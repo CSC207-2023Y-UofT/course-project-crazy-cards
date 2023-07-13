@@ -1,10 +1,11 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
     private Card currentCard;
-    private List<Player> players;
+    private ArrayList<Player> players;
 
     private Deck gameDeck;
 
@@ -12,9 +13,9 @@ public class Game {
 
     private Player currentTurn;
 
-    public Game(Deck deck, List<Player> players) {
+    public Game(Deck deck, ArrayList<Player> players) {
         this.gameDeck = deck;
-        this.players = new List<Player>(players);
+        this.players = new ArrayList<Player>(players);
     }
 
     public Player getCurrentTurn() {
@@ -34,7 +35,7 @@ public class Game {
     }
 
     public List<Player> getPlayers() {
-        return new List<Player>(this.players);
+        return new ArrayList<Player>(this.players);
     }
 
     public boolean hasWinner() {
