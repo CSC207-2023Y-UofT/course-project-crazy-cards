@@ -27,15 +27,14 @@ public class Game {
 
     public void playCard(Card currentCard) {
         this.currentCard = currentCard;
-        this.gameDeck
     }
 
     public void setWinner(Player winner) {
         this.winner = winner;
     }
 
-    public List<Players> getPlayers() {
-        return new List<Players>(this.players);
+    public List<Player> getPlayers() {
+        return new List<Player>(this.players);
     }
 
     public boolean hasWinner() {
@@ -45,6 +44,4 @@ public class Game {
     public Player getWinner() {
         return this.winner;
     }
-
-
 }
