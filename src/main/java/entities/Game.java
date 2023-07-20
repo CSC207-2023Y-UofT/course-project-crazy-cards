@@ -15,19 +15,22 @@ public class Game {
 
     public Game(Deck deck, ArrayList<Player> players) {
         this.gameDeck = deck;
-        this.players = new ArrayList<Player>(players);
+        this.players = new ArrayList<>(players);
     }
 
     public Player getCurrentTurn() {
         return this.currentTurn;
     }
 
+    private void changeCurrentTurn() {}
+
     public Card getCurrentCard() {
         return this.currentCard;
     }
 
-    public void playCard(Card currentCard) {
-        this.currentCard = currentCard;
+    public void playCard(Card card) {
+        this.gameDeck.addCardToDeck(this.currentCard);
+        this.currentCard = card;
     }
 
     public void setWinner(Player winner) {

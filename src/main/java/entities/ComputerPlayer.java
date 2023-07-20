@@ -1,30 +1,15 @@
 package entities;
 
-import java.io.*;
 import java.util.*;
 
-public class ComputerPlayer implements Player {
+public class ComputerPlayer extends Player {
 
-    public static void main(String[] args) throws IOException {
-    }
-
-    @Override
-    public int getNumCard() {
-        return 0;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public void putCard(Game game, Card card) {
+    public void putCard(Game game) {
+        ArrayList<Card> computerCopyCards = getCards();
+        Collections.shuffle(computerCopyCards);
+        Card selectedCard = computerCopyCards.get(0);
+        super.putCard(game, selectedCard);
 
     }
 
-    @Override
-    public void setHand() {
-
-    }
 }

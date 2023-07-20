@@ -5,11 +5,14 @@ import java.util.*;
 
 public class Deck {
 
-    public static void main(String[] args) throws IOException {
+    private ArrayList<Card> cards;
+
+    public void addCardToDeck(Card card) {
+        this.cards.add(card);
     }
 
-    public Card removeCard() {
-        Card card = new Card("", 0, null);
-        return card;
+    private void removeCardFromDeck(Card card) {
+        this.cards.remove(card);
     }
+
 }
