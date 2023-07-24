@@ -6,5 +6,5 @@ public interface Deck {
 
     void addCardToDeck(Card card);
 
-    void removeCardFromDeck(Card card);
+    void removeCardFromDeck();
 }

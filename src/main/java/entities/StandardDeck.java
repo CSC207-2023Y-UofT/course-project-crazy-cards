@@ -7,8 +7,8 @@ public class StandardDeck implements Deck {
 
     private ArrayList<Card> cards = new ArrayList<>();
 
-    private static String[] suits = {"Spades" , "Hearts", "Diamond", "Clubs"};
-    private static String[] values = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    private final static String[] suits = {"Spades" , "Hearts", "Diamond", "Clubs"};
+    private final static String[] values = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
     public StandardDeck() {
         for (String suit: suits) {
@@ -23,8 +23,8 @@ public class StandardDeck implements Deck {
         this.cards.add(card);
     }
 
-    public void removeCardFromDeck(Card card) {
-        this.cards.remove(card);
+    public void removeCardFromDeck() {
+        this.cards.remove(cards.size() - 1);
     }
 
 }
