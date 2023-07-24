@@ -1,6 +1,6 @@
 package entities;
 
-import java.io.*;
+
 import java.util.*;
 
 public class HumanPlayer extends Player {
@@ -12,23 +12,45 @@ public class HumanPlayer extends Player {
     private int wins;
 
 
-    public HumanPlayer(String name) {
+    /**
+     * Construct a new HumanPlayer with the given name and Hand.
+     * @param name A String representing the name of this Player.
+     * @param hand The Hand of Cards given to this player.
+     */
+    public HumanPlayer(String name, Hand hand) {
+        super(hand);
         this.name = name;
     }
 
-    public String getStats() {
-        return "";
+    /**
+     * Get the wins and losses of this HumanPlayer/
+     * @return An ArrayList of Integers containing the wins as the first index and losses as the second index.
+     */
+    public ArrayList<Integer> getStats() {
+        ArrayList<Integer> winsLosses = new ArrayList<>();
+        winsLosses.add(this.wins);
+        winsLosses.add(this.losses);
+        return winsLosses;
     }
 
+    /**
+     * Increase the win statistic of this Player.
+     */
     public void incrementWins() {
-
+        this.wins ++;
     }
 
+    /**
+     * Increase the loss statistic of this Player.
+     */
     public void incrementLosses() {
-
+        this.losses ++;
     }
 
-
+    /**
+     * Get the name of this Player
+     * @return a String containing the name of this HumanPlayer.
+     */
     public String getName() {
         return this.name;
     }

@@ -13,39 +13,101 @@ public class Game {
 
     private Player currentTurn;
 
+    /**
+     * Construct a new card game given a particular deck and set of players.
+     * @param deck The deck of cards that belongs to this Game.
+     * @param players The Players who will be playing this card Game.
+     */
     public Game(Deck deck, ArrayList<Player> players) {
         this.gameDeck = deck;
         this.players = new ArrayList<>(players);
+        this.currentTurn = this.players.get(0);
     }
 
+    /**
+     * Get the Player whose turn it is currently.
+     * @return The Player in this Game whose turn it is who needs to put down a card.
+     */
     public Player getCurrentTurn() {
         return this.currentTurn;
     }
 
-    private void changeCurrentTurn() {}
+    /**
+     * Change the turn of the Player from the current Player to the next in the Game.
+     * This method assumes that the Player before is not the winner of the Game, otherwise it would not be called.
+     */
+    private void changeCurrentTurn() {
+        if(this.currentTurn.equals(this.players.get(this.players.size()))) {
+            this.currentTurn = this.players.get(0);
+        }
+        else {
+            this.currentTurn = this.players.get(players.indexOf(this.currentTurn) + 1);
+        }
+    }
 
+    /**
+     * Get the Card that had been played last.
+     * @return A Card object which the current Player must place their card on top of.
+     */
     public Card getCurrentCard() {
         return this.currentCard;
     }
 
-    public void playCard(Card card) {
+    /**
+     * A Player will play the given card object to be put down into the Game as the new currentCard.
+     * @param card A Card object played by a Player in this Game.
+     */
+    public void putCardDown(Card card) {
         this.gameDeck.addCardToDeck(this.currentCard);
         this.currentCard = card;
     }
 
+    /**
+     * Set the winner of this game to the given Player.
+     * @param winner The Player who has won the Game.
+     */
     public void setWinner(Player winner) {
         this.winner = winner;
     }
 
+    /**
+     * Get all the Players in this Game.
+     * @return an ArrayList of Players in this game.
+     */
     public List<Player> getPlayers() {
         return new ArrayList<Player>(this.players);
     }
 
+    /**
+     * Determine whether this Game has been won yet.
+     * @return True if this Game has been won, false otherwise.
+     */
     public boolean hasWinner() {
         return this.winner instanceof Player;
     }
 
+    /**
+     * Get the Winner of this Game.
+     * This method is only to be called when the Game has a winner.
+     * @return The Player who has won this Game.
+     */
     public Player getWinner() {
         return this.winner;
+    }
+
+    /**
+     * Determine whether this Card is a valid Card to be placed onto this Game given the currentCard of this Game.
+     * @param card The Card to be placed down.
+     * @return True if this is a valid Card, false otherwise.
+     */
+    public boolean isValidCard(Card card) {
+        if (card.getValue() == 8) {
+            return true;
+        } else if (card.getValue() == currentCard.getValue() & card.getSuit().equals(currentCard.getSuit())) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
