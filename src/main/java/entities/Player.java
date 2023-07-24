@@ -7,7 +7,7 @@ public abstract class Player {
     Hand hand;
 
     /**
-     * Construct an instance of a card game Player
+     * Construct an instance of a card game Player.
      */
     public Player() {}
 

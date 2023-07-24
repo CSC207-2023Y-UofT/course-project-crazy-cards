@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Game {
     private Card currentCard;
@@ -37,11 +38,12 @@ public class Game {
      * This method assumes that the Player before is not the winner of the Game, otherwise it would not be called.
      */
     private void changeCurrentTurn() {
-        if(this.currentTurn.equals(this.players.get(this.players.size()))) {
+        int currentPlayerIndex = this.players.indexOf(this.currentTurn);
+        if(currentPlayerIndex == (this.players.size() -  1)) {
             this.currentTurn = this.players.get(0);
         }
         else {
-            this.currentTurn = this.players.get(players.indexOf(this.currentTurn) + 1);
+            this.currentTurn = this.players.get(currentPlayerIndex + 1);
         }
     }
 
@@ -101,9 +103,9 @@ public class Game {
      * @return True if this is a valid Card, false otherwise.
      */
     public boolean isValidCard(Card card) {
-        if (card.getValue() == 8) {
+        if (card.getValue().equals("8")) {
             return true;
-        } else if (card.getValue() == currentCard.getValue() & card.getSuit().equals(currentCard.getSuit())) {
+        } else if (Objects.equals(card.getValue(), currentCard.getValue()) & card.getSuit().equals(currentCard.getSuit())) {
             return true;
         }
         else {

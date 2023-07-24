@@ -2,10 +2,14 @@ package entities;
 
 public class Card {
     private final String suit;
-    private final int value;
+    private final String value;
     private String specialEffect = null;
 
-    public Card(String suit, int value, String specialEffect) {
+    public Card(String suit, String value) {
+        this.suit = suit;
+        this.value = value;
+    }
+    public Card(String suit, String value, String specialEffect) {
         this.suit = suit;
         this.value = value;
         this.specialEffect = specialEffect;
@@ -15,7 +19,7 @@ public class Card {
         return suit;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
