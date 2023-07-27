@@ -10,14 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
-    Game game;
-    Player p1;
-    Player p2;
-    Deck deck;
-
-    Hand h1;
-
-    Hand h2;
+    private Game game;
+    private Player p1;
+    private Player p2;
+    private Deck deck;
+    private Hand h1;
+    private Hand h2;
 
     /**
      * Initialize a Game with a Deck and Players for testing of Player.java methods.
@@ -60,7 +58,7 @@ class PlayerTest {
      * Test getNumCard() returns the Player's actual number of Cards in their Hand.
      */
     @Test
-    void testGetNumCards() {
+    public void testGetNumCards() {
         int expected = 4;
         int actual = p1.getNumCards();
         assertEquals(expected, actual);
@@ -72,7 +70,7 @@ class PlayerTest {
      * Note that the played Card may not necessarily be valid as that is handled in the Use Case classes.
      */
     @Test
-    void testPlayCard() {
+    public void testPlayCard() {
         int expectedDeckSize = deck.getCards().size() + 1;
         Card toPutDown = p1.getCards().get(0);
         p1.playCard(game, toPutDown);
@@ -91,7 +89,7 @@ class PlayerTest {
      * Test setHand() sets the Player's Hand to the given Hand.
      */
     @Test
-    void testSetHand() {
+    public void testSetHand() {
         p1.setHand(h2);
         Hand actualHand = p1.getHand();
         assertEquals(h2, actualHand);
@@ -101,7 +99,7 @@ class PlayerTest {
      * Test getCards() returns the cards in this Player's Hand.
      */
     @Test
-    void testGetCards() {
+    public void testGetCards() {
         ArrayList<Card> playerCards = p1.getCards();
         ArrayList<Card> expected = h1.getCards();
         boolean equality = expected.equals(playerCards);
