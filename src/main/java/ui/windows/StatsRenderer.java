@@ -70,4 +70,5 @@ public class StatsRenderer extends JPanel {
         frame.setVisible(true);
 
         renderer.updateView();
+    }
 }
