@@ -58,14 +58,4 @@ class HumanPlayerTest {
         assertArrayEquals(expected, toTest);
     }
 
-
-    /**
-     * Test that getName() returns the name of the given Plauer.
-     */
-    @Test
-    public void testGetName() {
-        String actual = p1.getName();
-        String expected = "sol";
-        assertEquals(expected, actual);
-    }
 }

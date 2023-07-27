@@ -4,7 +4,6 @@ import java.util.*;
 
 public class ComputerPlayer extends Player {
 
-    String name;
 
     /**
      * Construct a ComputerPlayer with the given Hand.
@@ -12,8 +11,7 @@ public class ComputerPlayer extends Player {
      * @param hand The Hand instance to be this ComputerPlayer's Hand.
      */
     public ComputerPlayer(String name, Hand hand) {
-        super(hand);
-        this.name = name;
+        super(name, hand);
     }
 
 
