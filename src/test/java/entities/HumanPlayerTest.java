@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HumanPlayerTest {
 
-    HumanPlayer p1;
+    private HumanPlayer p1;
 
     /**
      * Set up Player instances with a given Hand.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
        for(int i = 0; i < 4 ; i++) {
@@ -31,7 +31,7 @@ class HumanPlayerTest {
      * Free memory by setting the created HumanPlayer object to null.
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         p1 = null;
     }
 
@@ -39,7 +39,7 @@ class HumanPlayerTest {
      * Test that getStats returns the number of wins and losses of a Player.
      */
     @Test
-    void testGetStatsNoWins() {
+    public void testGetStatsNoWins() {
         int[] toTest = p1.getStats();
         int[] expected = {0, 0};
         assertArrayEquals(expected, toTest);
@@ -50,7 +50,7 @@ class HumanPlayerTest {
      * losses of a HumanPlayer.
      */
     @Test
-    void testIncrementWinsAndLosses() {
+    public void testIncrementWinsAndLosses() {
         p1.incrementWins();
         p1.incrementWins();
         p1.incrementLosses();
@@ -64,7 +64,7 @@ class HumanPlayerTest {
      * Test that getName() returns the name of the given Plauer.
      */
     @Test
-    void testGetName() {
+    public void testGetName() {
         String actual = p1.getName();
         String expected = "sol";
         assertEquals(expected, actual);
