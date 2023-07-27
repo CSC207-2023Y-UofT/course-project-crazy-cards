@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StandardDeckTest {
 
-    Card toAdd;
-    Deck deck;
+    private Card toAdd;
+    private Deck deck;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         deck = new StandardDeck();
         toAdd = new Card("Tests", "17");
     }
@@ -20,7 +20,7 @@ class StandardDeckTest {
      * Test that the deck increases in size when a Card is added to it.
      */
     @Test
-    void testAddCardToDeck() {
+    public void testAddCardToDeck() {
         int deckSize = deck.getCards().size();
         deck.addCardToDeck(toAdd);
         assertEquals(deckSize + 1, deck.getCards().size());
@@ -30,7 +30,7 @@ class StandardDeckTest {
      * Test the deck decreases in size when a Card is added to it.
      */
     @Test
-    void testRemoveCardFromDeck() {
+    public void testRemoveCardFromDeck() {
         int expected = deck.getCards().size() -  1;
         deck.removeCardFromDeck();
         assertEquals(expected, deck.getCards().size());
@@ -40,7 +40,7 @@ class StandardDeckTest {
      * Test getCards returns an ArrayList that is the expected size of Deck.
      */
     @Test
-    void testGetCards() {
+    public void testGetCards() {
         int expected = 52;
         int actual = deck.getCards().size();
         assertEquals(expected, actual);
