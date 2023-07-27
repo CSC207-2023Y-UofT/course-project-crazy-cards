@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Game {
+public class Game implements ObservableGame {
     private Card currentCard;
     private ArrayList<Player> players;
 
@@ -13,6 +13,8 @@ public class Game {
     private Player winner;
 
     private Player currentTurn;
+
+    private ArrayList<GameObserver> observers;
 
     /**
      * Construct a new card game given a particular deck and set of players.
@@ -116,5 +118,47 @@ public class Game {
      */
     public Deck getGameDeck() {
         return this.gameDeck;
+    }
+
+    /**
+     * Notify all GameObservers observing this Game that there has been a change.
+     */
+    @Override
+    public void notifyGameObservers() {
+        for(GameObserver observer : observers) {
+            observer.updateGameObserver(this);
+        }
+    }
+
+    /**
+     * Add a GameObserver to the list of observers.
+     *
+     * @param observer The GameObserver to be added to the list of observers.
+     */
+    @Override
+    public void addObserver(GameObserver observer) {
+        this.observers.add(observer);
+
+    }
+
+    /**
+     * Delete the given observer from the list of observers.
+     *
+     * @param observer The GameObserver to be deleted from the list of observers.
+     */
+    @Override
+    public void deleteObserver(GameObserver observer) {
+        if (this.observers.contains(observer)) {
+            this.observers.remove(observer);
+        }
+
+    }
+
+    /**
+     * Delete clear the list of observers, such that it is now empty.
+     */
+    @Override
+    public void deleteObservers() {
+        this.observers.clear();
     }
 }
