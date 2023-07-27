@@ -8,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
 
-    Card regCard;
-    Card specCard;
+    private Card regCard;
+    private Card specCard;
 
     /**
      * Set up Card objects for testing.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         regCard = new Card("Spades", "10");
         specCard = new Card("Clubs", "8", "Crazy8");
     }
@@ -24,7 +24,7 @@ class CardTest {
      * Free memory by setting the objects made in setUp() to null.
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         regCard = null;
         specCard = null;
     }
@@ -33,7 +33,7 @@ class CardTest {
      * Test getSuit() returns the suit of the Card.
      */
     @Test
-    void testGetSuit() {
+    public void testGetSuit() {
         String expected = "Spades";
         String actual = regCard.getSuit();
         assertEquals(expected, actual);
@@ -43,7 +43,7 @@ class CardTest {
      * Test getValue() returns the value of the Card.
      */
     @Test
-    void testGetValue() {
+    public void testGetValue() {
         String expected = "10";
         String actual = regCard.getValue();
         assertEquals(expected, actual);
@@ -53,7 +53,7 @@ class CardTest {
      * Test getSpecialEffect returns the special effect of this Card if it has any.
      */
     @Test
-    void testGetSpecialEffect() {
+    public void testGetSpecialEffect() {
         String expected = "Crazy8";
         String actual = specCard.getSpecialEffect();
         assertEquals(expected, actual);
