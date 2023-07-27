@@ -1,4 +1,6 @@
-package ui;
+package ui.windows;
+
+import javax.swing.*;
 
 public class StatsRendererData {
     private String name;
