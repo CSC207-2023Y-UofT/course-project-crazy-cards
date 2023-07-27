@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ComputerPlayerTest {
 
-    ComputerPlayer cp1;
-    Game game;
+    private ComputerPlayer cp1;
+    private Game game;
 
     /**
      * Construct a ComputerPlayer with a valid Hand of Cards.
