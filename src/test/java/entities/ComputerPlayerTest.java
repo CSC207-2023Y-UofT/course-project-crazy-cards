@@ -27,7 +27,7 @@ class ComputerPlayerTest {
                 h.addCard(deck.removeCardFromDeck());
             }
         }
-        cp1 = new ComputerPlayer(h1);
+        cp1 = new ComputerPlayer("CPU1", h1);
         ArrayList<Player> players = new ArrayList<>();
         players.add(cp1);
         game = new Game(deck, players);

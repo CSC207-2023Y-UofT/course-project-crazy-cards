@@ -4,12 +4,16 @@ import java.util.*;
 
 public class ComputerPlayer extends Player {
 
+    String name;
+
     /**
      * Construct a ComputerPlayer with the given Hand.
+     * @param name The name to distinguish between the different ComputerPlayers.
      * @param hand The Hand instance to be this ComputerPlayer's Hand.
      */
-    public ComputerPlayer(Hand hand) {
+    public ComputerPlayer(String name, Hand hand) {
         super(hand);
+        this.name = name;
     }
 
 
