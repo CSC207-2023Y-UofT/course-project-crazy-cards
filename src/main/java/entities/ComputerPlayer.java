@@ -5,21 +5,30 @@ import java.util.*;
 public class ComputerPlayer extends Player {
 
     /**
-     * This method implements the logic required for the ComputerPlayer.
-     * A random card is selected from the ComputerPlayer's Hand to be put down to the Game.
-     * @param game The Game instance where the Card is to be put down.
+     * Construct a ComputerPlayer with the given Hand.
+     * @param hand The Hand instance to be this ComputerPlayer's Hand.
      */
-    public void playCard(Game game) {
+    public ComputerPlayer(Hand hand) {
+        super(hand);
+    }
+
+
+    /**
+     * Select a random valid Card to play in this Game
+     * @param game The Game instance this ComputerPlayer is a part of.
+     * @return a Card that is to be placed down in the Game.
+     * @throws NoValidCardException iff there is no valid Cards to play for the given Game.
+     */
+    public Card selectRandomCard(Game game) throws NoValidCardException {
         ArrayList<Card> computerCopyCards = getCards();
         Collections.shuffle(computerCopyCards);
-        Card selectedCard = computerCopyCards.get(0);
-        for (Card i: getCards()) {
-            if (game.isValidCard(i)) {
-                super.playCard(game, i);
+        for (Card card : getCards()) {
+            if (game.isValidCard(card)) {
+                return card;
             }
-
         }
-
+        throw new NoValidCardException("This ComputerPlayer has no valid Cards to play.");
     }
+
 }
 

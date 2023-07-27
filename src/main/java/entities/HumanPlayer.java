@@ -26,10 +26,8 @@ public class HumanPlayer extends Player {
      * Get the wins and losses of this HumanPlayer/
      * @return An ArrayList of Integers containing the wins as the first index and losses as the second index.
      */
-    public ArrayList<Integer> getStats() {
-        ArrayList<Integer> winsLosses = new ArrayList<>();
-        winsLosses.add(this.wins);
-        winsLosses.add(this.losses);
+    public int[] getStats() {
+        int[] winsLosses = {this.wins, this.losses};
         return winsLosses;
     }
 

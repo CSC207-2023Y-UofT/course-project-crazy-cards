@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
-    Hand hand;
+    private Hand hand;
 
     /**
      * Construct an instance of a card game Player.
@@ -49,10 +49,26 @@ public abstract class Player {
     }
 
     /**
+     * Get this Player's Hand.
+     * @return a Hand object, representing this Player's Hand.
+     */
+    public Hand getHand() {
+        return this.hand;
+    }
+
+    /**
      * Get the cards in this Player's hand. For use when representing the Card's a player has to the User.
      * @return An ArrayList containing the cards in this Player's Hand.
      */
     public ArrayList<Card> getCards() {
         return this.hand.getCards();
+    }
+
+    /**
+     * Have this Player pick up a Card from the Deck of the provided Game.
+     */
+    public void pickUpCard(Game game) {
+        Card cardToAdd = game.getGameDeck().removeCardFromDeck();
+        this.hand.addCard(cardToAdd);
     }
 }

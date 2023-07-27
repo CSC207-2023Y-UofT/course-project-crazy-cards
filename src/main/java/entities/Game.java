@@ -60,7 +60,9 @@ public class Game {
      * @param card A Card object played by a Player in this Game.
      */
     public void putCardDown(Card card) {
-        this.gameDeck.addCardToDeck(this.currentCard);
+        if (currentCard != null) {
+            this.gameDeck.addCardToDeck(this.currentCard);
+        }
         this.currentCard = card;
     }
 
@@ -76,8 +78,8 @@ public class Game {
      * Get all the Players in this Game.
      * @return an ArrayList of Players in this game.
      */
-    public List<Player> getPlayers() {
-        return new ArrayList<Player>(this.players);
+    public ArrayList<Player> getPlayers() {
+        return new ArrayList<>(this.players);
     }
 
     /**
@@ -85,7 +87,7 @@ public class Game {
      * @return True if this Game has been won, false otherwise.
      */
     public boolean hasWinner() {
-        return this.winner instanceof Player;
+        return this.winner != null;
     }
 
     /**
@@ -105,11 +107,14 @@ public class Game {
     public boolean isValidCard(Card card) {
         if (card.getValue().equals("8")) {
             return true;
-        } else if (Objects.equals(card.getValue(), currentCard.getValue()) & card.getSuit().equals(currentCard.getSuit())) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        } else return Objects.equals(card.getValue(), currentCard.getValue()) | card.getSuit().equals(currentCard.getSuit());
+    }
+
+    /**
+     * Get the Deck used for this Game.
+     * @return a Deck object belonging to this Game.
+     */
+    public Deck getGameDeck() {
+        return this.gameDeck;
     }
 }
