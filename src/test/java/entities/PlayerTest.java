@@ -33,8 +33,8 @@ class PlayerTest {
                 h.addCard(deck.removeCardFromDeck());
             }
         }
-        p1 = new ConcretePlayer(h1);
-        p2 = new ConcretePlayer(h2);
+        p1 = new ConcretePlayer("p1", h1);
+        p2 = new ConcretePlayer("p2", h2);
         ArrayList<Player> players = new ArrayList<>();
         players.add(p1);
         players.add(p2);
@@ -106,5 +106,15 @@ class PlayerTest {
         ArrayList<Card> expected = h1.getCards();
         boolean equality = expected.equals(playerCards);
         assertTrue(equality);
+    }
+
+    /**
+     * Test that getName() returns the name of the given Player.
+     */
+    @Test
+    void testGetName() {
+        String actual = p1.getName();
+        String expected = "p1";
+        assertEquals(expected, actual);
     }
 }

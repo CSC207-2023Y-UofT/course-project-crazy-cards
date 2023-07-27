@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class Player {
 
     private Hand hand;
+    private String name;
 
     /**
      * Construct an instance of a card game Player.
@@ -17,8 +18,9 @@ public abstract class Player {
      *  so that we can delay the decision of constructing a player with a given Hand or setting a Hand later.
      * @param hand The Hand this player has been dealt.
      */
-    public Player(Hand hand) {
+    public Player(String name, Hand hand) {
         this.hand = hand;
+        this.name = name;
     }
 
     /**
@@ -70,5 +72,13 @@ public abstract class Player {
     public void pickUpCard(Game game) {
         Card cardToAdd = game.getGameDeck().removeCardFromDeck();
         this.hand.addCard(cardToAdd);
+    }
+
+    /**
+     * Get the name of this Player
+     * @return a String containing the name of this HumanPlayer.
+     */
+    public String getName() {
+        return this.name;
     }
 }

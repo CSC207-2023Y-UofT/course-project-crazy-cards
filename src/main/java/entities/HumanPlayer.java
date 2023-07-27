@@ -5,8 +5,6 @@ import java.util.*;
 
 public class HumanPlayer extends Player {
 
-    String name;
-
     private int losses;
 
     private int wins;
@@ -18,8 +16,7 @@ public class HumanPlayer extends Player {
      * @param hand The Hand of Cards given to this player.
      */
     public HumanPlayer(String name, Hand hand) {
-        super(hand);
-        this.name = name;
+        super(name, hand);
     }
 
     /**
@@ -43,14 +40,6 @@ public class HumanPlayer extends Player {
      */
     public void incrementLosses() {
         this.losses ++;
-    }
-
-    /**
-     * Get the name of this Player
-     * @return a String containing the name of this HumanPlayer.
-     */
-    public String getName() {
-        return this.name;
     }
 
 }
