@@ -13,7 +13,7 @@ public class StatsWindow implements Window {
 
     @Override
     public void display() {
-        this.renderer.display();
+        // this.renderer.display();
     }
 
     @Override
