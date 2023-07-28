@@ -1,12 +1,12 @@
 package entities;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
@@ -30,8 +30,8 @@ class GameTest {
                 h.addCard(deck.removeCardFromDeck());
             }
         }
-        p1 = new HumanPlayer("sol", h1);
-        p2 = new HumanPlayer("sab" , h2);
+        p1 = new HumanPlayer("sol", h1, 0 , 0);
+        p2 = new HumanPlayer("sab" , h2, 0 , 0);
         players = new ArrayList<>();
         players.add(p1);
         players.add(p2);

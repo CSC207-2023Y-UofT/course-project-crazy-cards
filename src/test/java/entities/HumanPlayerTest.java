@@ -22,7 +22,7 @@ class HumanPlayerTest {
        for(int i = 0; i < 4 ; i++) {
            h1.addCard(deck.removeCardFromDeck());
             }
-        p1 = new HumanPlayer("sol", h1);
+        p1 = new HumanPlayer("sol", h1, 0 , 0);
     }
 
     /**

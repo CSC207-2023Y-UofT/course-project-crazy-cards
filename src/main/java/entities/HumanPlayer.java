@@ -13,8 +13,10 @@ public class HumanPlayer extends Player {
      * @param name A String representing the name of this Player.
      * @param hand The Hand of Cards given to this player.
      */
-    public HumanPlayer(String name, Hand hand) {
+    public HumanPlayer(String name, Hand hand, int wins, int losses) {
         super(name, hand);
+        this.wins = wins;
+        this.losses = losses;
     }
 
     /**
