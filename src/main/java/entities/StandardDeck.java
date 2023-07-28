@@ -45,7 +45,7 @@ public class StandardDeck implements Deck {
 
     /**
      * Get all the cards in this Deck.
-     * @return An ArrayList of the Cards in this Deck.
+     * @return A new ArrayList of the Cards in this Deck.
      */
     public ArrayList<Card> getCards() {
             return new ArrayList<>(cards);

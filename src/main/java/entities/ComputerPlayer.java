@@ -18,10 +18,9 @@ public class ComputerPlayer extends Player {
     /**
      * Select a random valid Card to play in this Game
      * @param game The Game instance this ComputerPlayer is a part of.
-     * @return a Card that is to be placed down in the Game.
-     * @throws NoValidCardException iff there is no valid Cards to play for the given Game.
+     * @return a Card that is to be placed down in the Game or null is there is no valid Card.
      */
-    public Card selectRandomCard(Game game) throws NoValidCardException {
+    public Card selectRandomCard(Game game) {
         ArrayList<Card> computerCopyCards = getCards();
         Collections.shuffle(computerCopyCards);
         for (Card card : getCards()) {
@@ -29,7 +28,7 @@ public class ComputerPlayer extends Player {
                 return card;
             }
         }
-        throw new NoValidCardException("This ComputerPlayer has no valid Cards to play.");
+        return null;
     }
 
 }

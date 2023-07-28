@@ -50,15 +50,12 @@ class ComputerPlayerTest {
      */
     @Test
     void testSelectCardValidCard() {
-        try {
-            Card toAddtoCp1 = new Card("Spades", "9");
-            cp1.getHand().addCard(toAddtoCp1);
-            Card selected = cp1.selectRandomCard(game);
-            boolean validity = game.isValidCard(selected);
-            assertTrue(validity);
-        } catch (NoValidCardException e) {
-            fail();
-        }
+        Card toAddtoCp1 = new Card("Spades", "9");
+        cp1.getHand().addCard(toAddtoCp1);
+        Card selected = cp1.selectRandomCard(game);
+        boolean validity = game.isValidCard(selected);
+        assertTrue(validity);
+
     }
 
     /**
@@ -71,6 +68,7 @@ class ComputerPlayerTest {
         newHandList.add(bogus);
         Hand hand = new Hand(newHandList);
         cp1.setHand(hand);
-        NoValidCardException thrown = assertThrows(NoValidCardException.class, () -> cp1.selectRandomCard(game), "This ComputerPlayer has no valid Cards to play.");
+        Card selected = cp1.selectRandomCard(game);
+        assertNull(selected);
     }
 }

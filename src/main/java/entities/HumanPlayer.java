@@ -1,8 +1,6 @@
 package entities;
 
 
-import java.util.*;
-
 public class HumanPlayer extends Player {
 
     private int losses;

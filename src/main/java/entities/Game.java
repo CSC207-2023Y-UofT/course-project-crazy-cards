@@ -1,8 +1,6 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Game implements ObservableGame {
     private Card currentCard;
@@ -109,7 +107,7 @@ public class Game implements ObservableGame {
     public boolean isValidCard(Card card) {
         if (card.getValue().equals("8")) {
             return true;
-        } else return Objects.equals(card.getValue(), currentCard.getValue()) | card.getSuit().equals(currentCard.getSuit());
+        } else return (card.getValue().equals(currentCard.getValue()) | card.getSuit().equals(currentCard.getSuit()));
     }
 
     /**

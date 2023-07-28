@@ -14,5 +14,9 @@ public interface Deck {
 
     Card removeCardFromDeck();
 
+    /**
+     * Get all the cards in this Deck.
+     * @return An ArrayList of the Cards in this Deck.
+     */
     ArrayList<Card> getCards();
 }
