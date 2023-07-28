@@ -21,13 +21,13 @@ public class StandardDeck implements Deck {
         }
         Collections.shuffle(cards);
     }
-        /**
-         * Add the given card to the end of the ArrayList containing the deck of cards in play.
-         * @param card The instance of the Card class that is being added to the current deck.
-         */
-        public void addCardToDeck(Card card) {
-            this.cards.add(card);
-        }
+
+    /**
+     * Add the given card to the end of the ArrayList containing the deck of cards in play.
+     * @param card The instance of the Card class that is being added to the current deck.
+     */
+    public void addCardToDeck(Card card) {
+        this.cards.add(card);}
 
     /**
      * remove a Card from this randomly shuffled Deck, removes from the end of the ArrayList.
