@@ -107,7 +107,7 @@ public class Game implements ObservableGame {
     public boolean isValidCard(Card card) {
         if (card.getValue().equals("8")) {
             return true;
-        } else return (card.getValue().equals(currentCard.getValue()) | card.getSuit().equals(currentCard.getSuit()));
+        } else {return (card.getValue().equals(currentCard.getValue()) | card.getSuit().equals(currentCard.getSuit()));}
     }
 
     /**
