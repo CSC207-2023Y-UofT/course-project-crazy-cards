@@ -4,23 +4,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HandTest {
 
-    Hand h1;
-    Card toAdd;
-
-    ArrayList<Card> cards;
+    private Hand h1;
+    private Card toAdd;
+    private ArrayList<Card> cards;
 
     /**
      * Set up Hand and Card objects for testing.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         Deck deck = new StandardDeck();
         cards = new ArrayList<>();
         for(int i = 0; i < 4 ; i++) {
@@ -34,7 +32,7 @@ class HandTest {
      * Set each created object in setUp to null to free memory.
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         h1 = null;
         toAdd = null;
         cards = null;
@@ -46,7 +44,7 @@ class HandTest {
      * suit and value such that it does not match any Card in the Deck.
      */
     @Test
-    void testAddCard() {
+    public void testAddCard() {
         // First assert the Hand is not empty.
         ArrayList<Card> empty = new ArrayList<>();
         assertNotEquals(empty, h1.getCards());
@@ -61,7 +59,7 @@ class HandTest {
      * Test removeCard() removes a given Card from the Hand.
      */
     @Test
-    void testRemoveCard() {
+    public void testRemoveCard() {
         Card toAdd = new Card("Tests", "17");
         h1.addCard(toAdd);
         h1.removeCard(toAdd);
@@ -73,7 +71,7 @@ class HandTest {
      * Test getCards() contains all the Cards in this Hand.
      */
     @Test
-    void testGetCards() {
+    public void testGetCards() {
         assertEquals(cards, h1.getCards());
     }
 }
