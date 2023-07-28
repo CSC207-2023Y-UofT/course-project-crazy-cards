@@ -17,7 +17,7 @@ class ComputerPlayerTest {
      * Construct a ComputerPlayer with a valid Hand of Cards.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
@@ -39,7 +39,7 @@ class ComputerPlayerTest {
      * Free memory by setting constructed objects in setUp() to null.
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         cp1 = null;
     }
 
@@ -49,9 +49,9 @@ class ComputerPlayerTest {
      * is thrown if it does not.
      */
     @Test
-    void testSelectCardValidCard() {
-        Card toAddtoCp1 = new Card("Spades", "9");
-        cp1.getHand().addCard(toAddtoCp1);
+    public void testSelectCardValidCard() {
+        Card toAddToCp1 = new Card("Spades", "9");
+        cp1.getHand().addCard(toAddToCp1);
         Card selected = cp1.selectRandomCard(game);
         boolean validity = game.isValidCard(selected);
         assertTrue(validity);
@@ -62,7 +62,7 @@ class ComputerPlayerTest {
      * Test selectRandomCard() throws a NoValidCardException when there is no valid Card for the given Game.
      */
     @Test()
-    void testSelectCardInvalid() {
+    public void testSelectCardInvalid() {
         Card bogus = new Card("Test", "18");
         ArrayList<Card> newHandList = new ArrayList<>();
         newHandList.add(bogus);
