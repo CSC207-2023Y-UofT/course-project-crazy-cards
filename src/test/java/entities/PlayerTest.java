@@ -110,7 +110,7 @@ class PlayerTest {
      * Test that getName() returns the name of the given Player.
      */
     @Test
-    void testGetName() {
+    public void testGetName() {
         String actual = p1.getName();
         String expected = "p1";
         assertEquals(expected, actual);
