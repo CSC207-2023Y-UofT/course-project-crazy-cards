@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * A JPanel subclass representing the game's statistics window.
  */
-public class StatsRenderer extends JPanel {
+public class StatsDisplay extends JPanel {
     private static final String EMPTY_LABEL = "";
 
     private StatsDelegator delegator;
@@ -20,7 +20,7 @@ public class StatsRenderer extends JPanel {
      * @param data the StatsRendererData this renderer links to
      * @param delegator the StatsDelegator this renderer links to
      */
-    public StatsRenderer(StatsDelegator delegator) {
+    public StatsDisplay(StatsDelegator delegator) {
         this.delegator = delegator;
 
         initializeGUIComponents();
@@ -70,7 +70,7 @@ public class StatsRenderer extends JPanel {
     /**
      * Update this instance's labels to reflect updated values in data.
      */
-    public void updateView(StatsRendererData data) {
+    public void updateView(StatsDisplayData data) {
         nameLabel.setText(data.getName());
         gamesPlayedLabel.setText("Games Played: " + data.getGamesPlayed());
         gamesWonLabel.setText("Games Won: " + data.getGamesWon());

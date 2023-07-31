@@ -3,7 +3,7 @@ package ui.windows;
 /**
  * Stores data to be displayed by a StatsRenderer.
  */
-public class StatsRendererData {
+public class StatsDisplayData {
     private String name;
     private int gamesPlayed;
     private int gamesWon;
@@ -12,7 +12,7 @@ public class StatsRendererData {
     /**
      * Create a StatsRendererData with default values.
      */
-    public StatsRendererData() {
+    public StatsDisplayData() {
         this.name = "";
         this.gamesPlayed = 0;
         this.gamesWon = 0;
@@ -26,7 +26,7 @@ public class StatsRendererData {
      * @param gamesWon the number of games won by the user
      * @param longestWinStreak the longest win streak of the user
      */
-    public StatsRendererData(String name, int gamesPlayed, int gamesWon, int longestWinStreak) {
+    public StatsDisplayData(String name, int gamesPlayed, int gamesWon, int longestWinStreak) {
         this.name = name;
         this.gamesPlayed = gamesPlayed;
         this.gamesWon = gamesWon;
