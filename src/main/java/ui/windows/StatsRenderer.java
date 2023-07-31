@@ -2,27 +2,40 @@ package ui.windows;
 
 import javax.swing.*;
 
+/**
+ * A JPanel subclass representing the game's statistics window.
+ */
 public class StatsRenderer extends JPanel {
     private static final String EMPTY_LABEL = "";
 
-    private StatsRendererData data;
+    private StatsDelegator delegator;
 
     private JLabel nameLabel;
     private JLabel gamesPlayedLabel;
     private JLabel gamesWonLabel;
     private JLabel longestWinStreakLabel;
 
-    public StatsRenderer(StatsRendererData data) {
-        this.data = data;
+    /**
+     * Construct a StatsRenderer displaying default data.
+     * @param data the StatsRendererData this renderer links to
+     * @param delegator the StatsDelegator this renderer links to
+     */
+    public StatsRenderer(StatsDelegator delegator) {
+        this.delegator = delegator;
 
         initializeGUIComponents();
     }
 
+    /**
+     * Create the GUI components for this instance.
+     */
     private void initializeGUIComponents() {
+        // The data panel displaying user statistics
         JPanel dataPanel = new JPanel();
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
         dataPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 
+        // Default labels
         nameLabel = new JLabel("Enter a username.");
         gamesPlayedLabel = new JLabel(EMPTY_LABEL);
         gamesWonLabel = new JLabel(EMPTY_LABEL);
@@ -33,14 +46,18 @@ public class StatsRenderer extends JPanel {
         dataPanel.add(gamesWonLabel);
         dataPanel.add(longestWinStreakLabel);
 
+        // The button panel containing the back button and search bar
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         JButton backButton = new JButton("Back");
-        JButton inputNameButton = new JButton("Search");
         JTextField inputNameField = new JTextField(20);
+
+        // Link the search bar to the delegator
+        inputNameField.addActionListener(delegator);
+        
+        // Formatting/spacing TBD
         buttonPanel.add(backButton);
         buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(inputNameButton);
         buttonPanel.add(inputNameField);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -50,25 +67,28 @@ public class StatsRenderer extends JPanel {
         add(buttonPanel);
     }
 
-    public void updateView() {
+    /**
+     * Update this instance's labels to reflect updated values in data.
+     */
+    public void updateView(StatsRendererData data) {
         nameLabel.setText(data.getName());
         gamesPlayedLabel.setText("Games Played: " + data.getGamesPlayed());
         gamesWonLabel.setText("Games Won: " + data.getGamesWon());
         longestWinStreakLabel.setText("Longest Win Streak: " + data.getLongestWinStreak());
     }
 
+    /**
+     * Tests creation of a Stats window.
+     */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Stats Renderer");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+        // JFrame frame = new JFrame("Stats Renderer");
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setSize(800, 800);
 
-        StatsRendererData data = new StatsRendererData("Test", 10, 5, 3);
-        StatsRenderer renderer = new StatsRenderer(data);
+        // StatsRenderer renderer = new StatsRenderer();
 
-        renderer.setOpaque(true);
-        frame.setContentPane(renderer);
-        frame.setVisible(true);
-
-        renderer.updateView();
+        // renderer.setOpaque(true);
+        // frame.setContentPane(renderer);
+        // frame.setVisible(true);
     }
 }
