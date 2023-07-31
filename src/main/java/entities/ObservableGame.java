@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public interface ObservableGame {
 
     /**
@@ -22,6 +24,30 @@ public interface ObservableGame {
      * Delete clear the list of observers, such that it is now empty.
      */
     void deleteObservers();
+
+    /**
+     * Get the Player whose turn it is currently.
+     * @return The Player in this Game whose turn it is who needs to put down a card.
+     */
+    Player getCurrentTurn();
+
+    /**
+     * Get the Card that had been played last.
+     * @return A Card object which the current Player must place their card on top of.
+     */
+    Card getCurrentCard();
+
+    /**
+     * Get all the Players in this Game.
+     * @return an ArrayList of Players in this game.
+     */
+    ArrayList<Player> getPlayers();
+
+    /**
+     * Determine whether this Game has been won yet.
+     * @return True if this Game has been won, false otherwise.
+     */
+    boolean hasWinner();
 
 
 }
