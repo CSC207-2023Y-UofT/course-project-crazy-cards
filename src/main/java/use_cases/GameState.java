@@ -6,6 +6,11 @@ import entities.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class is an Observer of a Game. It provides information that will eventually be relayed
+ * to the controller for presentation, such as the current Player and their cards, the names and number of Cards
+ * of the opponent Players, as well as the last Card played and if there is a winner to the Game.
+ */
 public class GameState implements GameObserver {
 
     private Player currentPlayer;
