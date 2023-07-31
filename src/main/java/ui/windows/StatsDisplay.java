@@ -80,14 +80,17 @@ public class StatsDisplay extends JPanel {
      * Tests creation of a Stats window.
      */
     public static void main(String[] args) {
-        // JFrame frame = new JFrame("Stats Renderer");
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setSize(800, 800);
+        JFrame frame = new JFrame("Stats Display");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 800);
 
-        // StatsRenderer renderer = new StatsRenderer();
+        StatsController controller = new StatsController();
+        StatsDelegator delegator = new StatsDelegator(controller);
+        StatsDisplay display = new StatsDisplay(delegator);
+        controller.setDisplay(display);
 
-        // renderer.setOpaque(true);
-        // frame.setContentPane(renderer);
-        // frame.setVisible(true);
+        display.setOpaque(true);
+        frame.setContentPane(display);
+        frame.setVisible(true);
     }
 }
