@@ -29,6 +29,7 @@ public class Game implements ObservableGame {
      * Get the Player whose turn it is currently.
      * @return The Player in this Game whose turn it is who needs to put down a card.
      */
+    @Override
     public Player getCurrentTurn() {
         return this.currentTurn;
     }
@@ -37,7 +38,7 @@ public class Game implements ObservableGame {
      * Change the turn of the Player from the current Player to the next in the Game.
      * This method assumes that the Player before is not the winner of the Game, otherwise it would not be called.
      */
-    private void changeCurrentTurn() {
+    public void changeCurrentTurn() {
         int currentPlayerIndex = this.players.indexOf(this.currentTurn);
         if(currentPlayerIndex == (this.players.size() -  1)) {
             this.currentTurn = this.players.get(0);
@@ -51,6 +52,7 @@ public class Game implements ObservableGame {
      * Get the Card that had been played last.
      * @return A Card object which the current Player must place their card on top of.
      */
+    @Override
     public Card getCurrentCard() {
         return this.currentCard;
     }
@@ -78,6 +80,7 @@ public class Game implements ObservableGame {
      * Get all the Players in this Game.
      * @return an ArrayList of Players in this game.
      */
+    @Override
     public ArrayList<Player> getPlayers() {
         return new ArrayList<>(this.players);
     }
@@ -86,6 +89,7 @@ public class Game implements ObservableGame {
      * Determine whether this Game has been won yet.
      * @return True if this Game has been won, false otherwise.
      */
+    @Override
     public boolean hasWinner() {
         return this.winner != null;
     }
