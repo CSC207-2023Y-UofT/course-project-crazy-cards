@@ -1,7 +1,7 @@
 package ui.windows;
 
 /**
- * Stores data to be displayed by a StatsRenderer.
+ * Stores data to be displayed by a StatsDisplay.
  */
 public class StatsDisplayData {
     private String name;
@@ -10,7 +10,7 @@ public class StatsDisplayData {
     private int longestWinStreak;
 
     /**
-     * Create a StatsRendererData with default values.
+     * Create a StatsDisplayData with default values.
      */
     public StatsDisplayData() {
         this.name = "";
@@ -20,7 +20,7 @@ public class StatsDisplayData {
     }
 
     /**
-     * Create a StatsRendererData with specified values.
+     * Create a StatsDisplayData with specified values.
      * @param name the name of the user
      * @param gamesPlayed the number of games played by the user
      * @param gamesWon the number of games won by the user

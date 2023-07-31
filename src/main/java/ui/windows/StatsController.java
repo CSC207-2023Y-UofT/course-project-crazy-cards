@@ -22,7 +22,7 @@ public class StatsController {
     }
 
     /**
-     * Requests statistics for a given user and updates renderer.
+     * Requests statistics for a given user and updates display.
      * @param username the name of the user
      * @return false if no display is supplied, true otherwise
      */
@@ -39,7 +39,7 @@ public class StatsController {
     /**
      * Retrieves statistics for a given user.
      * @param username the name of the user
-     * @return the retrieved data as a StatsRendererData
+     * @return the retrieved data as a StatsDisplayData
      */
     private StatsDisplayData retrieveData(String username) {
         // TODO: send usecase 

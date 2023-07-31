@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Delegates incoming user input from a StatsRenderer.
+ * Delegates incoming user input from a StatsDisplay.
  */
 public class StatsDelegator implements ActionListener {
     private StatsController controller;
@@ -19,7 +19,7 @@ public class StatsDelegator implements ActionListener {
     } 
 
     /**
-     * Handle the user input from a JButton in the StatsRenderer. 
+     * Handle the user input from a JButton in the StatsDisplay. 
      * Fires when the user clicks the "Search" button.
      * @param e the event to be processed
      */

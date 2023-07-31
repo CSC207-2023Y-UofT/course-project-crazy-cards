@@ -16,9 +16,8 @@ public class StatsDisplay extends JPanel {
     private JLabel longestWinStreakLabel;
 
     /**
-     * Construct a StatsRenderer displaying default data.
-     * @param data the StatsRendererData this renderer links to
-     * @param delegator the StatsDelegator this renderer links to
+     * Construct a StatsDisplay displaying default data.
+     * @param delegator the StatsDelegator this display links to
      */
     public StatsDisplay(StatsDelegator delegator) {
         this.delegator = delegator;
