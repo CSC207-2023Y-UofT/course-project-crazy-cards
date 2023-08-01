@@ -23,7 +23,7 @@ public class GameState implements GameObserver {
      * Given a Game, construct a GameState objects which keep track of the Game's current Player,
      * current Card, their Cards, the other players and the number of Cards they have,
      * as well as if the Game has a winner.
-     * @param game
+     * @param game The Game containing the information to update this GameState.
      */
     public GameState(ObservableGame game) {
 
@@ -57,6 +57,7 @@ public class GameState implements GameObserver {
                 this.playersAndCards.put(p, p.getNumCards());
             }
         }
+        this.currentPlayerCards = currentPlayer.getCards();
     }
 
     /**
