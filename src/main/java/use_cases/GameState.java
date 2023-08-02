@@ -45,19 +45,14 @@ public class GameState implements GameObserver {
      */
     @Override
     public void updateGameObserver(ObservableGame game) {
+        // Add the Player whose turn it was previous to the HashMap and remove the new current Player from it.
+        Player prevPlayer = this.currentPlayer;
+        this.playersAndCards.put(prevPlayer, prevPlayer.getNumCards());
         this.currentPlayer = game.getCurrentTurn();
+        this.playersAndCards.remove(this.currentPlayer);
         this.currentCard = game.getCurrentCard();
         this.hasWinner = game.hasWinner();
-        for(Player p: game.getPlayers()) {
-            if(p.equals(currentPlayer)) {
-                this.playersAndCards.remove(p);
-            }
-            else {
-                this.playersAndCards.remove(p);
-                this.playersAndCards.put(p, p.getNumCards());
-            }
-        }
-        this.currentPlayerCards = currentPlayer.getCards();
+        this.currentPlayerCards = this.currentPlayer.getCards();
     }
 
     /**

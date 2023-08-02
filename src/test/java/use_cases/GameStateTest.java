@@ -25,7 +25,7 @@ class GameStateTest {
      * Initialize all objects needed to test GameState.
      */
     @BeforeEach
-    void setUp(){
+    public void setUp(){
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
@@ -49,7 +49,7 @@ class GameStateTest {
      * Set all objects created in setUp() to null to free memory.
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         gameState = null;
         p1 = null;
         p2 = null;
@@ -62,7 +62,7 @@ class GameStateTest {
      * This test method will also test the getter methods in GameState as well.
      */
     @Test
-    void testUpdateGameObserver() {
+    public void testUpdateGameObserver() {
         // It is p1's turn, once the turn has been changed it will be p2's turn
         // the turn change and card placement will be separate, p1 should still have
         // the same amount of Cards
