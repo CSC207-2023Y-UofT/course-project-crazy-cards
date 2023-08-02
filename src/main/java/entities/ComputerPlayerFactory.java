@@ -1,5 +1,7 @@
 package entities;
 
+// The class used to create the computer players whenever a new game of Crazy Cards is started.
+// It may or may not be used in the game, depending on whether the user wants to play with computer players.
 public class ComputerPlayerFactory implements PlayerFactory {
     /**
      * Create a ComputerPlayer with the given parameters.
