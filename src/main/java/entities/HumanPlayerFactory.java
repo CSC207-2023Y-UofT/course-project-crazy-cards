@@ -1,7 +1,9 @@
 package entities;
 
-// The class used to create the human players whenever a new game of Crazy Cards is started.
-// It will be used at least once per game to create the user who starts the game.
+/**
+ * The class used to create the human players whenever a new game of Crazy Cards is started.
+ * It will be used at least once per game to create the user who starts the game.
+ */
 public class HumanPlayerFactory implements PlayerFactory {
     /**
      * Create a HumanPlayer with the given parameters.
