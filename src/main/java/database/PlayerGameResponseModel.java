@@ -37,7 +37,11 @@ public class PlayerGameResponseModel {
 
     /**
      * Convert the given Card to an array of strings.
+<<<<<<< HEAD
      * @param card The Card ot be converted.
+=======
+     * @param card The Card ot be converted/
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
      * @return An array of Strings representing the Card as {value, suit}.
      */
     private String[] cardToArray(Card card) {
@@ -70,15 +74,23 @@ public class PlayerGameResponseModel {
      * Get the name of the current Player.
      * @return A string containing the name of the current Player.
      */
+<<<<<<< HEAD
     public String getCurrentPlayerName() {
         return this.currentPlayerName;
     }
+=======
+    public String getCurrentPlayerName() { return this.currentPlayerName; }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 
     /**
      * Get the current Card this ResponseModel is sending.
      * @return The current Card in String format.
      */
+<<<<<<< HEAD
     public String[] getCurrentCard() {
         return this.currentCard;
     }
+=======
+    public String[] getCurrentCard() { return this.currentCard; }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 }

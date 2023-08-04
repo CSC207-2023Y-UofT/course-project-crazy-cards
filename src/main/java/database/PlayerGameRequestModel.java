@@ -51,33 +51,49 @@ public class PlayerGameRequestModel {
      * Get whether the User requested to skip their turn.
      * @return True iff requested to skip turn.
      */
+<<<<<<< HEAD
     boolean getSkipTurnRequest() {
         return this.skipTurnRequest;
     }
+=======
+    boolean getSkipTurnRequest() { return this.skipTurnRequest; }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 
     /**
      * Get the name of the current Player.
      * @return String containing name of current Player.
      */
+<<<<<<< HEAD
     String getPlayerName() {
         return this.playerName;
     }
+=======
+    String getPlayerName() { return this.playerName; }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 
     /**
      * Get the suit of the Card that was requested to be played.
      * This method assumes that a Card was played, and thus it should not return null.
      * @return a String containing the suit of the chosen Card.
      */
+<<<<<<< HEAD
     String getCardSuit() {
         return this.cardSuit;
     }
+=======
+    String getCardSuit() { return this.cardSuit; }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 
     /**
      * Get the value of the Card that was requested to be played.
      * This method assumes that a Card was played, and thus it should not return null.
      * @return a String containing the value of the chosen Card.
      */
+<<<<<<< HEAD
     String getCardValue(){
         return this.cardValue;
     }
+=======
+    String getCardValue(){ return this.cardValue; }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 }

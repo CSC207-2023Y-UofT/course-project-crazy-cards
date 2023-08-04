@@ -4,12 +4,21 @@ import entities.*;
 
 /**
  * This class is responsible for the logic whenever a User/Player interacts with the game screen.
+<<<<<<< HEAD
  * That is, when they request to play a Card, pick up a Card, or skip their turn.
  * This class also implements the logic for the ComputerPlayer logic.
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
     private final Game currentGame;
     private final GameState gameState;
+=======
+ * that is, when they request to play a Card, pick up a Card, or skip their turn.
+ * This class also implements the logic for the ComputerPlayer logic.
+ */
+public class PlayerGameInteractor implements PlayerGameInputBoundary {
+    private Game currentGame;
+    private GameState gameState;
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 
     /**
      * Create a new PlayerGameInteractor.
@@ -29,9 +38,15 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     @Override
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
+<<<<<<< HEAD
         if(currPlayer != null){
         Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
         if (chosenCard != null && pgrm.getPlayCardRequest()) {
+=======
+        assert currPlayer != null;
+        Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
+        if(chosenCard != null && pgrm.getPlayCardRequest()) {
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
             playCardRequestLogic(chosenCard, currPlayer);
         } else if (pgrm.getPickUpCardRequest()) {
             pickUpCardRequestLogic(currPlayer);
@@ -42,6 +57,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         // Now we assume that the Game has been successfully updated, but first check that the Player whose
         // turn it IS NOT a ComputerPlayer, as a User should not play as a ComputerPlayer
         Player newCurrPlayer = currentGame.getCurrentTurn();
+<<<<<<< HEAD
         while ((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
             newCurrPlayer = currentGame.getCurrentTurn();
@@ -51,6 +67,13 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     } else {
             return null;
         }
+=======
+        while((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
+            computerPlayerLogic((ComputerPlayer) newCurrPlayer);
+        }
+        // Return the current state of the game with a response model.
+        return new PlayerGameResponseModel(gameState);
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
     }
 
     /**
@@ -77,9 +100,13 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      */
     private Card findCardFromStrings(String value, String suit, Player player) {
         for(Card card: player.getCards()) {
+<<<<<<< HEAD
             String valToCheck = card.getValue();
             String suitToCheck = card.getSuit();
             if(valToCheck.equals(value) & suitToCheck.equals(suit)) {
+=======
+            if(card.getValue().equals(value) & card.getSuit().equals(suit)) {
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
                 return card;
             }
         }
@@ -99,8 +126,15 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             }
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
+<<<<<<< HEAD
         }  // The card is not valid, therefore it should not be played, nothing is to be done.
 
+=======
+        } else {
+            // The card is not valid, therefore it should not be played, nothing is to be done.
+            return;
+        }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
     }
 
     /**
@@ -108,9 +142,17 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * can pick up a Card, and if they can, then pick up one, otherwise don't do anything.
      */
     private void pickUpCardRequestLogic(Player currentPlayer) {
+<<<<<<< HEAD
         if(!(currentGame.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
             currentPlayer.pickUpCard(currentGame);
             currentGame.notifyGameObservers();
+=======
+        if(!(currentGame.getCurrentTurnHasPickedUp())) {
+            currentPlayer.pickUpCard(currentGame);
+            currentGame.notifyGameObservers();
+        } else {
+            return;
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
         }
     }
 
@@ -120,14 +162,25 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      */
     private void skipTurnLogic(Player currentPlayer) {
         assert currentPlayer.equals(currentGame.getCurrentTurn());
+<<<<<<< HEAD
         if ((currentGame.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
+=======
+        if(!(currentGame.getCurrentTurnHasPickedUp()) | anyValidCards(currentPlayer)) {
+            // User cannot skip.
+            return;
+        } else {
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
             // User can skip.
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
         }
+<<<<<<< HEAD
             // User cannot skip.
 
         }
+=======
+    }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 
     /**
      * Check all the Cards in this Player's Hand to see if any of them are valid to play in the Game.
@@ -176,20 +229,38 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * @param compPlayer The ComputerPlayer whose turn it is.
      */
     private void computerPlayerLogic(ComputerPlayer compPlayer) {
+<<<<<<< HEAD
         Card compCard = compPlayer.selectRandomValidCard(this.currentGame);
+=======
+        Card compCard = compPlayer.selectRandomCard(this.currentGame);
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
         // If compCard is null, compPlayer has no valid cards, thus it must pick up and then try again.
         if(compCard == null) {
             compPlayer.pickUpCard(this.currentGame);
             boolean hasAnyValid = anyValidCards(compPlayer);
             if(hasAnyValid) {
                 // Player has a valid card, thus play it
+<<<<<<< HEAD
                 Card toPlay = compPlayer.selectRandomValidCard(this.currentGame);
+=======
+                Card toPlay = compPlayer.selectRandomCard(this.currentGame);
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
                 compPlayer.playCard(this.currentGame, toPlay);
                 if(isWinner(compPlayer)) {
                     // The ComputerPlayer is the winner, set them as the Winner and notify the Game
                     winLogic(compPlayer);
                     return;
                 }
+<<<<<<< HEAD
+=======
+                currentGame.changeCurrentTurn();
+                currentGame.notifyGameObservers();
+            } else {
+                // Picked up but can't go, so skip turn
+                this.currentGame.changeCurrentTurn();
+                this.currentGame.notifyGameObservers();
+                return;
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
             }
         } else {
             // Play the valid Card
@@ -199,11 +270,18 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 winLogic(compPlayer);
                 return;
             }
+<<<<<<< HEAD
 
         }
         // The ComputerPlayer has played a Card (may or may not have picked up) and there was no winner, so change the
         // current turn and update the Game.
         currentGame.changeCurrentTurn();
         currentGame.notifyGameObservers();
+=======
+            currentGame.changeCurrentTurn();
+            currentGame.notifyGameObservers();
+
+        }
+>>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
     }
 }
