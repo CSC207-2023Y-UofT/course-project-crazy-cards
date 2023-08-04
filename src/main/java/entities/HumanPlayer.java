@@ -20,15 +20,6 @@ public class HumanPlayer extends Player {
     }
 
     /**
-     * Get the wins and losses of this HumanPlayer/
-     * @return An ArrayList of Integers containing the wins as the first index and losses as the second index.
-     */
-    public int[] getStats() {
-        int[] winsLosses = {this.wins, this.losses};
-        return winsLosses;
-    }
-
-    /**
      * Increase the win statistic of this Player.
      */
     public void incrementWins() {
