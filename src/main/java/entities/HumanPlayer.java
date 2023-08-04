@@ -42,4 +42,19 @@ public class HumanPlayer extends Player {
         this.losses ++;
     }
 
+    /**
+     * Get the number of wins of this HumanPlayer.
+     * @return An int containing the number of wins of this HumanPlayer.
+     */
+    public int getWins() {
+        return this.wins;
+    }
+
+    /**
+     * Get the number of losses of this HumanPlayer.
+     * @return An int containing the number of losses of this HumanPlayer.
+     */
+    public int getLosses() {
+        return this.losses;
+    }
 }
