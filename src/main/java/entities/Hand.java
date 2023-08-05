@@ -22,8 +22,8 @@ public class Hand {
     }
 
     /**
-     * Remove the given Card from this Hand, this method is only called when a Player puts down a Card from their
-     * Hand, which will always be non-empty, it should never throw an exception, hence why we don't check if
+     * Remove the given Card from this Hand. This method is only called when a Player puts down a Card from their
+     * Hand, which will always be non-empty. It should never throw an exception, hence why we don't check if
      * Card is in this.cards.
      * @param card The Card object to be removed.
      */
