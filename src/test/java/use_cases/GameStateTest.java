@@ -42,7 +42,6 @@ class GameStateTest {
         players.add(p2);
         game = new Game(deck, players);
         gameState = new GameState(game);
-
     }
 
     /**

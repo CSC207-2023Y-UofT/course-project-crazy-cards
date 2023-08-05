@@ -8,8 +8,8 @@ import entities.*;
  * This class also implements the logic for the ComputerPlayer logic.
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
-    private Game currentGame;
-    private GameState gameState;
+    private final Game currentGame;
+    private final GameState gameState;
 
     /**
      * Create a new PlayerGameInteractor.
@@ -44,6 +44,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         Player newCurrPlayer = currentGame.getCurrentTurn();
         while((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
+            newCurrPlayer = currentGame.getCurrentTurn();
         }
         // Return the current state of the game with a response model.
         return new PlayerGameResponseModel(gameState);
@@ -73,7 +74,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      */
     private Card findCardFromStrings(String value, String suit, Player player) {
         for(Card card: player.getCards()) {
-            if(card.getValue().equals(value) & card.getSuit().equals(suit)) {
+            String valToCheck = card.getValue();
+            String suitToCheck = card.getSuit();
+            if(valToCheck.equals(value) & suitToCheck.equals(suit)) {
                 return card;
             }
         }
@@ -93,10 +96,8 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             }
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
-        } else {
-            // The card is not valid, therefore it should not be played, nothing is to be done.
-            return;
-        }
+        }  // The card is not valid, therefore it should not be played, nothing is to be done.
+
     }
 
     /**
@@ -104,11 +105,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * can pick up a Card, and if they can, then pick up one, otherwise don't do anything.
      */
     private void pickUpCardRequestLogic(Player currentPlayer) {
-        if(!(currentGame.getCurrentTurnHasPickedUp())) {
+        if(!(currentGame.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
             currentPlayer.pickUpCard(currentGame);
             currentGame.notifyGameObservers();
-        } else {
-            return;
         }
     }
 
@@ -118,15 +117,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      */
     private void skipTurnLogic(Player currentPlayer) {
         assert currentPlayer.equals(currentGame.getCurrentTurn());
-        if(!(currentGame.getCurrentTurnHasPickedUp()) | anyValidCards(currentPlayer)) {
-            // User cannot skip.
-            return;
-        } else {
+        if ((currentGame.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
             // User can skip.
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
         }
-    }
+            // User cannot skip.
+
+        }
 
     /**
      * Check all the Cards in this Player's Hand to see if any of them are valid to play in the Game.
@@ -191,12 +189,13 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 }
                 currentGame.changeCurrentTurn();
                 currentGame.notifyGameObservers();
+                return;
             } else {
                 // Picked up but can't go, so skip turn
-                this.currentGame.changeCurrentTurn();
                 this.currentGame.notifyGameObservers();
-                return;
             }
+            currentGame.changeCurrentTurn();
+            currentGame.notifyGameObservers();
         } else {
             // Play the valid Card
             compPlayer.playCard(this.currentGame, compCard);
