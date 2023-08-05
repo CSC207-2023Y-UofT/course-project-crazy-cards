@@ -12,6 +12,10 @@ public interface Deck {
      */
     void addCardToDeck(Card card);
 
+    /**
+     * Remove a card from the current deck.
+     * @return A Card instance that has been removed from the deck.
+     */
     Card removeCardFromDeck();
 
     /**
