@@ -52,17 +52,24 @@ public class PlayerGameRequestModel {
      * @return True iff requested to skip turn.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     boolean getSkipTurnRequest() {
         return this.skipTurnRequest;
     }
 =======
     boolean getSkipTurnRequest() { return this.skipTurnRequest; }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    boolean getSkipTurnRequest() {
+        return this.skipTurnRequest;
+    }
+>>>>>>> a548eb8 (Made all getter methods to three lines instead of 1.)
 
     /**
      * Get the name of the current Player.
      * @return String containing name of current Player.
      */
+<<<<<<< HEAD
 <<<<<<< HEAD
     String getPlayerName() {
         return this.playerName;
@@ -70,6 +77,11 @@ public class PlayerGameRequestModel {
 =======
     String getPlayerName() { return this.playerName; }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    String getPlayerName() {
+        return this.playerName;
+    }
+>>>>>>> a548eb8 (Made all getter methods to three lines instead of 1.)
 
     /**
      * Get the suit of the Card that was requested to be played.
@@ -77,12 +89,18 @@ public class PlayerGameRequestModel {
      * @return a String containing the suit of the chosen Card.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     String getCardSuit() {
         return this.cardSuit;
     }
 =======
     String getCardSuit() { return this.cardSuit; }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    String getCardSuit() {
+        return this.cardSuit;
+    }
+>>>>>>> a548eb8 (Made all getter methods to three lines instead of 1.)
 
     /**
      * Get the value of the Card that was requested to be played.
@@ -90,10 +108,16 @@ public class PlayerGameRequestModel {
      * @return a String containing the value of the chosen Card.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     String getCardValue(){
         return this.cardValue;
     }
 =======
     String getCardValue(){ return this.cardValue; }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    String getCardValue(){
+        return this.cardValue;
+    }
+>>>>>>> a548eb8 (Made all getter methods to three lines instead of 1.)
 }

@@ -75,17 +75,24 @@ public class PlayerGameResponseModel {
      * @return A string containing the name of the current Player.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String getCurrentPlayerName() {
         return this.currentPlayerName;
     }
 =======
     public String getCurrentPlayerName() { return this.currentPlayerName; }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    public String getCurrentPlayerName() {
+        return this.currentPlayerName;
+    }
+>>>>>>> a548eb8 (Made all getter methods to three lines instead of 1.)
 
     /**
      * Get the current Card this ResponseModel is sending.
      * @return The current Card in String format.
      */
+<<<<<<< HEAD
 <<<<<<< HEAD
     public String[] getCurrentCard() {
         return this.currentCard;
@@ -93,4 +100,9 @@ public class PlayerGameResponseModel {
 =======
     public String[] getCurrentCard() { return this.currentCard; }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    public String[] getCurrentCard() {
+        return this.currentCard;
+    }
+>>>>>>> a548eb8 (Made all getter methods to three lines instead of 1.)
 }
