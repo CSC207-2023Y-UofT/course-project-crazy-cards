@@ -5,7 +5,7 @@ import entities.*;
 /**
  * This class is responsible for the logic whenever a User/Player interacts with the game screen.
  * That is, when they request to play a Card, pick up a Card, or skip their turn.
- * This class also implements the logic for the ComputerPlayer logic.
+ * This class also implements the logic for the ComputerPlayer.
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
     private final Game currentGame;
@@ -14,7 +14,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     /**
      * Create a new PlayerGameInteractor.
      * @param game The Game instance which the User interacts with.
-     * @param gameState The GameState which this Interactor uses to later construct a response model
+     * @param gameState The GameState which this Interactor uses to later construct a response model.
      */
     public PlayerGameInteractor(Game game, GameState gameState) {
         this.currentGame = game;
@@ -24,7 +24,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     /**
      * Create a new PlayerGameResponseModel given a PlayerGameRequestModel.
      * @param pgrm A PlayerGameRequestModel containing information on the User's request.
-     * @return a PlayerGameResponseModel that contains the information necessary to update the view a User sees.
+     * @return A PlayerGameResponseModel containing the information necessary to update the view a User sees.
      */
     @Override
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
@@ -55,9 +55,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 
     /**
      * Find the Player in the Game with the given name.
-     * This method assumes no Player in the same Game has the same name.
+     * This method assumes no Player in the current Game share the same name.
      * @param name A name of a Player in the Game.
-     * @return The Player whose name matches name.
+     * @return The Player whose name matches the 'name' parameter.
      */
     private Player findPlayerFromString(String name) {
         for(Player p: currentGame.getPlayers()) {
@@ -100,12 +100,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
         }  // The card is not valid, therefore it should not be played, nothing is to be done.
-
     }
 
     /**
-     * Implement the logic required when a User requests to pick up a Card, that is, check if the user
-     * can pick up a Card, and if they can, then pick up one, otherwise don't do anything.
+     * Implement the logic required when a User requests to pick up a Card. It will check if the user
+     * can pick up a Card, and if they can, then pick one up. Otherwise, the function won't do anything.
      */
     private void pickUpCardRequestLogic(Player currentPlayer) {
         if(!(currentGame.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
@@ -115,8 +114,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     }
 
     /**
-     * Implement the logic required when a User requests to skip a turn, that is to check if the user
-     * has any valid cards or if the user has not picked up, if they do then do not skip, otherwise skip
+     * Implement the logic required when a User requests to skip a turn. This method will check if the user
+     * has any valid cards or if the user has picked up. If the user has picked up OR has no valid cards,
+     * the user CAN skip their turn. Otherwise, the user CANNOT skip their turn.
      */
     private void skipTurnLogic(Player currentPlayer) {
         assert currentPlayer.equals(currentGame.getCurrentTurn());
@@ -125,8 +125,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
         }
-            // User cannot skip.
-
+            // User cannot skip their turn.
         }
 
     /**
@@ -142,10 +141,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         return false;
     }
 
-
     /**
-     * Perform the logic required when a Player wins the Game, that is, set the Player as the Game winner,
-     * increment wins and losses for all Players
+     * Perform the logic required when a Player wins the Game. If a Player has won, set the Player as the Game winner,
+     * and increment wins and losses for all HumanPlayers in the current game.
      * @param player The player who has won the Game.
      */
     private void winLogic(Player player) {
@@ -162,17 +160,16 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     }
 
     /**
-     * Check if the given Player is the winner of the Game
+     * Check if the given Player is the winner of the Game.
      * @return True iff the Player has no Cards left in their Hand (played their last Card).
      */
     private boolean isWinner(Player player) {
         return player.getCards().isEmpty();
     }
 
-
     /**
      * This method implements all the logic for ComputerPlayers, including the logic for putting down a Card,
-     * picking one up, and skipping the turn.
+     * picking a card up, and skipping their turn.
      * @param compPlayer The ComputerPlayer whose turn it is.
      */
     private void computerPlayerLogic(ComputerPlayer compPlayer) {
@@ -199,7 +196,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 winLogic(compPlayer);
                 return;
             }
-
         }
         // The ComputerPlayer has played a Card (may or may not have picked up) and there was no winner, so change the
         // current turn and update the Game.
