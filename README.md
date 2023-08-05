@@ -11,9 +11,12 @@ Run the file src/main/Main.java (ADD LINK HERE AFTER CREATED).
 
 ### Feature 1: Game Start
 
-### Feature 2: Statistics Page
+### Feature 2: [Statistics Page](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/issues/2)
+Significant files in this feature include ... This feature displays a statistics page to the user with the wins and losses associated with each username in players.csv (data storing file).
+The statistics page is accessible through the home page.
 
-### Feature 3: Rules Page
+### Feature 3: [Rules Page](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/issues/3)
+Significant files in this feature include ... This feature displays the rules of the game. The rules page is accessible through the home page.
 
 ### Feature 4: Play Card Feature
 
@@ -37,10 +40,10 @@ This allows players to continuously build and monitor their gaming progress.
 ...
 
 ## Code Organization
-The code is organized by packages adhering to clean architecture. Packages include entities, use_cases, controllers, database, and UI.windows (LIST OTHERS HERE).
+The code is organized by packages adhering to clean architecture. Packages include entities, use_cases, controllers, database, and UI (LIST OTHERS HERE).
 
 ## Testing
-Under src/test/java include comprehensive tests for the various functionalities of the game. Javadocs are included to further explain each test.
+Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive tests for the various functionalities of the game. Javadocs are included to further explain each test.
 
 ## Design Patterns
 
