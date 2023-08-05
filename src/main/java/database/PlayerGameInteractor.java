@@ -296,6 +296,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                     return;
                 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 currentGame.changeCurrentTurn();
                 currentGame.notifyGameObservers();
@@ -308,6 +309,8 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
 =======
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+>>>>>>> 35ff790 (Changed computerPlayerLogic() code to be less redundant when calling changeCurrentTurn() and notifyGameObservers().)
             }
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
