@@ -5,6 +5,9 @@ import entities.*;
 /**
  * This class is responsible for the logic whenever a User/Player interacts with the game screen.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 35526f4 (Renamed ComputerPlayer.selectRandomCard() to selectRandomValidCard() and updated everywhere that used it.)
  * That is, when they request to play a Card, pick up a Card, or skip their turn.
  * This class also implements the logic for the ComputerPlayer logic.
  */
@@ -263,10 +266,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      */
     private void computerPlayerLogic(ComputerPlayer compPlayer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Card compCard = compPlayer.selectRandomValidCard(this.currentGame);
 =======
         Card compCard = compPlayer.selectRandomCard(this.currentGame);
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+        Card compCard = compPlayer.selectRandomValidCard(this.currentGame);
+>>>>>>> 35526f4 (Renamed ComputerPlayer.selectRandomCard() to selectRandomValidCard() and updated everywhere that used it.)
         // If compCard is null, compPlayer has no valid cards, thus it must pick up and then try again.
         if(compCard == null) {
             compPlayer.pickUpCard(this.currentGame);
@@ -274,10 +281,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             if(hasAnyValid) {
                 // Player has a valid card, thus play it
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Card toPlay = compPlayer.selectRandomValidCard(this.currentGame);
 =======
                 Card toPlay = compPlayer.selectRandomCard(this.currentGame);
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+                Card toPlay = compPlayer.selectRandomValidCard(this.currentGame);
+>>>>>>> 35526f4 (Renamed ComputerPlayer.selectRandomCard() to selectRandomValidCard() and updated everywhere that used it.)
                 compPlayer.playCard(this.currentGame, toPlay);
                 if(isWinner(compPlayer)) {
                     // The ComputerPlayer is the winner, set them as the Winner and notify the Game
