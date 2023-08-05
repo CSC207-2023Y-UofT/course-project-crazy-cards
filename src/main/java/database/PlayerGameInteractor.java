@@ -47,6 +47,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(currPlayer != null){
         Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
         if (chosenCard != null && pgrm.getPlayCardRequest()) {
@@ -55,6 +56,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
         if(chosenCard != null && pgrm.getPlayCardRequest()) {
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+        if(currPlayer != null){
+        Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
+        if (chosenCard != null && pgrm.getPlayCardRequest()) {
+>>>>>>> 8917829 (Removed redundant code in computerPlayerLogic())
             playCardRequestLogic(chosenCard, currPlayer);
         } else if (pgrm.getPickUpCardRequest()) {
             pickUpCardRequestLogic(currPlayer);
@@ -65,6 +71,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         // Now we assume that the Game has been successfully updated, but first check that the Player whose
         // turn it IS NOT a ComputerPlayer, as a User should not play as a ComputerPlayer
         Player newCurrPlayer = currentGame.getCurrentTurn();
+<<<<<<< HEAD
 <<<<<<< HEAD
         while ((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
@@ -77,12 +84,21 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         }
 =======
         while((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
+=======
+        while ((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
+>>>>>>> 8917829 (Removed redundant code in computerPlayerLogic())
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
             newCurrPlayer = currentGame.getCurrentTurn();
         }
         // Return the current state of the game with a response model.
         return new PlayerGameResponseModel(gameState);
+<<<<<<< HEAD
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    } else {
+            return null;
+        }
+>>>>>>> 8917829 (Removed redundant code in computerPlayerLogic())
     }
 
     /**
@@ -312,8 +328,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 =======
 >>>>>>> 35ff790 (Changed computerPlayerLogic() code to be less redundant when calling changeCurrentTurn() and notifyGameObservers().)
             }
-            currentGame.changeCurrentTurn();
-            currentGame.notifyGameObservers();
         } else {
             // Play the valid Card
             compPlayer.playCard(this.currentGame, compCard);
@@ -322,6 +336,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 winLogic(compPlayer);
                 return;
             }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         }
@@ -335,5 +350,13 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 
         }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+
+        }
+        // The ComputerPlayer has played a Card (may or may not have picked up) and there was no winner, so change the
+        // current turn and update the Game.
+        currentGame.changeCurrentTurn();
+        currentGame.notifyGameObservers();
+>>>>>>> 8917829 (Removed redundant code in computerPlayerLogic())
     }
 }
