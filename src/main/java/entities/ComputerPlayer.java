@@ -20,7 +20,7 @@ public class ComputerPlayer extends Player {
      * @param game The Game instance this ComputerPlayer is a part of.
      * @return a Card that is to be placed down in the Game or null is there is no valid Card.
      */
-    public Card selectRandomCard(Game game) {
+    public Card selectRandomValidCard(Game game) {
         ArrayList<Card> computerCopyCards = getCards();
         Collections.shuffle(computerCopyCards);
         for (Card card : getCards()) {

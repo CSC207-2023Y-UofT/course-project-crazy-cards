@@ -4,7 +4,7 @@ import entities.*;
 
 /**
  * This class is responsible for the logic whenever a User/Player interacts with the game screen.
- * that is, when they request to play a Card, pick up a Card, or skip their turn.
+ * That is, when they request to play a Card, pick up a Card, or skip their turn.
  * This class also implements the logic for the ComputerPlayer logic.
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
@@ -173,14 +173,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * @param compPlayer The ComputerPlayer whose turn it is.
      */
     private void computerPlayerLogic(ComputerPlayer compPlayer) {
-        Card compCard = compPlayer.selectRandomCard(this.currentGame);
+        Card compCard = compPlayer.selectRandomValidCard(this.currentGame);
         // If compCard is null, compPlayer has no valid cards, thus it must pick up and then try again.
         if(compCard == null) {
             compPlayer.pickUpCard(this.currentGame);
             boolean hasAnyValid = anyValidCards(compPlayer);
             if(hasAnyValid) {
                 // Player has a valid card, thus play it
-                Card toPlay = compPlayer.selectRandomCard(this.currentGame);
+                Card toPlay = compPlayer.selectRandomValidCard(this.currentGame);
                 compPlayer.playCard(this.currentGame, toPlay);
                 if(isWinner(compPlayer)) {
                     // The ComputerPlayer is the winner, set them as the Winner and notify the Game
