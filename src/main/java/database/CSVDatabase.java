@@ -1,7 +1,7 @@
 package database;
 
 import entities.HumanPlayer;
-import entities.PlayerInformation;
+import usecases.PlayerInformation;
 
 import java.io.*;
 
