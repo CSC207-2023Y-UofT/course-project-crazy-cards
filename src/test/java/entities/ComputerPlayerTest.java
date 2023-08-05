@@ -52,7 +52,7 @@ class ComputerPlayerTest {
     public void testSelectCardValidCard() {
         Card toAddToCp1 = new Card("Spades", "9");
         cp1.getHand().addCard(toAddToCp1);
-        Card selected = cp1.selectRandomCard(game);
+        Card selected = cp1.selectRandomValidCard(game);
         boolean validity = game.isValidCard(selected);
         assertTrue(validity);
 
@@ -68,7 +68,7 @@ class ComputerPlayerTest {
         newHandList.add(bogus);
         Hand hand = new Hand(newHandList);
         cp1.setHand(hand);
-        Card selected = cp1.selectRandomCard(game);
+        Card selected = cp1.selectRandomValidCard(game);
         assertNull(selected);
     }
 }

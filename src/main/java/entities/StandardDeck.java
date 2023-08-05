@@ -8,7 +8,7 @@ public class StandardDeck implements Deck {
     private ArrayList<Card> cards = new ArrayList<>();
 
     private final static String[] suits = {"Spades", "Hearts", "Diamond", "Clubs"};
-    private final static String[] values = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    private final static String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
     /**
      * Construct an ArrayList that contains a standard 52 card deck that will be used for the game.

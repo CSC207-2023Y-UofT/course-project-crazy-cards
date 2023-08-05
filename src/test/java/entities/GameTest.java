@@ -130,7 +130,7 @@ class GameTest {
     @Test
     public void testIsValidCardInvalid() {
         game.putCardDown(new Card("Hearts", "9"));
-        Card toTest = new Card("Spades", "King");
+        Card toTest = new Card("Spades", "K");
         boolean validity = game.isValidCard(toTest);
         assertFalse(validity);
     }
@@ -153,6 +153,26 @@ class GameTest {
     public void testGetGameDeck() {
         Deck toTest = game.getGameDeck();
         assertEquals(deck, toTest);
+    }
+
+    /**
+     * Test that ChangeCurrentTurn changes the turn to the next Player, and that the new turn has not picked up a Card.
+     */
+    @Test
+    public void testChangeCurrentTurn() {
+        game.changeCurrentTurn();
+        assertEquals(p2, game.getCurrentTurn());
+        assertFalse(game.getCurrentTurnHasPickedUp());
+    }
+
+    /**
+     * Test that when the current turn of the Game picks up a card, getCurrentTurnHasPickedUp is True.
+     * This would also test setCurrentTurnHasPickedUpTrue() as well.
+     */
+    @Test
+    public void testGetCurrentTurnHasPickedUp() {
+        p1.pickUpCard(game);
+        assertTrue(game.getCurrentTurnHasPickedUp());
     }
 
 }
