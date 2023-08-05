@@ -7,7 +7,12 @@ import ui.windows.StatsWindow;
 import ui.windows.Window;
 
 public class StatsWindowFactory implements WindowFactory {
-    
+
+    /**
+     * Creates a controller, delegator and display for statistics page usage, before returning a new
+     * StatsWindow using the three previously mentioned classes.
+     * @return A new StatsWindow to display statistics on.
+     */
     @Override
     public Window createWindow() {
         StatsController controller = new StatsController();
@@ -17,5 +22,4 @@ public class StatsWindowFactory implements WindowFactory {
 
         return new StatsWindow(display);
     }
-    
 }
