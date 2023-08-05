@@ -19,7 +19,7 @@ public class PlayerGameResponseModel {
 
     /**
      * Create a new PlayerGameResponseModel, using the updated GameState provided.
-     * Cards are represented as an array of string by {value, suit}
+     * Cards are represented as an array of string by {value, suit}.
      * @param gameState The GameState which provides the information for this ResponseModel.
      */
     public PlayerGameResponseModel(GameState gameState) {
@@ -32,12 +32,11 @@ public class PlayerGameResponseModel {
         for(Player player: gameState.getPlayersAndCards().keySet()) {
             this.playersAndNumCards.put(player.getName(), player.getNumCards());
         }
-
     }
 
     /**
      * Convert the given Card to an array of strings.
-     * @param card The Card ot be converted.
+     * @param card The Card to be converted.
      * @return An array of Strings representing the Card as {value, suit}.
      */
     private String[] cardToArray(Card card) {
@@ -48,7 +47,9 @@ public class PlayerGameResponseModel {
      * Get if this ResponseModel shows if there is a Winner.
      * @return True iff hasWinner is true.
      */
-    public boolean getHasWinner() { return this.hasWinner; }
+    public boolean getHasWinner() {
+        return this.hasWinner;
+    }
 
     /**
      * Get the cards of the current Player in String format.
@@ -59,8 +60,8 @@ public class PlayerGameResponseModel {
     }
 
     /**
-     * Get all the Players names (besides current Player) and their number of Cards.
-     * @return HashMap with Player names as Strings and number of Cards as an Integer.
+     * Get all the Players names (other than the current Player) and their respective number of Cards.
+     * @return A HashMap with Player names as Strings and number of Cards as an Integer.
      */
     public HashMap<String, Integer> getPlayersAndNumCards() {
         return playersAndNumCards;
