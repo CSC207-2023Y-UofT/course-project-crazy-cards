@@ -12,7 +12,8 @@ public class Game implements ObservableGame {
 
     private Player currentTurn;
 
-    private ArrayList<GameObserver> observers;
+    private ArrayList<GameObserver> observers = new ArrayList<>();
+    private boolean currentTurnHasPickedUp = false;
 
     /**
      * Construct a new card game given a particular deck and set of players.
@@ -36,6 +37,7 @@ public class Game implements ObservableGame {
 
     /**
      * Change the turn of the Player from the current Player to the next in the Game.
+     * The Player whose turn it is now should not have picked up.
      * This method assumes that the Player before is not the winner of the Game, otherwise it would not be called.
      */
     public void changeCurrentTurn() {
@@ -46,6 +48,7 @@ public class Game implements ObservableGame {
         else {
             this.currentTurn = this.players.get(currentPlayerIndex + 1);
         }
+        currentTurnHasPickedUp = false;
     }
 
     /**
@@ -163,4 +166,19 @@ public class Game implements ObservableGame {
     public void deleteObservers() {
         this.observers.clear();
     }
+
+    /**
+     * Return if the current Player has picked up a card.
+     * @return True iff the current Player has picked up a Card from this Game's Deck.
+     */
+    public boolean getCurrentTurnHasPickedUp() { return this.currentTurnHasPickedUp;}
+
+    /**
+     * Set currentTurnHasPickUp to true.
+     * This method is only called when a Player picks up a Card from this Game's deck.
+     */
+    public void setCurrentTurnHasPickedUpTrue() {
+        currentTurnHasPickedUp = true;
+    }
+
 }

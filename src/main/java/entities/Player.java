@@ -72,6 +72,7 @@ public abstract class Player {
     public void pickUpCard(Game game) {
         Card cardToAdd = game.getGameDeck().removeCardFromDeck();
         this.hand.addCard(cardToAdd);
+        game.setCurrentTurnHasPickedUpTrue();
     }
 
     /**
