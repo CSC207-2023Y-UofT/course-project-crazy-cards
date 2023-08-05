@@ -5,7 +5,7 @@ the code, we use player and user interchangeably.
 
 ## How To Run The Game
 
-Run the file src/main/Main.java.
+Run the file src/main/Main.java (ADD LINK HERE AFTER CREATED).
 
 ## Functionality & Features
 
