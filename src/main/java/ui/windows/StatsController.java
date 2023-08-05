@@ -15,7 +15,7 @@ public class StatsController {
 
     /**
      * Sets a display endpoint for the controller.
-     * @param display the display to be used
+     * @param display The display to be used.
      */
     public void setDisplay(StatsDisplay display) {
         this.display = display;
@@ -23,8 +23,8 @@ public class StatsController {
 
     /**
      * Requests statistics for a given user and updates display.
-     * @param username the name of the user
-     * @return false if no display is supplied, true otherwise
+     * @param username The name of the user.
+     * @return false if no display is supplied, true otherwise.
      */
     public boolean tryRequestUser(String username) {
         if (display == null) {
@@ -38,8 +38,8 @@ public class StatsController {
 
     /**
      * Retrieves statistics for a given user.
-     * @param username the name of the user
-     * @return the retrieved data as a StatsDisplayData
+     * @param username The name of the user.
+     * @return The retrieved data as a StatsDisplayData.
      */
     private StatsDisplayData retrieveData(String username) {
         // TODO: send usecase 
