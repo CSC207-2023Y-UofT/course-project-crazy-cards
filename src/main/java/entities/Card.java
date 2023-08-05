@@ -7,8 +7,8 @@ public class Card {
 
     /**
      * Construct a Card, giving it the provided suit and value. This constructor is used for regular cards.
-     * @param suit  The suit of the card (i.e. Spade, Club, Heart, Diamond)
-     * @param value The value of the card (i.e. 2 through 10, or Jack, Queen, King or Ace)
+     * @param suit  The suit of the card (i.e. Spades, Clubs, Hearts, Diamonds)
+     * @param value The value of the card (i.e. 2 through 10, or J, Q, K or A)
      */
     public Card(String suit, String value) {
         this.suit = suit;
@@ -17,8 +17,8 @@ public class Card {
 
     /**
      * Construct a Card, giving it the provided suit, value, and specialEffect.
-     * @param suit          The suit of the card (i.e. Spade, Club, Heart, Diamond)
-     * @param value         The value of the card (i.e. 2 through 10, or Jack, Queen, King or Ace)
+     * @param suit          The suit of the card (i.e. Spades, Clubs, Hearts, Diamonds)
+     * @param value         The value of the card (i.e. 2 through 10, or J, Q, K or A)
      * @param specialEffect The special effect given to the card, if any is provided (e.g. changing the current suit)
      */
     public Card(String suit, String value, String specialEffect) {
