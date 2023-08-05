@@ -1,9 +1,6 @@
 package use_cases;
 
-import entities.Deck;
-import entities.Hand;
-import entities.HumanPlayer;
-import entities.StandardDeck;
+import entities.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,12 +53,12 @@ public class SaveLoadPlayerTest {
     @Test
     public void saveLoadOneValidPlayer() throws IOException {
         database.savePlayer(p1);
-        String[] p4 = database.loadPlayer("Lily1");
+        PlayerInformation p4 = database.loadPlayer("Lily1");
 
         assert p4 != null;
-        assertEquals(p1.getName(), p4[0]);
-        assertEquals(Integer.toString(p1.getWins()), p4[1]);
-        assertEquals(Integer.toString(p1.getLosses()), p4[2]);
+        assertEquals(p1.getName(), p4.getName());
+        assertEquals(p1.getWins(), p4.getWins());
+        assertEquals(p1.getLosses(), p4.getLosses());
     }
 
     /**
@@ -72,18 +69,18 @@ public class SaveLoadPlayerTest {
     public void saveLoadMultipleValidPlayer() throws IOException {
         database.savePlayer(p1);
         database.savePlayer(p2);
-        String[] p4 = database.loadPlayer("Lily1");
-        String[] p5 = database.loadPlayer("Lily2");
+        PlayerInformation p4 = database.loadPlayer("Lily1");
+        PlayerInformation p5 = database.loadPlayer("Lily2");
 
         assert p4 != null;
-        assertEquals(p1.getName(), p4[0]);
-        assertEquals(Integer.toString(p1.getWins()), p4[1]);
-        assertEquals(Integer.toString(p1.getLosses()), p4[2]);
+        assertEquals(p1.getName(), p4.getName());
+        assertEquals(p1.getWins(), p4.getWins());
+        assertEquals(p1.getLosses(), p4.getLosses());
 
         assert p5 != null;
-        assertEquals(p2.getName(), p5[0]);
-        assertEquals(Integer.toString(p2.getWins()), p5[1]);
-        assertEquals(Integer.toString(p2.getLosses()), p5[2]);
+        assertEquals(p2.getName(), p5.getName());
+        assertEquals(p2.getWins(), p5.getWins());
+        assertEquals(p2.getLosses(), p5.getLosses());
     }
 
     /**
@@ -92,7 +89,7 @@ public class SaveLoadPlayerTest {
      */
     @Test
     public void loadOneInvalidPlayer() throws IOException {
-        String[] p4 = database.loadPlayer("Lily3");
+        PlayerInformation p4 = database.loadPlayer("Lily3");
 
         assertNull(p4);
     }
@@ -103,8 +100,8 @@ public class SaveLoadPlayerTest {
      */
     @Test
     public void loadMultipleInvalidPlayer() throws IOException {
-        String[] p4 = database.loadPlayer("Lily3");
-        String[] p5 = database.loadPlayer("Lily4");
+        PlayerInformation p4 = database.loadPlayer("Lily3");
+        PlayerInformation p5 = database.loadPlayer("Lily4");
 
         assertNull(p4);
         assertNull(p5);
@@ -117,13 +114,13 @@ public class SaveLoadPlayerTest {
     @Test
     public void saveLoadValidInvalidPlayer() throws IOException {
         database.savePlayer(p1);
-        String[] p4 = database.loadPlayer("Lily1");
-        String[] p5 = database.loadPlayer("Lily3");
+        PlayerInformation p4 = database.loadPlayer("Lily1");
+        PlayerInformation p5 = database.loadPlayer("Lily3");
 
         assert p4 != null;
-        assertEquals(p1.getName(), p4[0]);
-        assertEquals(Integer.toString(p1.getWins()), p4[1]);
-        assertEquals(Integer.toString(p1.getLosses()), p4[2]);
+        assertEquals(p1.getName(), p4.getName());
+        assertEquals(p1.getWins(), p4.getWins());
+        assertEquals(p1.getLosses(), p4.getLosses());
 
         assertNull(p5);
     }
