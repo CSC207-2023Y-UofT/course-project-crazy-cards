@@ -1,6 +1,7 @@
 package use_cases;
 
 import entities.HumanPlayer;
+import entities.PlayerInformation;
 
 import java.io.*;
 
@@ -11,17 +12,17 @@ public class CSVDatabase implements DataAccess {
     /**
      * Loads a HumanPlayer's wins and losses from "src/main/java/use_cases/players.csv" given their name.
      * @param name The name of the HumanPlayer.
-     * @return A string array [name, wins, losses] of the HumanPlayer, or null if the name is not found.
+     * @return A PlayerInformation object, or null if the name is not found.
      * @throws IOException If an input/output error occurs when reading from the file.
      */
     @Override
-    public String[] loadPlayer(String name) throws IOException {
+    public PlayerInformation loadPlayer(String name) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
             if (values[0].equals(name)) {
-                return values;
+                return new PlayerInformation(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2]));
             }
         }
         return null;
@@ -40,8 +41,8 @@ public class CSVDatabase implements DataAccess {
         String wins = Integer.toString(player.getWins());
         String losses = Integer.toString(player.getLosses());
 
-        String[] loadedPlayer = loadPlayer(player.getName());
-        if (loadedPlayer != null && loadedPlayer[0].equals(player.getName())) {
+        PlayerInformation loadedPlayer = loadPlayer(player.getName());
+        if (loadedPlayer != null && loadedPlayer.getName().equals(player.getName())) {
             bw.close();
             return false;
         }
