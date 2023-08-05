@@ -187,12 +187,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                     winLogic(compPlayer);
                     return;
                 }
-                currentGame.changeCurrentTurn();
-                currentGame.notifyGameObservers();
-                return;
-            } else {
-                // Picked up but can't go, so skip turn
-                this.currentGame.notifyGameObservers();
             }
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
