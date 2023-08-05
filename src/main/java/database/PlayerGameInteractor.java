@@ -16,9 +16,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
  * This class also implements the logic for the ComputerPlayer logic.
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
+<<<<<<< HEAD
     private Game currentGame;
     private GameState gameState;
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+    private final Game currentGame;
+    private final GameState gameState;
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
 
     /**
      * Create a new PlayerGameInteractor.
@@ -70,6 +75,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 =======
         while((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
+            newCurrPlayer = currentGame.getCurrentTurn();
         }
         // Return the current state of the game with a response model.
         return new PlayerGameResponseModel(gameState);
@@ -101,12 +107,18 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     private Card findCardFromStrings(String value, String suit, Player player) {
         for(Card card: player.getCards()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             String valToCheck = card.getValue();
             String suitToCheck = card.getSuit();
             if(valToCheck.equals(value) & suitToCheck.equals(suit)) {
 =======
             if(card.getValue().equals(value) & card.getSuit().equals(suit)) {
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+            String valToCheck = card.getValue();
+            String suitToCheck = card.getSuit();
+            if(valToCheck.equals(value) & suitToCheck.equals(suit)) {
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
                 return card;
             }
         }
@@ -127,6 +139,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
 <<<<<<< HEAD
+<<<<<<< HEAD
         }  // The card is not valid, therefore it should not be played, nothing is to be done.
 
 =======
@@ -135,6 +148,10 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             return;
         }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+        }  // The card is not valid, therefore it should not be played, nothing is to be done.
+
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
     }
 
     /**
@@ -142,6 +159,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * can pick up a Card, and if they can, then pick up one, otherwise don't do anything.
      */
     private void pickUpCardRequestLogic(Player currentPlayer) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         if(!(currentGame.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
             currentPlayer.pickUpCard(currentGame);
@@ -153,6 +171,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         } else {
             return;
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+        if(!(currentGame.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
+            currentPlayer.pickUpCard(currentGame);
+            currentGame.notifyGameObservers();
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
         }
     }
 
@@ -163,6 +186,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     private void skipTurnLogic(Player currentPlayer) {
         assert currentPlayer.equals(currentGame.getCurrentTurn());
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ((currentGame.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
 =======
         if(!(currentGame.getCurrentTurnHasPickedUp()) | anyValidCards(currentPlayer)) {
@@ -170,10 +194,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             return;
         } else {
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+        if ((currentGame.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
             // User can skip.
             currentGame.changeCurrentTurn();
             currentGame.notifyGameObservers();
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
             // User cannot skip.
 
@@ -181,6 +209,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 =======
     }
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+            // User cannot skip.
+
+        }
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
 
     /**
      * Check all the Cards in this Player's Hand to see if any of them are valid to play in the Game.
@@ -255,13 +288,18 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
 =======
                 currentGame.changeCurrentTurn();
                 currentGame.notifyGameObservers();
+                return;
             } else {
                 // Picked up but can't go, so skip turn
-                this.currentGame.changeCurrentTurn();
                 this.currentGame.notifyGameObservers();
+<<<<<<< HEAD
                 return;
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
             }
+            currentGame.changeCurrentTurn();
+            currentGame.notifyGameObservers();
         } else {
             // Play the valid Card
             compPlayer.playCard(this.currentGame, compCard);

@@ -40,7 +40,11 @@ class PlayerGameResponseModelTest {
         players.add(p3);
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
+<<<<<<< HEAD
         Card firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
+=======
+        Card firstCard = new Card(h1.getCards().get(0).getSuit(), "King");
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
         game.putCardDown(firstCard);
         GameState gameState = new GameState(game);
         game.addObserver(gameState);
@@ -54,9 +58,13 @@ class PlayerGameResponseModelTest {
      */
     @AfterEach
     public void tearDown() {
+<<<<<<< HEAD
         game = null;
         p1 = null;
         response = null;
+=======
+
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
     }
 
     /**

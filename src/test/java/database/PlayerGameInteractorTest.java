@@ -11,7 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for PlayerGameInteractor.
+<<<<<<< HEAD
  * This test class would also serve to test PlayerGameController as its only behaviour is creating a request model
+=======
+ * This test class would also serve to test PlayerGameController as it's only behaviour is creating a request model
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
  * and using the interactor to create a response model.
  */
 class PlayerGameInteractorTest {
@@ -33,7 +37,11 @@ class PlayerGameInteractorTest {
      * Initialize all objects required to test PlayerGameInteractor.
      */
     @BeforeEach
+<<<<<<< HEAD
     public void setUp() {
+=======
+    void setUp() {
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
@@ -54,7 +62,11 @@ class PlayerGameInteractorTest {
         players.add(p3);
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
+<<<<<<< HEAD
         firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
+=======
+        firstCard = new Card(h1.getCards().get(0).getSuit(), "King");
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
         game.putCardDown(firstCard);
         gameState = new GameState(game);
         game.addObserver(gameState);
@@ -72,7 +84,11 @@ class PlayerGameInteractorTest {
      * Set all made objects in setUp() to null to free memory.
      */
     @AfterEach
+<<<<<<< HEAD
     public void tearDown() {
+=======
+    void tearDown() {
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
         gameState = null;
         p1 = null;
         p2 = null;
@@ -131,6 +147,7 @@ class PlayerGameInteractorTest {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Test createResponse when given a Player plays a valid Card and they become the winner.
      */
@@ -231,3 +248,93 @@ class PlayerGameInteractorTest {
         }
     }
 }
+=======
+        /**
+         * Test createResponse when given a Player plays a valid Card and they become the winner.
+         */
+        @Test
+        public void testCreateResponsePlayCardWinner () {
+            // Give p1 a new Hand containing just one valid Card
+            Hand newHand = new Hand(new ArrayList<>());
+            newHand.addCard(p1sCard);
+            p1.setHand(newHand);
+            // Play the only Card in this Hand.
+            PlayerGameResponseModel response = interactor.createResponse(playCardReq);
+            // Assert the Game has a winner, p1 has no cards, p1 has 1 win 0 losses, while p3 has 1 loss and 0 win, current
+            // Card was the played Card.
+            assertTrue(response.getHasWinner());
+            assertEquals(0, p1.getNumCards());
+            HumanPlayer humanP1 = (HumanPlayer) p1;
+            assertEquals(1, humanP1.getStats()[0]);
+            assertEquals(0, humanP1.getStats()[1]);
+            HumanPlayer humanP3 = (HumanPlayer) p3;
+            assertEquals(1, humanP3.getStats()[1]);
+            assertEquals(0, humanP3.getStats()[0]);
+            assertEquals(p1sCard, gameState.getCurrentCard());
+        }
+
+        /**
+         * Test createResponse when a User/Player requests to skip a turn which they can.
+         */
+        @Test
+        public void testCreateResponseSkipTurnValid () {
+
+        }
+
+        /**
+         * Test createResponse when a User requests to skip a turn, but they cannot.
+         */
+        @Test
+        public void testCreateResponseSkipTurnInvalid () {
+            interactor.createResponse(skipReq);
+            // Nothing should have changed. Therefore, assert game was how it was before the response.
+            assertEquals(p1, gameState.getCurrentPlayer());
+            assertFalse(gameState.getHasWinner());
+            assertEquals(firstCard, gameState.getCurrentCard());
+            for (Player p : game.getPlayers()) {
+                assertEquals(5, p.getNumCards());
+            }
+        }
+
+        /**
+         * Test createResponse when a User requests to pick up a Card and they can do so.
+         */
+        @Test
+        public void testCreateResponsePickUpCardValid () {
+            // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
+            Hand newHand = new Hand(new ArrayList<>());
+            Card bogus1 = new Card("Test", "17");
+            Card bogus2 = new Card("Test", "18");
+            newHand.addCard(bogus1);
+            newHand.addCard(bogus2);
+            p1.setHand(newHand);
+            // Have p1 pick up a Card. Only thing that should've changed is p1's number of Cards.
+            interactor.createResponse(pickUpReq);
+            assertEquals(p1, gameState.getCurrentPlayer());
+            assertFalse(gameState.getHasWinner());
+            assertEquals(firstCard, gameState.getCurrentCard());
+            for (Player p : game.getPlayers()) {
+                if(!(p.equals(p1))) {
+                    assertEquals(5, p.getNumCards());
+                } else {
+                    assertEquals(3, p1.getNumCards());
+                }
+            }
+        }
+
+        /**
+         * Test createResponse when a User requests to pick up a Card, but they cannot.
+         */
+        @Test
+        public void testCreateResponsePickUpCardInValid () {
+            PlayerGameResponseModel response = interactor.createResponse(pickUpReq);
+            // Nothing should have changed. Therefore, assert game was how it was before the response.
+            assertEquals(p1.getName(), response.getCurrentPlayerName());
+            assertFalse(gameState.getHasWinner());
+            assertEquals(firstCard, gameState.getCurrentCard());
+            for (Player p : game.getPlayers()) {
+                assertEquals(5, p.getNumCards());
+            }
+        }
+    }
+>>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
