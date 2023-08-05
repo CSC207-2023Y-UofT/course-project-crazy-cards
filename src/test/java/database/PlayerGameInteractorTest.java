@@ -12,10 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test class for PlayerGameInteractor.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This test class would also serve to test PlayerGameController as its only behaviour is creating a request model
 =======
  * This test class would also serve to test PlayerGameController as it's only behaviour is creating a request model
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+ * This test class would also serve to test PlayerGameController as its only behaviour is creating a request model
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
  * and using the interactor to create a response model.
  */
 class PlayerGameInteractorTest {
@@ -38,10 +42,14 @@ class PlayerGameInteractorTest {
      */
     @BeforeEach
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void setUp() {
 =======
     void setUp() {
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+    public void setUp() {
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
@@ -85,10 +93,14 @@ class PlayerGameInteractorTest {
      */
     @AfterEach
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void tearDown() {
 =======
     void tearDown() {
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+    public void tearDown() {
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
         gameState = null;
         p1 = null;
         p2 = null;
@@ -148,6 +160,9 @@ class PlayerGameInteractorTest {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
     /**
      * Test createResponse when given a Player plays a valid Card and they become the winner.
      */
@@ -164,11 +179,19 @@ class PlayerGameInteractorTest {
         assertTrue(response.getHasWinner());
         assertEquals(0, p1.getNumCards());
         HumanPlayer humanP1 = (HumanPlayer) p1;
+<<<<<<< HEAD
         assertEquals(1, humanP1.getWins());
         assertEquals(0, humanP1.getLosses());
         HumanPlayer humanP3 = (HumanPlayer) p3;
         assertEquals(1, humanP3.getLosses());
         assertEquals(0, humanP3.getWins());
+=======
+        assertEquals(1, humanP1.getStats()[0]);
+        assertEquals(0, humanP1.getStats()[1]);
+        HumanPlayer humanP3 = (HumanPlayer) p3;
+        assertEquals(1, humanP3.getStats()[1]);
+        assertEquals(0, humanP3.getStats()[0]);
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
         assertEquals(p1sCard, gameState.getCurrentCard());
     }
 
@@ -190,6 +213,7 @@ class PlayerGameInteractorTest {
         // Assert that p1 has had no change in Card number, and that it is now p3s turn
         assertEquals(2, p1.getNumCards());
         assertEquals(p3, gameState.getCurrentPlayer());
+<<<<<<< HEAD
         }
 
     /**
@@ -271,70 +295,67 @@ class PlayerGameInteractorTest {
             assertEquals(1, humanP3.getStats()[1]);
             assertEquals(0, humanP3.getStats()[0]);
             assertEquals(p1sCard, gameState.getCurrentCard());
+=======
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
         }
 
-        /**
-         * Test createResponse when a User/Player requests to skip a turn which they can.
-         */
-        @Test
-        public void testCreateResponseSkipTurnValid () {
-
+    /**
+     * Test createResponse when a User requests to skip a turn, but they cannot.
+     */
+    @Test
+    public void testCreateResponseSkipTurnInvalid () {
+        interactor.createResponse(skipReq);
+        // Nothing should have changed. Therefore, assert game was how it was before the response.
+        assertEquals(p1, gameState.getCurrentPlayer());
+        assertFalse(gameState.getHasWinner());
+        assertEquals(firstCard, gameState.getCurrentCard());
+        for (Player p : game.getPlayers()) {
+            assertEquals(5, p.getNumCards());
         }
+    }
 
-        /**
-         * Test createResponse when a User requests to skip a turn, but they cannot.
-         */
-        @Test
-        public void testCreateResponseSkipTurnInvalid () {
-            interactor.createResponse(skipReq);
-            // Nothing should have changed. Therefore, assert game was how it was before the response.
-            assertEquals(p1, gameState.getCurrentPlayer());
-            assertFalse(gameState.getHasWinner());
-            assertEquals(firstCard, gameState.getCurrentCard());
-            for (Player p : game.getPlayers()) {
+    /**
+     * Test createResponse when a User requests to pick up a Card and they can do so.
+     */
+    @Test
+    public void testCreateResponsePickUpCardValid () {
+        // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
+        Hand newHand = new Hand(new ArrayList<>());
+        Card bogus1 = new Card("Test", "17");
+        Card bogus2 = new Card("Test", "18");
+        newHand.addCard(bogus1);
+        newHand.addCard(bogus2);
+        p1.setHand(newHand);
+        // Have p1 pick up a Card. Only thing that should've changed is p1's number of Cards.
+        interactor.createResponse(pickUpReq);
+        assertEquals(p1, gameState.getCurrentPlayer());
+        assertFalse(gameState.getHasWinner());
+        assertEquals(firstCard, gameState.getCurrentCard());
+        for (Player p : game.getPlayers()) {
+            if(!(p.equals(p1))) {
                 assertEquals(5, p.getNumCards());
-            }
-        }
-
-        /**
-         * Test createResponse when a User requests to pick up a Card and they can do so.
-         */
-        @Test
-        public void testCreateResponsePickUpCardValid () {
-            // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
-            Hand newHand = new Hand(new ArrayList<>());
-            Card bogus1 = new Card("Test", "17");
-            Card bogus2 = new Card("Test", "18");
-            newHand.addCard(bogus1);
-            newHand.addCard(bogus2);
-            p1.setHand(newHand);
-            // Have p1 pick up a Card. Only thing that should've changed is p1's number of Cards.
-            interactor.createResponse(pickUpReq);
-            assertEquals(p1, gameState.getCurrentPlayer());
-            assertFalse(gameState.getHasWinner());
-            assertEquals(firstCard, gameState.getCurrentCard());
-            for (Player p : game.getPlayers()) {
-                if(!(p.equals(p1))) {
-                    assertEquals(5, p.getNumCards());
-                } else {
-                    assertEquals(3, p1.getNumCards());
-                }
-            }
-        }
-
-        /**
-         * Test createResponse when a User requests to pick up a Card, but they cannot.
-         */
-        @Test
-        public void testCreateResponsePickUpCardInValid () {
-            PlayerGameResponseModel response = interactor.createResponse(pickUpReq);
-            // Nothing should have changed. Therefore, assert game was how it was before the response.
-            assertEquals(p1.getName(), response.getCurrentPlayerName());
-            assertFalse(gameState.getHasWinner());
-            assertEquals(firstCard, gameState.getCurrentCard());
-            for (Player p : game.getPlayers()) {
-                assertEquals(5, p.getNumCards());
+            } else {
+                assertEquals(3, p1.getNumCards());
             }
         }
     }
+<<<<<<< HEAD
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+
+    /**
+     * Test createResponse when a User requests to pick up a Card, but they cannot.
+     */
+    @Test
+    public void testCreateResponsePickUpCardInValid () {
+        PlayerGameResponseModel response = interactor.createResponse(pickUpReq);
+        // Nothing should have changed. Therefore, assert game was how it was before the response.
+        assertEquals(p1.getName(), response.getCurrentPlayerName());
+        assertFalse(gameState.getHasWinner());
+        assertEquals(firstCard, gameState.getCurrentCard());
+        for (Player p : game.getPlayers()) {
+            assertEquals(5, p.getNumCards());
+        }
+    }
+}
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)

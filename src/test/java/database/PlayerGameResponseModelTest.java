@@ -59,12 +59,18 @@ class PlayerGameResponseModelTest {
     @AfterEach
     public void tearDown() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         game = null;
         p1 = null;
         response = null;
 =======
 
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+        game = null;
+        p1 = null;
+        response = null;
+>>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
     }
 
     /**
