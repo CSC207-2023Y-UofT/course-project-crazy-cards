@@ -1,4 +1,4 @@
-package entities;
+package usecases;
 
 import java.io.*;
 import java.util.*;
