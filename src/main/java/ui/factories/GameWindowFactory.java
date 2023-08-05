@@ -12,6 +12,11 @@ import ui.windows.Window;
 
 public class GameWindowFactory implements WindowFactory {
 
+    /**
+     * Using the different controllers, delegators and displays created, return a new GameWindow for
+     * the game to be played using.
+     * @return A new GameWindow that will display the game for the user.
+     */
     @Override
     public Window createWindow() {
         GameController controller = new GameController();
