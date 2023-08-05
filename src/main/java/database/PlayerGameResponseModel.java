@@ -38,10 +38,14 @@ public class PlayerGameResponseModel {
     /**
      * Convert the given Card to an array of strings.
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @param card The Card ot be converted.
 =======
      * @param card The Card ot be converted/
 >>>>>>> 8e7484b (Created the Model and Controller for when a User is playing a Game.)
+=======
+     * @param card The Card ot be converted.
+>>>>>>> 9d66489 (Fixed typo in Javadoc for cardToArray().)
      * @return An array of Strings representing the Card as {value, suit}.
      */
     private String[] cardToArray(Card card) {
