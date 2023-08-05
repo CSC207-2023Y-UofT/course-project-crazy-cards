@@ -54,7 +54,9 @@ class PlayerGameResponseModelTest {
      */
     @AfterEach
     public void tearDown() {
-
+        game = null;
+        p1 = null;
+        response = null;
     }
 
     /**
