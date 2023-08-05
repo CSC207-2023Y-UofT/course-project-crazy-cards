@@ -71,10 +71,14 @@ class PlayerGameInteractorTest {
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
 <<<<<<< HEAD
+<<<<<<< HEAD
         firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
 =======
         firstCard = new Card(h1.getCards().get(0).getSuit(), "King");
 >>>>>>> 47fdcee (Fixed bugs in computerPlayerLogic() and in createResponse(). Wrote tests for PlayerGameInteractor and PlayerGameResponseModel. Cleared most IntelliJ warnings)
+=======
+        firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
+>>>>>>> 84b597b (Change test code to match new card values)
         game.putCardDown(firstCard);
         gameState = new GameState(game);
         game.addObserver(gameState);
@@ -180,6 +184,7 @@ class PlayerGameInteractorTest {
         assertEquals(0, p1.getNumCards());
         HumanPlayer humanP1 = (HumanPlayer) p1;
 <<<<<<< HEAD
+<<<<<<< HEAD
         assertEquals(1, humanP1.getWins());
         assertEquals(0, humanP1.getLosses());
         HumanPlayer humanP3 = (HumanPlayer) p3;
@@ -192,6 +197,13 @@ class PlayerGameInteractorTest {
         assertEquals(1, humanP3.getStats()[1]);
         assertEquals(0, humanP3.getStats()[0]);
 >>>>>>> 5e3f3af (Fixed indentation in PlayerGameInteractorTest and implemented empty test methods in PlayerGameInteractorTest and PlayerGameResponseModelTest.)
+=======
+        assertEquals(1, humanP1.getWins());
+        assertEquals(0, humanP1.getLosses());
+        HumanPlayer humanP3 = (HumanPlayer) p3;
+        assertEquals(1, humanP3.getLosses());
+        assertEquals(0, humanP3.getWins());
+>>>>>>> 84b597b (Change test code to match new card values)
         assertEquals(p1sCard, gameState.getCurrentCard());
     }
 
