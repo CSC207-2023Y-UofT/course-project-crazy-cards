@@ -130,7 +130,7 @@ class GameTest {
     @Test
     public void testIsValidCardInvalid() {
         game.putCardDown(new Card("Hearts", "9"));
-        Card toTest = new Card("Spades", "King");
+        Card toTest = new Card("Spades", "K");
         boolean validity = game.isValidCard(toTest);
         assertFalse(validity);
     }

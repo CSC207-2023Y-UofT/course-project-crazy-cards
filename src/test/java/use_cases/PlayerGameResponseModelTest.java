@@ -40,7 +40,7 @@ class PlayerGameResponseModelTest {
         players.add(p3);
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
-        Card firstCard = new Card(h1.getCards().get(0).getSuit(), "King");
+        Card firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
         game.putCardDown(firstCard);
         GameState gameState = new GameState(game);
         game.addObserver(gameState);

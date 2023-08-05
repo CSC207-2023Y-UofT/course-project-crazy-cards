@@ -54,7 +54,7 @@ class PlayerGameInteractorTest {
         players.add(p3);
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
-        firstCard = new Card(h1.getCards().get(0).getSuit(), "King");
+        firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
         game.putCardDown(firstCard);
         gameState = new GameState(game);
         game.addObserver(gameState);
@@ -147,11 +147,11 @@ class PlayerGameInteractorTest {
         assertTrue(response.getHasWinner());
         assertEquals(0, p1.getNumCards());
         HumanPlayer humanP1 = (HumanPlayer) p1;
-        assertEquals(1, humanP1.getStats()[0]);
-        assertEquals(0, humanP1.getStats()[1]);
+        assertEquals(1, humanP1.getWins());
+        assertEquals(0, humanP1.getLosses());
         HumanPlayer humanP3 = (HumanPlayer) p3;
-        assertEquals(1, humanP3.getStats()[1]);
-        assertEquals(0, humanP3.getStats()[0]);
+        assertEquals(1, humanP3.getLosses());
+        assertEquals(0, humanP3.getWins());
         assertEquals(p1sCard, gameState.getCurrentCard());
     }
 
