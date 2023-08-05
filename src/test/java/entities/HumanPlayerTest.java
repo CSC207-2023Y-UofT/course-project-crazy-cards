@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class HumanPlayerTest {
@@ -34,13 +35,23 @@ class HumanPlayerTest {
     }
 
     /**
-     * Test that getStats returns the number of wins and losses of a Player.
+     * Test that getWins returns the number of wins of a Player.
      */
     @Test
-    public void testGetStatsNoWins() {
-        int[] toTest = {p1.getWins(), p1.getLosses()};
-        int[] expected = {0, 0};
-        assertArrayEquals(expected, toTest);
+    public void testGetWinsNoWins() {
+        int actual = p1.getWins();
+        int expected = 0;
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Test that getLosses returns the number of losses of a Player.
+     */
+    @Test
+    public void testGetLossesNoLosses() {
+        int actual = p1.getLosses();
+        int expected = 0;
+        assertEquals(expected, actual);
     }
 
     /**
@@ -56,5 +67,4 @@ class HumanPlayerTest {
         int[] expected = {2, 1};
         assertArrayEquals(expected, toTest);
     }
-
 }
