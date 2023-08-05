@@ -37,7 +37,7 @@ public class PlayerGameResponseModel {
 
     /**
      * Convert the given Card to an array of strings.
-     * @param card The Card ot be converted/
+     * @param card The Card ot be converted.
      * @return An array of Strings representing the Card as {value, suit}.
      */
     private String[] cardToArray(Card card) {
