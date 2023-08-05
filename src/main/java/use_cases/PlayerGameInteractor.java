@@ -29,9 +29,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     @Override
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
-        assert currPlayer != null;
+        if(currPlayer != null){
         Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
-        if(chosenCard != null && pgrm.getPlayCardRequest()) {
+        if (chosenCard != null && pgrm.getPlayCardRequest()) {
             playCardRequestLogic(chosenCard, currPlayer);
         } else if (pgrm.getPickUpCardRequest()) {
             pickUpCardRequestLogic(currPlayer);
@@ -42,12 +42,15 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         // Now we assume that the Game has been successfully updated, but first check that the Player whose
         // turn it IS NOT a ComputerPlayer, as a User should not play as a ComputerPlayer
         Player newCurrPlayer = currentGame.getCurrentTurn();
-        while((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
+        while ((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
             newCurrPlayer = currentGame.getCurrentTurn();
         }
         // Return the current state of the game with a response model.
         return new PlayerGameResponseModel(gameState);
+    } else {
+            return null;
+        }
     }
 
     /**
@@ -188,8 +191,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                     return;
                 }
             }
-            currentGame.changeCurrentTurn();
-            currentGame.notifyGameObservers();
         } else {
             // Play the valid Card
             compPlayer.playCard(this.currentGame, compCard);
@@ -198,9 +199,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 winLogic(compPlayer);
                 return;
             }
-            currentGame.changeCurrentTurn();
-            currentGame.notifyGameObservers();
 
         }
+        // The ComputerPlayer has played a Card (may or may not have picked up) and there was no winner, so change the
+        // current turn and update the Game.
+        currentGame.changeCurrentTurn();
+        currentGame.notifyGameObservers();
     }
 }
