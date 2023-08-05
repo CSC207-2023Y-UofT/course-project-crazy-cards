@@ -1,6 +1,7 @@
 package use_cases;
 
 import entities.HumanPlayer;
+import entities.PlayerInformation;
 
 import java.io.IOException;
 
@@ -8,10 +9,10 @@ public interface DataAccess {
     /**
      * Loads a HumanPlayer's wins and losses from "src/main/java/use_cases/players.csv" given their name.
      * @param name The name of the HumanPlayer.
-     * @return A string array [name, wins, losses] of the HumanPlayer, or null if the name is not found.
+     * @return A PlayerInformation object, or null if the name is not found.
      * @throws IOException If an input/output error occurs when reading from the file.
      */
-    String[] loadPlayer(String name) throws IOException;
+    PlayerInformation loadPlayer(String name) throws IOException;
 
     /**
      * If the HumanPlayer does not exist in "src/main/java/use_cases/players.csv", saves its name, wins, and losses.
