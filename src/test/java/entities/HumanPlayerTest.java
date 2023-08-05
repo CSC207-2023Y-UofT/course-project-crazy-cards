@@ -38,7 +38,7 @@ class HumanPlayerTest {
      */
     @Test
     public void testGetStatsNoWins() {
-        int[] toTest = p1.getStats();
+        int[] toTest = {p1.getWins(), p1.getLosses()};
         int[] expected = {0, 0};
         assertArrayEquals(expected, toTest);
     }
@@ -52,7 +52,7 @@ class HumanPlayerTest {
         p1.incrementWins();
         p1.incrementWins();
         p1.incrementLosses();
-        int[] toTest = p1.getStats();
+        int[] toTest = {p1.getWins(), p1.getLosses()};
         int[] expected = {2, 1};
         assertArrayEquals(expected, toTest);
     }
