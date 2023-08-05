@@ -17,7 +17,7 @@ public class SaveLoadPlayerTest {
     private HumanPlayer p2;
     private HumanPlayer p3;
     
-    CSVDatabase database;
+    private CSVDatabase database;
 
     /**
      * Construct 3 HumanPlayer objects to be used in the following tests.
