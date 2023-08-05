@@ -24,9 +24,9 @@ public class PlayerGameController {
      * @param playerName The name of the Player whose turn it is.
      * @param cardValue The value of the chosen Card, null if none chosen.
      * @param cardSuit The suit of the chosen Card, null if none chosen.
-     * @param playCard True iff Player requested to play a Card.
-     * @param pickCard True iff Player requested to pick up a Card from the Deck.
-     * @param skipTurn True iff Player requested to skip the current turn.
+     * @param playCard True iff requested to play a Card.
+     * @param pickCard True iff requested to pick up a Card from the Deck.
+     * @param skipTurn True iff requested to skip the current turn.
      * @return A PlayerGameResponseModel containing the Game details to be eventually shown to the User.
      */
     public PlayerGameResponseModel getResponse(String playerName, String cardValue, String cardSuit,
