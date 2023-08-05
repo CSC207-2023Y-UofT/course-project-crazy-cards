@@ -70,11 +70,15 @@ public class PlayerGameResponseModel {
      * Get the name of the current Player.
      * @return A string containing the name of the current Player.
      */
-    public String getCurrentPlayerName() { return this.currentPlayerName; }
+    public String getCurrentPlayerName() {
+        return this.currentPlayerName;
+    }
 
     /**
      * Get the current Card this ResponseModel is sending.
      * @return The current Card in String format.
      */
-    public String[] getCurrentCard() { return this.currentCard; }
+    public String[] getCurrentCard() {
+        return this.currentCard;
+    }
 }
