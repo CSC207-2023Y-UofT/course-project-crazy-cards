@@ -1,4 +1,4 @@
-package use_cases;
+package database;
 
 import entities.HumanPlayer;
 import entities.PlayerInformation;

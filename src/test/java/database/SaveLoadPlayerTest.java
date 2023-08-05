@@ -1,4 +1,4 @@
-package use_cases;
+package database;
 
 import entities.*;
 import org.junit.jupiter.api.AfterEach;
