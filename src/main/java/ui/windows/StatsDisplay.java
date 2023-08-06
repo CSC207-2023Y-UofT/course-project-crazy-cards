@@ -11,9 +11,8 @@ public class StatsDisplay extends JPanel {
     private StatsDelegator delegator;
 
     private JLabel nameLabel;
-    private JLabel gamesPlayedLabel;
     private JLabel gamesWonLabel;
-    private JLabel longestWinStreakLabel;
+    private JLabel gamesLostLabel;
 
     /**
      * Construct a StatsDisplay displaying default data.
@@ -36,14 +35,12 @@ public class StatsDisplay extends JPanel {
 
         // Default labels
         nameLabel = new JLabel("Enter a username.");
-        gamesPlayedLabel = new JLabel(EMPTY_LABEL);
         gamesWonLabel = new JLabel(EMPTY_LABEL);
-        longestWinStreakLabel = new JLabel(EMPTY_LABEL);
+        gamesLostLabel = new JLabel(EMPTY_LABEL);
 
         dataPanel.add(nameLabel);
-        dataPanel.add(gamesPlayedLabel);
         dataPanel.add(gamesWonLabel);
-        dataPanel.add(longestWinStreakLabel);
+        dataPanel.add(gamesLostLabel);
 
         // The button panel containing the back button and search bar
         JPanel buttonPanel = new JPanel();
@@ -71,9 +68,8 @@ public class StatsDisplay extends JPanel {
      */
     public void updateView(StatsDisplayData data) {
         nameLabel.setText(data.getName());
-        gamesPlayedLabel.setText("Games Played: " + data.getGamesPlayed());
         gamesWonLabel.setText("Games Won: " + data.getGamesWon());
-        longestWinStreakLabel.setText("Longest Win Streak: " + data.getLongestWinStreak());
+        gamesLostLabel.setText("Games Lost: " + data.getGamesLost());
     }
 
     /**

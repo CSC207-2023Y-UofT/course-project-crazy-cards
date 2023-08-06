@@ -5,32 +5,28 @@ package ui.windows;
  */
 public class StatsDisplayData {
     private String name;
-    private int gamesPlayed;
     private int gamesWon;
-    private int longestWinStreak;
+    private int gamesLost;
 
     /**
      * Create a StatsDisplayData with default values.
      */
     public StatsDisplayData() {
         this.name = "";
-        this.gamesPlayed = 0;
         this.gamesWon = 0;
-        this.longestWinStreak = 0;
+        this.gamesLost = 0;
     }
 
     /**
      * Create a StatsDisplayData with specified values.
      * @param name the name of the user
-     * @param gamesPlayed the number of games played by the user
      * @param gamesWon the number of games won by the user
-     * @param longestWinStreak the longest win streak of the user
+     * @param gamesLost the number of games lost by the user
      */
-    public StatsDisplayData(String name, int gamesPlayed, int gamesWon, int longestWinStreak) {
+    public StatsDisplayData(String name, int gamesWon, int gamesLost) {
         this.name = name;
-        this.gamesPlayed = gamesPlayed;
         this.gamesWon = gamesWon;
-        this.longestWinStreak = longestWinStreak;
+        this.gamesLost = gamesLost;
     }
 
     /**
@@ -50,22 +46,6 @@ public class StatsDisplayData {
     }
 
     /**
-     * Returns the number of games played by the stored user.
-     * @return the number of games played as an integer
-     */
-    public int getGamesPlayed() {
-        return gamesPlayed;
-    }
-
-    /**
-     * Sets the number of games played by the stored user.
-     * @param gamesPlayed the number of games played as an integer
-     */
-    public void setGamesPlayed(int gamesPlayed) {
-        this.gamesPlayed = gamesPlayed;
-    }
-
-    /**
      * Returns the number of games won by the stored user.
      * @return the number of games won as an integer
      */
@@ -78,22 +58,22 @@ public class StatsDisplayData {
      * @param gamesWon the number of games won as an integer
      */
     public void setGamesWon(int gamesWon) {
-        this.gamesWon = gamesWon;
+        this.gamesLost = gamesWon;
     }
 
     /**
-     * Returns the longest win streak of the stored user.
-     * @return the longest win streak as an integer
+     * Returns the number of games lost by the stored user.
+     * @return the number of games lost as an integer
      */
-    public int getLongestWinStreak() {
-        return longestWinStreak;
+    public int getGamesLost() {
+        return gamesLost;
     }
 
     /**
-     * Sets the longest win streak of the stored user.
-     * @param longestWinStreak the longest win streak as an integer
+     * Sets the number of games lost by the stored user.
+     * @param gamesLost the number of games lost as an integer
      */
-    public void setLongestWinStreak(int longestWinStreak) {
-        this.longestWinStreak = longestWinStreak;
+    public void setGamesLost(int gamesLost) {
+        this.gamesLost = gamesLost;
     }
 }
