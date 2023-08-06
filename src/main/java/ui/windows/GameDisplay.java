@@ -144,7 +144,7 @@ public class GameDisplay extends JPanel {
         handConstraints.weightx = 0.8;
         handConstraints.weighty = 1;
         hand = new JPanel();
-        // JButton hand = new JButton("Hand");
+        hand.setLayout(new BorderLayout());
 
         hand.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 4)); //TODO
 
@@ -159,11 +159,10 @@ public class GameDisplay extends JPanel {
         buttonsConstraints.weightx = 0.2;
         buttonsConstraints.weighty = 1;
         buttons = new JPanel();
-        // JButton buttons = new JButton("Buttons");
 
         buttons.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 4)); //TODO
 
-        // initializeButtons();
+        initializeButtons();
         bottom.add(buttons, buttonsConstraints);
 
         GridBagConstraints test = new GridBagConstraints();
