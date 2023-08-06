@@ -5,20 +5,16 @@ import java.util.ArrayList;
 public class Game implements ObservableGame {
     private Card currentCard;
     private ArrayList<Player> players;
-
     private Deck gameDeck;
-
     private Player winner;
-
     private Player currentTurn;
-
     private ArrayList<GameObserver> observers = new ArrayList<>();
     private boolean currentTurnHasPickedUp = false;
 
     /**
-     * Construct a new card game given a particular deck and set of players.
+     * Construct a new Game given a particular deck and set of players.
      * @param deck The deck of cards that belongs to this Game.
-     * @param players The Players who will be playing this card Game.
+     * @param players The Players who will be playing this Game.
      */
     public Game(Deck deck, ArrayList<Player> players) {
         this.gameDeck = deck;
@@ -28,7 +24,7 @@ public class Game implements ObservableGame {
 
     /**
      * Get the Player whose turn it is currently.
-     * @return The Player in this Game whose turn it is who needs to put down a card.
+     * @return The Player in this Game whose turn it is, and needs to put down a card.
      */
     @Override
     public Player getCurrentTurn() {
@@ -38,7 +34,7 @@ public class Game implements ObservableGame {
     /**
      * Change the turn of the Player from the current Player to the next in the Game.
      * The Player whose turn it is now should not have picked up.
-     * This method assumes that the Player before is not the winner of the Game, otherwise it would not be called.
+     * This method assumes that the previous Player is not the winner of the Game, otherwise it would not be called.
      */
     public void changeCurrentTurn() {
         int currentPlayerIndex = this.players.indexOf(this.currentTurn);

@@ -12,7 +12,7 @@ public class PlayerGameController {
 
     /**
      * Construct a Controller for the interaction between a User/Player and a Game.
-     * Only one should be created for a particular Game instance.
+     * Only one should be created for any particular Game instance.
      * @param inputBoundary The inputBoundary which takes in a request and returns a response.
      */
     public PlayerGameController(PlayerGameInputBoundary inputBoundary) {
@@ -22,8 +22,8 @@ public class PlayerGameController {
     /**
      * Given the details of a User's request, get the response of the action taken.
      * @param playerName The name of the Player whose turn it is.
-     * @param cardValue The value of the chosen Card, could be null if none chosen.
-     * @param cardSuit The suit of the chosen Card, could be null if none chosen.
+     * @param cardValue The value of the chosen Card, null if none chosen.
+     * @param cardSuit The suit of the chosen Card, null if none chosen.
      * @param playCard True iff requested to play a Card.
      * @param pickCard True iff requested to pick up a Card from the Deck.
      * @param skipTurn True iff requested to skip the current turn.

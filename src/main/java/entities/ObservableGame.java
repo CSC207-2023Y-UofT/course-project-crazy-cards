@@ -21,25 +21,25 @@ public interface ObservableGame {
     void deleteObserver(GameObserver observer);
 
     /**
-     * Delete clear the list of observers, such that it is now empty.
+     * Completely clear the list of observers, such that it is now empty.
      */
     void deleteObservers();
 
     /**
      * Get the Player whose turn it is currently.
-     * @return The Player in this Game whose turn it is who needs to put down a card.
+     * @return The Player in this Game who needs to put down a card (i.e. the player whose current turn it is).
      */
     Player getCurrentTurn();
 
     /**
      * Get the Card that had been played last.
-     * @return A Card object which the current Player must place their card on top of.
+     * @return A Card object which the current Player places their card on top of (i.e. the topmost card in the pile).
      */
     Card getCurrentCard();
 
     /**
      * Get all the Players in this Game.
-     * @return an ArrayList of Players in this game.
+     * @return An ArrayList of Players in this game.
      */
     ArrayList<Player> getPlayers();
 

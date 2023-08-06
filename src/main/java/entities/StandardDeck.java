@@ -30,8 +30,8 @@ public class StandardDeck implements Deck {
         this.cards.add(card);}
 
     /**
-     * remove a Card from this randomly shuffled Deck, removes from the end of the ArrayList.
-     * @return a Card instance if this Deck is nonempty, otherwise return null.
+     * Remove a Card from this randomly shuffled Deck, from the *end* of the ArrayList.
+     * @return A Card instance if this Deck is nonempty, otherwise return null.
      */
     public Card removeCardFromDeck () {
             if (cards.size() >= 1) {
@@ -44,7 +44,7 @@ public class StandardDeck implements Deck {
         }
 
     /**
-     * Get all the cards in this Deck.
+     * Get for all the cards in this Deck.
      * @return A new ArrayList of the Cards in this Deck.
      */
     public ArrayList<Card> getCards() {

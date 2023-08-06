@@ -7,9 +7,7 @@ import javax.swing.*;
  */
 public class StatsDisplay extends JPanel {
     private static final String EMPTY_LABEL = "";
-
     private StatsDelegator delegator;
-
     private JLabel nameLabel;
     private JLabel gamesPlayedLabel;
     private JLabel gamesWonLabel;
