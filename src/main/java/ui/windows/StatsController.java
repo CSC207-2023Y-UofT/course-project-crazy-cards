@@ -1,5 +1,7 @@
 package ui.windows;
 
+import usecases.PlayerInformation;
+
 /**
  * Handles in- and outgoing data for a StatsDisplay.
  */
@@ -23,32 +25,38 @@ public class StatsController {
 
     /**
      * Requests statistics for a given user and updates display.
+     * @param player the PlayerInformation of the user
      * @param username the name of the user
      * @return false if no display is supplied, true otherwise
      */
-    public boolean tryRequestUser(String username) {
+    public boolean tryRequestUser(PlayerInformation player, String username) {
         if (display == null) {
             return false;
         }
 
-        StatsDisplayData data = retrieveData(username);
+        StatsDisplayData data = retrieveData(player, username);
         display.updateView(data);
         return true;
     }
 
     /**
      * Retrieves statistics for a given user.
+     * @param player the PlayerInformation of the user
      * @param username the name of the user
      * @return the retrieved data as a StatsDisplayData
      */
-    private StatsDisplayData retrieveData(String username) {
-        // TODO: send usecase 
-
+    private StatsDisplayData retrieveData(PlayerInformation player, String username) {
         StatsDisplayData data = new StatsDisplayData();
-        data.setName(username);
-        data.setGamesPlayed(0); // TODO: replace with retrieved data
-        data.setGamesWon(0); // ditto
-        data.setLongestWinStreak(0); // ditto ditto
+
+        if (player != null) {
+            data.setName(player.getName());
+            data.setGamesWon(player.getWins());
+            data.setGamesLost(player.getLosses());
+        } else {
+            data.setName(username);
+            data.setGamesWon(0);
+            data.setGamesLost(0);
+        }
         return data;
     }
 }
