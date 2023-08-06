@@ -28,4 +28,16 @@ public class GameController {
         selectedSuit = suit;
         selectedRank = rank;
     }
+
+    public void playCard() {
+
+    }
+
+    public void drawCard() {
+
+    }
+
+    public void skip() {
+        
+    }
 }
