@@ -12,13 +12,19 @@ import java.util.Collections;
  * to create a Game, and sends a response model to the controller on whether a Game was created or not.
  */
 public class GameCreationInteractor implements GameCreationInputBoundary {
-
+    static final int NUMBERCARDS = 5;
     private final DataAccess dataAccess;
     private Game createdGame;
     private GameState newGameState;
+
+    /**
+     * Initialize a GameCreationInteractor given a particular data access object.
+     * @param dataAccess The DataAccess object providing interaction with the database.
+     */
     public GameCreationInteractor(DataAccess dataAccess) {
         this.dataAccess = dataAccess;
     }
+
 
     /**
      * Created a response model, and Game if the request is valid.
@@ -65,7 +71,7 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         }
         int numHumanPlayer = 0;
         for (String name: request.getPlayersInfo().keySet()) {
-            if(!(request.isComputer(name))) {
+            if(!(request.isComputerPlayer(name))) {
              numHumanPlayer ++;
             }
         }
@@ -88,7 +94,6 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
      */
     private Hand buildHand(Deck deck) {
         Hand hand = new Hand(new ArrayList<>());
-        int NUMBERCARDS = 5;
         for(int i = 0; i < NUMBERCARDS; i++) {
             hand.addCard(deck.removeCardFromDeck());
         }
@@ -107,7 +112,7 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         HumanPlayerFactory hpFactory = new HumanPlayerFactory();
         for(String name: playersInfo.getPlayersInfo().keySet()) {
             Hand playerHand = buildHand(deck);
-            if(playersInfo.isComputer(name)) {
+            if(playersInfo.isComputerPlayer(name)) {
                 Player cp = cpFactory.create(name, playerHand);
                 players.add(cp);
             } else {

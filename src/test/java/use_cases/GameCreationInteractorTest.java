@@ -55,7 +55,7 @@ class GameCreationInteractorTest {
         GameCreationResponseModel response = interactor.createGameResponse(invalidRequest);
         assertNull(interactor.getCreatedGame());
         assertNull(interactor.getNewGameState());
-        assertFalse(response.getCreated());
+        assertFalse(response.getGameCreated());
     }
 
     /**
@@ -65,7 +65,7 @@ class GameCreationInteractorTest {
     @Test
     public void testCreateGameResponseValid() {
         GameCreationResponseModel response = interactor.createGameResponse(validRequest);
-        assertTrue(response.getCreated());
+        assertTrue(response.getGameCreated());
         Game game = interactor.getCreatedGame();
         GameState gameState = interactor.getNewGameState();
         assertNotNull(game);

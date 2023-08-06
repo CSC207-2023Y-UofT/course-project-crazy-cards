@@ -12,7 +12,6 @@ import java.util.HashMap;
  * of the opponent Players, as well as the last Card played and if there is a winner to the Game.
  */
 public class GameState implements GameObserver {
-
     private Player currentPlayer;
     private Card currentCard;
     private ArrayList<Card> currentPlayerCards;
@@ -20,8 +19,8 @@ public class GameState implements GameObserver {
     private boolean hasWinner;
 
     /**
-     * Given a Game, construct a GameState objects which keep track of the Game's current Player,
-     * current Card, their Cards, the other players and the number of Cards they have,
+     * Given a Game, construct a GameState object which keeps track of the Game's current Player,
+     * current Card, the current Player's Cards, the other players and their respective number of Cards,
      * as well as if the Game has a winner.
      * @param game The Game containing the information to update this GameState.
      */
@@ -36,7 +35,6 @@ public class GameState implements GameObserver {
         }
         this.hasWinner = game.hasWinner();
         this.currentPlayerCards = currentPlayer.getCards();
-
     }
 
     /**
@@ -57,7 +55,7 @@ public class GameState implements GameObserver {
 
     /**
      * Get the current Player of the Game.
-     * @return a Player representing the current turn of the Game.
+     * @return A Player representing the current turn of the Game.
      */
    public Player getCurrentPlayer() {
         return this.currentPlayer;
@@ -65,7 +63,7 @@ public class GameState implements GameObserver {
 
     /**
      * Get the last card played in the Game.
-     * @return the current Card in the Game, (last played Card).
+     * @return The current Card in the Game, (most recently played Card).
      */
    public Card getCurrentCard() {
         return this.currentCard;
@@ -80,7 +78,7 @@ public class GameState implements GameObserver {
    }
 
     /**
-     * Get whether the Game this GameState is observing has a winner.
+     * Get whether the current Game being observed by this GameState has a winner.
      * @return True iff the Game has a winner.
      */
    public boolean getHasWinner() {
@@ -88,8 +86,8 @@ public class GameState implements GameObserver {
    }
 
     /**
-     * Get the Players beside the current Player and their number of Cards.
-     * @return A HashMap with keys being the other Players, and values being their number of cards.
+     * Get the Players other than the current Player and their respective number of Cards.
+     * @return A HashMap with keys being the other Player entities, and values being their respective number of cards.
      */
     public HashMap<Player, Integer> getPlayersAndCards() {
         return playersAndCards;

@@ -3,7 +3,6 @@ package entities;
 import java.util.ArrayList;
 
 public abstract class Player {
-
     private Hand hand;
     private String name;
 
@@ -13,9 +12,9 @@ public abstract class Player {
     public Player() {}
 
     /**
-     * Construct an instance of a card game Player with a given Hand
-     * There are two constructors here for now such that there is flexibility when writing the use case classes,
-     *  so that we can delay the decision of constructing a player with a given Hand or setting a Hand later.
+     * Construct an instance of a card game Player with a given Hand.
+     * There are two constructors here for flexibility when writing the use case classes
+     * so that we can delay the decision of constructing a player with a given Hand or setting a Hand later.
      * @param hand The Hand this player has been dealt.
      */
     public Player(String name, Hand hand) {
@@ -24,8 +23,8 @@ public abstract class Player {
     }
 
     /**
-     * get the number of cards in the hand of this Player.
-     * @return number of cards in this Player's hand.
+     * Get the number of cards in the hand of this Player.
+     * @return The number of cards in this Player's hand.
      */
     public int getNumCards() {
         ArrayList<Card> cards = this.hand.getCards();
@@ -44,7 +43,7 @@ public abstract class Player {
 
     /**
      * Set this Player's hand to the given Hand.
-     * @param hand The Hand which will be the Player's Hand.
+     * @param hand The Hand which will be set as the Player's Hand.
      */
     public void setHand(Hand hand) {
         this.hand = hand;
@@ -52,14 +51,14 @@ public abstract class Player {
 
     /**
      * Get this Player's Hand.
-     * @return a Hand object, representing this Player's Hand.
+     * @return A Hand object, representing this Player's Hand.
      */
     public Hand getHand() {
         return this.hand;
     }
 
     /**
-     * Get the cards in this Player's hand. For use when representing the Card's a player has to the User.
+     * Get the cards in this Player's hand. The user can use this to see a representation of the Cards a player has.
      * @return An ArrayList containing the cards in this Player's Hand.
      */
     public ArrayList<Card> getCards() {
@@ -76,8 +75,8 @@ public abstract class Player {
     }
 
     /**
-     * Get the name of this Player
-     * @return a String containing the name of this HumanPlayer.
+     * Get the name of this Player.
+     * @return A String containing the name of this HumanPlayer.
      */
     public String getName() {
         return this.name;

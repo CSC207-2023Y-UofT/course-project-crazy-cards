@@ -18,7 +18,7 @@ public class GameCreationResponseModel {
      * Get whether a Game was created.
      * @return True iff a Game was created.
      */
-    public boolean getCreated() {
+    public boolean getGameCreated() {
         return this.gameCreated;
     }
 }

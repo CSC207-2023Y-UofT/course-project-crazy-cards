@@ -4,7 +4,6 @@ package use_cases;
  * An object containing the details of a User's request with a particular Game.
  */
 public class PlayerGameRequestModel {
-
     private boolean playCardRequest;
     private boolean pickUpCardRequest;
     private boolean skipTurnRequest;
@@ -15,8 +14,8 @@ public class PlayerGameRequestModel {
     /**
      * Construct a PlayerGameRequestModel object with the following information.
      * @param playerName The name of the Player whose turn it is.
-     * @param cardValue The value of the chosen Card, could be null if none chosen.
-     * @param cardSuit The suit of the chosen Card, could be null if none chosen.
+     * @param cardValue The value of the chosen Card, null if none chosen.
+     * @param cardSuit The suit of the chosen Card, null if none chosen.
      * @param playCard True iff requested to play a Card.
      * @param pickCard True iff requested to pick up a Card from the Deck.
      * @param skipTurn True iff requested to skip the current turn.
@@ -57,7 +56,7 @@ public class PlayerGameRequestModel {
 
     /**
      * Get the name of the current Player.
-     * @return String containing name of current Player.
+     * @return A String containing name of current Player.
      */
     String getPlayerName() {
         return this.playerName;
@@ -66,7 +65,7 @@ public class PlayerGameRequestModel {
     /**
      * Get the suit of the Card that was requested to be played.
      * This method assumes that a Card was played, and thus it should not return null.
-     * @return a String containing the suit of the chosen Card.
+     * @return A String containing the suit of the chosen Card.
      */
     String getCardSuit() {
         return this.cardSuit;
@@ -75,7 +74,7 @@ public class PlayerGameRequestModel {
     /**
      * Get the value of the Card that was requested to be played.
      * This method assumes that a Card was played, and thus it should not return null.
-     * @return a String containing the value of the chosen Card.
+     * @return A String containing the value of the chosen Card.
      */
     String getCardValue(){
         return this.cardValue;

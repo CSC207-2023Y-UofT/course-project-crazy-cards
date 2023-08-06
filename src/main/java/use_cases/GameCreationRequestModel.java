@@ -22,7 +22,7 @@ public class GameCreationRequestModel {
      * @param playerName The name of the Player to check
      * @return True iff the Player is to be a ComputerPlayer, null iff the name is not of a Player to be.
      */
-    public Boolean isComputer(String playerName) {
+    public Boolean isComputerPlayer(String playerName) {
         if (playersInfo.containsKey(playerName)) {
             return this.playersInfo.get(playerName);
         }

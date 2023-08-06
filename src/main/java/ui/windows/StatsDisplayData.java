@@ -21,10 +21,10 @@ public class StatsDisplayData {
 
     /**
      * Create a StatsDisplayData with specified values.
-     * @param name the name of the user
-     * @param gamesPlayed the number of games played by the user
-     * @param gamesWon the number of games won by the user
-     * @param longestWinStreak the longest win streak of the user
+     * @param name The name of the user.
+     * @param gamesPlayed The number of games played by the user.
+     * @param gamesWon The number of games won by the user.
+     * @param longestWinStreak The longest win streak of the user.
      */
     public StatsDisplayData(String name, int gamesPlayed, int gamesWon, int longestWinStreak) {
         this.name = name;
@@ -35,7 +35,7 @@ public class StatsDisplayData {
 
     /**
      * Returns the name of the stored user.
-     * @return the name as a String
+     * @return The name of the user, as a String.
      */
     public String getName() {
         return name;
@@ -43,7 +43,7 @@ public class StatsDisplayData {
 
     /**
      * Sets the name of the stored user.
-     * @param name the name as a String
+     * @param name The name of the user, as a String.
      */
     public void setName(String name) {
         this.name = name;
@@ -51,7 +51,7 @@ public class StatsDisplayData {
 
     /**
      * Returns the number of games played by the stored user.
-     * @return the number of games played as an integer
+     * @return The number of games played, as an integer.
      */
     public int getGamesPlayed() {
         return gamesPlayed;
@@ -59,7 +59,7 @@ public class StatsDisplayData {
 
     /**
      * Sets the number of games played by the stored user.
-     * @param gamesPlayed the number of games played as an integer
+     * @param gamesPlayed The number of games played, as an integer.
      */
     public void setGamesPlayed(int gamesPlayed) {
         this.gamesPlayed = gamesPlayed;
@@ -67,7 +67,7 @@ public class StatsDisplayData {
 
     /**
      * Returns the number of games won by the stored user.
-     * @return the number of games won as an integer
+     * @return The number of games won, as an integer.
      */
     public int getGamesWon() {
         return gamesWon;
@@ -75,7 +75,7 @@ public class StatsDisplayData {
 
     /**
      * Sets the number of games won by the stored user.
-     * @param gamesWon the number of games won as an integer
+     * @param gamesWon The number of games won, as an integer.
      */
     public void setGamesWon(int gamesWon) {
         this.gamesWon = gamesWon;
@@ -83,7 +83,7 @@ public class StatsDisplayData {
 
     /**
      * Returns the longest win streak of the stored user.
-     * @return the longest win streak as an integer
+     * @return The longest win streak as an integer.
      */
     public int getLongestWinStreak() {
         return longestWinStreak;
@@ -91,7 +91,7 @@ public class StatsDisplayData {
 
     /**
      * Sets the longest win streak of the stored user.
-     * @param longestWinStreak the longest win streak as an integer
+     * @param longestWinStreak The longest win streak, as an integer.
      */
     public void setLongestWinStreak(int longestWinStreak) {
         this.longestWinStreak = longestWinStreak;

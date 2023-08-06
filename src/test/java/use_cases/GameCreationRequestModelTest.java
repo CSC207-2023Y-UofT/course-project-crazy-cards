@@ -19,7 +19,7 @@ class GameCreationRequestModelTest {
      * Initialize objects needed to test GameCreationRequestModel.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         request = new GameCreationRequestModel(new HashMap<>());
         request.getPlayersInfo().put("cp1", true);
         request.getPlayersInfo().put("Sab", false);
@@ -29,24 +29,24 @@ class GameCreationRequestModelTest {
      * Set objects from setUp() to null to free memory./
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         request = null;
     }
 
     /**
-     * Test to check whether a given Player name in the request is to be a ComputerPlayer using isComputer().
+     * Test to check whether a given Player name in the request is to be a ComputerPlayer using isComputerPlayer().
      */
     @Test
-    void isComputer() {
-        assertTrue(request.isComputer("cp1"));
-        assertFalse(request.isComputer("Sab"));
+    public void testIsComputerPlayer() {
+        assertTrue(request.isComputerPlayer("cp1"));
+        assertFalse(request.isComputerPlayer("Sab"));
     }
 
     /**
      * Test to check getPlayersinfo() returns with the names and options requested.
      */
     @Test
-    void getPlayersInfo() {
+    public void TestgetPlayersInfo() {
         HashMap<String, Boolean> map = request.getPlayersInfo();
         assertEquals(2, map.keySet().size());
         assertTrue(map.get("cp1"));

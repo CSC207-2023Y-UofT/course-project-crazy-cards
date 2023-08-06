@@ -16,12 +16,12 @@ public class StatsDelegator implements ActionListener {
      */
     public StatsDelegator(StatsController controller) {
         this.controller = controller;
-    } 
+    }
 
     /**
      * Handle the user input from a JButton in the StatsDisplay. 
      * Fires when the user clicks the "Search" button.
-     * @param e the event to be processed
+     * @param e The event to be processed.
      */
     public void actionPerformed(ActionEvent e) {
         JTextField inputNameField = (JTextField)e.getSource();
