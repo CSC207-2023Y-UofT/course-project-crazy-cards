@@ -17,7 +17,7 @@ class PlayerCreationInformationTest {
      * Create objects needed to test PlayerCreationInformation.
      */
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         pciComp = new PlayerCreationInformation("cp1", true);
         pciHuman = new PlayerCreationInformation("Sab", false);
     }
@@ -26,7 +26,7 @@ class PlayerCreationInformationTest {
      * Free memory by setting objects from setUp() to null.
      */
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         pciComp = null;
         pciHuman = null;
     }
@@ -35,7 +35,7 @@ class PlayerCreationInformationTest {
      * Test getPlayerName() given both computer and non computer requests.
      */
     @Test
-    void getPlayerName() {
+    public void testGetPlayerName() {
         assertEquals("cp1", pciComp.getPlayerName());
         assertEquals("Sab", pciHuman.getPlayerName());
     }
@@ -44,7 +44,7 @@ class PlayerCreationInformationTest {
      * Test getIsComputerPlayer() given both computer and non computer requests.
      */
     @Test
-    void getIsComputerPlayer() {
+    public void testGetIsComputerPlayer() {
         assertTrue(pciComp.getIsComputerPlayer());
         assertFalse(pciHuman.getIsComputerPlayer());
     }
