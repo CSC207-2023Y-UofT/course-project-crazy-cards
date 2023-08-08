@@ -1,8 +1,13 @@
 package ui.windows;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 
 public class RulesDisplay extends JPanel {
     private JLabel titleLabel;
