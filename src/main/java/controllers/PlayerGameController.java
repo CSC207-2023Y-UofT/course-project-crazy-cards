@@ -4,6 +4,10 @@ import use_cases.PlayerGameInputBoundary;
 import use_cases.PlayerGameRequestModel;
 import use_cases.PlayerGameResponseModel;
 
+import enums.Rank;
+import enums.Suit;
+import enums.TurnAction;
+
 /**
  * The controller class for when a User is playing a Game.
  */
@@ -29,10 +33,9 @@ public class PlayerGameController {
      * @param skipTurn True iff requested to skip the current turn.
      * @return A PlayerGameResponseModel containing the Game details to be eventually shown to the User.
      */
-    public PlayerGameResponseModel getResponse(String playerName, String cardValue, String cardSuit,
-                                               boolean playCard, boolean pickCard, boolean skipTurn) {
-        PlayerGameRequestModel requestModel = new PlayerGameRequestModel(playerName, cardValue, cardSuit,
-                playCard, pickCard, skipTurn);
+    public PlayerGameResponseModel getResponse(String playerName, Suit suit, Rank rank,
+                                               TurnAction action) {
+        PlayerGameRequestModel requestModel = new PlayerGameRequestModel(playerName, suit, rank, action);
         return inputBoundary.createResponse(requestModel);
     }
 }
