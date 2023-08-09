@@ -4,6 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import enums.Rank;
+import enums.Suit;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,8 +110,8 @@ class GameTest {
      */
     @Test
     public void testIsValidCardSameSuit() {
-        game.putCardDown(new Card("Spades", "9"));
-        Card toTest = new Card("Spades", "7");
+        game.putCardDown(new Card(Suit.SPADE, Rank.NINE));
+        Card toTest = new Card(Suit.SPADE, Rank.SEVEN);
         boolean validity = game.isValidCard(toTest);
         assertTrue(validity);
     }
@@ -118,8 +121,8 @@ class GameTest {
      */
     @Test
     public void testIsValidCardSameValue() {
-        game.putCardDown(new Card("Hearts", "9"));
-        Card toTest = new Card("Spades", "9");
+        game.putCardDown(new Card(Suit.HEART, Rank.NINE));
+        Card toTest = new Card(Suit.SPADE, Rank.NINE);
         boolean validity = game.isValidCard(toTest);
         assertTrue(validity);
     }
@@ -129,8 +132,8 @@ class GameTest {
      */
     @Test
     public void testIsValidCardInvalid() {
-        game.putCardDown(new Card("Hearts", "9"));
-        Card toTest = new Card("Spades", "K");
+        game.putCardDown(new Card(Suit.HEART, Rank.NINE));
+        Card toTest = new Card(Suit.SPADE, Rank.KING);
         boolean validity = game.isValidCard(toTest);
         assertFalse(validity);
     }
@@ -140,8 +143,8 @@ class GameTest {
      */
     @Test
     public void testIsValidCardCrazy8() {
-        game.putCardDown(new Card("Hearts", "9"));
-        Card toTest = new Card("Spades", "8");
+        game.putCardDown(new Card(Suit.HEART, Rank.NINE));
+        Card toTest = new Card(Suit.SPADE, Rank.EIGHT);
         boolean validity = game.isValidCard(toTest);
         assertTrue(validity);
     }

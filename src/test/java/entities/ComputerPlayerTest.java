@@ -4,6 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import enums.Rank;
+import enums.Suit;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +34,7 @@ class ComputerPlayerTest {
         ArrayList<Player> players = new ArrayList<>();
         players.add(cp1);
         game = new Game(deck, players);
-        Card firstCard = new Card("Spades", "7");
+        Card firstCard = new Card(Suit.SPADE, Rank.SEVEN);
         game.putCardDown(firstCard);
     }
 
@@ -50,7 +53,7 @@ class ComputerPlayerTest {
      */
     @Test
     public void testSelectCardValidCard() {
-        Card toAddToCp1 = new Card("Spades", "9");
+        Card toAddToCp1 = new Card(Suit.SPADE, Rank.NINE);
         cp1.getHand().addCard(toAddToCp1);
         Card selected = cp1.selectRandomValidCard(game);
         boolean validity = game.isValidCard(selected);
