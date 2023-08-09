@@ -2,7 +2,7 @@ package ui.components;
 
 import javax.swing.JPanel;
 
-import ui.enums.Suit;
+import enums.Suit;
 import ui.windows.CardDelegator;
 
 import javax.swing.BorderFactory;

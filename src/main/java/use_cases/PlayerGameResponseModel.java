@@ -13,9 +13,10 @@ import java.util.HashMap;
 public class PlayerGameResponseModel {
     private String currentPlayerName;
     private boolean hasWinner;
-    private ArrayList<String[]> playerCards = new ArrayList<>();
     private HashMap<String, Integer> playersAndNumCards = new HashMap<>();
-    private String[] currentCard;
+    private CardResponseModel currentCard;
+    private ArrayList<CardResponseModel> playerCards = new ArrayList<>();
+
 
     /**
      * Create a new PlayerGameResponseModel, using the updated GameState provided.
@@ -25,9 +26,9 @@ public class PlayerGameResponseModel {
     public PlayerGameResponseModel(GameState gameState) {
         this.currentPlayerName = gameState.getCurrentPlayer().getName();
         this.hasWinner = gameState.getHasWinner();
-        this.currentCard = cardToArray(gameState.getCurrentCard());
+        this.currentCard = cardToModel(gameState.getCurrentCard());
         for(Card card: gameState.getCurrentPlayerCards()) {
-            this.playerCards.add(cardToArray(card));
+            this.playerCards.add(cardToModel(card));
         }
         for(Player player: gameState.getPlayersAndCards().keySet()) {
             this.playersAndNumCards.put(player.getName(), player.getNumCards());
@@ -39,8 +40,8 @@ public class PlayerGameResponseModel {
      * @param card The Card to be converted.
      * @return An array of Strings representing the Card as {value, suit}.
      */
-    private String[] cardToArray(Card card) {
-        return new String[]{card.getValue(), card.getSuit()};
+    private CardResponseModel cardToModel(Card card) {
+        return new CardResponseModel(card.getSuit(), card.getRank());
     }
 
     /**
@@ -55,7 +56,7 @@ public class PlayerGameResponseModel {
      * Get the cards of the current Player in String format.
      * @return An ArrayList of Cards in String format.
      */
-    public ArrayList<String[]> getPlayerCards() {
+    public ArrayList<CardResponseModel> getPlayerCards() {
         return playerCards;
     }
 
@@ -79,7 +80,7 @@ public class PlayerGameResponseModel {
      * Get the current Card this ResponseModel is sending.
      * @return The current Card in String format.
      */
-    public String[] getCurrentCard() {
+    public CardResponseModel getCurrentCard() {
         return this.currentCard;
     }
 }

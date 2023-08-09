@@ -1,6 +1,10 @@
 package use_cases;
 
 import entities.*;
+import enums.Rank;
+import enums.Suit;
+import enums.TurnAction;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,12 +44,12 @@ class PlayerGameResponseModelTest {
         players.add(p3);
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
-        Card firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
+        Card firstCard = new Card(h1.getCards().get(0).getSuit(), Rank.KING);
         game.putCardDown(firstCard);
         GameState gameState = new GameState(game);
         game.addObserver(gameState);
         PlayerGameInteractor interactor = new PlayerGameInteractor(game, gameState);
-        PlayerGameRequestModel request = new PlayerGameRequestModel("sol", null, null, false, true, false);
+        PlayerGameRequestModel request = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
         response = interactor.createResponse(request);
     }
 
@@ -75,10 +79,10 @@ class PlayerGameResponseModelTest {
     public void testGetPlayerCards() {
         for(int i = 0; i < p1.getNumCards(); i++) {
             Card p1s = p1.getCards().get(i);
-            String suit = response.getPlayerCards().get(i)[1];
-            String value = response.getPlayerCards().get(i)[0];
+            Suit suit = response.getPlayerCards().get(i).getSuit();
+            Rank value = response.getPlayerCards().get(i).getRank();
             assertEquals(p1s.getSuit(), suit);
-            assertEquals(p1s.getValue(), value);
+            assertEquals(p1s.getRank(), value);
         }
     }
 

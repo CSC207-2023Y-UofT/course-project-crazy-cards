@@ -1,82 +1,88 @@
 package use_cases;
 
+import enums.Rank;
+import enums.Suit;
+import enums.TurnAction;
+
 /**
  * An object containing the details of a User's request with a particular Game.
  */
 public class PlayerGameRequestModel {
-    private boolean playCardRequest;
-    private boolean pickUpCardRequest;
-    private boolean skipTurnRequest;
     private String playerName;
-    private String cardSuit;
-    private String cardValue;
+    private TurnAction action;
+    private Suit suit;
+    private Rank rank;
 
     /**
      * Construct a PlayerGameRequestModel object with the following information.
      * @param playerName The name of the Player whose turn it is.
-     * @param cardValue The value of the chosen Card, null if none chosen.
-     * @param cardSuit The suit of the chosen Card, null if none chosen.
-     * @param playCard True iff requested to play a Card.
-     * @param pickCard True iff requested to pick up a Card from the Deck.
-     * @param skipTurn True iff requested to skip the current turn.
+     * @param suit The suit of the Card that was requested to be played.
+     * @param rank The value of the Card that was requested to be played.
+     * @param action The action that the User requested to take.
      */
-    public PlayerGameRequestModel(String playerName, String cardValue, String cardSuit,
-                                  boolean playCard, boolean pickCard, boolean skipTurn) {
-        this.pickUpCardRequest = pickCard;
-        this.playCardRequest = playCard;
-        this.skipTurnRequest = skipTurn;
+    public PlayerGameRequestModel(String playerName, Suit suit, Rank rank,
+                                  TurnAction action) {
         this.playerName = playerName;
-        this.cardSuit = cardSuit;
-        this.cardValue = cardValue;
+        this.action = action;
+        this.suit = suit;
+        this.rank = rank;
     }
 
     /**
      * Get if the User requested to play a Card.
      * @return True iff requested to play a Card.
      */
-    boolean getPlayCardRequest() {
-        return this.playCardRequest;
+    public boolean getPlayCardRequest() {
+        return action == TurnAction.PLAY;
     }
 
     /**
      * Get if the User requested to pick up a Card from the deck.
      * @return True iff requested to pick up a Card.
      */
-    boolean getPickUpCardRequest() {
-        return this.pickUpCardRequest;
+    public boolean getPickUpCardRequest() {
+        return action == TurnAction.DRAW;
     }
 
     /**
      * Get whether the User requested to skip their turn.
      * @return True iff requested to skip turn.
      */
-    boolean getSkipTurnRequest() {
-        return this.skipTurnRequest;
+    public boolean getSkipTurnRequest() {
+        return action == TurnAction.SKIP;
+    }
+
+    /**
+     * Get the action that the User requested to take.
+     * @return A TurnAction enum value.
+     */
+    public TurnAction getAction() {
+        return action;
     }
 
     /**
      * Get the name of the current Player.
      * @return A String containing name of current Player.
      */
-    String getPlayerName() {
+    public String getPlayerName() {
         return this.playerName;
     }
 
     /**
      * Get the suit of the Card that was requested to be played.
      * This method assumes that a Card was played, and thus it should not return null.
-     * @return A String containing the suit of the chosen Card.
+     * @return A Suit enum value.
      */
-    String getCardSuit() {
-        return this.cardSuit;
+    public Suit getCardSuit() {
+        return this.suit;
     }
 
     /**
      * Get the value of the Card that was requested to be played.
      * This method assumes that a Card was played, and thus it should not return null.
-     * @return A String containing the value of the chosen Card.
+     * @return A Rank enum value.
      */
-    String getCardValue(){
-        return this.cardValue;
+    public Rank getCardValue(){
+        return this.rank;
     }
 }

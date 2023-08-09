@@ -1,6 +1,8 @@
 package use_cases;
 
 import entities.*;
+import enums.Rank;
+import enums.Suit;
 
 /**
  * This class is responsible for the logic whenever a User/Player interacts with the game screen.
@@ -30,7 +32,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
         if(currPlayer != null){
-        Card chosenCard = findCardFromStrings(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
+        Card chosenCard = findCard(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
         if (chosenCard != null && pgrm.getPlayCardRequest()) {
             playCardRequestLogic(chosenCard, currPlayer);
         } else if (pgrm.getPickUpCardRequest()) {
@@ -75,11 +77,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * @param suit The suit of the Card to return.
      * @return The Card matching the given suit and value.
      */
-    private Card findCardFromStrings(String value, String suit, Player player) {
+    private Card findCard(Rank rank, Suit suit, Player player) {
         for(Card card: player.getCards()) {
-            String valToCheck = card.getValue();
-            String suitToCheck = card.getSuit();
-            if(valToCheck.equals(value) & suitToCheck.equals(suit)) {
+            Rank otherRank = card.getRank();
+            Suit otherSuit = card.getSuit();
+            if(rank == otherRank & suit == otherSuit) {
                 return card;
             }
         }
@@ -126,7 +128,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             currentGame.notifyGameObservers();
         }
             // User cannot skip their turn.
-        }
+    }
 
     /**
      * Check all the Cards in this Player's Hand to see if any of them are valid to play in the Game.

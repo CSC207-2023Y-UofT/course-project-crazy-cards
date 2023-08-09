@@ -1,7 +1,7 @@
 package ui.windows;
 
-import ui.enums.Rank;
-import ui.enums.Suit;
+import enums.Rank;
+import enums.Suit;
 
 /**
  * Handles delegated user interaction for a game window.

@@ -4,6 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import enums.Rank;
+import enums.Suit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
@@ -16,8 +19,8 @@ class CardTest {
      */
     @BeforeEach
     public void setUp() {
-        regCard = new Card("Spades", "10");
-        specCard = new Card("Clubs", "8", "Crazy8");
+        regCard = new Card(Suit.SPADE, Rank.TEN);
+        specCard = new Card(Suit.CLUB, Rank.EIGHT, "Crazy8");
     }
 
     /**
@@ -34,8 +37,8 @@ class CardTest {
      */
     @Test
     public void testGetSuit() {
-        String expected = "Spades";
-        String actual = regCard.getSuit();
+        Suit expected = Suit.SPADE;
+        Suit actual = regCard.getSuit();
         assertEquals(expected, actual);
     }
 
@@ -44,8 +47,8 @@ class CardTest {
      */
     @Test
     public void testGetValue() {
-        String expected = "10";
-        String actual = regCard.getValue();
+        Rank expected = Rank.TEN;
+        Rank actual = regCard.getRank();
         assertEquals(expected, actual);
     }
 
