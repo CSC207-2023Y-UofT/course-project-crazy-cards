@@ -141,6 +141,9 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
             layoutManager.setPane("Game");
+        } else {
+            JLabel message = new JLabel("Please enter valid input. That is, atleast 2 players, 1 non-computer player, and no repeated names");
+            this.add(message, BorderLayout.LINE_END);
         }
 
     }
