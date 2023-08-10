@@ -2,7 +2,7 @@ package database;
 
 import entities.HumanPlayer;
 import use_cases.DataAccess;
-import usecases.PlayerInformation;
+import use_cases.PlayerInformation;
 
 import java.io.*;
 

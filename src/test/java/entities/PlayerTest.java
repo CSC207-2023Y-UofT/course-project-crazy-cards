@@ -4,6 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import enums.Rank;
+import enums.Suit;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,7 +40,7 @@ class PlayerTest {
         players.add(p1);
         players.add(p2);
         game = new Game(deck, players);
-        Card firstGameCard = new Card("Spades", "7");
+        Card firstGameCard = new Card(Suit.SPADE, Rank.SEVEN);
         game.putCardDown(firstGameCard);
     }
 

@@ -1,4 +1,4 @@
-package usecases;
+package use_cases;
 
 public class PlayerInformation {
     private String name;

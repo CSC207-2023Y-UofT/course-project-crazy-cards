@@ -3,12 +3,12 @@ package ui.components;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import ui.enums.Rank;
-import ui.enums.Suit;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+
+import enums.Rank;
+import enums.Suit;
 
 public class DrawnCard extends JPanel {
     private static final int HIGHLIGHT_OFFSET = 15;

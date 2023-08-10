@@ -1,7 +1,6 @@
 package use_cases;
 
 import entities.*;
-import usecases.PlayerInformation;
 
 import java.io.IOException;
 import java.util.ArrayList;

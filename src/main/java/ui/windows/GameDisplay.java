@@ -16,10 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import enums.Rank;
+import enums.Suit;
 import ui.components.DrawnCard;
 import ui.components.DrawnHand;
-import ui.enums.Rank;
-import ui.enums.Suit;
 import ui.factories.GameWindowFactory;
 
 /**
