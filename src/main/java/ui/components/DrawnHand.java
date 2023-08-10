@@ -69,7 +69,7 @@ public class DrawnHand extends JPanel {
         setLayout(new BorderLayout());
 
         cardPane = new JLayeredPane();
-        cardPane.setPreferredSize(new Dimension(300, 50));
+        cardPane.setPreferredSize(new Dimension(300, 100));
 
         cardPane.setBorder(BorderFactory.createLineBorder(Color.RED, 8));
         add(cardPane);
@@ -86,7 +86,7 @@ public class DrawnHand extends JPanel {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 
-            card.setBounds((int)(i * offset), height / 2, 30, 50);
+            card.setBounds((int)(i * offset + 28), (height / 2) -30, 50, 65);
         }
     }
 }
