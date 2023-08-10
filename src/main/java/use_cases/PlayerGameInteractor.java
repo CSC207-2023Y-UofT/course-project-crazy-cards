@@ -73,8 +73,9 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     /**
      * Find the Card in the given Player's Hand matching the description given.
      * This method assumes the Card is in the Player's Hand (it wouldn't be called otherwise).
-     * @param value The value of the Card to return.
+     * @param rank The value of the Card to return.
      * @param suit The suit of the Card to return.
+     * @param player The player object of the player.
      * @return The Card matching the given suit and value.
      */
     private Card findCard(Rank rank, Suit suit, Player player) {
