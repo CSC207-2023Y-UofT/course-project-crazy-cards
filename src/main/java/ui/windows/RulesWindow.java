@@ -2,18 +2,22 @@ package ui.windows;
 
 import javax.swing.JPanel;
 
+import enums.WindowName;
+
 public class RulesWindow implements Window {
+    private RulesDisplay display;
+
+    public RulesWindow(RulesDisplay display) {
+        this.display = display;
+    }
 
     @Override
-    public String getIdentifier() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getIdentifier'");
+    public WindowName getIdentifier() {
+        return WindowName.RULES;
     }
 
     @Override
     public JPanel getPanel() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPanel'");
+        return display;
     }
-    
 }

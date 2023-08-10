@@ -2,6 +2,8 @@ package ui.windows;
 
 import javax.swing.*;
 
+import enums.WindowName;
+
 import java.awt.CardLayout;
 
 public class CardLayoutManager implements ICardLayoutManager {
@@ -21,9 +23,9 @@ public class CardLayoutManager implements ICardLayoutManager {
      * @param pane The pane passed through as the argument to be set as the current viewing pane.
      */
     @Override
-    public void setPane(String pane) {
+    public void setPane(WindowName pane) {
         CardLayout layout = getLayout();
-        layout.show(frame.getContentPane(), pane);
+        layout.show(frame.getContentPane(), pane.toString());
     }
 
     /**
@@ -34,7 +36,7 @@ public class CardLayoutManager implements ICardLayoutManager {
     @Override
     public void addPane(Window window) {
         CardLayout layout = getLayout();
-        layout.addLayoutComponent(window.getPanel(), window.getIdentifier());
+        layout.addLayoutComponent(window.getPanel(), window.getIdentifier().toString());
     }
 
     /**

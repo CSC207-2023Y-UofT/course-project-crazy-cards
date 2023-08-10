@@ -2,6 +2,8 @@ package ui.windows;
 
 import javax.swing.JPanel;
 
+import enums.WindowName;
+
 public class GameWindow implements Window {
     private GameDisplay display;
 
@@ -10,8 +12,8 @@ public class GameWindow implements Window {
     }
 
     @Override
-    public String getIdentifier() {
-        return "Game";
+    public WindowName getIdentifier() {
+        return WindowName.GAME;
     }
 
     @Override
