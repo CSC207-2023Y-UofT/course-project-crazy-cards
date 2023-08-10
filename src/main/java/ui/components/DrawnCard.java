@@ -20,6 +20,8 @@ public class DrawnCard extends JPanel {
     private boolean highlighted;
 
     public DrawnCard(Suit suit, Rank rank) {
+        this.suit = suit;
+        this.rank = rank;
         highlighted = false;
 
         initializeGUIComponents();
@@ -37,7 +39,7 @@ public class DrawnCard extends JPanel {
         return rank;
     }
 
-    public void getRank(Rank rank) {
+    public void setRank(Rank rank) {
         this.rank = rank;
     }
 
