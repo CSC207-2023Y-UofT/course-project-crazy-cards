@@ -2,21 +2,25 @@ package entities;
 
 import java.util.*;
 
+import enums.Rank;
+import enums.Suit;
+
 // A StandardDeck containing 52 Cards, no Jokers
 public class StandardDeck implements Deck {
 
     private ArrayList<Card> cards = new ArrayList<>();
 
-    private final static String[] suits = {"Spades", "Hearts", "Diamond", "Clubs"};
-    private final static String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    private final static Suit[] suits = {Suit.SPADE, Suit.HEART, Suit.DIAMOND, Suit.CLUB};
+    private final static Rank[] rank = {Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX, Rank.SEVEN,
+            Rank.EIGHT, Rank.NINE, Rank.TEN, Rank.JACK, Rank.QUEEN, Rank.KING};
 
     /**
      * Construct an ArrayList that contains a standard 52 card deck that will be used for the game.
      */
     public StandardDeck() {
-        for (String suit : suits) {
-            for (String value : values) {
-                this.cards.add(new Card(suit, value));
+        for (Suit suit : suits) {
+            for (Rank rank : rank) {
+                this.cards.add(new Card(suit, rank));
             }
         }
         Collections.shuffle(cards);
@@ -30,8 +34,8 @@ public class StandardDeck implements Deck {
         this.cards.add(card);}
 
     /**
-     * remove a Card from this randomly shuffled Deck, removes from the end of the ArrayList.
-     * @return a Card instance if this Deck is nonempty, otherwise return null.
+     * Remove a Card from this randomly shuffled Deck, from the *end* of the ArrayList.
+     * @return A Card instance if this Deck is nonempty, otherwise return null.
      */
     public Card removeCardFromDeck () {
             if (cards.size() >= 1) {
@@ -44,7 +48,7 @@ public class StandardDeck implements Deck {
         }
 
     /**
-     * Get all the cards in this Deck.
+     * Get for all the cards in this Deck.
      * @return A new ArrayList of the Cards in this Deck.
      */
     public ArrayList<Card> getCards() {

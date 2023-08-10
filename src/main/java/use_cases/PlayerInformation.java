@@ -1,7 +1,4 @@
-package usecases;
-
-import java.io.*;
-import java.util.*;
+package use_cases;
 
 public class PlayerInformation {
     private String name;
@@ -18,24 +15,24 @@ public class PlayerInformation {
     }
 
     /**
-     * Get the name from this players PlayerInformation.
-     * @return A String containing this players name.
+     * Get the name from this player's PlayerInformation.
+     * @return A String containing this player's name.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Get the number of wins from this players PlayerInformation.
-     * @return An int containing this players number of wins.
+     * Get the number of wins from this player's PlayerInformation.
+     * @return An int containing this player's number of wins.
      */
     public int getWins() {
         return this.wins;
     }
 
     /**
-     * Get the number of losses from this players PlayerInformation.
-     * @return An int containing this players number of losses.
+     * Get the number of losses from this player's PlayerInformation.
+     * @return An int containing this player's number of losses.
      */
     public int getLosses() {
         return this.losses;

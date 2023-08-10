@@ -13,54 +13,56 @@ import java.util.HashMap;
 public class PlayerGameResponseModel {
     private String currentPlayerName;
     private boolean hasWinner;
-    private ArrayList<String[]> playerCards = new ArrayList<>();
     private HashMap<String, Integer> playersAndNumCards = new HashMap<>();
-    private String[] currentCard;
+    private CardResponseModel currentCard;
+    private ArrayList<CardResponseModel> playerCards = new ArrayList<>();
+
 
     /**
      * Create a new PlayerGameResponseModel, using the updated GameState provided.
-     * Cards are represented as an array of string by {value, suit}
+     * Cards are represented as an array of string by {value, suit}.
      * @param gameState The GameState which provides the information for this ResponseModel.
      */
     public PlayerGameResponseModel(GameState gameState) {
         this.currentPlayerName = gameState.getCurrentPlayer().getName();
         this.hasWinner = gameState.getHasWinner();
-        this.currentCard = cardToArray(gameState.getCurrentCard());
+        this.currentCard = cardToModel(gameState.getCurrentCard());
         for(Card card: gameState.getCurrentPlayerCards()) {
-            this.playerCards.add(cardToArray(card));
+            this.playerCards.add(cardToModel(card));
         }
         for(Player player: gameState.getPlayersAndCards().keySet()) {
             this.playersAndNumCards.put(player.getName(), player.getNumCards());
         }
-
     }
 
     /**
      * Convert the given Card to an array of strings.
-     * @param card The Card ot be converted.
+     * @param card The Card to be converted.
      * @return An array of Strings representing the Card as {value, suit}.
      */
-    private String[] cardToArray(Card card) {
-        return new String[]{card.getValue(), card.getSuit()};
+    private CardResponseModel cardToModel(Card card) {
+        return new CardResponseModel(card.getSuit(), card.getRank());
     }
 
     /**
      * Get if this ResponseModel shows if there is a Winner.
      * @return True iff hasWinner is true.
      */
-    public boolean getHasWinner() { return this.hasWinner; }
+    public boolean getHasWinner() {
+        return this.hasWinner;
+    }
 
     /**
      * Get the cards of the current Player in String format.
      * @return An ArrayList of Cards in String format.
      */
-    public ArrayList<String[]> getPlayerCards() {
+    public ArrayList<CardResponseModel> getPlayerCards() {
         return playerCards;
     }
 
     /**
-     * Get all the Players names (besides current Player) and their number of Cards.
-     * @return HashMap with Player names as Strings and number of Cards as an Integer.
+     * Get all the Players names (other than the current Player) and their respective number of Cards.
+     * @return A HashMap with Player names as Strings and number of Cards as an Integer.
      */
     public HashMap<String, Integer> getPlayersAndNumCards() {
         return playersAndNumCards;
@@ -78,7 +80,7 @@ public class PlayerGameResponseModel {
      * Get the current Card this ResponseModel is sending.
      * @return The current Card in String format.
      */
-    public String[] getCurrentCard() {
+    public CardResponseModel getCurrentCard() {
         return this.currentCard;
     }
 }

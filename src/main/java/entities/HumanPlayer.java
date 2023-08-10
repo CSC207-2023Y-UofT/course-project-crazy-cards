@@ -1,12 +1,8 @@
 package entities;
 
-
 public class HumanPlayer extends Player {
-
     private int losses;
-
     private int wins;
-
 
     /**
      * Construct a new HumanPlayer with the given name and Hand.
@@ -20,14 +16,14 @@ public class HumanPlayer extends Player {
     }
 
     /**
-     * Increase the win statistic of this Player.
+     * Increase the number of wins for this Player.
      */
     public void incrementWins() {
         this.wins ++;
     }
 
     /**
-     * Increase the loss statistic of this Player.
+     * Increase the number of losses for this Player.
      */
     public void incrementLosses() {
         this.losses ++;

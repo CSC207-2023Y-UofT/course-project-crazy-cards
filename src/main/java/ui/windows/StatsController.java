@@ -1,6 +1,6 @@
 package ui.windows;
 
-import usecases.PlayerInformation;
+import use_cases.PlayerInformation;
 
 /**
  * Handles in- and outgoing data for a StatsDisplay.

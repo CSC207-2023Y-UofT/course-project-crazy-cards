@@ -1,4 +1,4 @@
-package ui.enums;
+package enums;
 
 /**
  * Suit to be used for the corresponding card during gameplay.

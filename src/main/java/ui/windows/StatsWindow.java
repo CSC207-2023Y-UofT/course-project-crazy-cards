@@ -9,8 +9,8 @@ public class StatsWindow implements Window {
     private StatsDisplay renderer;
 
     /**
-     * Construct a StatsWindow holding the given StatsRenderer.
-     * @param renderer the StatsRenderer to be displayed
+     * Constructor for a StatsWindow holding the given StatsRenderer.
+     * @param renderer The StatsRenderer to be displayed.
      */
     public StatsWindow(StatsDisplay renderer) {
         this.renderer = renderer;
@@ -18,7 +18,7 @@ public class StatsWindow implements Window {
 
     /**
      * Returns the identifier of this window.
-     * @return the identifier as a String
+     * @return The identifier of the window, as a String.
      */
     @Override
     public String getIdentifier() {
@@ -27,7 +27,7 @@ public class StatsWindow implements Window {
 
     /**
      * Returns the JPanel of this window.
-     * @return the JPanel
+     * @return The JPanel corresponding to the current window.
      */
     @Override
     public JPanel getPanel() {

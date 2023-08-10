@@ -1,4 +1,4 @@
-package ui.enums;
+package enums;
 
 /**
  * Ranks to be used for their corresponding card in gameplay.

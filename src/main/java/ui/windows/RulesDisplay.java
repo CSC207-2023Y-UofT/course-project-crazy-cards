@@ -1,13 +1,13 @@
 package ui.windows;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 
 public class RulesDisplay extends JPanel {
     private JLabel titleLabel;
@@ -21,12 +21,19 @@ public class RulesDisplay extends JPanel {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
 
-        titleLabel = new JLabel("Rules");
+        titleLabel = new JLabel("<html>Rules/How to Play</html>");
+        titleLabel.setFont(new Font("Calibri", Font.BOLD, 36));
         // Wrapping JLabel text with html tags allows for wrapping and resizing with window
         // TODO: Make wrapping labels a helper method
-        bodyLabel = new JLabel("<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis tortor ut est consectetur vehicula. Nam consequat faucibus lacus vitae aliquet. Phasellus purus urna, varius a tempor in, ullamcorper in turpis. Phasellus felis magna, dictum eu consequat et, auctor at mauris. Integer placerat ipsum sed maximus porta. Praesent sit amet ligula laoreet, commodo magna quis, consectetur dui. Maecenas risus leo, dapibus id velit sed, condimentum pulvinar nisl. Mauris quis erat gravida, suscipit odio in, efficitur quam. Quisque vulputate vestibulum hendrerit. Curabitur id mi consectetur, posuere lectus at, scelerisque massa. Quisque sit amet mollis sapien. Duis at facilisis mi. Aenean et justo scelerisque mauris bibendum rutrum.</html>");
+        bodyLabel = new JLabel("<html><br>Objective: Players try to be the first to get rid of all of their cards in their hand.<br><br>" +
+                "Players can play a given card onto the pile if the card has the same value OR suit as the one on the table.<br><br>" +
+                "Crazy cards can be used to change up various aspects of the game. Their functions are listed below:<br>" +
+                "1. Any '8' card can be used to change the suit of the game, which the next player must play.<br>" +
+                "2. Any 'Ace' card can be used to swap hands with the player with the smallest number of cards in their hand.</html>");
+        bodyLabel.setFont(new Font("Calibri", Font.BOLD, 20));
         textPanel.add(titleLabel);
         textPanel.add(bodyLabel);
+        textPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -41,8 +48,8 @@ public class RulesDisplay extends JPanel {
 
     public static void main(String[] args) {
         RulesDisplay display = new RulesDisplay();
-        JFrame frame = new JFrame("RulesDisplay");
-        frame.setSize(400, 400);
+        JFrame frame = new JFrame("Rules Page");
+        frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(display);
         frame.setVisible(true);
