@@ -1,8 +1,5 @@
 package ui.windows;
 
-import database.CSVDatabase;
-import use_cases.PlayerInformation;
-
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -13,7 +10,6 @@ import java.io.IOException;
  */
 public class StatsDelegator implements ActionListener {
     private StatsController controller;
-    private CSVDatabase database = new CSVDatabase();
 
     /**
      * Construct a StatsDelegator with a given controller.
@@ -32,8 +28,7 @@ public class StatsDelegator implements ActionListener {
         JTextField inputNameField = (JTextField)e.getSource();
         String username = inputNameField.getText();
         try {
-            PlayerInformation player = database.loadPlayer(username);
-            controller.tryRequestUser(player, username);
+            controller.tryRequestUser(username);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
