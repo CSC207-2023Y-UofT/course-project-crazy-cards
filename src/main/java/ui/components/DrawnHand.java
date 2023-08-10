@@ -29,15 +29,15 @@ public class DrawnHand extends JPanel {
             }
 
             public void componentMoved(java.awt.event.ComponentEvent e) {
-                ; // Do nothing
+                // Do nothing
             }
 
             public void componentShown(java.awt.event.ComponentEvent e) {
-                ; // Do nothing
+                // Do nothing
             }
 
             public void componentHidden(java.awt.event.ComponentEvent e) {
-                ; // Do nothing
+                // Do nothing
             }
         });
     }
@@ -74,7 +74,7 @@ public class DrawnHand extends JPanel {
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
-        double offset = width / drawnCards.size();
+        double offset = (double) width / drawnCards.size();
 
         cardPane.removeAll();
 
