@@ -5,6 +5,7 @@ import ui.windows.StatsDelegator;
 import ui.windows.StatsDisplay;
 import ui.windows.StatsWindow;
 import ui.windows.Window;
+import use_cases.DataAccess;
 
 public class StatsWindowFactory implements WindowFactory {
 
@@ -14,8 +15,8 @@ public class StatsWindowFactory implements WindowFactory {
      * @return A new StatsWindow to display statistics on.
      */
     @Override
-    public Window createWindow() {
-        StatsController controller = new StatsController();
+    public Window createWindow(DataAccess database) {
+        StatsController controller = new StatsController(database);
         StatsDelegator delegator = new StatsDelegator(controller);
         StatsDisplay display = new StatsDisplay(delegator);
         controller.setDisplay(display);

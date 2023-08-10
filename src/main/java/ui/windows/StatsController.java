@@ -1,6 +1,6 @@
 package ui.windows;
 
-import database.CSVDatabase;
+import use_cases.DataAccess;
 import use_cases.PlayerInformation;
 
 import java.io.IOException;
@@ -10,12 +10,14 @@ import java.io.IOException;
  */
 public class StatsController {
     private StatsDisplay display;
+    private DataAccess database;
 
     /**
      * Construct a StatsController with no endpoint. 
      */
-    public StatsController() { 
+    public StatsController(DataAccess database) {
         this.display = null;
+        this.database = database;
     }
 
     /**
@@ -35,7 +37,6 @@ public class StatsController {
         if (display == null) {
             return false;
         }
-        CSVDatabase database = new CSVDatabase();
         PlayerInformation player = database.loadPlayer(username);
         StatsDisplayData data = retrieveData(player, username);
         display.updateView(data);
