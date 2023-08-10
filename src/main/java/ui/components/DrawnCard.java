@@ -8,8 +8,6 @@ import ui.enums.Suit;
 
 import javax.swing.*;
 
-import static ui.enums.Rank.*;
-
 public class DrawnCard extends JPanel {
     private static final int HIGHLIGHT_OFFSET = 15;
     private Suit suit;
