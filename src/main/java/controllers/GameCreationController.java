@@ -26,12 +26,13 @@ public class GameCreationController {
      * @param playersInfo The User requested Player names and if they are to be ComputerPlayers or not.
      * @return A GameCreationResponseModel detailing if a Game was created.
      */
-    public GameCreationResponseModel createGameResponse(ArrayList<PlayerCreationInformation> playersInfo) {
+    public boolean createGameResponse(ArrayList<PlayerCreationInformation> playersInfo) {
         HashMap<String, Boolean> requestInfo = new HashMap<>();
         for(PlayerCreationInformation info: playersInfo) {
             requestInfo.put(info.getPlayerName(), info.getIsComputerPlayer());
         }
         GameCreationRequestModel request = new GameCreationRequestModel(requestInfo);
-        return inputBoundary.createGameResponse(request);
+        GameCreationResponseModel response = inputBoundary.createGameResponse(request);
+        return response.getGameCreated();
     }
 }
