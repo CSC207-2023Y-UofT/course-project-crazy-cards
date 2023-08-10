@@ -58,7 +58,7 @@ public class StatsDisplayData {
      * @param gamesWon the number of games won as an integer
      */
     public void setGamesWon(int gamesWon) {
-        this.gamesLost = gamesWon;
+        this.gamesWon = gamesWon;
     }
 
     /**
