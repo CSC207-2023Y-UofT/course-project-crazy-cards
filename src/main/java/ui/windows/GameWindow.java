@@ -20,5 +20,10 @@ public class GameWindow implements Window {
     public JPanel getPanel() {
         return display;
     }
-    
+
+    @Override
+    public void setNavigator(PaneDelegator navigator) {
+        // add when game window has navigation, if ever
+        // if not needed, extract setNavigator into Navigable interface or smth
+    }
 }

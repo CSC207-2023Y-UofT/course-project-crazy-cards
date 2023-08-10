@@ -19,4 +19,6 @@ public interface Window {
      * @return The JPanel of the window.
      */
     JPanel getPanel();
+
+    void setNavigator(PaneDelegator navigator);
 }

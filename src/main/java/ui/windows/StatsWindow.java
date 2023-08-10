@@ -35,6 +35,11 @@ public class StatsWindow implements Window {
     public JPanel getPanel() {
         return renderer;
     }
+
+    @Override
+    public void setNavigator(PaneDelegator navigator) {
+        renderer.setNavigator(navigator);
+    }
     
 }
 

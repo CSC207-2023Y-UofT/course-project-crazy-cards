@@ -20,4 +20,9 @@ public class RulesWindow implements Window {
     public JPanel getPanel() {
         return display;
     }
+
+    @Override
+    public void setNavigator(PaneDelegator navigator) {
+        display.setNavigator(navigator);
+    }
 }
