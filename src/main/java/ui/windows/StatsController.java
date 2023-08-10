@@ -46,16 +46,13 @@ public class StatsController {
      * @return the retrieved data as a StatsDisplayData
      */
     private StatsDisplayData retrieveData(PlayerInformation player, String username) {
-        StatsDisplayData data = new StatsDisplayData();
+        StatsDisplayData data;
 
         if (player != null) {
-            data.setName(player.getName());
-            data.setGamesWon(player.getWins());
-            data.setGamesLost(player.getLosses());
+            data = new StatsDisplayData(player.getName(), player.getWins(), player.getLosses());
         } else {
+            data = new StatsDisplayData();
             data.setName(username);
-            data.setGamesWon(0);
-            data.setGamesLost(0);
         }
         return data;
     }
