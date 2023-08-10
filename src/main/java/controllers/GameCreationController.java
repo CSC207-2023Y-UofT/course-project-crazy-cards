@@ -31,6 +31,10 @@ public class GameCreationController {
         for(PlayerCreationInformation info: playersInfo) {
             requestInfo.put(info.getPlayerName(), info.getIsComputerPlayer());
         }
+        // immediately return false if there are duplicate names
+        if(requestInfo.keySet().size() != playersInfo.size()) {
+            return false;
+        }
         GameCreationRequestModel request = new GameCreationRequestModel(requestInfo);
         GameCreationResponseModel response = inputBoundary.createGameResponse(request);
         return response.getGameCreated();
