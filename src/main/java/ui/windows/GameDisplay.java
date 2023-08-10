@@ -1,26 +1,18 @@
 package ui.windows;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import ui.components.DrawnCard;
 import ui.components.DrawnHand;
-import ui.enums.Rank;
-import ui.enums.Suit;
-import ui.factories.GameWindowFactory;
 
 /**
  * Renderer for a game window.
@@ -218,7 +210,7 @@ public class GameDisplay extends JPanel {
         buttons.add(playButton);
         buttons.add(drawButton);
         buttons.add(skipButton);
-    }   
+    }
 
     /**
      * Initialize the footer of this window.
