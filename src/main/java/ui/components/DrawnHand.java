@@ -5,6 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 
+import enums.Suit;
+import enums.Rank;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
