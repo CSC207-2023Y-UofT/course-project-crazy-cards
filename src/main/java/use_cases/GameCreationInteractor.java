@@ -71,7 +71,7 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         int numHumanPlayer = 0;
         for (String name: request.getPlayersInfo().keySet()) {
             if(!(request.isComputerPlayer(name))) {
-             numHumanPlayer ++;
+                numHumanPlayer ++;
             }
         }
         // The request contains at least 1 human player

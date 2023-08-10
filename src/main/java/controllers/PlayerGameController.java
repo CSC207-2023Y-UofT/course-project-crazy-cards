@@ -11,7 +11,7 @@ import enums.TurnAction;
 /**
  * The controller class for when a User is playing a Game.
  */
-public class PlayerGameController {
+public class PlayerGameController implements GameBridge {
     private final PlayerGameInputBoundary inputBoundary;
 
     /**

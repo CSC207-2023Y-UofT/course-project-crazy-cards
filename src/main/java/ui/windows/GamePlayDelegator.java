@@ -3,8 +3,6 @@ package ui.windows;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.components.DrawnCard;
-
 /**
  * Delegates user interaction for playing cards.
  */
@@ -24,7 +22,6 @@ public class GamePlayDelegator implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        DrawnCard card = (DrawnCard)e.getSource();
-        controller.setSelectedCard(card.getSuit(), card.getRank());
+        controller.playCard();
     }
 }

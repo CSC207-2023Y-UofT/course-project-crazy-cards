@@ -15,6 +15,7 @@ public class PlayerGameResponseModel {
     private boolean hasWinner;
     private HashMap<String, Integer> playersAndNumCards = new HashMap<>();
     private CardResponseModel currentCard;
+    private CardResponseModel currentDrawnCard;
     private ArrayList<CardResponseModel> playerCards = new ArrayList<>();
 
 
@@ -27,6 +28,7 @@ public class PlayerGameResponseModel {
         this.currentPlayerName = gameState.getCurrentPlayer().getName();
         this.hasWinner = gameState.getHasWinner();
         this.currentCard = cardToModel(gameState.getCurrentCard());
+        this.currentDrawnCard = cardToModel(gameState.getCurrentDrawnCard());
         for(Card card: gameState.getCurrentPlayerCards()) {
             this.playerCards.add(cardToModel(card));
         }
@@ -82,5 +84,13 @@ public class PlayerGameResponseModel {
      */
     public CardResponseModel getCurrentCard() {
         return this.currentCard;
+    }
+
+    /**
+     * Get the current Drawn Card this ResponseModel is sending.
+     * @return The current Drawn Card in String format.
+     */
+    public CardResponseModel getCurrentDrawnCard() {
+        return this.currentDrawnCard;
     }
 }

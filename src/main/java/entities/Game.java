@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Game implements ObservableGame {
     private Card currentCard;
+    private Card currentDrawnCard;
     private ArrayList<Player> players;
     private Deck gameDeck;
     private Player winner;
@@ -54,6 +55,15 @@ public class Game implements ObservableGame {
     @Override
     public Card getCurrentCard() {
         return this.currentCard;
+    }
+
+    /**
+     * Get the Card that was drawn last.
+     * @return A Card object which the current Player has drawn from the deck.
+     */
+    @Override
+    public Card getDrawnCard() {
+        return this.currentDrawnCard;
     }
 
     /**
@@ -119,6 +129,15 @@ public class Game implements ObservableGame {
      */
     public Deck getGameDeck() {
         return this.gameDeck;
+    }
+
+    /**
+     * Get the top Card of this Game's Deck.
+     * @return A Card object representing the top Card of this Game's Deck.
+     */
+    public Card getTopCard() {
+        this.currentDrawnCard = this.gameDeck.removeCardFromDeck();
+        return this.currentDrawnCard;
     }
 
     /**

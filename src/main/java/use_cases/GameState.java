@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class GameState implements GameObserver {
     private Player currentPlayer;
     private Card currentCard;
+    private Card currentDrawnCard;
     private ArrayList<Card> currentPlayerCards;
     private HashMap<Player, Integer> playersAndCards = new HashMap<>();
     private boolean hasWinner;
@@ -28,6 +29,7 @@ public class GameState implements GameObserver {
 
         this.currentPlayer = game.getCurrentTurn();
         this.currentCard = game.getCurrentCard();
+        this.currentDrawnCard = game.getDrawnCard();
         for (Player player: game.getPlayers()) {
             if(player != currentPlayer) {
                 this.playersAndCards.put(player, player.getNumCards());
@@ -49,6 +51,7 @@ public class GameState implements GameObserver {
         this.currentPlayer = game.getCurrentTurn();
         this.playersAndCards.remove(this.currentPlayer);
         this.currentCard = game.getCurrentCard();
+        this.currentDrawnCard = game.getDrawnCard();
         this.hasWinner = game.hasWinner();
         this.currentPlayerCards = this.currentPlayer.getCards();
     }
@@ -57,33 +60,41 @@ public class GameState implements GameObserver {
      * Get the current Player of the Game.
      * @return A Player representing the current turn of the Game.
      */
-   public Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return this.currentPlayer;
-   }
+    }
 
     /**
      * Get the last card played in the Game.
      * @return The current Card in the Game, (most recently played Card).
      */
-   public Card getCurrentCard() {
+    public Card getCurrentCard() {
         return this.currentCard;
-   }
+    }
+
+    /**
+     * Get the last card drawn in the Game.
+     * @return The current Card in the Game, (most recently drawn Card).
+     */
+    public Card getCurrentDrawnCard() {
+        return this.currentDrawnCard;
+    }
 
     /**
      * Get the Cards of the current Player.
      * @return A new ArrayList of the Cards belonging to the current Player.
      */
-   public ArrayList<Card> getCurrentPlayerCards() {
+    public ArrayList<Card> getCurrentPlayerCards() {
         return new ArrayList<>(currentPlayerCards);
-   }
+    }
 
     /**
      * Get whether the current Game being observed by this GameState has a winner.
      * @return True iff the Game has a winner.
      */
-   public boolean getHasWinner() {
-       return this.hasWinner;
-   }
+    public boolean getHasWinner() {
+        return this.hasWinner;
+    }
 
     /**
      * Get the Players other than the current Player and their respective number of Cards.
