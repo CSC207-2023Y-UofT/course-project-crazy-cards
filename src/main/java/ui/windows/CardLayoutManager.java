@@ -7,7 +7,7 @@ import enums.WindowName;
 import java.awt.CardLayout;
 
 public class CardLayoutManager implements ICardLayoutManager {
-    private JFrame frame;
+    private JPanel panel;
 
     /**
      * Constructor for the CardLayoutManager, which manages transitions between windows,
@@ -15,7 +15,9 @@ public class CardLayoutManager implements ICardLayoutManager {
      * @param window The JFrame window created in order to display information.
      */
     public CardLayoutManager(JFrame window) {
-        this.frame = window;
+        panel = new JPanel(new CardLayout());
+
+        window.add(panel);
     }
 
     /**
@@ -25,7 +27,7 @@ public class CardLayoutManager implements ICardLayoutManager {
     @Override
     public void setPane(WindowName pane) {
         CardLayout layout = getLayout();
-        layout.show(frame.getContentPane(), pane.toString());
+        layout.show(panel, pane.toString());
     }
 
     /**
@@ -35,8 +37,7 @@ public class CardLayoutManager implements ICardLayoutManager {
      */
     @Override
     public void addPane(Window window) {
-        CardLayout layout = getLayout();
-        layout.addLayoutComponent(window.getPanel(), window.getIdentifier().toString());
+        panel.add(window.getPanel(), window.getIdentifier().toString());
     }
 
     /**
@@ -44,6 +45,6 @@ public class CardLayoutManager implements ICardLayoutManager {
      * @return The current internal layout manager of the window that is on screen.
      */
     private CardLayout getLayout() {
-        return (CardLayout)frame.getContentPane().getLayout();
+        return (CardLayout)(panel.getLayout());
     }
 }
