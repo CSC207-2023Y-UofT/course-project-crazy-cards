@@ -226,34 +226,4 @@ public class GameDisplay extends JPanel {
     private void initializeFooter() {
         footer = new JPanel();
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(800, 600));
-
-        GameWindowFactory factory = new GameWindowFactory();
-        Window gameWindow = factory.createWindow();
-
-        GameDisplay gameDisplay = (GameDisplay)gameWindow.getPanel();
-        DrawnHand hand = new DrawnHand(new ArrayList<>());
-
-        ArrayList<DrawnCard> cards = new ArrayList<DrawnCard>();
-        cards.add(new DrawnCard(Suit.CLUB, Rank.ACE));
-        cards.add(new DrawnCard(Suit.CLUB, Rank.TWO));
-        cards.add(new DrawnCard(Suit.CLUB, Rank.THREE));
-        cards.add(new DrawnCard(Suit.HEART, Rank.ACE));
-        cards.add(new DrawnCard(Suit.HEART, Rank.TWO));
-        cards.add(new DrawnCard(Suit.HEART, Rank.THREE));
-
-        hand.addCards(cards);
-        gameDisplay.setHandsByPlayer(new HashMap<String, DrawnHand>() {{
-            put("Player 1", hand);
-        }});
-        gameDisplay.switchHand("Player 1");
-
-        frame.add(gameWindow.getPanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
 }
