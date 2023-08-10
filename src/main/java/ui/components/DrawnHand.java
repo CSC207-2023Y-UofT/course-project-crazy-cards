@@ -65,7 +65,7 @@ public class DrawnHand extends JPanel {
         drawnCards.remove(card);
     }
 
-    private void initializeGUIComponents() {;
+    private void initializeGUIComponents() {
         setLayout(new BorderLayout());
 
         cardPane = new JLayeredPane();
