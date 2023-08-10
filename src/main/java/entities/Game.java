@@ -136,7 +136,8 @@ public class Game implements ObservableGame {
      * @return A Card object representing the top Card of this Game's Deck.
      */
     public Card getTopCard() {
-        return this.gameDeck.removeCardFromDeck();
+        this.currentDrawnCard = this.gameDeck.removeCardFromDeck();
+        return this.currentDrawnCard;
     }
 
     /**
