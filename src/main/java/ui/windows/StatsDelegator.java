@@ -3,6 +3,7 @@ package ui.windows;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 /**
  * Delegates incoming user input from a StatsDisplay.
@@ -26,6 +27,10 @@ public class StatsDelegator implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JTextField inputNameField = (JTextField)e.getSource();
         String username = inputNameField.getText();
-        controller.tryRequestUser(username);
+        try {
+            controller.tryRequestUser(username);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
