@@ -9,7 +9,6 @@ import ui.windows.GamePlayDelegator;
 import ui.windows.GameSkipDelegator;
 import ui.windows.GameWindow;
 import ui.windows.Window;
-import use_cases.DataAccess;
 
 public class GameWindowFactory implements WindowFactory {
 
@@ -19,7 +18,7 @@ public class GameWindowFactory implements WindowFactory {
      * @return A new GameWindow that will display the game for the user.
      */
     @Override
-    public Window createWindow(DataAccess database) {
+    public Window createWindow() {
         GameController controller = new GameController();
         
         GamePlayDelegator playDel = new GamePlayDelegator(controller);
