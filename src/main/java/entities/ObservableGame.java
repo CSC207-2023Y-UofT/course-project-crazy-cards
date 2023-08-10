@@ -38,6 +38,12 @@ public interface ObservableGame {
     Card getCurrentCard();
 
     /**
+     * Get the Card that was drawn last.
+     * @return A Card object which the current Player has drawn from the deck.
+     */
+    Card getDrawnCard();
+
+    /**
      * Get all the Players in this Game.
      * @return An ArrayList of Players in this game.
      */
