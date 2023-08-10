@@ -14,8 +14,13 @@ public class DrawnCard extends JPanel {
     private Rank rank;
     private int index;
     private boolean highlighted;
-    private HashMap<Rank, String> rankToString;
+    private static HashMap<Rank, String> rankToString;
 
+    /**
+     * Constructor for the DrawnCard class, which initializes all the components necessary for the card.
+     * @param suit The suit the DrawnCard will have.
+     * @param rank The rank/value the DrawnCard will have.
+     */
     public DrawnCard(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
@@ -25,30 +30,41 @@ public class DrawnCard extends JPanel {
         initializeGUIComponents();
     }
 
+    /**
+     * Getter method for the suit of the card.
+     * @return The suit of the card, as a Suit enum.
+     */
     public Suit getSuit() {
         return suit;
     }
 
+    /**
+     * Setter method for the suit of the card.
+     * @param suit The suit of the card to be set, as a Suit enum.
+     */
     public void setSuit(Suit suit) {
         this.suit = suit;
     }
 
+    /**
+     * Getter method for the value of the card.
+     * @return The value of the card, as a Rank enum.
+     */
     public Rank getRank() {
         return rank;
     }
 
+    /**
+     * Setter method for the value of the card.
+     * @param rank The value of the card to be set, as a Rank enum.
+     */
     public void setRank(Rank rank) {
         this.rank = rank;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
+    /**
+     * Generates the hashmap used to display the string representation of a Rank enum, for any given card.
+     */
     public void generateRankToString() {
         rankToString.put(Rank.ACE, "A");
         rankToString.put(Rank.TWO, "2");
@@ -65,6 +81,9 @@ public class DrawnCard extends JPanel {
         rankToString.put(Rank.KING, "K");
     }
 
+    /**
+     * Create the JPanel for each card, and display the suit and value accordingly.
+     */
     private void initializeGUIComponents() {
         Dimension dimension = new Dimension(50, 65);
         setPreferredSize(dimension);
@@ -113,6 +132,9 @@ public class DrawnCard extends JPanel {
         add(pane);
     }
 
+    /**
+     * Highlights the card by moving the card up 15 pixels.
+     */
     public void highlight() {
         if (!highlighted) {
             highlighted = true;
@@ -120,6 +142,9 @@ public class DrawnCard extends JPanel {
         }
     }
 
+    /**
+     * Unhighlights the card by setting it back to the initial position.
+     */
     public void unhighlight() {
         if (highlighted) {
             highlighted = false;
