@@ -9,12 +9,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
+import enums.WindowName;
+import ui.components.NavigationButton;
+
 public class RulesDisplay extends JPanel {
+    private NavigationButton backButton;
     private JLabel titleLabel;
     private JLabel bodyLabel;
 
     public RulesDisplay() {
         initializeGUIComponents();
+    }
+
+    public void setNavigator(PaneDelegator navigator) {
+        backButton.addActionListener(navigator);
     }
 
     private void initializeGUIComponents() {
@@ -37,7 +45,7 @@ public class RulesDisplay extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        JButton backButton = new JButton("Back");
+        backButton = new NavigationButton(WindowName.MENU, "Back");
 
         buttonPanel.add(backButton);
 

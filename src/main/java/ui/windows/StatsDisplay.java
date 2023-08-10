@@ -2,6 +2,13 @@ package ui.windows;
 
 import javax.swing.*;
 
+import javax.swing.border.EmptyBorder;
+
+import enums.WindowName;
+import ui.components.NavigationButton;
+
+import java.awt.*;
+
 /**
  * A JPanel subclass representing the game's statistics window.
  */
@@ -14,6 +21,8 @@ public class StatsDisplay extends JPanel {
     private JLabel gamesWonLabel;
     private JLabel gamesLostLabel;
 
+    private NavigationButton backButton;
+
     /**
      * Construct a StatsDisplay displaying default data.
      * @param delegator the StatsDelegator this display links to
@@ -22,6 +31,10 @@ public class StatsDisplay extends JPanel {
         this.delegator = delegator;
 
         initializeGUIComponents();
+    }
+
+    public void setNavigator(PaneDelegator delegator) {
+        backButton.addActionListener(delegator);
     }
 
     /**
@@ -45,7 +58,7 @@ public class StatsDisplay extends JPanel {
         // The button panel containing the back button and search bar
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        JButton backButton = new JButton("Back");
+        backButton = new NavigationButton(WindowName.MENU, "Back");
         JTextField inputNameField = new JTextField(20);
 
         // Link the search bar to the delegator

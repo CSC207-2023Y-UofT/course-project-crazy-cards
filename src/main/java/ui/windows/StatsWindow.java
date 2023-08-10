@@ -2,6 +2,8 @@ package ui.windows;
 
 import javax.swing.JPanel;
 
+import enums.WindowName;
+
 /**
  * Wrapper class for StatsRenderer used in a CardLayout.
  */
@@ -18,11 +20,11 @@ public class StatsWindow implements Window {
 
     /**
      * Returns the identifier of this window.
-     * @return The identifier of the window, as a String.
+     * @return The identifier of the window as a WindowName enum.
      */
     @Override
-    public String getIdentifier() {
-        return "Stats Window";
+    public WindowName getIdentifier() {
+        return WindowName.STATS;
     }
 
     /**
@@ -32,6 +34,11 @@ public class StatsWindow implements Window {
     @Override
     public JPanel getPanel() {
         return renderer;
+    }
+
+    @Override
+    public void setNavigator(PaneDelegator navigator) {
+        renderer.setNavigator(navigator);
     }
     
 }
