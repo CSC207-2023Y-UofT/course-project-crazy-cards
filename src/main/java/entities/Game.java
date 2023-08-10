@@ -108,9 +108,9 @@ public class Game implements ObservableGame {
      * @return True if this is a valid Card, false otherwise.
      */
     public boolean isValidCard(Card card) {
-        if (card.getValue().equals("8")) {
+        if (card.getRank().equals("8")) {
             return true;
-        } else {return (card.getValue().equals(currentCard.getValue()) | card.getSuit().equals(currentCard.getSuit()));}
+        } else {return (card.getRank().equals(currentCard.getRank()) | card.getSuit().equals(currentCard.getSuit()));}
     }
 
     /**

@@ -1,6 +1,10 @@
 package use_cases;
 
 import entities.*;
+import enums.Rank;
+import enums.Suit;
+import enums.TurnAction;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,17 +58,17 @@ class PlayerGameInteractorTest {
         players.add(p3);
         game = new Game(deck, players);
         // Make the first Card of the game something p1 can play on top of.
-        firstCard = new Card(h1.getCards().get(0).getSuit(), "K");
+        firstCard = new Card(h1.getCards().get(0).getSuit(), Rank.KING);
         game.putCardDown(firstCard);
         gameState = new GameState(game);
         game.addObserver(gameState);
-        String p1CardVal = h1.getCards().get(0).getValue();
-        String p1CardSuit = h1.getCards().get(0).getSuit();
+        Rank p1CardVal = h1.getCards().get(0).getRank();
+        Suit p1CardSuit = h1.getCards().get(0).getSuit();
         p1sCard = h1.getCards().get(0);
         interactor = new PlayerGameInteractor(game, gameState);
-        playCardReq = new PlayerGameRequestModel("sol", p1CardVal, p1CardSuit, true, false, false);
-        pickUpReq = new PlayerGameRequestModel("sol", null, null, false, true, false);
-        skipReq = new PlayerGameRequestModel("sol", null, null, false, false, true);
+        playCardReq = new PlayerGameRequestModel("sol", p1CardSuit, p1CardVal, TurnAction.PLAY);
+        pickUpReq = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
+        skipReq = new PlayerGameRequestModel("sol", null, null, TurnAction.SKIP);
 
     }
 
@@ -113,10 +117,10 @@ class PlayerGameInteractorTest {
         newHand.addCard(bogus1);
         newHand.addCard(bogus2);
         p1.setHand(newHand);
-        String chosenSuit = bogus1.getSuit();
-        String chosenValue = bogus1.getValue();
+        Suit chosenSuit = bogus1.getSuit();
+        Rank chosenValue = bogus1.getRank();
         // Have p1 try to play bogus1.
-        PlayerGameRequestModel pgrm = new PlayerGameRequestModel("sol", chosenValue, chosenSuit, true, false, false);
+        PlayerGameRequestModel pgrm = new PlayerGameRequestModel("sol", chosenSuit, chosenValue, TurnAction.PLAY);
         interactor.createResponse(pgrm);
         // Assert the turn has not changed, no winner, current Card is the same, none of the player's cards have changed.
         assertEquals(p1, gameState.getCurrentPlayer());

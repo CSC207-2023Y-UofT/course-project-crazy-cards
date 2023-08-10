@@ -1,8 +1,11 @@
 package entities;
 
+import enums.Rank;
+import enums.Suit;
+
 public class Card {
-    private final String suit;
-    private final String value;
+    private final Suit suit;
+    private final Rank rank;
     private String specialEffect = null;
 
     /**
@@ -10,9 +13,9 @@ public class Card {
      * @param suit  The suit of the card (i.e. Spades, Clubs, Hearts, Diamonds)
      * @param value The value of the card (i.e. 2 through 10, or J, Q, K or A)
      */
-    public Card(String suit, String value) {
+    public Card(Suit suit, Rank rank) {
         this.suit = suit;
-        this.value = value;
+        this.rank = rank;
     }
 
     /**
@@ -21,9 +24,9 @@ public class Card {
      * @param value         The value of the card (i.e. 2 through 10, or J, Q, K or A)
      * @param specialEffect The special effect given to the card, if any is provided (e.g. changing the current suit)
      */
-    public Card(String suit, String value, String specialEffect) {
+    public Card(Suit suit, Rank rank, String specialEffect) {
         this.suit = suit;
-        this.value = value;
+        this.rank = rank;
         this.specialEffect = specialEffect;
     }
 
@@ -31,7 +34,7 @@ public class Card {
      * Getter method for the suit of the card, since the suit is a private attribute.
      * @return The suit of the card.
      */
-    public String getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 
@@ -39,8 +42,8 @@ public class Card {
      * Getter method for the value of the card, since the value is a private attribute.
      * @return The value of the card.
      */
-    public String getValue() {
-        return value;
+    public Rank getRank() {
+        return rank;
     }
 
     /**

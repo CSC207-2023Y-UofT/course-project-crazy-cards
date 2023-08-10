@@ -1,7 +1,6 @@
-package database;
+package use_cases;
 
 import entities.HumanPlayer;
-import usecases.PlayerInformation;
 
 import java.io.IOException;
 
