@@ -31,8 +31,7 @@ public class GameDisplay extends JPanel {
     private GameDrawDelegator drawDelegator;
     private CardDelegator cardDelegator;
 
-    private String currentPlayer;
-    private HashMap<String, DrawnHand> handsByPlayer;
+    private DrawnHand currentHand;
 
     private JPanel header;
     private JPanel center;
@@ -63,31 +62,18 @@ public class GameDisplay extends JPanel {
         initializeGUIComponents();
     }
 
-    /**
-     * Switch the current player. Should be called on new turns.
-     * @param player the name of the current player
-     */
-    public void switchHand(String player) {
-        currentPlayer = player;
-        currentPlayerLabel.setText(currentPlayer);
-
-        hand.removeAll();
-        DrawnHand currentHand = handsByPlayer.get(currentPlayer);
-        currentHand.updateCards();
-        hand.add(currentHand);
+    public void updateView(GameDisplayData data) {
+        currentPlayerLabel.setText(data.getCurrentPlayer());
+        updateHand(data.getCards());
     }
 
-    /**
-     * Set the hands of each player. Should be called when this object is first created.
-     * @param handsByPlayer the hands of each player
-     */
-    public void setHandsByPlayer(HashMap<String, DrawnHand> handsByPlayer) {
-        for (String player : handsByPlayer.keySet()) {
-            DrawnHand hand = handsByPlayer.get(player);
-            hand.addMouseListener(cardDelegator);
+    private void updateHand(ArrayList<CardDisplayData> cards) {
+        int i = 0;
+        for (i = 0; i < cards.size(); i++) {
+            CardDisplayData card = cards.get(i);
+            currentHand.setCard(i, card.getSuit(), card.getRank());
         }
-
-        this.handsByPlayer = handsByPlayer;
+        currentHand.hideCards(i);
     }
 
     /**
@@ -110,7 +96,7 @@ public class GameDisplay extends JPanel {
      */
     private void initializeHeader() {
         header = new JPanel();
-        currentPlayerLabel = new JLabel(currentPlayer);
+        currentPlayerLabel = new JLabel();
         header.add(currentPlayerLabel);
     }
 
@@ -247,10 +233,6 @@ public class GameDisplay extends JPanel {
         cards.add(new DrawnCard(Suit.HEART, Rank.THREE));
 
         hand.addCards(cards);
-        gameDisplay.setHandsByPlayer(new HashMap<String, DrawnHand>() {{
-            put("Player 1", hand);
-        }});
-        gameDisplay.switchHand("Player 1");
 
         frame.add(gameWindow.getPanel());
         frame.pack();

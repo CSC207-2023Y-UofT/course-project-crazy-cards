@@ -2,7 +2,8 @@ package ui.components;
 
 import javax.swing.JPanel;
 
-import ui.enums.Suit;
+import enums.Rank;
+import enums.Suit;
 import ui.windows.CardDelegator;
 
 import javax.swing.BorderFactory;
@@ -19,6 +20,7 @@ import java.util.List;
 public class DrawnHand extends JPanel {
     private JLayeredPane cardPane;
 
+    private int visible;
     private List<DrawnCard> drawnCards;
 
     public DrawnHand(List<DrawnCard> drawnCards) {
@@ -73,6 +75,25 @@ public class DrawnHand extends JPanel {
 
         cardPane.setBorder(BorderFactory.createLineBorder(Color.RED, 8));
         add(cardPane);
+    }
+
+    public void setCard(int index, Suit suit, Rank rank) {
+        DrawnCard card = drawnCards.get(index);
+        card.setSuit(suit);
+        card.setRank(rank);
+        card.setVisible(true);
+        // TODO: justDrawn implementation
+    }
+
+    /**
+     * Hide all cards after the given index, inclusive.
+     * @param index The index of the card to start hiding from.
+     */
+    public void hideCards(int index) {
+        for (int i = index; i < drawnCards.size(); i++) {
+            DrawnCard card = drawnCards.get(i);
+            card.setVisible(false);
+        }
     }
     
     public void updateCards() {
