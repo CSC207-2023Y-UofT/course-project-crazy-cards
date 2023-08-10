@@ -1,26 +1,18 @@
 package ui.windows;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import enums.Rank;
-import enums.Suit;
-import ui.components.DrawnCard;
 import ui.components.DrawnHand;
-import ui.factories.GameWindowFactory;
 
 /**
  * Renderer for a game window.
@@ -218,42 +210,12 @@ public class GameDisplay extends JPanel {
         buttons.add(playButton);
         buttons.add(drawButton);
         buttons.add(skipButton);
-    }   
+    }
 
     /**
      * Initialize the footer of this window.
      */
     private void initializeFooter() {
         footer = new JPanel();
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(800, 600));
-
-        GameWindowFactory factory = new GameWindowFactory();
-        Window gameWindow = factory.createWindow();
-
-        GameDisplay gameDisplay = (GameDisplay)gameWindow.getPanel();
-        DrawnHand hand = new DrawnHand(new ArrayList<>());
-
-        ArrayList<DrawnCard> cards = new ArrayList<DrawnCard>();
-        cards.add(new DrawnCard(Suit.CLUB, Rank.ACE));
-        cards.add(new DrawnCard(Suit.CLUB, Rank.TWO));
-        cards.add(new DrawnCard(Suit.CLUB, Rank.THREE));
-        cards.add(new DrawnCard(Suit.HEART, Rank.ACE));
-        cards.add(new DrawnCard(Suit.HEART, Rank.TWO));
-        cards.add(new DrawnCard(Suit.HEART, Rank.THREE));
-
-        hand.addCards(cards);
-        gameDisplay.setHandsByPlayer(new HashMap<String, DrawnHand>() {{
-            put("Player 1", hand);
-        }});
-        gameDisplay.switchHand("Player 1");
-
-        frame.add(gameWindow.getPanel());
-        frame.pack();
-        frame.setVisible(true);
     }
 }

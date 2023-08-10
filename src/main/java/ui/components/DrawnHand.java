@@ -2,11 +2,7 @@ package ui.components;
 
 import javax.swing.JPanel;
 
-import enums.Suit;
-import ui.windows.CardDelegator;
-
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 
 import java.awt.BorderLayout;
@@ -33,15 +29,15 @@ public class DrawnHand extends JPanel {
             }
 
             public void componentMoved(java.awt.event.ComponentEvent e) {
-                ; // Do nothing
+                // Do nothing
             }
 
             public void componentShown(java.awt.event.ComponentEvent e) {
-                ; // Do nothing
+                // Do nothing
             }
 
             public void componentHidden(java.awt.event.ComponentEvent e) {
-                ; // Do nothing
+                // Do nothing
             }
         });
     }
@@ -69,7 +65,7 @@ public class DrawnHand extends JPanel {
         setLayout(new BorderLayout());
 
         cardPane = new JLayeredPane();
-        cardPane.setPreferredSize(new Dimension(300, 50));
+        cardPane.setPreferredSize(new Dimension(300, 100));
 
         cardPane.setBorder(BorderFactory.createLineBorder(Color.RED, 8));
         add(cardPane);
@@ -78,7 +74,7 @@ public class DrawnHand extends JPanel {
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
-        double offset = width / drawnCards.size();
+        double offset = (double) width / drawnCards.size();
 
         cardPane.removeAll();
 
@@ -86,7 +82,7 @@ public class DrawnHand extends JPanel {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 
-            card.setBounds((int)(i * offset), height / 2, 30, 50);
+            card.setBounds((int)(i * offset + 28), (height / 2) -30, 50, 65);
         }
     }
 }
