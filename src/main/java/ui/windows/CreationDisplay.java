@@ -1,7 +1,11 @@
 package ui.windows;
 
+import controllers.GameBridge;
 import controllers.GameCreationController;
 import controllers.PlayerCreationInformation;
+import controllers.PlayerGameController;
+import enums.WindowName;
+import use_cases.PlayerGameInputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +20,8 @@ public class CreationDisplay extends JPanel implements ActionListener {
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
-    private final ICardLayoutManager layoutManager;
+    private GameController gameController;
+    private CardLayoutManager layoutManager;
     private final GameCreationController controller;
 private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
 private final ArrayList<JTextField> textFieldList = new ArrayList<>();
@@ -24,13 +29,21 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
     /**
      * Construct a new CreationDisplay.
      */
-    public CreationDisplay(ICardLayoutManager layoutManager, GameCreationController controller) {
+    public CreationDisplay(GameCreationController controller) {
 
         this.controller = controller;
-        this.layoutManager = layoutManager;
         initializeGUIComponents();
     }
+    public void setLayoutManager(CardLayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
+    }
+    public GameCreationController getController() {
+        return controller;
+    }
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
     /**
      * Initialize the GUI components for the Game Creation display.
      */
@@ -138,9 +151,14 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
             }
         }
         boolean gameCreated = controller.createGameResponse(controllerInput);
+        PlayerGameInputBoundary playerGameInteractor = controller.getPlayerGameInteractor();
+        GameBridge bridge = new PlayerGameController(playerGameInteractor);
+        gameController.setBridge(bridge);
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
-            layoutManager.setPane("Game");
+            gameController.startGame();
+            layoutManager.setPane(WindowName.GAME);
+
         } else {
             JLabel message = new JLabel("Please enter valid input. That is, atleast 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);

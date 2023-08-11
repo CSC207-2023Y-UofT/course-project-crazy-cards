@@ -1,12 +1,11 @@
 package ui.components;
 
-import java.awt.*;
-import java.util.HashMap;
-
-import javax.swing.*;
-
 import enums.Rank;
 import enums.Suit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
 
 public class DrawnCard extends JPanel {
     private static final int HIGHLIGHT_OFFSET = 15;
@@ -100,7 +99,7 @@ public class DrawnCard extends JPanel {
         Font font = new Font("monospaced", Font.BOLD, 37);
 
         // Creating objects
-        JLayeredPane pane = new JLayeredPane();
+        JPanel pane = new JPanel();
         pane.setPreferredSize(dimension);
         String valueString = rankToString.get(this.rank);
         JLabel value = new JLabel(valueString);
@@ -128,7 +127,7 @@ public class DrawnCard extends JPanel {
             break;
         }
         pane.add(suits, back);
-        pane.add(value, front);
+        //pane.add(value, front);
         add(pane);
     }
 

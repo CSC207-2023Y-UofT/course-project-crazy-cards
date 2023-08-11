@@ -1,13 +1,10 @@
 package ui.components;
 
-import javax.swing.JPanel;
+import enums.Rank;
+import enums.Suit;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLayeredPane;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseListener;
 import java.util.List;

@@ -17,6 +17,10 @@ public class GameSkipDelegator implements ActionListener {
         this.controller = controller;
     }
 
+    public GameController getController() {
+        return controller;
+    }
+
     /**
      * Fires when the user requests to skip their turn.
      */

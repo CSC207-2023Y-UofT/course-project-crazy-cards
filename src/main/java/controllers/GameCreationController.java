@@ -1,8 +1,6 @@
 package controllers;
 
-import use_cases.GameCreationInputBoundary;
-import use_cases.GameCreationRequestModel;
-import use_cases.GameCreationResponseModel;
+import use_cases.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +17,10 @@ public class GameCreationController {
      */
     public GameCreationController(GameCreationInputBoundary inputBoundary) {
         this.inputBoundary = inputBoundary;
+    }
+
+    public GameCreationInteractor getInteractor() {
+        return (GameCreationInteractor) this.inputBoundary;
     }
 
     /**
@@ -38,5 +40,14 @@ public class GameCreationController {
         GameCreationRequestModel request = new GameCreationRequestModel(requestInfo);
         GameCreationResponseModel response = inputBoundary.createGameResponse(request);
         return response.getGameCreated();
+    }
+
+    /**
+     * Temporary method
+     * @return a playergameinteractor
+     */
+    public PlayerGameInteractor getPlayerGameInteractor() {
+        GameCreationInteractor interactor = (GameCreationInteractor) inputBoundary;
+        return interactor.getPlayerGameInteractor();
     }
 }

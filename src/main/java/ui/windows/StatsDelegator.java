@@ -19,6 +19,10 @@ public class StatsDelegator implements ActionListener {
         this.controller = controller;
     }
 
+    public StatsController getController() {
+        return controller;
+    }
+
     /**
      * Handle the user input from a JButton in the StatsDisplay. 
      * Fires when the user clicks the "Search" button.

@@ -1,5 +1,7 @@
 package ui.windows;
 
+import enums.WindowName;
+
 import javax.swing.*;
 
 /**
@@ -17,11 +19,12 @@ public class CreationWindow implements Window{
     }
     /**
      * Getter method for the identifier of a CreationWindow.
+     *
      * @return The identifier of the Window, as a String.
      */
     @Override
-    public String getIdentifier() {
-        return "Creation";
+    public WindowName getIdentifier() {
+        return WindowName.CREATOR;
     }
 
     /**
@@ -31,5 +34,13 @@ public class CreationWindow implements Window{
     @Override
     public JPanel getPanel() {
         return this.creationDisplay;
+    }
+
+    /**
+     * @param navigator
+     */
+    @Override
+    public void setNavigator(PaneDelegator navigator) {
+
     }
 }

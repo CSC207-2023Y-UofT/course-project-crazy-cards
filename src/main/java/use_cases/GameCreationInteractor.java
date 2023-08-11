@@ -12,15 +12,18 @@ import java.util.Collections;
  */
 public class GameCreationInteractor implements GameCreationInputBoundary {
     static final int NUMBERCARDS = 5;
-    private final DataAccess dataAccess;
+    private DataAccess dataAccess;
     private Game createdGame;
     private GameState newGameState;
+    private PlayerGameInteractor playerGameInteractor;
 
     /**
      * Initialize a GameCreationInteractor given a particular data access object.
-     * @param dataAccess The DataAccess object providing interaction with the database.
      */
-    public GameCreationInteractor(DataAccess dataAccess) {
+    public GameCreationInteractor() {
+    }
+
+    public void setDataAccess(DataAccess dataAccess) {
         this.dataAccess = dataAccess;
     }
 
@@ -39,8 +42,17 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         ArrayList<Player> players = buildPlayers(request, deck);
         Game game = buildGame(players, deck);
         createdGame = game;
+        // Code below to be changed
+        playerGameInteractor = new PlayerGameInteractor(createdGame, newGameState);
+        // Code above to be changed (for CA purposes)
         return new GameCreationResponseModel(true);
     }
+
+    /**
+     * Temporary method
+     * @return a PlayerGameInteractor
+     */
+    public PlayerGameInteractor getPlayerGameInteractor() { return playerGameInteractor;}
 
     /**
      * Get the Game this interactor has created.
@@ -163,6 +175,7 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         GameState gameState = new GameState(game);
         game.addObserver(gameState);
         newGameState = gameState;
+        game.notifyGameObservers();
         return game;
     }
 

@@ -17,6 +17,10 @@ public class GamePlayDelegator implements ActionListener {
         this.controller = controller;
     }
 
+    public GameController getController() {
+        return controller;
+    }
+
     /**
      * Fires when the user requests to play a card.
      */

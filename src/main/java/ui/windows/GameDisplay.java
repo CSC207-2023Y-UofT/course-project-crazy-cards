@@ -1,18 +1,13 @@
 package ui.windows;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import java.util.HashMap;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-
+import enums.Rank;
+import enums.Suit;
+import ui.components.DrawnCard;
 import ui.components.DrawnHand;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Renderer for a game window.
@@ -39,6 +34,7 @@ public class GameDisplay extends JPanel {
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
+    private DrawnCard currentCard;
 
     /**
      * Construct a GameDisplay with the given delegators.
@@ -51,9 +47,20 @@ public class GameDisplay extends JPanel {
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
 
+        ArrayList<DrawnCard> cards = new ArrayList<>(8);
+
+        for (int i = 0; i < 8; i++) {
+            cards.add(new DrawnCard(Suit.HEART, Rank.ACE));
+        }
+
+        currentHand = new DrawnHand(cards);
+
         initializeGUIComponents();
     }
 
+    public GameController getController() {
+        return this.skipDelegator.getController();
+    }
     public void updateView(GameDisplayData data) {
         currentPlayerLabel.setText(data.getCurrentPlayer());
         updateHand(data.getCards());
@@ -146,8 +153,8 @@ public class GameDisplay extends JPanel {
         handConstraints.weightx = 0.8;
         handConstraints.weighty = 1;
         hand = new JPanel();
-        hand.setLayout(new BorderLayout());
-        bottom.add(hand, handConstraints);
+        // hand.setLayout(new BorderLayout());
+        bottom.add(currentHand, handConstraints);
 
         // The buttons for playing, drawing, and skipping
         GridBagConstraints buttonsConstraints = new GridBagConstraints();
@@ -190,8 +197,8 @@ public class GameDisplay extends JPanel {
         skipButton = new JButton("Skip");
 
         playButton.addActionListener(playDelegator);
-        drawButton.addActionListener(playDelegator);
-        skipButton.addActionListener(playDelegator);
+        drawButton.addActionListener(drawDelegator);
+        skipButton.addActionListener(skipDelegator);
 
         buttons.add(playButton);
         buttons.add(drawButton);

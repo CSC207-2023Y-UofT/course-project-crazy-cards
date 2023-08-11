@@ -1,13 +1,9 @@
 package ui.windows;
 
-import javax.swing.*;
-
-import javax.swing.border.EmptyBorder;
-
 import enums.WindowName;
 import ui.components.NavigationButton;
 
-import java.awt.*;
+import javax.swing.*;
 
 /**
  * A JPanel subclass representing the game's statistics window.
@@ -31,6 +27,10 @@ public class StatsDisplay extends JPanel {
         this.delegator = delegator;
 
         initializeGUIComponents();
+    }
+
+    public StatsDelegator getDelegator() {
+        return delegator;
     }
 
     public void setNavigator(PaneDelegator delegator) {
@@ -83,23 +83,5 @@ public class StatsDisplay extends JPanel {
         nameLabel.setText(data.getName());
         gamesWonLabel.setText("Games Won: " + data.getGamesWon());
         gamesLostLabel.setText("Games Lost: " + data.getGamesLost());
-    }
-
-    /**
-     * Tests creation of a Stats window.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Stats Display");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
-
-        StatsController controller = new StatsController();
-        StatsDelegator delegator = new StatsDelegator(controller);
-        StatsDisplay display = new StatsDisplay(delegator);
-        controller.setDisplay(display);
-
-        display.setOpaque(true);
-        frame.setContentPane(display);
-        frame.setVisible(true);
     }
 }
