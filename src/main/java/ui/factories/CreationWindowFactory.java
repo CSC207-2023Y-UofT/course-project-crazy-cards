@@ -1,8 +1,8 @@
 package ui.factories;
 
 import controllers.GameCreationController;
-import ui.windows.CreationDisplay;
-import ui.windows.CreationWindow;
+import ui.windows.creation.CreationDisplay;
+import ui.windows.creation.CreationWindow;
 import ui.windows.Window;
 import use_cases.GameCreationInteractor;
 

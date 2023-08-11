@@ -3,6 +3,7 @@ package ui.windows;
 import javax.swing.JPanel;
 
 import enums.WindowName;
+import ui.windows.layout_managers.PaneDelegator;
 
 /**
  * Interface for windows in a CardLayout.

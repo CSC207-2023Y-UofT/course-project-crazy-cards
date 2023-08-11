@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.game;
 
 import enums.Rank;
 import enums.Suit;
@@ -34,7 +34,6 @@ public class GameDisplay extends JPanel {
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
-    private DrawnCard currentCard;
 
     /**
      * Construct a GameDisplay with the given delegators.
@@ -47,20 +46,14 @@ public class GameDisplay extends JPanel {
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
 
-        ArrayList<DrawnCard> cards = new ArrayList<>(8);
-
-        for (int i = 0; i < 8; i++) {
-            cards.add(new DrawnCard(Suit.HEART, Rank.ACE));
+        currentHand = new DrawnHand(new ArrayList<>());
+        for(int i = 0; i < 8; i++){
+            currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
-
-        currentHand = new DrawnHand(cards);
 
         initializeGUIComponents();
     }
 
-    public GameController getController() {
-        return this.skipDelegator.getController();
-    }
     public void updateView(GameDisplayData data) {
         currentPlayerLabel.setText(data.getCurrentPlayer());
         updateHand(data.getCards());
@@ -73,6 +66,7 @@ public class GameDisplay extends JPanel {
             currentHand.setCard(i, card.getSuit(), card.getRank());
         }
         currentHand.hideCards(i);
+        initializeFooter();
     }
 
     /**
@@ -154,8 +148,7 @@ public class GameDisplay extends JPanel {
         handConstraints.weighty = 1;
         hand = new JPanel();
         hand.setLayout(new BorderLayout());
-        hand.add(currentHand);
-        bottom.add(hand, handConstraints);
+        bottom.add(currentHand, handConstraints);
 
         // The buttons for playing, drawing, and skipping
         GridBagConstraints buttonsConstraints = new GridBagConstraints();
@@ -211,5 +204,9 @@ public class GameDisplay extends JPanel {
      */
     private void initializeFooter() {
         footer = new JPanel();
+    }
+
+    public GameController getController() {
+        return this.playDelegator.getController();
     }
 }

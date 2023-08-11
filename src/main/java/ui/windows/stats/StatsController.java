@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.stats;
 
 import use_cases.DataAccess;
 import use_cases.PlayerInformation;

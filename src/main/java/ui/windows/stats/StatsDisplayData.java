@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.stats;
 
 /**
  * Stores data to be displayed by a StatsDisplay.

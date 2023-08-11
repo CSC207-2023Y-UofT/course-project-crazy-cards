@@ -1,6 +1,7 @@
-package ui.windows;
+package ui.windows.layout_managers;
 
 import enums.WindowName;
+import ui.windows.Window;
 
 /**
  * The interface used to implement functions within the CardLayoutManager class, which will be used

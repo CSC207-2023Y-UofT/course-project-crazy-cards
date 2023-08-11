@@ -1,13 +1,15 @@
-package ui.windows;
+package ui.windows.creation;
 
 import enums.WindowName;
+import ui.windows.layout_managers.PaneDelegator;
+import ui.windows.Window;
 
 import javax.swing.*;
 
 /**
  * A window containing the display for game creation and identifier for what window it is.
  */
-public class CreationWindow implements Window{
+public class CreationWindow implements Window {
     private final CreationDisplay creationDisplay;
 
     /**

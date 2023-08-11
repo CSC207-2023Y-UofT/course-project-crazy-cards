@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.game;
 
 /**
  * Wrapper class for user interaction delegators in a game.

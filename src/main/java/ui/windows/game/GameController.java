@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.game;
 
 import controllers.GameBridge;
 import enums.Rank;

@@ -1,19 +1,21 @@
-package ui.windows;
+package ui.windows.rules;
 
 import javax.swing.JPanel;
 
 import enums.WindowName;
+import ui.windows.layout_managers.PaneDelegator;
+import ui.windows.Window;
 
-public class MenuWindow implements Window {
-    private MenuDisplay display;
+public class RulesWindow implements Window {
+    private RulesDisplay display;
 
-    public MenuWindow(MenuDisplay display) {
+    public RulesWindow(RulesDisplay display) {
         this.display = display;
     }
 
     @Override
     public WindowName getIdentifier() {
-        return WindowName.MENU;
+        return WindowName.RULES;
     }
 
     @Override

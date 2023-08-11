@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

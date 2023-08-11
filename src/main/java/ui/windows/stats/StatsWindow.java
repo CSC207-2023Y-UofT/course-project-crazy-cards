@@ -1,8 +1,10 @@
-package ui.windows;
+package ui.windows.stats;
 
 import javax.swing.JPanel;
 
 import enums.WindowName;
+import ui.windows.layout_managers.PaneDelegator;
+import ui.windows.Window;
 
 /**
  * Wrapper class for StatsRenderer used in a CardLayout.

@@ -1,9 +1,9 @@
 package ui.factories;
 
-import ui.windows.StatsController;
-import ui.windows.StatsDelegator;
-import ui.windows.StatsDisplay;
-import ui.windows.StatsWindow;
+import ui.windows.stats.StatsController;
+import ui.windows.stats.StatsDelegator;
+import ui.windows.stats.StatsDisplay;
+import ui.windows.stats.StatsWindow;
 import ui.windows.Window;
 
 public class StatsWindowFactory implements WindowFactory {
