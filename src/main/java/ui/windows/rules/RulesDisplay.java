@@ -16,11 +16,9 @@ public class RulesDisplay extends JPanel {
     private NavigationButton backButton;
     private JLabel titleLabel;
     private JLabel bodyLabel;
-
     public RulesDisplay() {
         initializeGUIComponents();
     }
-
     public void setNavigator(PaneDelegator navigator) {
         backButton.addActionListener(navigator);
     }
@@ -52,14 +50,5 @@ public class RulesDisplay extends JPanel {
         setLayout(new BorderLayout());
         add(textPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.PAGE_END);
-    }
-
-    public static void main(String[] args) {
-        RulesDisplay display = new RulesDisplay();
-        JFrame frame = new JFrame("Rules Page");
-        frame.setSize(600, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(display);
-        frame.setVisible(true);
     }
 }

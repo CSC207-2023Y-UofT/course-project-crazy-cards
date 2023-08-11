@@ -1,8 +1,8 @@
 package ui.windows.menu;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import enums.WindowName;
 import ui.components.NavigationButton;
@@ -24,7 +24,25 @@ public class MenuDisplay extends JPanel {
     }
 
     private void initializeGUIComponents() {
+        JPanel main = new JPanel();
         JPanel buttonPanel = new JPanel();
+        JLayeredPane logo = new JLayeredPane();
+        JLabel title = new JLabel("Crazy Cards!");
+        title.setFont(new Font("serif", Font.PLAIN, 100));
+        main.add(title);
+
+        JLabel c1 = new JLabel("C");
+        c1.setFont(new Font("serif", Font.PLAIN, 350));
+        c1.setForeground(new Color(180, 20, 20));
+        c1.setBounds(250, 10, 300, 300);
+
+        JLabel c2 = new JLabel("C");
+        c2.setFont(new Font("serif", Font.PLAIN, 350));
+        c2.setForeground(Color.BLACK);
+        c2.setBounds(280, 30, 300, 300);
+
+        logo.add(c1, new Integer(1));
+        logo.add(c2, new Integer(2));
 
         playButton = new NavigationButton(WindowName.CREATOR, "Play");
         statsButton = new NavigationButton(WindowName.STATS, "Stats");
@@ -35,6 +53,8 @@ public class MenuDisplay extends JPanel {
         buttonPanel.add(rulesButton);
 
         setLayout(new BorderLayout());
-        add(buttonPanel);
+        add(main, BorderLayout.NORTH);
+        add(logo, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 }
