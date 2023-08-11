@@ -153,8 +153,9 @@ public class GameDisplay extends JPanel {
         handConstraints.weightx = 0.8;
         handConstraints.weighty = 1;
         hand = new JPanel();
-        // hand.setLayout(new BorderLayout());
-        bottom.add(currentHand, handConstraints);
+        hand.setLayout(new BorderLayout());
+        hand.add(currentHand);
+        bottom.add(hand, handConstraints);
 
         // The buttons for playing, drawing, and skipping
         GridBagConstraints buttonsConstraints = new GridBagConstraints();

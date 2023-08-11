@@ -127,7 +127,7 @@ public class DrawnCard extends JPanel {
             break;
         }
         pane.add(suits, back);
-        //pane.add(value, front);
+        pane.add(value, front);
         add(pane);
     }
 

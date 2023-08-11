@@ -1,9 +1,6 @@
 import controllers.GameBridge;
 import controllers.GameCreationController;
 import database.CSVDatabase;
-import entities.*;
-import enums.Rank;
-import enums.Suit;
 import enums.WindowName;
 import ui.factories.*;
 import ui.windows.*;
@@ -12,23 +9,10 @@ import use_cases.GameCreationInteractor;
 import use_cases.PlayerGameInteractor;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        Deck deck = new StandardDeck();
-        ArrayList<Player> players = new ArrayList<>();
-        ArrayList<Card> cards1 = new ArrayList<>();
-        cards1.add(new Card(Suit.CLUB, Rank.ACE));
-        cards1.add(new Card(Suit.CLUB, Rank.TWO));
-        players.add(new HumanPlayer("Player 1", new Hand(cards1), 0, 0));
 
-        ArrayList<Card> cards2 = new ArrayList<>();
-        cards2.add(new Card(Suit.HEART, Rank.THREE));
-        cards2.add(new Card(Suit.HEART, Rank.FOUR));
-        players.add(new HumanPlayer("Player 2", new Hand(cards2), 0, 0));
-
-        Game game = new Game(deck, players);
         
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
