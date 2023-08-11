@@ -2,9 +2,14 @@ package ui.components;
 
 import enums.Rank;
 import enums.Suit;
+import javax.swing.JPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLayeredPane;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -59,7 +64,7 @@ public class DrawnHand extends JPanel {
         drawnCards.remove(card);
     }
 
-    private void initializeGUIComponents() {;
+    private void initializeGUIComponents() {
         setLayout(new BorderLayout());
 
         cardPane = new JLayeredPane();
