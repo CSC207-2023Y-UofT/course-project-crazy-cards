@@ -41,7 +41,7 @@ public class GameDisplay extends JPanel{
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
 
-        currentHand = new DrawnHand(new ArrayList<>());
+        currentHand = new DrawnHand(new ArrayList<>(), cardDelegator);
         for(int i = 0; i < 8; i++){
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
