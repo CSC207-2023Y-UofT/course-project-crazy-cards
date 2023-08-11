@@ -21,11 +21,9 @@ public class DrawnHand extends JPanel {
 
     private int visible;
     private List<DrawnCard> drawnCards;
-    private CardDelegator delegator;
 
-    public DrawnHand(List<DrawnCard> drawnCards, CardDelegator delegator) {
+    public DrawnHand(List<DrawnCard> drawnCards) {
         this.drawnCards = drawnCards;
-        this.delegator = delegator;
 
         initializeGUIComponents();
 
