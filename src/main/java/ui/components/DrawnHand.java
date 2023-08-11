@@ -2,6 +2,8 @@ package ui.components;
 
 import enums.Rank;
 import enums.Suit;
+import ui.windows.game.CardDelegator;
+
 import javax.swing.JPanel;
 
 import javax.swing.BorderFactory;
@@ -19,9 +21,11 @@ public class DrawnHand extends JPanel {
 
     private int visible;
     private List<DrawnCard> drawnCards;
+    private CardDelegator delegator;
 
-    public DrawnHand(List<DrawnCard> drawnCards) {
+    public DrawnHand(List<DrawnCard> drawnCards, CardDelegator delegator) {
         this.drawnCards = drawnCards;
+        this.delegator = delegator;
 
         initializeGUIComponents();
 
