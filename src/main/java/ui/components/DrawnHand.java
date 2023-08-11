@@ -82,7 +82,6 @@ public class DrawnHand extends JPanel {
         card.setRankLabel(rank);
         card.setVisible(true);
         // TODO: justDrawn implementation
-        updateCards();
     }
 
     /**
@@ -90,6 +89,7 @@ public class DrawnHand extends JPanel {
      * @param index The index of the card to start hiding from.
      */
     public void hideCards(int index) {
+        visible = index;
         for (int i = index; i < drawnCards.size(); i++) {
             DrawnCard card = drawnCards.get(i);
             card.setVisible(false);
@@ -99,11 +99,11 @@ public class DrawnHand extends JPanel {
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
-        double offset = (double) width / drawnCards.size();
+        double offset = (double) width / this.visible;
 
         cardPane.removeAll();
 
-        for (int i = 0; i < drawnCards.size(); i++) {
+        for (int i = 0; i < this.visible; i++) {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 

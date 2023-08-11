@@ -101,7 +101,7 @@ public class DrawnCard extends JPanel {
         Font font = new Font("monospaced", Font.BOLD, 37);
 
         // Creating objects
-        JPanel pane = new JPanel();
+        JLayeredPane pane = new JLayeredPane();
         pane.setPreferredSize(dimension);
         String rankString = rankToString.get(this.rank);
         rankLabel = new JLabel(rankString);
@@ -136,7 +136,7 @@ public class DrawnCard extends JPanel {
     public void setSuitLabel(Suit suit) {
         Color red = new Color(180, 20, 20);
         Color black = Color.BLACK;
-        switch (this.suit) {
+        switch (suit) {
             case CLUB: suitLabel.setText("<html>&#9827;</html>");
                 suitLabel.setForeground(black);
                 rankLabel.setForeground(red);
