@@ -101,7 +101,7 @@ public class DrawnCard extends JPanel {
         Font font = new Font("monospaced", Font.BOLD, 37);
 
         // Creating objects
-        JPanel pane = new JPanel();
+        JLayeredPane pane = new JLayeredPane();
         pane.setPreferredSize(dimension);
         String rankString = rankToString.get(this.rank);
         rankLabel = new JLabel(rankString);
