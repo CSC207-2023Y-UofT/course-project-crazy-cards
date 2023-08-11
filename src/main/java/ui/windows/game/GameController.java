@@ -39,6 +39,10 @@ public class GameController {
         this.display = display;
     }
 
+    public void setSelectedOwner(String owner) {
+        this.selectedOwner = owner;
+    }
+
     /**
      * Sets the user-selected card before it is played.
      * @param suit the suit of the card

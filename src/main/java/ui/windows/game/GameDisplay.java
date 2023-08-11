@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Renderer for a game window.
  */
-public class GameDisplay extends JPanel {
+public class GameDisplay extends JPanel{
     private GamePlayDelegator playDelegator;
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
@@ -67,7 +67,7 @@ public class GameDisplay extends JPanel {
             currentHand.setCard(i, card.getSuit(), card.getRank());
         }
         currentHand.hideCards(i);
-        initializeFooter();
+        currentHand.updateCards();
     }
 
     /**
@@ -210,4 +210,6 @@ public class GameDisplay extends JPanel {
     public GameController getController() {
         return this.playDelegator.getController();
     }
+
 }
+
