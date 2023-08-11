@@ -91,6 +91,20 @@ class PlayerGameInteractorTest {
     }
 
     /**
+     * Give the given player an invalid Hand
+     */
+    private void giveInvalidHand(Player player) {
+        Hand newHand = new Hand(new ArrayList<>());
+        while (newHand.getCards().size() < 2) {
+            Card newCard = game.getGameDeck().removeCardFromDeck();
+            if(!(game.isValidCard(newCard))) {
+                newHand.addCard(newCard);
+            }
+        }
+        player.setHand(newHand);
+    }
+
+    /**
      * Test createResponse() when given the input to play a Card and the Card is valid.
      */
     @Test
@@ -111,16 +125,12 @@ class PlayerGameInteractorTest {
     @Test
     public void testCreateResponsePlayInvalidCard() {
         // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
-        Hand newHand = new Hand(new ArrayList<>());
-        Card bogus1 = new Card("Test", "17");
-        Card bogus2 = new Card("Test", "18");
-        newHand.addCard(bogus1);
-        newHand.addCard(bogus2);
-        p1.setHand(newHand);
-        Suit chosenSuit = bogus1.getSuit();
-        Rank chosenValue = bogus1.getRank();
-        // Have p1 try to play bogus1.
-        PlayerGameRequestModel pgrm = new PlayerGameRequestModel("sol", chosenSuit, chosenValue, TurnAction.PLAY);
+        giveInvalidHand(p1);
+        Card bogus = p1.getCards().get(0);
+        Suit bogusSuit = bogus.getSuit();
+        Rank bogusRank = bogus.getRank();
+        // Have p1 try to play bogus card.
+        PlayerGameRequestModel pgrm = new PlayerGameRequestModel("sol", bogusSuit, bogusRank, TurnAction.PLAY);
         interactor.createResponse(pgrm);
         // Assert the turn has not changed, no winner, current Card is the same, none of the player's cards have changed.
         assertEquals(p1, gameState.getCurrentPlayer());
@@ -166,12 +176,7 @@ class PlayerGameInteractorTest {
     public void testCreateResponseSkipTurnValid () {
         // Make it so that p1 has to skip (has picked up and no valid cards)
         game.setCurrentTurnHasPickedUpTrue();
-        Hand newHand = new Hand(new ArrayList<>());
-        Card bogus1 = new Card("Test", "17");
-        Card bogus2 = new Card("Test", "18");
-        newHand.addCard(bogus1);
-        newHand.addCard(bogus2);
-        p1.setHand(newHand);
+        giveInvalidHand(p1);
         // p1 has no valid cards, and cannot pick up, now request to skip
         interactor.createResponse(skipReq);
         // Assert that p1 has had no change in Card number, and that it is now p3s turn
@@ -200,12 +205,7 @@ class PlayerGameInteractorTest {
     @Test
     public void testCreateResponsePickUpCardValid () {
         // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
-        Hand newHand = new Hand(new ArrayList<>());
-        Card bogus1 = new Card("Test", "17");
-        Card bogus2 = new Card("Test", "18");
-        newHand.addCard(bogus1);
-        newHand.addCard(bogus2);
-        p1.setHand(newHand);
+        giveInvalidHand(p1);
         // Have p1 pick up a Card. Only thing that should've changed is p1's number of Cards.
         interactor.createResponse(pickUpReq);
         assertEquals(p1, gameState.getCurrentPlayer());
