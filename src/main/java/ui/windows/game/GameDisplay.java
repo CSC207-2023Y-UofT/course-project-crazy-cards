@@ -63,6 +63,7 @@ public class GameDisplay extends JPanel {
         int i = 0;
         for (i = 0; i < cards.size(); i++) {
             CardDisplayData card = cards.get(i);
+
             currentHand.setCard(i, card.getSuit(), card.getRank());
         }
         currentHand.hideCards(i);
