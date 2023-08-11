@@ -17,20 +17,15 @@ public class GameDisplay extends JPanel {
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
     private CardDelegator cardDelegator;
-
     private DrawnHand currentHand;
-
     private JPanel header;
     private JPanel center;
     private JPanel footer;
-
     private JLabel currentPlayerLabel;
-
     private JTable scores;
     private JPanel gameBoard;
     private JPanel hand;   
     private JPanel buttons;
-
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
@@ -190,6 +185,16 @@ public class GameDisplay extends JPanel {
         playButton = new JButton("Play");
         drawButton = new JButton("Draw");
         skipButton = new JButton("Skip");
+
+        Dimension dim = new Dimension(80, 40);
+        Font font = new Font("serif", Font.BOLD, 20);
+
+        playButton.setPreferredSize(dim);
+        playButton.setFont(font);
+        drawButton.setPreferredSize(dim);
+        drawButton.setFont(font);
+        skipButton.setPreferredSize(dim);
+        skipButton.setFont(font);
 
         playButton.addActionListener(playDelegator);
         drawButton.addActionListener(drawDelegator);
