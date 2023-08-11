@@ -41,12 +41,17 @@ public class GameDisplay extends JPanel{
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
 
-        currentHand = new DrawnHand(new ArrayList<>(), cardDelegator);
+        currentHand = new DrawnHand(new ArrayList<>());
         for(int i = 0; i < 8; i++){
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
+        currentHand.addMouseListener(cardDelegator);
 
         initializeGUIComponents();
+    }
+
+    public String getCurrentPlayer() {
+        return this.currentPlayerLabel.getText();
     }
 
     public void updateView(GameDisplayData data) {
