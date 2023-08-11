@@ -73,7 +73,8 @@ public class DrawnHand extends JPanel {
     public void setCard(int index, Suit suit, Rank rank) {
         DrawnCard card = drawnCards.get(index);
        //  DrawnCard newCard = new DrawnCard(suit, rank);
-
+        card.setSuit(suit);
+        card.setRank(rank);
         card.setSuitLabel(suit);
         card.setRankLabel(rank);
         card.setVisible(true);
