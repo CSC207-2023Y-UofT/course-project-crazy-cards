@@ -1,6 +1,8 @@
-package ui.windows;
+package ui.windows.layout_managers;
 
 import enums.WindowName;
+import ui.windows.Window;
+import ui.windows.layout_managers.ICardLayoutManager;
 
 import javax.swing.*;
 import java.awt.*;

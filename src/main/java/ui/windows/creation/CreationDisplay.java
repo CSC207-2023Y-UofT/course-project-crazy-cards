@@ -1,10 +1,12 @@
-package ui.windows;
+package ui.windows.creation;
 
 import controllers.GameBridge;
 import controllers.GameCreationController;
 import controllers.PlayerCreationInformation;
 import controllers.PlayerGameController;
 import enums.WindowName;
+import ui.windows.layout_managers.CardLayoutManager;
+import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
 
 import javax.swing.*;

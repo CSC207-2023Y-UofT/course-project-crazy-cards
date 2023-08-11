@@ -1,4 +1,6 @@
-package ui.windows;
+package ui.windows.stats;
+
+import ui.windows.stats.StatsController;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

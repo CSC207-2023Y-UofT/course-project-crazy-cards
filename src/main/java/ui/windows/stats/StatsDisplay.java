@@ -1,7 +1,8 @@
-package ui.windows;
+package ui.windows.stats;
 
 import enums.WindowName;
 import ui.components.NavigationButton;
+import ui.windows.layout_managers.PaneDelegator;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

@@ -1,4 +1,4 @@
-package ui.windows;
+package ui.windows.menu;
 
 import java.awt.*;
 
@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import enums.WindowName;
 import ui.components.NavigationButton;
+import ui.windows.layout_managers.PaneDelegator;
 
 public class MenuDisplay extends JPanel {
     private NavigationButton playButton;
