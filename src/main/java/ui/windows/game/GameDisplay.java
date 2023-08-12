@@ -25,7 +25,7 @@ public class GameDisplay extends JPanel{
     private JLabel currentPlayerLabel;
     private JTable scores;
     private JPanel gameBoard;
-    private JPanel hand;   
+    private JPanel hand;
     private JPanel buttons;
     private JButton playButton;
     private JButton drawButton;
@@ -48,7 +48,6 @@ public class GameDisplay extends JPanel{
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
         currentHand.addMouseListener(cardDelegator);
-        currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
         initializeGUIComponents();
     }
 
