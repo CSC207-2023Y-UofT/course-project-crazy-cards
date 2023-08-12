@@ -57,6 +57,7 @@ public class Main {
         menuWindow.setNavigator(paneDelegator);
         statsWindow.setNavigator(paneDelegator);
         ruleWindow.setNavigator(paneDelegator);
+        gameWindow.setNavigator(paneDelegator);
 
         GameDisplay gameDisplay = (GameDisplay) gameWindow.getPanel();
         GameController gameController = gameDisplay.getController();

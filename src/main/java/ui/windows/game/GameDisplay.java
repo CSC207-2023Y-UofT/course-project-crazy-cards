@@ -2,8 +2,11 @@ package ui.windows.game;
 
 import enums.Rank;
 import enums.Suit;
+import enums.WindowName;
 import ui.components.DrawnCard;
 import ui.components.DrawnHand;
+import ui.components.NavigationButton;
+import ui.windows.layout_managers.PaneDelegator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +33,7 @@ public class GameDisplay extends JPanel{
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
+    private NavigationButton goToMenu = new NavigationButton(WindowName.MENU, "Go to Menu");
 
     /**
      * Construct a GameDisplay with the given delegators.
@@ -44,7 +48,7 @@ public class GameDisplay extends JPanel{
         this.currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
 
         currentHand = new DrawnHand(new ArrayList<>());
-        for(int i = 0; i < 8; i++){
+        for(int i = 0; i < 10; i++){
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
         currentHand.addMouseListener(cardDelegator);
@@ -58,8 +62,12 @@ public class GameDisplay extends JPanel{
     }
 
     public void updateView(GameDisplayData data) {
+        boolean winner = data.getHasWinner();
         currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
         currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
+        if(winner) {
+            winScreen();
+        }
         updateHand(data.getCards());
         Suit newSuit = data.getCurrentCard().getSuit();
         Rank newRank = data.getCurrentCard().getRank();
@@ -68,6 +76,22 @@ public class GameDisplay extends JPanel{
         currentCard.setSuitLabel(newSuit);
         currentCard.setSuit(newSuit);
         currentCard.setVisible(true);
+    }
+
+    private void winScreen() {
+        String winner = getCurrentPlayer();
+        System.out.println("The Game has been won, please exit the application.");
+        goToMenu = new NavigationButton(WindowName.MENU, "Go to menu");
+        NavigationButton[] buttons = {goToMenu};
+        String[] winOptions = {"Go to Main Menu"};
+        JOptionPane.showOptionDialog(this, winner + " has won!",
+                "Game is over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, buttons, 0);
+
+    }
+
+    public void setNavigator(PaneDelegator navigator) {
+        this.goToMenu.addActionListener(navigator);
     }
 
     private void updateHand(ArrayList<CardDisplayData> cards) {

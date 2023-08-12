@@ -66,15 +66,12 @@ public class GameController {
      */
     public void playCard() {
         PlayerGameResponseModel response = bridge.getResponse(selectedOwner, selectedSuit, selectedRank, TurnAction.PLAY);
-        if (response.getHasWinner()) {
-            // TODO: show winner in display
-            System.out.println("The Game has been won, please exit the application.");
-        } else {
+
             // Assume players can only play at most 1 card per turn.
             // Future updates may allow for multiple cards to be played.
             GameDisplayData data = getGameDisplayData(response);
             display.updateView(data);
-        }
+
     }
 
     /**
@@ -100,12 +97,12 @@ public class GameController {
     private GameDisplayData getGameDisplayData(PlayerGameResponseModel response) {
         String currentPlayer = response.getCurrentPlayerName();
         ArrayList<CardResponseModel> cardResponses = response.getPlayerCards();
-
+        boolean hasWinner = response.getHasWinner();
         ArrayList<CardDisplayData> cards = new ArrayList<>(cardResponses.size());
         for (CardResponseModel cardResponse : cardResponses) {
             cards.add(new CardDisplayData(cardResponse.getSuit(), cardResponse.getRank()));
         }
 
-        return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()));
+        return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()), hasWinner);
     }
 }
