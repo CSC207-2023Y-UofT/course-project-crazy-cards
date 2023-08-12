@@ -58,7 +58,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             return new PlayerGameResponseModel(gameState);
         } 
         else {
-            return null;
+            return new PlayerGameResponseModel(gameState);
         }
     }
 
