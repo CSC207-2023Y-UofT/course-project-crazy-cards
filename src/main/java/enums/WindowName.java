@@ -8,7 +8,8 @@ public enum WindowName {
     GAME("Game"),
     CREATOR("Creator"),
     STATS("Statistics"),
-    RULES("Rules");
+    RULES("Rules"),
+    HOWTO("Howto");
 
     private String name;
 

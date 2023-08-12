@@ -1,8 +1,8 @@
 package ui.factories;
 
 import ui.windows.Window;
-import ui.windows.creation.CreationDisplay;
-import ui.windows.creation.CreationWindow;
+import ui.windows.creator.CreatorDisplay;
+import ui.windows.creator.CreatorWindow;
 import controllers.GameCreationController;
 
 public class CreatorWindowFactory implements WindowFactory {
@@ -22,7 +22,7 @@ public class CreatorWindowFactory implements WindowFactory {
      */
     @Override
     public Window createWindow() {
-        CreationDisplay display = new CreationDisplay(controller);
-        return new CreationWindow(display);
+        CreatorDisplay display = new CreatorDisplay(controller);
+        return new CreatorWindow(display);
     }
 }

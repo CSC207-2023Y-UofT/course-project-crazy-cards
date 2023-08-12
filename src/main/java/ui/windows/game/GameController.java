@@ -19,7 +19,7 @@ public class GameController {
 
     private Suit selectedSuit;
     private Rank selectedRank;
-    private String selectedOwner;
+    private String currentPlayer;
 
     /**
      * Construct a GameController with no endpoint. 
@@ -28,9 +28,6 @@ public class GameController {
         this.bridge = bridge;
         this.display = null;
     }
-    public void setBridge(GameBridge bridge) {
-        this.bridge = bridge;
-    }
 
     /**
      * Sets a display endpoint for the controller.
@@ -38,10 +35,6 @@ public class GameController {
      */
     public void setDisplay(GameDisplay display) {
         this.display = display;
-    }
-
-    public void setSelectedOwner(String owner) {
-        this.selectedOwner = owner;
     }
 
     /**
@@ -54,23 +47,17 @@ public class GameController {
         selectedRank = rank;
     }
 
-    // Temporary method
-    public void startGame() {
-        PlayerGameResponseModel response = bridge.getResponse(null, null, null, TurnAction.START);
-        GameDisplayData data = getGameDisplayData(response);
-        display.updateView(data);
-    }
-
     /**
      * Fires when the user requests to play their selected card.
      * Passes request to game logic and sends response to display.
      */
     public void playCard() {
-        PlayerGameResponseModel response = bridge.getResponse(selectedOwner, selectedSuit, selectedRank, TurnAction.PLAY);
+        PlayerGameResponseModel response = bridge.getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.PLAY);
         if (response.getHasWinner()) {
             // TODO: show winner in display
             System.out.println("The Game has been won, please exit the application.");
         } else {
+            updateCurrentPlayer(response);
             // Assume players can only play at most 1 card per turn.
             // Future updates may allow for multiple cards to be played.
             GameDisplayData data = getGameDisplayData(response);
@@ -83,7 +70,9 @@ public class GameController {
      * Passes request to game logic and sends response to display.
      */
     public void drawCard() {
-        PlayerGameResponseModel response = bridge.getResponse(selectedOwner, selectedSuit, selectedRank, TurnAction.DRAW); 
+        PlayerGameResponseModel response = bridge.getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.DRAW); 
+
+        updateCurrentPlayer(response);
         GameDisplayData data = getGameDisplayData(response);
         display.updateView(data);
     }
@@ -93,11 +82,28 @@ public class GameController {
      * Passes request to game logic and sends response to display.
      */
     public void skip() {
-        PlayerGameResponseModel response = bridge.getResponse(selectedOwner, selectedSuit, selectedRank, TurnAction.SKIP);
+        PlayerGameResponseModel response = bridge.getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.SKIP);
+
+        updateCurrentPlayer(response);
         GameDisplayData data = getGameDisplayData(response);
         display.updateView(data);
     }
 
+    /**
+     * Fires when the user requests to start the game.
+     * Passes request to game logic and sends response to display.
+     */
+    public void requestStart() {
+        PlayerGameResponseModel response = bridge.getResponse(null, null, null, TurnAction.START);
+
+        updateCurrentPlayer(response);
+        GameDisplayData data = getGameDisplayData(response);
+        display.updateView(data);
+    }
+
+    /**
+     * Helper method to convert a PlayerGameResponseModel to a GameDisplayData.
+     */
     private GameDisplayData getGameDisplayData(PlayerGameResponseModel response) {
         String currentPlayer = response.getCurrentPlayerName();
         ArrayList<CardResponseModel> cardResponses = response.getPlayerCards();
@@ -108,5 +114,12 @@ public class GameController {
         }
 
         return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()));
+    }
+
+    /**
+     * Helper method to update the current player of the game.
+     */
+    private void updateCurrentPlayer(PlayerGameResponseModel response) {
+        currentPlayer = response.getCurrentPlayerName();
     }
 }
