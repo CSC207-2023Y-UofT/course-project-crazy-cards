@@ -72,7 +72,6 @@ public class DrawnHand extends JPanel {
 
     public void setCard(int index, Suit suit, Rank rank) {
         DrawnCard card = drawnCards.get(index);
-       //  DrawnCard newCard = new DrawnCard(suit, rank);
         card.setSuit(suit);
         card.setRank(rank);
         card.setSuitLabel(suit);
@@ -105,7 +104,7 @@ public class DrawnHand extends JPanel {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 
-            card.setBounds((int)(i * offset + 28), (height / 2) - 30, 70, 95);
+            card.setBounds((int)(i * offset + 10), (height / 2) - 30, 70, 95);
         }
     }
 }
