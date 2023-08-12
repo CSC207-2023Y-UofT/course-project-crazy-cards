@@ -1,25 +1,33 @@
 package ui.windows.layout_managers;
 
 import enums.WindowName;
+import ui.windows.SwapEvent;
+import ui.windows.SwapListener;
 import ui.windows.Window;
 import ui.windows.layout_managers.ICardLayoutManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class CardLayoutManager implements ICardLayoutManager {
     private JPanel panel;
-    private WindowName currPane;
+
+    private HashMap<WindowName, Window> windows;
+    private WindowName current;
 
     /**
      * Constructor for the CardLayoutManager, which manages transitions between windows,
      * on which information is displayed on.
      * @param window The JFrame window created in order to display information.
      */
-    public CardLayoutManager(JFrame window) {
+    public CardLayoutManager(JFrame window, WindowName initial) {
         panel = new JPanel(new CardLayout());
 
         window.add(panel);
+
+        windows = new HashMap<>();
+        current = initial;
     }
 
     /**
@@ -28,12 +36,13 @@ public class CardLayoutManager implements ICardLayoutManager {
      */
     @Override
     public void setPane(WindowName pane) {
+        Window window = windows.get(pane);
+        if (window instanceof SwapListener) {
+            ((SwapListener) window).OnPreSwap(new SwapEvent(current, pane));
+        }
+
         CardLayout layout = getLayout();
         layout.show(panel, pane.toString());
-        currPane = pane;
-    }
-    public WindowName getCurrPane() {
-        return currPane;
     }
 
     /**
@@ -43,6 +52,7 @@ public class CardLayoutManager implements ICardLayoutManager {
      */
     @Override
     public void addPane(Window window) {
+        windows.put(window.getIdentifier(), window);
         panel.add(window.getPanel(), window.getIdentifier().toString());
     }
 

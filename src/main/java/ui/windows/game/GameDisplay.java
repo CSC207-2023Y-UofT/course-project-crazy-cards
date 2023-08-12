@@ -6,13 +6,10 @@ import ui.components.DrawnCard;
 import ui.components.DrawnHand;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Renderer for a game window.
@@ -21,6 +18,7 @@ public class GameDisplay extends JPanel{
     private GamePlayDelegator playDelegator;
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
+    private SwitchUpdater switchUpdater;
     private CardDelegator cardDelegator;
     private DrawnHand currentHand;
     private DrawnCard currentCard;
@@ -43,11 +41,13 @@ public class GameDisplay extends JPanel{
      * @param gameDelegator the delegator for game actions
      * @param cardDelegator the delegator for card actions
      */
-    public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator) {
+    public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator, SwitchUpdater switchUpdater) {
         this.playDelegator = gameDelegator.getPlayDelegator();
         this.skipDelegator = gameDelegator.getSkipDelegator();
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
+        this.switchUpdater = switchUpdater;
+
         this.currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
         this.playerInfo = new String[][]{{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 
@@ -59,14 +59,8 @@ public class GameDisplay extends JPanel{
         initializeGUIComponents();
     }
 
-    /**
-     * Returns the name of the current player from the label on the top of the displayed screen.
-     * @return The current player's name, as a String.
-     */
-    public String getCurrentPlayer() {
-        String message = this.currentPlayerLabel.getText();
-        // Remove the substring "'s Turn!" from the player's name.
-        return message.substring(0, message.lastIndexOf("'s Turn!"));
+    public void onSwitch() {
+        switchUpdater.update();
     }
 
     /**
@@ -264,11 +258,4 @@ public class GameDisplay extends JPanel{
     private void initializeFooter() {
         footer = new JPanel();
     }
-
-    // TODO: if this is unnecessary, delete
-    public GameController getController() {
-        return this.playDelegator.getController();
-    }
-
 }
-

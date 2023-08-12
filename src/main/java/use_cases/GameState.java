@@ -25,18 +25,13 @@ public class GameState implements GameObserver {
      * as well as if the Game has a winner.
      * @param game The Game containing the information to update this GameState.
      */
-    public GameState(ObservableGame game) {
+    public GameState(GameAccess game) {
 
         this.currentPlayer = game.getCurrentTurn();
         this.currentCard = game.getCurrentCard();
         this.currentDrawnCard = game.getDrawnCard();
-        for (Player player: game.getPlayers()) {
-            if(player != currentPlayer) {
-                this.playersAndCards.put(player, player.getNumCards());
-            }
-        }
+
         this.hasWinner = game.hasWinner();
-        this.currentPlayerCards = currentPlayer.getCards();
     }
 
     /**
@@ -44,11 +39,10 @@ public class GameState implements GameObserver {
      * @param game An ObservableGame that has notified this GameObserver of an update.
      */
     @Override
-    public void updateGameObserver(ObservableGame game) {
+    public void updateGameObserver(GameAccess game) {
         // Add the Player whose turn it was previous to the HashMap and remove the new current Player from it.
-        Player prevPlayer = this.currentPlayer;
-        this.playersAndCards.put(prevPlayer, prevPlayer.getNumCards());
         this.currentPlayer = game.getCurrentTurn();
+        this.playersAndCards = updatePlayersAndCards(game.getPlayers());
         this.playersAndCards.remove(this.currentPlayer);
         this.currentCard = game.getCurrentCard();
         this.currentDrawnCard = game.getDrawnCard();
@@ -102,5 +96,20 @@ public class GameState implements GameObserver {
      */
     public HashMap<Player, Integer> getPlayersAndCards() {
         return playersAndCards;
+    }
+
+    /**
+     * Update the HashMap of Players and their respective number of Cards.
+     * @param players The list of players in the game.
+     * @return A HashMap with keys being the opponents, and values being their respective number of cards.
+     */
+    private HashMap<Player, Integer> updatePlayersAndCards(ArrayList<Player> players) {
+        HashMap<Player, Integer> newTurnPlayerScores = new HashMap<>();
+        for (Player player: players) {
+            if (player != this.currentPlayer) {
+                newTurnPlayerScores.put(player, player.getNumCards());
+            }
+        }
+        return newTurnPlayerScores;
     }
 }
