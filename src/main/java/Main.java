@@ -1,36 +1,17 @@
-
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-
 import controllers.GameCreationController;
 import controllers.PlayerGameController;
 import database.CSVDatabase;
-import entities.*;
-import enums.Rank;
-import enums.Suit;
-import enums.WindowName;
-import ui.components.NavigationButton;
-import ui.factories.CreatorWindowFactory;
-import ui.factories.GameWindowFactory;
-import ui.factories.MenuWindowFactory;
-import ui.factories.RuleWindowFactory;
-import ui.factories.StatsWindowFactory;
+import entities.GameManager;
+import entities.IObserverNotifier;
+import entities.ObserverNotifier;
+import ui.factories.*;
+import ui.windows.Window;
 import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.ICardLayoutManager;
-import ui.windows.menu.MenuWindow;
-import ui.windows.stats.StatsController;
-import ui.windows.stats.StatsDisplay;
 import ui.windows.layout_managers.PaneDelegator;
-import ui.windows.Window;
-import ui.windows.creation.CreationDisplay;
-import use_cases.DataAccess;
-import use_cases.GameCreationInputBoundary;
-import use_cases.GameCreationInteractor;
-import use_cases.GameState;
-import use_cases.PlayerGameInputBoundary;
-import use_cases.PlayerGameInteractor;
+import use_cases.*;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,6 +24,7 @@ public class Main {
         manager.addObserver(state);
 
         DataAccess dataAccess = new CSVDatabase();
+        manager.addObserver(dataAccess);
 
         IObserverNotifier notifier = new ObserverNotifier(manager);
 
