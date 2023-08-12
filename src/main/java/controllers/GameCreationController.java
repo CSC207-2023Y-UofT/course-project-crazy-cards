@@ -41,13 +41,4 @@ public class GameCreationController {
         GameCreationResponseModel response = inputBoundary.createGameResponse(request);
         return response.getGameCreated();
     }
-
-    /**
-     * Temporary method
-     * @return a playergameinteractor
-     */
-    public PlayerGameInteractor getPlayerGameInteractor() {
-        GameCreationInteractor interactor = (GameCreationInteractor) inputBoundary;
-        return interactor.getPlayerGameInteractor();
-    }
 }
