@@ -1,5 +1,7 @@
 package entities;
 
+import enums.Rank;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -112,7 +114,7 @@ public class Game {
      * @return True if this is a valid Card, false otherwise.
      */
     public boolean isValidCard(Card card) {
-        if (card.getRank().equals("8")) {
+        if (card.getRank().equals(Rank.EIGHT)){
             return true;
         } else {return (card.getRank().equals(currentCard.getRank()) | card.getSuit().equals(currentCard.getSuit()));}
     }

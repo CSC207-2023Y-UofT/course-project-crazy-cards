@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import enums.WindowName;
 import javafx.stage.Window;
 
+import java.awt.*;
+
 public class NavigationButton extends JButton {
     private WindowName identifier;
 
@@ -27,6 +29,8 @@ public class NavigationButton extends JButton {
         super(text);
 
         this.identifier = identifier;
+        setPreferredSize(new Dimension(100, 50));
+        setFont(new Font("serif", Font.BOLD, 20));
     }
 
     /**

@@ -1,13 +1,15 @@
-package ui.windows;
-
-import javax.swing.*;
+package ui.windows.layout_managers;
 
 import enums.WindowName;
+import ui.windows.Window;
+import ui.windows.layout_managers.ICardLayoutManager;
 
-import java.awt.CardLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class CardLayoutManager implements ICardLayoutManager {
     private JPanel panel;
+    private WindowName currPane;
 
     /**
      * Constructor for the CardLayoutManager, which manages transitions between windows,
@@ -28,6 +30,10 @@ public class CardLayoutManager implements ICardLayoutManager {
     public void setPane(WindowName pane) {
         CardLayout layout = getLayout();
         layout.show(panel, pane.toString());
+        currPane = pane;
+    }
+    public WindowName getCurrPane() {
+        return currPane;
     }
 
     /**

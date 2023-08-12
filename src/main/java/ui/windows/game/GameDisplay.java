@@ -1,41 +1,31 @@
-package ui.windows;
+package ui.windows.game;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import java.util.HashMap;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-
+import enums.Rank;
+import enums.Suit;
+import ui.components.DrawnCard;
 import ui.components.DrawnHand;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Renderer for a game window.
  */
-public class GameDisplay extends JPanel {
+public class GameDisplay extends JPanel{
     private GamePlayDelegator playDelegator;
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
     private CardDelegator cardDelegator;
-
     private DrawnHand currentHand;
-
     private JPanel header;
     private JPanel center;
     private JPanel footer;
-
     private JLabel currentPlayerLabel;
-
     private JTable scores;
     private JPanel gameBoard;
     private JPanel hand;   
     private JPanel buttons;
-
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
@@ -51,11 +41,24 @@ public class GameDisplay extends JPanel {
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
 
+        currentHand = new DrawnHand(new ArrayList<>());
+        for(int i = 0; i < 8; i++){
+            currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
+        }
+        currentHand.addMouseListener(cardDelegator);
+
         initializeGUIComponents();
     }
 
+    public String getCurrentPlayer() {
+        String message = this.currentPlayerLabel.getText();
+        // Remove the substring "'s Turn!" from the player's name.
+        return message.substring(0, message.lastIndexOf("'s Turn!"));
+    }
+
     public void updateView(GameDisplayData data) {
-        currentPlayerLabel.setText(data.getCurrentPlayer());
+        currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
+        currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
         updateHand(data.getCards());
     }
 
@@ -63,9 +66,11 @@ public class GameDisplay extends JPanel {
         int i = 0;
         for (i = 0; i < cards.size(); i++) {
             CardDisplayData card = cards.get(i);
+
             currentHand.setCard(i, card.getSuit(), card.getRank());
         }
         currentHand.hideCards(i);
+        currentHand.updateCards();
     }
 
     /**
@@ -147,7 +152,7 @@ public class GameDisplay extends JPanel {
         handConstraints.weighty = 1;
         hand = new JPanel();
         hand.setLayout(new BorderLayout());
-        bottom.add(hand, handConstraints);
+        bottom.add(currentHand, handConstraints);
 
         // The buttons for playing, drawing, and skipping
         GridBagConstraints buttonsConstraints = new GridBagConstraints();
@@ -189,9 +194,19 @@ public class GameDisplay extends JPanel {
         drawButton = new JButton("Draw");
         skipButton = new JButton("Skip");
 
+        Dimension dim = new Dimension(80, 40);
+        Font font = new Font("serif", Font.BOLD, 20);
+
+        playButton.setPreferredSize(dim);
+        playButton.setFont(font);
+        drawButton.setPreferredSize(dim);
+        drawButton.setFont(font);
+        skipButton.setPreferredSize(dim);
+        skipButton.setFont(font);
+
         playButton.addActionListener(playDelegator);
-        drawButton.addActionListener(playDelegator);
-        skipButton.addActionListener(playDelegator);
+        drawButton.addActionListener(drawDelegator);
+        skipButton.addActionListener(skipDelegator);
 
         buttons.add(playButton);
         buttons.add(drawButton);
@@ -204,4 +219,10 @@ public class GameDisplay extends JPanel {
     private void initializeFooter() {
         footer = new JPanel();
     }
+
+    public GameController getController() {
+        return this.playDelegator.getController();
+    }
+
 }
+

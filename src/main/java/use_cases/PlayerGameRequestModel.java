@@ -53,6 +53,14 @@ public class PlayerGameRequestModel {
     }
 
     /**
+     * Get whether the request has been made to start the Game.
+     * @ True iff request to start the Game.
+     */
+    public boolean getStartGameRequest() {
+        return action == TurnAction.START;
+    }
+
+    /**
      * Get the action that the User requested to take.
      * @return A TurnAction enum value.
      */

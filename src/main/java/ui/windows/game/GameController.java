@@ -1,14 +1,13 @@
-package ui.windows;
-
-import java.util.ArrayList;
+package ui.windows.game;
 
 import controllers.GameBridge;
-import entities.Player;
 import enums.Rank;
 import enums.Suit;
 import enums.TurnAction;
 import use_cases.CardResponseModel;
 import use_cases.PlayerGameResponseModel;
+
+import java.util.ArrayList;
 
 /**
  * Handles delegated user interaction for a game window.
@@ -25,8 +24,11 @@ public class GameController {
     /**
      * Construct a GameController with no endpoint. 
      */
-    public GameController() { 
+    public GameController() {
         this.display = null;
+    }
+    public void setBridge(GameBridge bridge) {
+        this.bridge = bridge;
     }
 
     /**
@@ -35,6 +37,10 @@ public class GameController {
      */
     public void setDisplay(GameDisplay display) {
         this.display = display;
+    }
+
+    public void setSelectedOwner(String owner) {
+        this.selectedOwner = owner;
     }
 
     /**
@@ -47,6 +53,13 @@ public class GameController {
         selectedRank = rank;
     }
 
+    // Temporary method
+    public void startGame() {
+        PlayerGameResponseModel response = bridge.getResponse(null, null, null, TurnAction.START);
+        GameDisplayData data = getGameDisplayData(response);
+        display.updateView(data);
+    }
+
     /**
      * Fires when the user requests to play their selected card.
      * Passes request to game logic and sends response to display.
@@ -55,6 +68,7 @@ public class GameController {
         PlayerGameResponseModel response = bridge.getResponse(selectedOwner, selectedSuit, selectedRank, TurnAction.PLAY);
         if (response.getHasWinner()) {
             // TODO: show winner in display
+            System.out.println("The Game has been won, please exit the application.");
         } else {
             // Assume players can only play at most 1 card per turn.
             // Future updates may allow for multiple cards to be played.
@@ -92,6 +106,6 @@ public class GameController {
             cards.add(new CardDisplayData(cardResponse.getSuit(), cardResponse.getRank()));
         }
 
-        return new GameDisplayData(currentPlayer, cards);
+        return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()));
     }
 }

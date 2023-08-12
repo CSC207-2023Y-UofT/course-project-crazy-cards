@@ -2,8 +2,8 @@ package ui.factories;
 
 import ui.windows.Window;
 
-import ui.windows.RulesDisplay;
-import ui.windows.RulesWindow;
+import ui.windows.rules.RulesDisplay;
+import ui.windows.rules.RulesWindow;
 
 public class RuleWindowFactory implements WindowFactory {
     

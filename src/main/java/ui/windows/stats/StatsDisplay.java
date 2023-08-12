@@ -1,12 +1,11 @@
-package ui.windows;
-
-import javax.swing.*;
-
-import javax.swing.border.EmptyBorder;
+package ui.windows.stats;
 
 import enums.WindowName;
 import ui.components.NavigationButton;
+import ui.windows.layout_managers.PaneDelegator;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -29,6 +28,10 @@ public class StatsDisplay extends JPanel {
         this.delegator = delegator;
 
         initializeGUIComponents();
+    }
+
+    public StatsDelegator getDelegator() {
+        return delegator;
     }
 
     public void setNavigator(PaneDelegator delegator) {
