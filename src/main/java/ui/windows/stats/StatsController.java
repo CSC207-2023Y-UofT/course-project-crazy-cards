@@ -15,7 +15,7 @@ public class StatsController {
     /**
      * Construct a StatsController with no endpoint. 
      */
-    public StatsController() {
+    public StatsController(DataAccess database) {
         this.display = null;
         this.database = database;
     }

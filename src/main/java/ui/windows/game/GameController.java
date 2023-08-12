@@ -24,7 +24,8 @@ public class GameController {
     /**
      * Construct a GameController with no endpoint. 
      */
-    public GameController() {
+    public GameController(GameBridge bridge) { 
+        this.bridge = bridge;
         this.display = null;
     }
     public void setBridge(GameBridge bridge) {
