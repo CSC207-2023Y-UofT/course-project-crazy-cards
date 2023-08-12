@@ -30,7 +30,7 @@ public class GameDisplay extends JPanel{
     private JLabel currentPlayerLabel;
     private JTable scores;
     public static final String[] COLUMNS = {"Player name", "# of cards"};
-    private Object[][] playerInfo;
+    private String[][] playerInfo;
     private JPanel gameBoard;
     private JPanel hand;
     private JPanel buttons;
@@ -49,7 +49,7 @@ public class GameDisplay extends JPanel{
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
         this.currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
-        this.playerInfo = new Object[][]{{"", 0}, {"", 0}, {"", 0}, {"", 0}, {"", 0}, {"", 0}};
+        this.playerInfo = new String[][]{{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 
         currentHand = new DrawnHand(new ArrayList<>());
         for(int i = 0; i < 8; i++){
@@ -89,8 +89,8 @@ public class GameDisplay extends JPanel{
         int index = 0;
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             String key = entry.getKey();
-            Integer value = entry.getValue();
-            Object[] row = {key, value};
+            String value = String.valueOf(entry.getValue());
+            String[] row = {key, value};
             playerInfo[index] = row;
             index++;
         }
