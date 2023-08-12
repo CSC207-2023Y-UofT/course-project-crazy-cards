@@ -4,6 +4,7 @@ import enums.Rank;
 import enums.Suit;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.HashMap;
 
@@ -86,19 +87,15 @@ public class DrawnCard extends JPanel {
      * Create the JPanel for each card, and display the suit and value accordingly.
      */
     private void initializeGUIComponents() {
-        Dimension dimension = new Dimension(50, 65);
+        Dimension dimension = new Dimension(70, 95);
         setPreferredSize(dimension);
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, true));
         // Define colours
         Color red = new Color(180, 20, 20);
         Color black = Color.BLACK;
 
-        // Define Integers (for layering's sake in the JLayeredPane)
-        Integer back = 1;
-        Integer front = 2;
-
         // Define font to be used
-        Font font = new Font("monospaced", Font.BOLD, 37);
+        Font font = new Font("monospaced", Font.BOLD, 50);
 
         // Creating objects
         JLayeredPane pane = new JLayeredPane();
@@ -106,10 +103,12 @@ public class DrawnCard extends JPanel {
         String rankString = rankToString.get(this.rank);
         rankLabel = new JLabel(rankString);
         rankLabel.setFont(font);
-        rankLabel.setBounds(22, 8, 50, 65);
+        rankLabel.setBounds(-5, 10, 70, 95);
+        rankLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         suitLabel = new JLabel();
         suitLabel.setFont(font);
-        suitLabel.setBounds(5, -18, 50, 65);
+        suitLabel.setBounds(5, -30, 70, 95);
+        suitLabel.setHorizontalAlignment(SwingConstants.LEFT);
         switch (this.suit) {
             case CLUB: suitLabel.setText("<html>&#9827;</html>");
             suitLabel.setForeground(black);
@@ -128,8 +127,8 @@ public class DrawnCard extends JPanel {
             rankLabel.setForeground(black);
             break;
         }
-        pane.add(suitLabel, back);
-        pane.add(rankLabel, front);
+        pane.add(suitLabel);
+        pane.add(rankLabel);
         add(pane);
     }
 
