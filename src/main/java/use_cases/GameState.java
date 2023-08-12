@@ -25,7 +25,7 @@ public class GameState implements GameObserver {
      * as well as if the Game has a winner.
      * @param game The Game containing the information to update this GameState.
      */
-    public GameState(ObservableGame game) {
+    public GameState(GameAccess game) {
 
         this.currentPlayer = game.getCurrentTurn();
         this.currentCard = game.getCurrentCard();
@@ -44,7 +44,7 @@ public class GameState implements GameObserver {
      * @param game An ObservableGame that has notified this GameObserver of an update.
      */
     @Override
-    public void updateGameObserver(ObservableGame game) {
+    public void updateGameObserver(GameAccess game) {
         // Add the Player whose turn it was previous to the HashMap and remove the new current Player from it.
         Player prevPlayer = this.currentPlayer;
         this.playersAndCards.put(prevPlayer, prevPlayer.getNumCards());
