@@ -15,7 +15,10 @@ public class DrawnHand extends JPanel {
     private int visible;
     private List<DrawnCard> drawnCards;
 
-
+    /**
+     * Constructor for DrawnHand that displays a player's hand on the screen.
+     * @param drawnCards The list of DrawnCards within the user's hand about to be displayed.
+     */
     public DrawnHand(List<DrawnCard> drawnCards) {
         this.drawnCards = drawnCards;
 
@@ -41,6 +44,10 @@ public class DrawnHand extends JPanel {
         });
     }
 
+    /**
+     * Add a mouse listener to each card for gameplay purposes.
+     * @param listener   the mouse listener
+     */
     @Override
     public void addMouseListener(MouseListener listener) {
         for (DrawnCard card : drawnCards) {
@@ -48,18 +55,17 @@ public class DrawnHand extends JPanel {
         }
     }
 
+    /**
+     * Add a given card to the DrawnHand, in order to be displayed.
+     * @param card
+     */
     public void addCard(DrawnCard card) {
         drawnCards.add(card);
     }
 
-    public void addCards(List<DrawnCard> cards) {
-        drawnCards.addAll(cards);
-    }
-
-    public void removeCard(DrawnCard card) {
-        drawnCards.remove(card);
-    }
-
+    /**
+     * Initializes the GUI components necessary for the DrawnHand to be displayed.
+     */
     private void initializeGUIComponents() {
         setLayout(new BorderLayout());
 
@@ -70,6 +76,12 @@ public class DrawnHand extends JPanel {
         add(cardPane);
     }
 
+    /**
+     * Sets a new display for a given DrawnCard within the user's DrawnHand to be displayed.
+     * @param index Index of the specific DrawnCard to be updated, in the List of DrawnCards within the user's hand.
+     * @param suit The new suit of the card that is being updated.
+     * @param rank The new rank/value of the card that is being updated.
+     */
     public void setCard(int index, Suit suit, Rank rank) {
         DrawnCard card = drawnCards.get(index);
         card.setSuit(suit);
@@ -92,7 +104,10 @@ public class DrawnHand extends JPanel {
             card.setVisible(false);
         }
     }
-    
+
+    /**
+     * Update the display of the DrawnHand by setting new positions of each card and changing the display between users.
+     */
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
