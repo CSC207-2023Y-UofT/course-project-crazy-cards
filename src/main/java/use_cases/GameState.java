@@ -98,6 +98,11 @@ public class GameState implements GameObserver {
         return playersAndCards;
     }
 
+    /**
+     * Update the HashMap of Players and their respective number of Cards.
+     * @param players The list of players in the game.
+     * @return A HashMap with keys being the opponents, and values being their respective number of cards.
+     */
     private HashMap<Player, Integer> updatePlayersAndCards(ArrayList<Player> players) {
         HashMap<Player, Integer> playersAndCards = new HashMap<>();
         for (Player player: players) {
