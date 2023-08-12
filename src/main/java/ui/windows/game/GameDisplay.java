@@ -16,6 +16,7 @@ public class GameDisplay extends JPanel{
     private GamePlayDelegator playDelegator;
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
+    private SwitchUpdater switchUpdater;
     private CardDelegator cardDelegator;
     private DrawnHand currentHand;
     private DrawnCard currentCard;
@@ -36,11 +37,13 @@ public class GameDisplay extends JPanel{
      * @param gameDelegator the delegator for game actions
      * @param cardDelegator the delegator for card actions
      */
-    public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator) {
+    public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator, SwitchUpdater switchUpdater) {
         this.playDelegator = gameDelegator.getPlayDelegator();
         this.skipDelegator = gameDelegator.getSkipDelegator();
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
+        this.switchUpdater = switchUpdater;
+
         this.currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
 
         currentHand = new DrawnHand(new ArrayList<>());
@@ -51,10 +54,8 @@ public class GameDisplay extends JPanel{
         initializeGUIComponents();
     }
 
-    public String getCurrentPlayer() {
-        String message = this.currentPlayerLabel.getText();
-        // Remove the substring "'s Turn!" from the player's name.
-        return message.substring(0, message.lastIndexOf("'s Turn!"));
+    public void onSwitch() {
+        switchUpdater.update();
     }
 
     public void updateView(GameDisplayData data) {
@@ -231,10 +232,4 @@ public class GameDisplay extends JPanel{
     private void initializeFooter() {
         footer = new JPanel();
     }
-
-    public GameController getController() {
-        return this.playDelegator.getController();
-    }
-
 }
-
