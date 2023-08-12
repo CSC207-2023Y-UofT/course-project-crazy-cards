@@ -117,7 +117,7 @@ public class GameController {
     }
 
     /**
-     * Helper method to update the current owner of the game.
+     * Helper method to update the current player of the game.
      */
     private void updateCurrentPlayer(PlayerGameResponseModel response) {
         currentPlayer = response.getCurrentPlayerName();
