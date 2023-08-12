@@ -109,7 +109,7 @@ public class DrawnHand extends JPanel {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 
-            card.setBounds((int)(i * offset + 28), (height / 2) - 30, 50, 65);
+            card.setBounds((int)(i * offset + 28), (height / 2) - 30, 70, 95);
         }
     }
 }
