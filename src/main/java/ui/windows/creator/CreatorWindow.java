@@ -6,8 +6,6 @@ import ui.windows.Window;
 
 import javax.swing.*;
 
-import enums.WindowName;
-
 /**
  * A window containing the display for game creation and identifier for what window it is.
  */
@@ -21,6 +19,7 @@ public class CreatorWindow implements Window {
     public CreatorWindow(CreatorDisplay creationDisplay) {
         this.creationDisplay = creationDisplay;
     }
+
     /**
      * Getter method for the identifier of a CreatorWindow.
      *
@@ -39,7 +38,11 @@ public class CreatorWindow implements Window {
     public JPanel getPanel() {
         return this.creationDisplay;
     }
-    
+
+    /**
+     * Setter method for the PaneDelegator of the display.
+     * @param navigator The PaneDelegator for the window's CreatorDisplay.
+     */
     @Override
     public void setNavigator(PaneDelegator navigator) {
         creationDisplay.setNavigator(navigator);
