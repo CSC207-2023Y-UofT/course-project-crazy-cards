@@ -10,6 +10,7 @@ import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,10 +58,13 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
         this.createFieldAndBoxPanels();
 
         // Create the button for submitting player info.
-        JButton createGameButton = new JButton("Play Game");
+        JButton createGameButton = new JButton("Play Game!");
         createGameButton.addActionListener(this);
+        createGameButton.setPreferredSize(new Dimension(800, 50));
+        createGameButton.setFont(new Font("serif", Font.BOLD, 20));
 
-        JLabel titleMessage = new JLabel("Game creation");
+        JLabel titleMessage = new JLabel("Game Creation!");
+        titleMessage.setFont(new Font("serif", Font.BOLD, 35));
 
         this.add(titleMessage, BorderLayout.PAGE_START);
         this.add(createGameButton, BorderLayout.PAGE_END);
@@ -97,19 +101,27 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
      * Create the header message and text-fields for each player name and add the text-fields to the list of text-fields
      */
     private void initializeTextFields() {
-        this.giveNameMessage = new JLabel("Give the names of the players.");
+        this.giveNameMessage = new JLabel("Type in the names of the players.   ");
+        this.giveNameMessage.setFont(new Font("serif", Font.BOLD, 20));
+        Dimension dim = new Dimension(420, 50);
 
         JTextField p1Name = new JTextField();
+        p1Name.setMaximumSize(dim);
         this.textFieldList.add(p1Name);
         JTextField p2Name = new JTextField();
+        p2Name.setMaximumSize(dim);
         this.textFieldList.add(p2Name);
         JTextField p3Name = new JTextField();
+        p3Name.setMaximumSize(dim);
         this.textFieldList.add(p3Name);
         JTextField p4Name = new JTextField();
+        p4Name.setMaximumSize(dim);
         this.textFieldList.add(p4Name);
         JTextField p5Name = new JTextField();
+        p5Name.setMaximumSize(dim);
         this.textFieldList.add(p5Name);
         JTextField p6Name = new JTextField();
+        p6Name.setMaximumSize(dim);
         this.textFieldList.add(p6Name);
     }
 
@@ -117,7 +129,8 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
      * Create all the checkboxes and add them to the list of checkboxes.
      */
     private void initializeCheckBoxes() {
-        this.makeCPUorNo = new JLabel("     Check to make player computer-controlled.");
+        this.makeCPUorNo = new JLabel("Check the box to make player computer-controlled.");
+        this.makeCPUorNo.setFont(new Font("serif", Font.BOLD, 20));
 
         JCheckBox p1isComp = new JCheckBox();
         this.checkBoxList.add(p1isComp);
@@ -162,7 +175,7 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
             layoutManager.setPane(WindowName.GAME);
 
         } else {
-            JLabel message = new JLabel("Please enter valid input. That is, atleast 2 players, 1 non-computer player, and no repeated names");
+            JLabel message = new JLabel("Please enter valid input. That is, at least 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);
         }
 
