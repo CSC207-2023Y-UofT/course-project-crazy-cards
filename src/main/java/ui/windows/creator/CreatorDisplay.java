@@ -1,4 +1,4 @@
-package ui.windows.creation;
+package ui.windows.creator;
 
 import controllers.GameBridge;
 import controllers.GameCreationController;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.
  */
-public class CreationDisplay extends JPanel implements ActionListener {
+public class CreatorDisplay extends JPanel implements ActionListener {
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
@@ -37,7 +37,7 @@ public class CreationDisplay extends JPanel implements ActionListener {
     /**
      * Construct a new CreationDisplay.
      */
-    public CreationDisplay(GameCreationController controller) {
+    public CreatorDisplay(GameCreationController controller) {
 
         this.controller = controller;
         initializeGUIComponents();
