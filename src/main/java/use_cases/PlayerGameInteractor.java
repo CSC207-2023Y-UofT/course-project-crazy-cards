@@ -31,7 +31,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     @Override
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
-        if(currPlayer != null){
+        if (currPlayer != null) {
             Card chosenCard = findCard(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
             if (chosenCard != null && pgrm.getPlayCardRequest()) {
             playCardRequestLogic(chosenCard, currPlayer);
@@ -50,7 +50,8 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             }
             // Return the current state of the game with a response model.
             return new PlayerGameResponseModel(gameState);
-    } else {
+        } 
+        else {
             return new PlayerGameResponseModel(gameState);
         }
     }
