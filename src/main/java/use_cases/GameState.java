@@ -104,12 +104,12 @@ public class GameState implements GameObserver {
      * @return A HashMap with keys being the opponents, and values being their respective number of cards.
      */
     private HashMap<Player, Integer> updatePlayersAndCards(ArrayList<Player> players) {
-        HashMap<Player, Integer> playersAndCards = new HashMap<>();
+        HashMap<Player, Integer> newTurnPlayerScores = new HashMap<>();
         for (Player player: players) {
             if (player != this.currentPlayer) {
-                playersAndCards.put(player, player.getNumCards());
+                newTurnPlayerScores.put(player, player.getNumCards());
             }
         }
-        return playersAndCards;
+        return newTurnPlayerScores;
     }
 }
