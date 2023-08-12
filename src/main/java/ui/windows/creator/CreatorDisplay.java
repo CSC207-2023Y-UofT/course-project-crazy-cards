@@ -9,8 +9,8 @@ import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
-import enums.WindowName;
 import ui.components.NavigationButton;
+import ui.components.PriorityActionListener;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -23,6 +23,9 @@ import java.util.ArrayList;
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.
  */
 public class CreatorDisplay extends JPanel implements ActionListener {
+    private static final int LOW_PRIO_NAVIGATOR = 0;
+    private static final int HIGH_PRIO_GAME_CREATION = 1;
+
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
@@ -33,18 +36,20 @@ public class CreatorDisplay extends JPanel implements ActionListener {
     private final ArrayList<JTextField> textFieldList = new ArrayList<>();
 
     private NavigationButton createGameButton;
+    private PriorityActionListener priorityListener;
 
     /**
      * Construct a new CreationDisplay.
      */
     public CreatorDisplay(GameCreationController controller) {
-
         this.controller = controller;
+        this.priorityListener = new PriorityActionListener();
+
         initializeGUIComponents();
     }
 
     public void setNavigator(PaneDelegator navigator) {
-        createGameButton.addActionListener(navigator);
+        priorityListener.addActionListener(navigator, LOW_PRIO_NAVIGATOR);
     }
 
     /**
@@ -59,7 +64,8 @@ public class CreatorDisplay extends JPanel implements ActionListener {
 
         // Create the button for submitting player info.
         createGameButton = new NavigationButton(WindowName.GAME, "Play Game");
-        createGameButton.addActionListener(this);
+        priorityListener.addActionListener(this, HIGH_PRIO_GAME_CREATION);
+        createGameButton.addActionListener(priorityListener);
         createGameButton.setPreferredSize(new Dimension(800, 50));
         createGameButton.setFont(new Font("serif", Font.BOLD, 20));
 
