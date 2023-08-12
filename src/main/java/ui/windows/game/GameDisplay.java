@@ -51,7 +51,9 @@ public class GameDisplay extends JPanel{
     }
 
     public String getCurrentPlayer() {
-        return this.currentPlayerLabel.getText();
+        String message = this.currentPlayerLabel.getText();
+        // Remove the substring "'s Turn!" from the player's name.
+        return message.substring(0, message.lastIndexOf("'s Turn!"));
     }
 
     public void updateView(GameDisplayData data) {
