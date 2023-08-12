@@ -100,25 +100,26 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         this.giveNameMessage = new JLabel("Type in the names of the players.   ");
         this.giveNameMessage.setFont(new Font("serif", Font.BOLD, 20));
         Dimension dim = new Dimension(420, 50);
+        Font font = new Font("serif", Font.PLAIN, 25);
 
         JTextField p1Name = new JTextField();
-        p1Name.setMaximumSize(dim);
         this.textFieldList.add(p1Name);
         JTextField p2Name = new JTextField();
-        p2Name.setMaximumSize(dim);
         this.textFieldList.add(p2Name);
         JTextField p3Name = new JTextField();
-        p3Name.setMaximumSize(dim);
         this.textFieldList.add(p3Name);
         JTextField p4Name = new JTextField();
-        p4Name.setMaximumSize(dim);
         this.textFieldList.add(p4Name);
         JTextField p5Name = new JTextField();
-        p5Name.setMaximumSize(dim);
         this.textFieldList.add(p5Name);
         JTextField p6Name = new JTextField();
-        p6Name.setMaximumSize(dim);
         this.textFieldList.add(p6Name);
+
+        for(int i = 0; i < this.textFieldList.size(); i++) {
+            JTextField textbox = this.textFieldList.get(i);
+            textbox.setMaximumSize(dim);
+            textbox.setFont(font);
+        }
     }
 
     /**

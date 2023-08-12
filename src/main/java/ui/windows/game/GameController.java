@@ -8,15 +8,14 @@ import use_cases.CardResponseModel;
 import use_cases.PlayerGameResponseModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Handles delegated user interaction for a game window.
  */
 public class GameController {
     private GameBridge bridge;
-    
     private GameDisplay display;
-
     private Suit selectedSuit;
     private Rank selectedRank;
     private String currentPlayer;
@@ -24,7 +23,7 @@ public class GameController {
     /**
      * Construct a GameController with no endpoint. 
      */
-    public GameController(GameBridge bridge) { 
+    public GameController(GameBridge bridge) {
         this.bridge = bridge;
         this.display = null;
     }
@@ -45,6 +44,12 @@ public class GameController {
     public void setSelectedCard(Suit suit, Rank rank) {
         selectedSuit = suit;
         selectedRank = rank;
+    }
+
+    public void startGame() {
+        PlayerGameResponseModel response = bridge.getResponse(null, null, null, TurnAction.START);
+        GameDisplayData data = getGameDisplayData(response);
+        display.updateView(data);
     }
 
     /**
@@ -70,7 +75,7 @@ public class GameController {
      * Passes request to game logic and sends response to display.
      */
     public void drawCard() {
-        PlayerGameResponseModel response = bridge.getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.DRAW); 
+        PlayerGameResponseModel response = bridge.getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.DRAW);
 
         updateCurrentPlayer(response);
         GameDisplayData data = getGameDisplayData(response);
@@ -112,8 +117,8 @@ public class GameController {
         for (CardResponseModel cardResponse : cardResponses) {
             cards.add(new CardDisplayData(cardResponse.getSuit(), cardResponse.getRank()));
         }
-
-        return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()));
+        HashMap<String, Integer> playersAndNumCards = response.getPlayersAndNumCards();
+        return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()), playersAndNumCards);
     }
 
     /**
