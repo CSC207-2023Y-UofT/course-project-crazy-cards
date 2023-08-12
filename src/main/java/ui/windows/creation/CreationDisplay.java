@@ -3,10 +3,10 @@ package ui.windows.creation;
 import controllers.GameBridge;
 import controllers.GameCreationController;
 import controllers.PlayerCreationInformation;
-<<<<<<< Updated upstream:src/main/java/ui/windows/creation/CreationDisplay.java
 import controllers.PlayerGameController;
 import enums.WindowName;
 import ui.windows.layout_managers.CardLayoutManager;
+import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
 import enums.WindowName;
