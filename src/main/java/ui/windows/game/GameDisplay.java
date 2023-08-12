@@ -145,8 +145,8 @@ public class GameDisplay extends JPanel{
         gameBoard = new JPanel();
         JLabel currCardLabel = new JLabel("Current card:");
         currCardLabel.setFont(new Font("serif", Font.PLAIN, 20));
-        gameBoard.add(currentCard);
         gameBoard.add(currCardLabel);
+        gameBoard.add(currentCard);
         top.add(gameBoard, gameBoardConstraints);
 
         // The bottom JPanel stores the hand and the buttons
