@@ -58,6 +58,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             return new PlayerGameResponseModel(gameState);
         } 
         else {
+            // Called on request of starting game data, i.e. TurnAction.START
             notifier.update();
             return new PlayerGameResponseModel(gameState);
         }
