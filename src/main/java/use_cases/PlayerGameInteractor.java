@@ -58,6 +58,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             return new PlayerGameResponseModel(gameState);
         } 
         else {
+            notifier.update();
             return new PlayerGameResponseModel(gameState);
         }
     }
@@ -69,6 +70,10 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * @return The Player whose name matches the 'name' parameter.
      */
     private Player findPlayerFromString(String name) {
+        if (name == null) {
+            return null;
+        }
+
         for(Player p: access.getPlayers()) {
             if(p.getName().equals(name)) {
                 return p;
