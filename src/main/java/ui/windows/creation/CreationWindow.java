@@ -1,11 +1,15 @@
-package ui.windows;
+package ui.windows.creation;
+
+import enums.WindowName;
+import ui.windows.layout_managers.PaneDelegator;
+import ui.windows.Window;
 
 import javax.swing.*;
 
 /**
  * A window containing the display for game creation and identifier for what window it is.
  */
-public class CreationWindow implements Window{
+public class CreationWindow implements Window {
     private final CreationDisplay creationDisplay;
 
     /**
@@ -17,11 +21,12 @@ public class CreationWindow implements Window{
     }
     /**
      * Getter method for the identifier of a CreationWindow.
+     *
      * @return The identifier of the Window, as a String.
      */
     @Override
-    public String getIdentifier() {
-        return "Creation";
+    public WindowName getIdentifier() {
+        return WindowName.CREATOR;
     }
 
     /**
@@ -31,5 +36,13 @@ public class CreationWindow implements Window{
     @Override
     public JPanel getPanel() {
         return this.creationDisplay;
+    }
+
+    /**
+     * @param navigator
+     */
+    @Override
+    public void setNavigator(PaneDelegator navigator) {
+
     }
 }

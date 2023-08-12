@@ -32,26 +32,26 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
         if(currPlayer != null){
-        Card chosenCard = findCard(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
-        if (chosenCard != null && pgrm.getPlayCardRequest()) {
+            Card chosenCard = findCard(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
+            if (chosenCard != null && pgrm.getPlayCardRequest()) {
             playCardRequestLogic(chosenCard, currPlayer);
-        } else if (pgrm.getPickUpCardRequest()) {
+            } else if (pgrm.getPickUpCardRequest()) {
             pickUpCardRequestLogic(currPlayer);
-        } else {
-            // Requested to skip turn, check if the Player can play a Card first
-            skipTurnLogic(currPlayer);
-        }
-        // Now we assume that the Game has been successfully updated, but first check that the Player whose
-        // turn it IS NOT a ComputerPlayer, as a User should not play as a ComputerPlayer
-        Player newCurrPlayer = currentGame.getCurrentTurn();
-        while ((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
+            } else if (pgrm.getSkipTurnRequest()) {
+                // Requested to skip turn, check if the Player can play a Card first
+                skipTurnLogic(currPlayer);
+            }
+            // Now we assume that the Game has been successfully updated, but first check that the Player whose
+            // turn it IS NOT a ComputerPlayer, as a User should not play as a ComputerPlayer
+            Player newCurrPlayer = currentGame.getCurrentTurn();
+            while ((newCurrPlayer instanceof ComputerPlayer) & !(currentGame.hasWinner())) {
             computerPlayerLogic((ComputerPlayer) newCurrPlayer);
             newCurrPlayer = currentGame.getCurrentTurn();
-        }
-        // Return the current state of the game with a response model.
-        return new PlayerGameResponseModel(gameState);
+            }
+            // Return the current state of the game with a response model.
+            return new PlayerGameResponseModel(gameState);
     } else {
-            return null;
+            return new PlayerGameResponseModel(gameState);
         }
     }
 

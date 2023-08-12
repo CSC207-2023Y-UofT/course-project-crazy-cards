@@ -43,6 +43,10 @@ public class PlayerGameResponseModel {
      * @return An array of Strings representing the Card as {value, suit}.
      */
     private CardResponseModel cardToModel(Card card) {
+
+        if (card == null) {
+            return null;
+        }
         return new CardResponseModel(card.getSuit(), card.getRank());
     }
 

@@ -1,14 +1,15 @@
 package entities;
 
-import java.util.*;
-
 import enums.Rank;
 import enums.Suit;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 // A StandardDeck containing 52 Cards, no Jokers
 public class StandardDeck implements Deck {
 
-    private ArrayList<Card> cards = new ArrayList<>();
+    private final ArrayList<Card> cards = new ArrayList<>();
 
     private final static Suit[] suits = {Suit.SPADE, Suit.HEART, Suit.DIAMOND, Suit.CLUB};
     private final static Rank[] rank = {Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX, Rank.SEVEN,
@@ -32,6 +33,17 @@ public class StandardDeck implements Deck {
      */
     public void addCardToDeck(Card card) {
         this.cards.add(card);}
+
+    /**
+     * Remove a Card from the top of the Deck, as a Player would when picking up a Card in-game.
+     * @return a Card from the top of the Deck.
+     */
+    public Card playerPickUp() {
+        if(cards.size() > 0) {
+            return this.cards.remove(0);
+        }
+        return null;
+    }
 
     /**
      * Remove a Card from this randomly shuffled Deck, from the *end* of the ArrayList.

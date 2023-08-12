@@ -1,13 +1,13 @@
 package ui.factories;
 
-import ui.windows.CardDelegator;
-import ui.windows.GameController;
-import ui.windows.GameDelegator;
-import ui.windows.GameDisplay;
-import ui.windows.GameDrawDelegator;
-import ui.windows.GamePlayDelegator;
-import ui.windows.GameSkipDelegator;
-import ui.windows.GameWindow;
+import ui.windows.game.CardDelegator;
+import ui.windows.game.GameController;
+import ui.windows.game.GameDelegator;
+import ui.windows.game.GameDisplay;
+import ui.windows.game.GameDrawDelegator;
+import ui.windows.game.GamePlayDelegator;
+import ui.windows.game.GameSkipDelegator;
+import ui.windows.game.GameWindow;
 import ui.windows.Window;
 
 public class GameWindowFactory implements WindowFactory {

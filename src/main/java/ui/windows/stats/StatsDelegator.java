@@ -1,4 +1,6 @@
-package ui.windows;
+package ui.windows.stats;
+
+import ui.windows.stats.StatsController;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -17,6 +19,10 @@ public class StatsDelegator implements ActionListener {
      */
     public StatsDelegator(StatsController controller) {
         this.controller = controller;
+    }
+
+    public StatsController getController() {
+        return controller;
     }
 
     /**
