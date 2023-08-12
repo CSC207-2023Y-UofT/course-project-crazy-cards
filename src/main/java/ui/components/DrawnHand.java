@@ -2,16 +2,9 @@ package ui.components;
 
 import enums.Rank;
 import enums.Suit;
-import ui.windows.game.CardDelegator;
 
-import javax.swing.JPanel;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLayeredPane;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -21,6 +14,7 @@ public class DrawnHand extends JPanel {
 
     private int visible;
     private List<DrawnCard> drawnCards;
+
 
     public DrawnHand(List<DrawnCard> drawnCards) {
         this.drawnCards = drawnCards;
@@ -79,11 +73,13 @@ public class DrawnHand extends JPanel {
     public void setCard(int index, Suit suit, Rank rank) {
         DrawnCard card = drawnCards.get(index);
        //  DrawnCard newCard = new DrawnCard(suit, rank);
-
+        card.setSuit(suit);
+        card.setRank(rank);
         card.setSuitLabel(suit);
         card.setRankLabel(rank);
         card.setVisible(true);
         // TODO: justDrawn implementation
+        updateCards();
     }
 
     /**
@@ -91,7 +87,6 @@ public class DrawnHand extends JPanel {
      * @param index The index of the card to start hiding from.
      */
     public void hideCards(int index) {
-        visible = index;
         for (int i = index; i < drawnCards.size(); i++) {
             DrawnCard card = drawnCards.get(i);
             card.setVisible(false);
@@ -101,11 +96,11 @@ public class DrawnHand extends JPanel {
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
-        double offset = (double) width / this.visible;
+        double offset = (double) width / drawnCards.size();
 
         cardPane.removeAll();
 
-        for (int i = 0; i < this.visible; i++) {
+        for (int i = 0; i < drawnCards.size(); i++) {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 

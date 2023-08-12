@@ -1,5 +1,6 @@
 package ui.windows.game;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +27,11 @@ public class GamePlayDelegator implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        JButton button = (JButton) e.getSource();
+        JPanel panel = (JPanel) button.getParent().getParent().getParent().getParent();
+        GameDisplay display = (GameDisplay) panel;
+        String currentPlayer = display.getCurrentPlayer();
+        controller.setSelectedOwner(currentPlayer);
         controller.playCard();
     }
 }

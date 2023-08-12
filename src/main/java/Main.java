@@ -3,12 +3,11 @@ import controllers.GameCreationController;
 import database.CSVDatabase;
 import enums.WindowName;
 import ui.factories.*;
-import ui.windows.*;
+import ui.windows.Window;
 import ui.windows.creation.CreationDisplay;
 import ui.windows.game.GameController;
 import ui.windows.game.GameDisplay;
 import ui.windows.layout_managers.CardLayoutManager;
-import ui.windows.layout_managers.ICardLayoutManager;
 import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.stats.StatsController;
 import ui.windows.stats.StatsDisplay;
@@ -26,7 +25,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 
-        ICardLayoutManager layoutManager = new CardLayoutManager(frame);
+        CardLayoutManager layoutManager = new CardLayoutManager(frame);
 
         MenuWindowFactory menuFactory = new MenuWindowFactory();
         RuleWindowFactory ruleFactory = new RuleWindowFactory();
@@ -64,7 +63,7 @@ public class Main {
         GameDisplay gameDisplay = (GameDisplay) gameWindow.getPanel();
         GameController gameController = gameDisplay.getController();
         creationDisplay.setGameController(gameController);
-        creationDisplay.setLayoutManager((CardLayoutManager) layoutManager);
+        creationDisplay.setLayoutManager(layoutManager);
 
 
         frame.setVisible(true);
