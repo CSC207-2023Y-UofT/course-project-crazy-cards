@@ -51,7 +51,8 @@ public class GameDisplay extends JPanel{
     }
 
     public void updateView(GameDisplayData data) {
-        currentPlayerLabel.setText(data.getCurrentPlayer());
+        currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
+        currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
         updateHand(data.getCards());
     }
 
