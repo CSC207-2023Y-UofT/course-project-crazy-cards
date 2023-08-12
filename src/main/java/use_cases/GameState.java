@@ -41,9 +41,8 @@ public class GameState implements GameObserver {
     @Override
     public void updateGameObserver(GameAccess game) {
         // Add the Player whose turn it was previous to the HashMap and remove the new current Player from it.
-        Player prevPlayer = this.currentPlayer;
-        this.playersAndCards.put(prevPlayer, prevPlayer.getNumCards());
         this.currentPlayer = game.getCurrentTurn();
+        this.playersAndCards = updatePlayersAndCards(game.getPlayers());
         this.playersAndCards.remove(this.currentPlayer);
         this.currentCard = game.getCurrentCard();
         this.currentDrawnCard = game.getDrawnCard();
@@ -96,6 +95,16 @@ public class GameState implements GameObserver {
      * @return A HashMap with keys being the other Player entities, and values being their respective number of cards.
      */
     public HashMap<Player, Integer> getPlayersAndCards() {
+        return playersAndCards;
+    }
+
+    private HashMap<Player, Integer> updatePlayersAndCards(ArrayList<Player> players) {
+        HashMap<Player, Integer> playersAndCards = new HashMap<>();
+        for (Player player: players) {
+            if (player != this.currentPlayer) {
+                playersAndCards.put(player, player.getNumCards());
+            }
+        }
         return playersAndCards;
     }
 }
