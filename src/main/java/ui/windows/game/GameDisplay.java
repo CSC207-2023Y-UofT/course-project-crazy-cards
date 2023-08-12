@@ -18,6 +18,7 @@ public class GameDisplay extends JPanel{
     private GameDrawDelegator drawDelegator;
     private CardDelegator cardDelegator;
     private DrawnHand currentHand;
+    private CardDisplayData currentCard;
     private JPanel header;
     private JPanel center;
     private JPanel footer;
@@ -40,6 +41,7 @@ public class GameDisplay extends JPanel{
         this.skipDelegator = gameDelegator.getSkipDelegator();
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
+//        this.currentCard = new CardDisplayData(Suit.HEART, Rank.ACE);
 
         currentHand = new DrawnHand(new ArrayList<>());
         for(int i = 0; i < 8; i++){
@@ -60,6 +62,7 @@ public class GameDisplay extends JPanel{
         currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
         currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
         updateHand(data.getCards());
+        this.currentCard = data.getCurrentCard();
     }
 
     private void updateHand(ArrayList<CardDisplayData> cards) {
@@ -135,6 +138,11 @@ public class GameDisplay extends JPanel{
         gameBoardConstraints.weightx = 0.67;
         gameBoardConstraints.weighty = 1;
         gameBoard = new JPanel();
+        JLabel currCardLabel = new JLabel("Current card:");
+        currCardLabel.setFont(new Font("serif", Font.PLAIN, 20));
+        DrawnCard currCard = new DrawnCard(this.currentCard.getSuit(), this.currentCard.getRank());
+        gameBoard.add(currCardLabel);
+        gameBoard.add(currCard);
         top.add(gameBoard, gameBoardConstraints);
 
         // The bottom JPanel stores the hand and the buttons
