@@ -47,8 +47,6 @@ public class Main {
         controller.setDatabase(database);
         Window gameWindow = factory.createWindow();
 
-
-        layoutManager = new CardLayoutManager(frame);
         layoutManager.addPane(menuWindow);
         layoutManager.addPane(ruleWindow);
         layoutManager.addPane(statsWindow);
