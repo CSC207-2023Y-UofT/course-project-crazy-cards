@@ -30,13 +30,8 @@ public class GameState implements GameObserver {
         this.currentPlayer = game.getCurrentTurn();
         this.currentCard = game.getCurrentCard();
         this.currentDrawnCard = game.getDrawnCard();
-        for (Player player: game.getPlayers()) {
-            if(player != currentPlayer) {
-                this.playersAndCards.put(player, player.getNumCards());
-            }
-        }
+
         this.hasWinner = game.hasWinner();
-        this.currentPlayerCards = currentPlayer.getCards();
     }
 
     /**

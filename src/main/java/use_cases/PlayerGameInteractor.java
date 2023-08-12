@@ -11,16 +11,16 @@ import enums.Suit;
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
     private GameAccess access;
-    private ObserverNotifier notifier;
+    private IObserverNotifier notifier;
     private GameState gameState;
 
     /**
      * Construct a PlayerGameInteractor with the given GameAccess, ObserverNotifier and GameState.
-     * @param access The GameAccess which allows the Interactor to access the Game.
-     * @param notifier The ObserverNotifier which allows the Interactor to notify the Observers.
-     * @param gameState The GameState which allows the Interactor to access the Game's state.
+     * @param access exposed manipulation methods for the Game.
+     * @param notifier delegate to notify Game observers of an update.
+     * @param gameState the current state of the Game.
      */
-    public PlayerGameInteractor(GameAccess access, ObserverNotifier notifier, GameState gameState) {
+    public PlayerGameInteractor(GameAccess access, IObserverNotifier notifier, GameState gameState) {
         this.access = access;
         this.notifier = notifier;
         this.gameState = gameState;

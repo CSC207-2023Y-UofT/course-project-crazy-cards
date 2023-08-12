@@ -18,7 +18,8 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
 
     /**
      * Initialize a GameCreationInteractor given a particular data access object.
-     * @param dataAccess The DataAccess object providing interaction with the database.
+     * @param dataAccess a database interactor.
+     * @param access exposed methods to build a Game.
      */
     public GameCreationInteractor(DataAccess dataAccess, CreationAccess access) {
         this.dataAccess = dataAccess;
