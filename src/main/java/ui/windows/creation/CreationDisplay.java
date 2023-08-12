@@ -3,11 +3,14 @@ package ui.windows.creation;
 import controllers.GameBridge;
 import controllers.GameCreationController;
 import controllers.PlayerCreationInformation;
+<<<<<<< Updated upstream:src/main/java/ui/windows/creation/CreationDisplay.java
 import controllers.PlayerGameController;
 import enums.WindowName;
 import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
+import enums.WindowName;
+import ui.components.NavigationButton;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -26,8 +29,10 @@ public class CreationDisplay extends JPanel implements ActionListener {
     private GameController gameController;
     private CardLayoutManager layoutManager;
     private final GameCreationController controller;
-private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
-private final ArrayList<JTextField> textFieldList = new ArrayList<>();
+    private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
+    private final ArrayList<JTextField> textFieldList = new ArrayList<>();
+
+    private NavigationButton createGameButton;
 
     /**
      * Construct a new CreationDisplay.
@@ -37,16 +42,11 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
         this.controller = controller;
         initializeGUIComponents();
     }
-    public void setLayoutManager(CardLayoutManager layoutManager) {
-        this.layoutManager = layoutManager;
-    }
-    public GameCreationController getController() {
-        return controller;
+
+    public void setNavigator(PaneDelegator navigator) {
+        createGameButton.addActionListener(navigator);
     }
 
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
     /**
      * Initialize the GUI components for the Game Creation display.
      */
@@ -58,7 +58,7 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
         this.createFieldAndBoxPanels();
 
         // Create the button for submitting player info.
-        JButton createGameButton = new JButton("Play Game!");
+        createGameButton = new NavigationButton(WindowName.GAME, "Play Game");
         createGameButton.addActionListener(this);
         createGameButton.setPreferredSize(new Dimension(800, 50));
         createGameButton.setFont(new Font("serif", Font.BOLD, 20));
@@ -166,14 +166,9 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
             }
         }
         boolean gameCreated = controller.createGameResponse(controllerInput);
-        PlayerGameInputBoundary playerGameInteractor = controller.getPlayerGameInteractor();
-        GameBridge bridge = new PlayerGameController(playerGameInteractor);
-        gameController.setBridge(bridge);
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
-            gameController.startGame();
-            layoutManager.setPane(WindowName.GAME);
-
+            
         } else {
             JLabel message = new JLabel("Please enter valid input. That is, at least 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);
