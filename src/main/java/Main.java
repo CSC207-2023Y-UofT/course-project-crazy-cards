@@ -12,11 +12,7 @@ import enums.Rank;
 import enums.Suit;
 import enums.WindowName;
 import ui.components.NavigationButton;
-import ui.factories.CreatorWindowFactory;
-import ui.factories.GameWindowFactory;
-import ui.factories.MenuWindowFactory;
-import ui.factories.RuleWindowFactory;
-import ui.factories.StatsWindowFactory;
+import ui.factories.*;
 import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.ICardLayoutManager;
 import ui.windows.menu.MenuWindow;
@@ -59,18 +55,21 @@ public class Main {
         StatsWindowFactory statsFactory = new StatsWindowFactory(new CSVDatabase());
         GameWindowFactory gameFactory = new GameWindowFactory(gameController);
         CreatorWindowFactory creatorFactory = new CreatorWindowFactory(creationController);
+        HowtoWindowFactory howtoFactory = new HowtoWindowFactory();
 
         Window menuWindow = menuFactory.createWindow();
         Window ruleWindow = ruleFactory.createWindow();
         Window statsWindow = statsFactory.createWindow();
         Window gameWindow = gameFactory.createWindow();
         Window creatorWindow = creatorFactory.createWindow();
+        Window howtoWindow = howtoFactory.createWindow();
 
         layoutManager.addPane(menuWindow);
         layoutManager.addPane(ruleWindow);
         layoutManager.addPane(statsWindow);
         layoutManager.addPane(gameWindow);
         layoutManager.addPane(creatorWindow);
+        layoutManager.addPane(howtoWindow);
 
         PaneDelegator paneDelegator = new PaneDelegator(layoutManager);
         menuWindow.setNavigator(paneDelegator);
