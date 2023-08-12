@@ -13,15 +13,16 @@ import java.util.Collections;
 public class GameCreationInteractor implements GameCreationInputBoundary {
     static final int NUMBERCARDS = 5;
     private final DataAccess dataAccess;
-    private Game createdGame;
-    private GameState newGameState;
+
+    private CreationAccess access;
 
     /**
      * Initialize a GameCreationInteractor given a particular data access object.
      * @param dataAccess The DataAccess object providing interaction with the database.
      */
-    public GameCreationInteractor(DataAccess dataAccess) {
+    public GameCreationInteractor(DataAccess dataAccess, CreationAccess access) {
         this.dataAccess = dataAccess;
+        this.access = access;
     }
 
 
@@ -37,25 +38,8 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         }
         Deck deck = buildDeck();
         ArrayList<Player> players = buildPlayers(request, deck);
-        Game game = buildGame(players, deck);
-        createdGame = game;
+        access.buildGame(players, deck);
         return new GameCreationResponseModel(true);
-    }
-
-    /**
-     * Get the Game this interactor has created.
-     * @return the Game instance that has been created by this class.
-     */
-    public Game getCreatedGame() {
-        return createdGame;
-    }
-
-    /**
-     * Get the GameState created by this class.
-     * @return a GameState instance.
-     */
-    public GameState getNewGameState() {
-        return newGameState;
     }
 
     /**
@@ -148,22 +132,6 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
             }
         }
         return hp;
-    }
-
-    /**
-     * Build a Game given the attributes below. Also constructs a GameState to be added as an Observer of the Game.
-     * @param players The Players that will play the Game to be built.
-     * @param gameDeck The Deck the Game will use.
-     * @return a Game
-     */
-    private Game buildGame(ArrayList<Player> players, Deck gameDeck) {
-        Game game = new Game(gameDeck, players);
-        Card firstCard = gameDeck.removeCardFromDeck();
-        game.putCardDown(firstCard);
-        GameState gameState = new GameState(game);
-        game.addObserver(gameState);
-        newGameState = gameState;
-        return game;
     }
 
     /**
