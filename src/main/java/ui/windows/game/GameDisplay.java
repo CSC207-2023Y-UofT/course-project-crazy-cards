@@ -18,13 +18,14 @@ public class GameDisplay extends JPanel{
     private GameDrawDelegator drawDelegator;
     private CardDelegator cardDelegator;
     private DrawnHand currentHand;
+    private DrawnCard currentCard;
     private JPanel header;
     private JPanel center;
     private JPanel footer;
     private JLabel currentPlayerLabel;
     private JTable scores;
     private JPanel gameBoard;
-    private JPanel hand;   
+    private JPanel hand;
     private JPanel buttons;
     private JButton playButton;
     private JButton drawButton;
@@ -40,13 +41,13 @@ public class GameDisplay extends JPanel{
         this.skipDelegator = gameDelegator.getSkipDelegator();
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
+        this.currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
 
         currentHand = new DrawnHand(new ArrayList<>());
         for(int i = 0; i < 8; i++){
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
         currentHand.addMouseListener(cardDelegator);
-
         initializeGUIComponents();
     }
 
@@ -60,6 +61,13 @@ public class GameDisplay extends JPanel{
         currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
         currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
         updateHand(data.getCards());
+        Suit newSuit = data.getCurrentCard().getSuit();
+        Rank newRank = data.getCurrentCard().getRank();
+        currentCard.setRank(newRank);
+        currentCard.setRankLabel(newRank);
+        currentCard.setSuitLabel(newSuit);
+        currentCard.setSuit(newSuit);
+        currentCard.setVisible(true);
     }
 
     private void updateHand(ArrayList<CardDisplayData> cards) {
@@ -135,6 +143,10 @@ public class GameDisplay extends JPanel{
         gameBoardConstraints.weightx = 0.67;
         gameBoardConstraints.weighty = 1;
         gameBoard = new JPanel();
+        JLabel currCardLabel = new JLabel("Current card:");
+        currCardLabel.setFont(new Font("serif", Font.PLAIN, 20));
+        gameBoard.add(currCardLabel);
+        gameBoard.add(currentCard);
         top.add(gameBoard, gameBoardConstraints);
 
         // The bottom JPanel stores the hand and the buttons
