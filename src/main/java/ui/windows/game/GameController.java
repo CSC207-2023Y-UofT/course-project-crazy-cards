@@ -89,6 +89,10 @@ public class GameController {
         display.updateView(data);
     }
 
+    /**
+     * Fires when the user requests to start the game.
+     * Passes request to game logic and sends response to display.
+     */
     public void requestStart() {
         PlayerGameResponseModel response = bridge.getResponse(null, null, null, TurnAction.START);
 
@@ -97,6 +101,9 @@ public class GameController {
         display.updateView(data);
     }
 
+    /**
+     * Helper method to convert a PlayerGameResponseModel to a GameDisplayData.
+     */
     private GameDisplayData getGameDisplayData(PlayerGameResponseModel response) {
         String currentPlayer = response.getCurrentPlayerName();
         ArrayList<CardResponseModel> cardResponses = response.getPlayerCards();
@@ -109,6 +116,9 @@ public class GameController {
         return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()));
     }
 
+    /**
+     * Helper method to update the current owner of the game.
+     */
     private void updateCurrentOwner(PlayerGameResponseModel response) {
         selectedOwner = response.getCurrentPlayerName();
     }
