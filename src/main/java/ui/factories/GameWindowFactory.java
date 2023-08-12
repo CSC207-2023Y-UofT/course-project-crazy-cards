@@ -1,5 +1,6 @@
 package ui.factories;
 
+import controllers.GameBridge;
 import ui.windows.game.CardDelegator;
 import ui.windows.game.GameController;
 import ui.windows.game.GameDelegator;
@@ -11,6 +12,11 @@ import ui.windows.game.GameWindow;
 import ui.windows.Window;
 
 public class GameWindowFactory implements WindowFactory {
+    private GameBridge bridge;
+
+    public GameWindowFactory(GameBridge bridge) {
+        this.bridge = bridge;
+    }
 
     /**
      * Using the different controllers, delegators and displays created, return a new GameWindow for
@@ -19,7 +25,7 @@ public class GameWindowFactory implements WindowFactory {
      */
     @Override
     public Window createWindow() {
-        GameController controller = new GameController();
+        GameController controller = new GameController(bridge);
         
         GamePlayDelegator playDel = new GamePlayDelegator(controller);
         GameDrawDelegator drawDel = new GameDrawDelegator(controller);
