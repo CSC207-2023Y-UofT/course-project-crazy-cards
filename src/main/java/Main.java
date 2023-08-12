@@ -24,7 +24,7 @@ import ui.windows.stats.StatsController;
 import ui.windows.stats.StatsDisplay;
 import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.Window;
-import ui.windows.creation.CreationDisplay;
+import ui.windows.creator.CreatorDisplay;
 import use_cases.DataAccess;
 import use_cases.GameCreationInputBoundary;
 import use_cases.GameCreationInteractor;
@@ -52,7 +52,7 @@ public class Main {
         PlayerGameController gameController = new PlayerGameController(gameBoundary);
         GameCreationController creationController = new GameCreationController(creationBoundary);
 
-        ICardLayoutManager layoutManager = new CardLayoutManager(frame);
+        ICardLayoutManager layoutManager = new CardLayoutManager(frame, WindowName.MENU);
 
         MenuWindowFactory menuFactory = new MenuWindowFactory();
         RuleWindowFactory ruleFactory = new RuleWindowFactory();
