@@ -101,6 +101,9 @@ public class GameDisplay extends JPanel{
         scores.repaint();
     }
 
+    /*
+     * Draws the winscreen popup.
+     */
     private void winScreen() {
         String winner = currentPlayer;
         goToMenu.setPreferredSize(new Dimension(200, 50));
