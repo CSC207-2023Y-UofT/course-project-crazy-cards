@@ -59,6 +59,9 @@ public class GameDisplay extends JPanel{
         initializeGUIComponents();
     }
 
+    /**
+     * Gets the game state after the game is started.
+     */
     public void onSwitch() {
         switchUpdater.update();
     }
