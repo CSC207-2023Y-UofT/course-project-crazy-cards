@@ -80,13 +80,14 @@ public class GameDisplay extends JPanel{
 
     private void winScreen() {
         String winner = getCurrentPlayer();
-        System.out.println("The Game has been won, please exit the application.");
-        goToMenu = new NavigationButton(WindowName.MENU, "Go to menu");
-        NavigationButton[] buttons = {goToMenu};
-        String[] winOptions = {"Go to Main Menu"};
-        JOptionPane.showOptionDialog(this, winner + " has won!",
+       NavigationButton[] buttons = {goToMenu};
+       String[] winOptions = {"Go to Main Menu"};
+       int num = JOptionPane.showOptionDialog(this, winner + " has won!",
                 "Game is over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null, buttons, 0);
+               null, buttons, 0);
+       if(num == JOptionPane.YES_OPTION) {
+           goToMenu.doClick();
+       }
 
     }
 
