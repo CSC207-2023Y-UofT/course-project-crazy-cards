@@ -1,16 +1,10 @@
 package ui.components;
 
-import javax.swing.JPanel;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLayeredPane;
-
-import enums.Suit;
 import enums.Rank;
+import enums.Suit;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -21,6 +15,10 @@ public class DrawnHand extends JPanel {
     private int visible;
     private List<DrawnCard> drawnCards;
 
+    /**
+     * Constructor for DrawnHand that displays a player's hand on the screen.
+     * @param drawnCards The list of DrawnCards within the user's hand about to be displayed.
+     */
     public DrawnHand(List<DrawnCard> drawnCards) {
         this.drawnCards = drawnCards;
 
@@ -46,6 +44,10 @@ public class DrawnHand extends JPanel {
         });
     }
 
+    /**
+     * Add a mouse listener to each card for gameplay purposes.
+     * @param listener   the mouse listener
+     */
     @Override
     public void addMouseListener(MouseListener listener) {
         for (DrawnCard card : drawnCards) {
@@ -53,18 +55,17 @@ public class DrawnHand extends JPanel {
         }
     }
 
+    /**
+     * Add a given card to the DrawnHand, in order to be displayed.
+     * @param card
+     */
     public void addCard(DrawnCard card) {
         drawnCards.add(card);
     }
 
-    public void addCards(List<DrawnCard> cards) {
-        drawnCards.addAll(cards);
-    }
-
-    public void removeCard(DrawnCard card) {
-        drawnCards.remove(card);
-    }
-
+    /**
+     * Initializes the GUI components necessary for the DrawnHand to be displayed.
+     */
     private void initializeGUIComponents() {
         setLayout(new BorderLayout());
 
@@ -75,12 +76,21 @@ public class DrawnHand extends JPanel {
         add(cardPane);
     }
 
+    /**
+     * Sets a new display for a given DrawnCard within the user's DrawnHand to be displayed.
+     * @param index Index of the specific DrawnCard to be updated, in the List of DrawnCards within the user's hand.
+     * @param suit The new suit of the card that is being updated.
+     * @param rank The new rank/value of the card that is being updated.
+     */
     public void setCard(int index, Suit suit, Rank rank) {
         DrawnCard card = drawnCards.get(index);
         card.setSuit(suit);
         card.setRank(rank);
+        card.setSuitLabel(suit);
+        card.setRankLabel(rank);
         card.setVisible(true);
         // TODO: justDrawn implementation
+        updateCards();
     }
 
     /**
@@ -88,24 +98,28 @@ public class DrawnHand extends JPanel {
      * @param index The index of the card to start hiding from.
      */
     public void hideCards(int index) {
+        visible = index;
         for (int i = index; i < drawnCards.size(); i++) {
             DrawnCard card = drawnCards.get(i);
             card.setVisible(false);
         }
     }
-    
+
+    /**
+     * Update the display of the DrawnHand by setting new positions of each card and changing the display between users.
+     */
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
-        double offset = (double) width / drawnCards.size();
+        double offset = (double) width / visible;
 
         cardPane.removeAll();
 
-        for (int i = 0; i < drawnCards.size(); i++) {
+        for (int i = 0; i < visible; i++) {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 
-            card.setBounds((int)(i * offset + 28), (height / 2) -30, 50, 65);
+            card.setBounds((int)(i * offset + 10), (height / 2) - 30, 70, 95);
         }
     }
 }

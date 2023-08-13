@@ -1,66 +1,69 @@
-
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
-
+import controllers.GameCreationController;
+import controllers.PlayerGameController;
+import database.CSVDatabase;
 import entities.*;
-import enums.Rank;
-import enums.Suit;
 import enums.WindowName;
-import ui.components.NavigationButton;
-import ui.factories.GameWindowFactory;
-import ui.factories.MenuWindowFactory;
-import ui.factories.RuleWindowFactory;
-import ui.factories.StatsWindowFactory;
-import ui.windows.CardLayoutManager;
-import ui.windows.ICardLayoutManager;
-import ui.windows.MenuWindow;
-import ui.windows.PaneDelegator;
+import ui.factories.*;
+import ui.windows.layout_managers.*;
 import ui.windows.Window;
+import use_cases.DataAccess;
+import use_cases.GameCreationInputBoundary;
+import use_cases.GameCreationInteractor;
+import use_cases.GameState;
+import use_cases.PlayerGameInputBoundary;
+import use_cases.PlayerGameInteractor;
 
 public class Main {
     public static void main(String[] args) {
-        Deck deck = new StandardDeck();
-        ArrayList<Player> players = new ArrayList<>();
-        ArrayList<Card> cards1 = new ArrayList<>();
-        cards1.add(new Card(Suit.CLUB, Rank.ACE));
-        cards1.add(new Card(Suit.CLUB, Rank.TWO));
-        players.add(new HumanPlayer("Player 1", new Hand(cards1), 0, 0));
-
-        ArrayList<Card> cards2 = new ArrayList<>();
-        cards2.add(new Card(Suit.HEART, Rank.THREE));
-        cards2.add(new Card(Suit.HEART, Rank.FOUR));
-        players.add(new HumanPlayer("Player 2", new Hand(cards2), 0, 0));
-
-        Game game = new Game(deck, players);
-        
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 
-        ICardLayoutManager layoutManager = new CardLayoutManager(frame);
+        GameManager manager = new GameManager();
+        GameState state = new GameState(manager);
+        manager.addObserver(state);
+
+        DataAccess dataAccess = new CSVDatabase();
+        manager.addObserver(dataAccess);
+
+        IObserverNotifier notifier = new ObserverNotifier(manager);
+
+        PlayerGameInputBoundary gameBoundary = new PlayerGameInteractor(manager, notifier, state);
+        GameCreationInputBoundary creationBoundary = new GameCreationInteractor(dataAccess, manager);
+
+        PlayerGameController gameController = new PlayerGameController(gameBoundary);
+        GameCreationController creationController = new GameCreationController(creationBoundary);
+
+        ICardLayoutManager layoutManager = new CardLayoutManager(frame, WindowName.MENU);
 
         MenuWindowFactory menuFactory = new MenuWindowFactory();
         RuleWindowFactory ruleFactory = new RuleWindowFactory();
-        StatsWindowFactory statsFactory = new StatsWindowFactory();
-        GameWindowFactory factory = new GameWindowFactory();
+        StatsWindowFactory statsFactory = new StatsWindowFactory(new CSVDatabase());
+        GameWindowFactory gameFactory = new GameWindowFactory(gameController);
+        CreatorWindowFactory creatorFactory = new CreatorWindowFactory(creationController);
+        HowtoWindowFactory howtoFactory = new HowtoWindowFactory();
 
         Window menuWindow = menuFactory.createWindow();
         Window ruleWindow = ruleFactory.createWindow();
         Window statsWindow = statsFactory.createWindow();
-        Window gameWindow = factory.createWindow();
+        Window gameWindow = gameFactory.createWindow();
+        Window creatorWindow = creatorFactory.createWindow();
+        Window howtoWindow = howtoFactory.createWindow();
 
-        layoutManager = new CardLayoutManager(frame);
         layoutManager.addPane(menuWindow);
         layoutManager.addPane(ruleWindow);
         layoutManager.addPane(statsWindow);
         layoutManager.addPane(gameWindow);
+        layoutManager.addPane(creatorWindow);
+        layoutManager.addPane(howtoWindow);
 
         PaneDelegator paneDelegator = new PaneDelegator(layoutManager);
         menuWindow.setNavigator(paneDelegator);
         statsWindow.setNavigator(paneDelegator);
         ruleWindow.setNavigator(paneDelegator);
+        creatorWindow.setNavigator(paneDelegator);
+        howtoWindow.setNavigator(paneDelegator);
 
         frame.setVisible(true);
     }

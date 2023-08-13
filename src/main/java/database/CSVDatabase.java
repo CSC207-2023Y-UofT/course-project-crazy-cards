@@ -1,6 +1,8 @@
 package database;
 
+import entities.GameAccess;
 import entities.HumanPlayer;
+import entities.Player;
 import use_cases.DataAccess;
 import use_cases.PlayerInformation;
 
@@ -53,5 +55,27 @@ public class CSVDatabase implements DataAccess {
         bw.newLine();
         bw.close();
         return true;
+    }
+
+    /**
+     * Update this GameObserver observing the given ObservableGame.
+     * This database will continually receive updates when a Game is updated, and if there is a winner
+     * then update the database to now have all the HumanPlayer's in the Game wins and losses.
+     * @param game An ObservableGame that has notified this GameObserver of an update.
+     */
+    @Override
+    public void updateGameObserver(GameAccess game) {
+        boolean hasWinner = game.hasWinner();
+        if(hasWinner) {
+            for(Player p: game.getPlayers()) {
+                if(p instanceof HumanPlayer) {
+                    try {
+                        savePlayer((HumanPlayer) p);
+                    } catch (IOException ignored) {
+
+                    }
+                }
+            }
+        }
     }
 }

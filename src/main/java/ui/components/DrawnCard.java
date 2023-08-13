@@ -1,12 +1,12 @@
 package ui.components;
 
-import java.awt.*;
-import java.util.HashMap;
-
-import javax.swing.*;
-
 import enums.Rank;
 import enums.Suit;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.HashMap;
 
 public class DrawnCard extends JPanel {
     private static final int HIGHLIGHT_OFFSET = 15;
@@ -15,6 +15,8 @@ public class DrawnCard extends JPanel {
     private int index;
     private boolean highlighted;
     private static HashMap<Rank, String> rankToString;
+    private JLabel suitLabel;
+    private JLabel rankLabel;
 
     /**
      * Constructor for the DrawnCard class, which initializes all the components necessary for the card.
@@ -85,51 +87,76 @@ public class DrawnCard extends JPanel {
      * Create the JPanel for each card, and display the suit and value accordingly.
      */
     private void initializeGUIComponents() {
-        Dimension dimension = new Dimension(50, 65);
+        Dimension dimension = new Dimension(70, 95);
         setPreferredSize(dimension);
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, true));
         // Define colours
         Color red = new Color(180, 20, 20);
         Color black = Color.BLACK;
 
-        // Define Integers (for layering's sake in the JLayeredPane)
-        Integer back = 1;
-        Integer front = 2;
-
         // Define font to be used
-        Font font = new Font("monospaced", Font.BOLD, 37);
+        Font font = new Font("monospaced", Font.BOLD, 50);
 
         // Creating objects
         JLayeredPane pane = new JLayeredPane();
         pane.setPreferredSize(dimension);
-        String valueString = rankToString.get(this.rank);
-        JLabel value = new JLabel(valueString);
-        value.setFont(font);
-        value.setBounds(22, 8, 50, 65);
-        JLabel suits = new JLabel();
-        suits.setFont(font);
-        suits.setBounds(5, -18, 50, 65);
+        String rankString = rankToString.get(this.rank);
+        rankLabel = new JLabel(rankString);
+        rankLabel.setFont(font);
+        rankLabel.setBounds(-5, 10, 70, 95);
+        rankLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        suitLabel = new JLabel();
+        suitLabel.setFont(font);
+        suitLabel.setBounds(5, -30, 70, 95);
+        suitLabel.setHorizontalAlignment(SwingConstants.LEFT);
         switch (this.suit) {
-            case CLUB: suits.setText("<html>&#9827;</html>");
-            suits.setForeground(black);
-            value.setForeground(red);
+            case CLUB: suitLabel.setText("<html>&#9827;</html>");
+            suitLabel.setForeground(black);
+            rankLabel.setForeground(red);
             break;
-            case SPADE: suits.setText("<html>&#9824;</html>");
-            suits.setForeground(black);
-            value.setForeground(red);
+            case SPADE: suitLabel.setText("<html>&#9824;</html>");
+            suitLabel.setForeground(black);
+            rankLabel.setForeground(red);
             break;
-            case HEART: suits.setText("<html>&#9829;</html>");
-            suits.setForeground(red);
-            value.setForeground(black);
+            case HEART: suitLabel.setText("<html>&#9829;</html>");
+            suitLabel.setForeground(red);
+            rankLabel.setForeground(black);
             break;
-            case DIAMOND: suits.setText("<html>&#9830;</html>");
-            suits.setForeground(red);
-            value.setForeground(black);
+            case DIAMOND: suitLabel.setText("<html>&#9830;</html>");
+            suitLabel.setForeground(red);
+            rankLabel.setForeground(black);
             break;
         }
-        pane.add(suits, back);
-        pane.add(value, front);
+        pane.add(suitLabel);
+        pane.add(rankLabel);
         add(pane);
+    }
+
+    public void setSuitLabel(Suit suit) {
+        Color red = new Color(180, 20, 20);
+        Color black = Color.BLACK;
+        switch (suit) {
+            case CLUB: suitLabel.setText("<html>&#9827;</html>");
+                suitLabel.setForeground(black);
+                rankLabel.setForeground(red);
+                break;
+            case SPADE: suitLabel.setText("<html>&#9824;</html>");
+                suitLabel.setForeground(black);
+                rankLabel.setForeground(red);
+                break;
+            case HEART: suitLabel.setText("<html>&#9829;</html>");
+                suitLabel.setForeground(red);
+                rankLabel.setForeground(black);
+                break;
+            case DIAMOND: suitLabel.setText("<html>&#9830;</html>");
+                suitLabel.setForeground(red);
+                rankLabel.setForeground(black);
+                break;
+        }
+    }
+
+    public void setRankLabel(Rank rank) {
+        this.rankLabel.setText(rankToString.get(rank));
     }
 
     /**

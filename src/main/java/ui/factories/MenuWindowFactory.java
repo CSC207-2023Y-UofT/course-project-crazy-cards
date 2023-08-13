@@ -1,7 +1,7 @@
 package ui.factories;
 
-import ui.windows.MenuDisplay;
-import ui.windows.MenuWindow;
+import ui.windows.menu.MenuDisplay;
+import ui.windows.menu.MenuWindow;
 import ui.windows.Window;
 
 public class MenuWindowFactory implements WindowFactory {

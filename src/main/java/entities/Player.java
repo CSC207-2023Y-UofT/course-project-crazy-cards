@@ -69,7 +69,7 @@ public abstract class Player {
      * Have this Player pick up a Card from the Deck of the provided Game.
      */
     public void pickUpCard(Game game) {
-        Card cardToAdd = game.getGameDeck().removeCardFromDeck();
+        Card cardToAdd = game.getGameDeck().playerPickUp();
         this.hand.addCard(cardToAdd);
         game.setCurrentTurnHasPickedUpTrue();
     }

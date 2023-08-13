@@ -27,7 +27,7 @@ class GameCreationInteractorTest {
     @BeforeEach
     public void setUp() {
         DataAccess dataAccess = new CSVDatabase();
-        interactor = new GameCreationInteractor(dataAccess);
+        interactor = new GameCreationInteractor();
         validRequest = new GameCreationRequestModel(new HashMap<>());
         invalidRequest = new GameCreationRequestModel(new HashMap<>());
         validRequest.getPlayersInfo().put("p1", false);
