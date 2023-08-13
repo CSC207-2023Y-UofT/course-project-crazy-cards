@@ -2,6 +2,9 @@ package entities;
 
 import java.util.ArrayList;
 
+import enums.Rank;
+import enums.Suit;
+
 /**
  * Proxy class for Game.
  * 
@@ -70,6 +73,20 @@ public class GameManager implements CreationAccess,
     }
 
     /**
+     * Gets the player who would be next in the game.
+     * @return the next player
+     */
+    @Override
+    public Player getNextTurn() {
+        if (isGameReady()) {
+            return game.getNextTurn();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
      * Gets the current (last played) card in the game.
      * @return the current card
      */
@@ -101,9 +118,9 @@ public class GameManager implements CreationAccess,
      * Changes the current turn to the next player.
      */
     @Override
-    public void changeCurrentTurn() {
+    public void moveNextTurn() {
         if (isGameReady()) {
-            game.changeCurrentTurn();
+            game.moveNextTurn();
         }
     }
 
@@ -198,6 +215,13 @@ public class GameManager implements CreationAccess,
         }
     }
 
+    @Override
+    public void drawCards(int numCards, Player player) {
+        if (isGameReady()) {
+            player.drawCards(game, numCards);
+        }
+    }
+
     /**
      * Selects a random valid card for the given computer player from its hand.
      * @param player the computer player
@@ -210,6 +234,49 @@ public class GameManager implements CreationAccess,
         }
         else {
             return null;
+        }
+    }
+
+    /**
+     * Sets the current suit of this game.
+     * @param suit the suit to set
+     */
+    @Override
+    public void setCurrentSuit(Suit suit) {
+        if (isGameReady()) {
+            game.setCurrentSuit(suit);
+        }
+    }
+
+    /**
+     * Sets the current rank of this game.
+     * @param rank the rank to set
+     */
+    @Override
+    public void setCurrentRank(Rank rank) {
+        if (isGameReady()) {
+            game.setCurrentRank(rank);
+        }
+    }
+
+    /**
+     * Moves the game by the given number of turns, positive for current direction, negative for reverse.
+     * @param turns the number of turns to move
+     */
+    @Override
+    public void moveTurns(int turns) {
+        if (isGameReady()) {
+            game.moveTurns(turns);
+        }
+    }
+
+    /**
+     * Reverses the direction of this game.
+     */
+    @Override
+    public void reverseDirection() {
+        if (isGameReady()) {
+            game.reverseDirection();
         }
     }
 
