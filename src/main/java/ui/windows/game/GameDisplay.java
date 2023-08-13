@@ -114,6 +114,9 @@ public class GameDisplay extends JPanel{
 
     }
 
+    /*
+     * Adds a PaneDelegator to this instance.
+     */
     public void setNavigator(PaneDelegator navigator) {
         this.goToMenu.addActionListener(navigator);
     }
