@@ -33,7 +33,8 @@ public class GameDisplay extends JPanel{
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
-    private NavigationButton goToMenu = new NavigationButton(WindowName.MENU, "Go to Menu");
+    private String currentPlayer;
+    private final NavigationButton goToMenu = new NavigationButton(WindowName.MENU, "Go to Menu");
 
     /**
      * Construct a GameDisplay with the given delegators.
@@ -63,6 +64,7 @@ public class GameDisplay extends JPanel{
 
     public void updateView(GameDisplayData data) {
         boolean winner = data.getHasWinner();
+        currentPlayer = data.getCurrentPlayer();
         currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
         currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
         if(winner) {
@@ -79,15 +81,15 @@ public class GameDisplay extends JPanel{
     }
 
     private void winScreen() {
-        String winner = getCurrentPlayer();
-       NavigationButton[] buttons = {goToMenu};
-       String[] winOptions = {"Go to Main Menu"};
-       int num = JOptionPane.showOptionDialog(this, winner + " has won!",
+        String winner = currentPlayer;
+        goToMenu.setPreferredSize(new Dimension(200, 50));
+        NavigationButton[] buttons = {goToMenu};
+        int num = JOptionPane.showOptionDialog(this, winner + " has won!",
                 "Game is over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE,
-               null, buttons, 0);
-       if(num == JOptionPane.YES_OPTION) {
-           goToMenu.doClick();
-       }
+                null, buttons, 0);
+        if(num == JOptionPane.YES_OPTION) {
+            goToMenu.doClick();
+        }
 
     }
 
