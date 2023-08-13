@@ -26,11 +26,9 @@ public class GameState implements GameObserver {
      * @param game The Game containing the information to update this GameState.
      */
     public GameState(GameAccess game) {
-
         this.currentPlayer = game.getCurrentTurn();
         this.currentCard = game.getCurrentCard();
         this.currentDrawnCard = game.getDrawnCard();
-
         this.hasWinner = game.hasWinner();
     }
 

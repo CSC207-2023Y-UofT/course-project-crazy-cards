@@ -1,7 +1,8 @@
 package use_cases;
 
 /**
- * A simple repsonse model. It contains a boolean on whether a Game was created or not when a User attempts to create a Game.
+ * A simple response model. It contains a boolean on whether a Game was created or not when a
+ * User attempts to create a Game.
  */
 public class GameCreationResponseModel {
     private boolean gameCreated;

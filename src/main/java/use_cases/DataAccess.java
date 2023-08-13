@@ -4,6 +4,9 @@ import entities.HumanPlayer;
 
 import java.io.IOException;
 
+/**
+ * An interface that interacts with the database to load and save players.
+ */
 public interface DataAccess {
     /**
      * Loads a HumanPlayer's wins and losses from "src/main/java/use_cases/players.csv" using the given name.
