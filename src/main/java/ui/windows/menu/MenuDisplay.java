@@ -61,6 +61,7 @@ public class MenuDisplay extends JPanel {
         statsButton = new NavigationButton(WindowName.STATS, "Stats");
         rulesButton = new NavigationButton(WindowName.RULES, "Rules");
         howtoButton = new NavigationButton(WindowName.HOWTO, "How to Play");
+        howtoButton.setPreferredSize(new Dimension(150, 50));
 
         buttonPanel.add(playButton);
         buttonPanel.add(statsButton);

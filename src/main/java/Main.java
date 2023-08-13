@@ -1,19 +1,12 @@
+import javax.swing.JFrame;
 import controllers.GameCreationController;
 import controllers.PlayerGameController;
 import database.CSVDatabase;
 import entities.*;
-import enums.Rank;
-import enums.Suit;
 import enums.WindowName;
-import ui.components.NavigationButton;
 import ui.factories.*;
-import ui.windows.layout_managers.CardLayoutManager;
-import ui.windows.layout_managers.ICardLayoutManager;
-import ui.windows.layout_managers.PaneDelegator;
-import use_cases.*;
-import javax.swing.*;
+import ui.windows.layout_managers.*;
 import ui.windows.Window;
-import ui.windows.creator.CreatorDisplay;
 import use_cases.DataAccess;
 import use_cases.GameCreationInputBoundary;
 import use_cases.GameCreationInteractor;
@@ -70,6 +63,7 @@ public class Main {
         statsWindow.setNavigator(paneDelegator);
         ruleWindow.setNavigator(paneDelegator);
         creatorWindow.setNavigator(paneDelegator);
+        howtoWindow.setNavigator(paneDelegator);
 
         frame.setVisible(true);
     }
