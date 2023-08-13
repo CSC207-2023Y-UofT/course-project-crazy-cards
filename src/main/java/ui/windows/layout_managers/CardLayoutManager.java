@@ -4,7 +4,6 @@ import enums.WindowName;
 import ui.windows.SwapEvent;
 import ui.windows.SwapListener;
 import ui.windows.Window;
-import ui.windows.layout_managers.ICardLayoutManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,6 @@ import java.util.HashMap;
 
 public class CardLayoutManager implements ICardLayoutManager {
     private JPanel panel;
-
     private HashMap<WindowName, Window> windows;
     private WindowName current;
 
@@ -23,9 +21,7 @@ public class CardLayoutManager implements ICardLayoutManager {
      */
     public CardLayoutManager(JFrame window, WindowName initial) {
         panel = new JPanel(new CardLayout());
-
         window.add(panel);
-
         windows = new HashMap<>();
         current = initial;
     }
@@ -40,7 +36,6 @@ public class CardLayoutManager implements ICardLayoutManager {
         if (window instanceof SwapListener) {
             ((SwapListener) window).OnPreSwap(new SwapEvent(current, pane));
         }
-
         CardLayout layout = getLayout();
         layout.show(panel, pane.toString());
     }

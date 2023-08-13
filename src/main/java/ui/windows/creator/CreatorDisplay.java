@@ -1,19 +1,13 @@
 package ui.windows.creator;
 
-import controllers.GameBridge;
 import controllers.GameCreationController;
 import controllers.PlayerCreationInformation;
-import controllers.PlayerGameController;
 import enums.WindowName;
-import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.PaneDelegator;
-import ui.windows.game.GameController;
-import use_cases.PlayerGameInputBoundary;
 import ui.components.NavigationButton;
 import ui.components.PriorityActionListener;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,12 +19,9 @@ import java.util.ArrayList;
 public class CreatorDisplay extends JPanel implements ActionListener {
     private static final int LOW_PRIO_NAVIGATOR = 0;
     private static final int HIGH_PRIO_GAME_CREATION = 1;
-
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
-    private GameController gameController;
-    private CardLayoutManager layoutManager;
     private final GameCreationController controller;
     private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
     private final ArrayList<JTextField> textFieldList = new ArrayList<>();
@@ -100,7 +91,6 @@ public class CreatorDisplay extends JPanel implements ActionListener {
             fieldAndBox.add(checkBox);
             this.fieldsAndBoxes.add(fieldAndBox);
         }
-
     }
 
     /**
@@ -151,7 +141,6 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         this.checkBoxList.add(p5isComp);
         JCheckBox p6isComp = new JCheckBox();
         this.checkBoxList.add(p6isComp);
-
     }
 
     /**
@@ -175,7 +164,7 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         boolean gameCreated = controller.createGameResponse(controllerInput);
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
-            
+            return;
         } else {
             JLabel message = new JLabel("Please enter valid input. That is, at least 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);

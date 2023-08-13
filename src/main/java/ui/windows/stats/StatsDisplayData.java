@@ -19,8 +19,8 @@ public class StatsDisplayData {
 
     /**
      * Create a StatsDisplayData with specified values.
-     * @param name the name of the user
-     * @param gamesWon the number of games won by the user
+     * @param name      the name of the user
+     * @param gamesWon  the number of games won by the user
      * @param gamesLost the number of games lost by the user
      */
     public StatsDisplayData(String name, int gamesWon, int gamesLost) {
@@ -54,26 +54,10 @@ public class StatsDisplayData {
     }
 
     /**
-     * Sets the number of games won by the stored user.
-     * @param gamesWon the number of games won as an integer
-     */
-    public void setGamesWon(int gamesWon) {
-        this.gamesWon = gamesWon;
-    }
-
-    /**
      * Returns the number of games lost by the stored user.
      * @return the number of games lost as an integer
      */
     public int getGamesLost() {
         return gamesLost;
-    }
-
-    /**
-     * Sets the number of games lost by the stored user.
-     * @param gamesLost the number of games lost as an integer
-     */
-    public void setGamesLost(int gamesLost) {
-        this.gamesLost = gamesLost;
     }
 }

@@ -6,6 +6,10 @@ import ui.windows.Window;
 
 public class MenuWindowFactory implements WindowFactory {
 
+    /**
+     * Constructor that creates a window for the main menu/title page.
+     * @return The MenuWindow that displays the main menu/title page.
+     */
     @Override
     public Window createWindow() {
         MenuDisplay display = new MenuDisplay();
