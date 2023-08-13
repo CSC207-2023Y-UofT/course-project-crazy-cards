@@ -21,5 +21,9 @@ public interface Window {
      */
     JPanel getPanel();
 
+    /**
+     * Setter method that sets the provided PaneDelegator as the navigator.
+     * @param navigator The PaneDelegator to be set as the navigator.
+     */
     void setNavigator(PaneDelegator navigator);
 }

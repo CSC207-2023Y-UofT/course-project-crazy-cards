@@ -1,10 +1,9 @@
 package ui.windows.stats;
 
-import ui.windows.stats.StatsController;
-
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import java.io.IOException;
 
 /**
@@ -14,13 +13,17 @@ public class StatsDelegator implements ActionListener {
     private StatsController controller;
 
     /**
-     * Construct a StatsDelegator with a given controller.
-     *  @param controller the controller to be used
+     * Constructs a StatsDelegator with a given controller.
+     *  @param controller the controller to be used.
      */
     public StatsDelegator(StatsController controller) {
         this.controller = controller;
     }
 
+    /**
+     * Gets the StatsController object.
+     * @return the StatsController object.
+     */
     public StatsController getController() {
         return controller;
     }

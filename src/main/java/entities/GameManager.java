@@ -225,6 +225,10 @@ public class GameManager implements CreationAccess,
         game.putCardDown(firstCard);
     }
 
+    /**
+     * Returns whether the game exists or not.
+     * @return If the game exists, returns true, otherwise return false.
+     */
     private boolean isGameReady() {
         return game != null;
     }
