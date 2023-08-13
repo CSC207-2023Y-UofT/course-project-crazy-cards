@@ -1,9 +1,3 @@
-
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-
 import controllers.GameCreationController;
 import controllers.PlayerGameController;
 import database.CSVDatabase;
@@ -15,10 +9,9 @@ import ui.components.NavigationButton;
 import ui.factories.*;
 import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.ICardLayoutManager;
-import ui.windows.menu.MenuWindow;
-import ui.windows.stats.StatsController;
-import ui.windows.stats.StatsDisplay;
 import ui.windows.layout_managers.PaneDelegator;
+import use_cases.*;
+import javax.swing.*;
 import ui.windows.Window;
 import ui.windows.creator.CreatorDisplay;
 import use_cases.DataAccess;
@@ -39,6 +32,7 @@ public class Main {
         manager.addObserver(state);
 
         DataAccess dataAccess = new CSVDatabase();
+        manager.addObserver(dataAccess);
 
         IObserverNotifier notifier = new ObserverNotifier(manager);
 

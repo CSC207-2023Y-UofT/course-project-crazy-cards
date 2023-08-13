@@ -1,10 +1,11 @@
 package use_cases;
 
+import entities.GameObserver;
 import entities.HumanPlayer;
 
 import java.io.IOException;
 
-public interface DataAccess {
+public interface DataAccess extends GameObserver {
     /**
      * Loads a HumanPlayer's wins and losses from "src/main/java/use_cases/players.csv" using the given name.
      * @param name The name of the HumanPlayer.
