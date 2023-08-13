@@ -112,6 +112,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             access.playCard(currentPlayer, chosenCard);
             if(isWinner(currentPlayer)) {
                 winLogic(currentPlayer);
+                return;
             }
             access.changeCurrentTurn();
             access.notifyGameObservers();

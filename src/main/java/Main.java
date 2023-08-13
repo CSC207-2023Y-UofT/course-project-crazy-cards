@@ -37,7 +37,7 @@ public class Main {
 
         MenuWindowFactory menuFactory = new MenuWindowFactory();
         RuleWindowFactory ruleFactory = new RuleWindowFactory();
-        StatsWindowFactory statsFactory = new StatsWindowFactory(new CSVDatabase());
+        StatsWindowFactory statsFactory = new StatsWindowFactory(dataAccess);
         GameWindowFactory gameFactory = new GameWindowFactory(gameController);
         CreatorWindowFactory creatorFactory = new CreatorWindowFactory(creationController);
         HowtoWindowFactory howtoFactory = new HowtoWindowFactory();
@@ -60,6 +60,7 @@ public class Main {
         menuWindow.setNavigator(paneDelegator);
         statsWindow.setNavigator(paneDelegator);
         ruleWindow.setNavigator(paneDelegator);
+        gameWindow.setNavigator(paneDelegator);
         creatorWindow.setNavigator(paneDelegator);
         howtoWindow.setNavigator(paneDelegator);
 

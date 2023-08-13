@@ -1,12 +1,11 @@
 package ui.windows.game;
 
-import javax.swing.JPanel;
-
 import enums.WindowName;
 import ui.windows.SwapEvent;
 import ui.windows.SwapListener;
 import ui.windows.Window;
 import ui.windows.layout_managers.PaneDelegator;
+import javax.swing.*;
 
 public class GameWindow implements Window, SwapListener {
     private GameDisplay display;
@@ -39,8 +38,7 @@ public class GameWindow implements Window, SwapListener {
 
     @Override
     public void setNavigator(PaneDelegator navigator) {
-        // add when game window has navigation, if ever
-        // if not needed, extract setNavigator into Navigable interface or something else
+        display.setNavigator(navigator);
     }
 
     /**

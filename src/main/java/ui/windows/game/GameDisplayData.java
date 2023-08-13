@@ -7,6 +7,7 @@ public class GameDisplayData {
     private String currentPlayer;
     private ArrayList<CardDisplayData> cards;
     private CardDisplayData currentCard;
+    private boolean hasWinner;
     private HashMap<String, Integer> playersAndNumCards;
 
     /**
@@ -16,11 +17,12 @@ public class GameDisplayData {
      * @param currentCard The current card in play on the table that the current player needs to play on.
      * @param playersAndNumCards The rest of the players (minus current player) and their respective number of cards.
      */
-    public GameDisplayData(String currentPlayer, ArrayList<CardDisplayData> cards, CardDisplayData currentCard, HashMap<String, Integer> playersAndNumCards) {
+    public GameDisplayData(String currentPlayer, ArrayList<CardDisplayData> cards, CardDisplayData currentCard, HashMap<String, Integer> playersAndNumCards, boolean hasWinner) {
         this.currentPlayer = currentPlayer;
         this.cards = cards;
         this.currentCard = currentCard;
         this.playersAndNumCards = playersAndNumCards;
+        this.hasWinner = hasWinner;
     }
 
     /**
@@ -29,6 +31,14 @@ public class GameDisplayData {
      */
     public String getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    /**
+     * Gets whether the game has a winner.
+     * @return whether the game has a winner.
+     */
+    public boolean getHasWinner() {
+        return this.hasWinner;
     }
 
     /**
