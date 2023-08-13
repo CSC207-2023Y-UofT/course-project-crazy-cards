@@ -54,6 +54,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 computerPlayerLogic((ComputerPlayer) newCurrPlayer);
                 newCurrPlayer = access.getCurrentTurn();
             }
+            access.notifyGameObservers();
             // Return the current state of the game with a response model.
             return new PlayerGameResponseModel(gameState);
         } 
@@ -115,7 +116,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 return;
             }
             access.changeCurrentTurn();
-            access.notifyGameObservers();
         }  // The card is not valid, therefore it should not be played, nothing is to be done.
     }
 
@@ -126,7 +126,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     private void pickUpCardRequestLogic(Player currentPlayer) {
         if(!(access.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
             access.pickUpCard(currentPlayer);
-            notifier.update();
         }
     }
 

@@ -34,11 +34,21 @@ public class GameCreationController {
             requestInfo.put(info.getPlayerName(), info.getIsComputerPlayer());
         }
         // immediately return false if there are duplicate names
-        if(requestInfo.keySet().size() != playersInfo.size()) {
+        if(requestInfo.keySet().size() != playersInfo.size() | !(validOptions(requestInfo))) {
             return false;
         }
         GameCreationRequestModel request = new GameCreationRequestModel(requestInfo);
         GameCreationResponseModel response = inputBoundary.createGameResponse(request);
         return response.getGameCreated();
+    }
+
+    private boolean validOptions(HashMap<String, Boolean> info) {
+        int numHuman = 0;
+        for(String name: info.keySet()) {
+            if(!info.get(name)) {
+                numHuman ++;
+            }
+        }
+        return numHuman >= 1;
     }
 }
