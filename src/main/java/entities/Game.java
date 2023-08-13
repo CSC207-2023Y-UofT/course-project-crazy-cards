@@ -4,14 +4,13 @@ import enums.Rank;
 
 import java.util.ArrayList;
 
-public class Game implements ObservableGame {
+public class Game {
     private Card currentCard;
     private Card currentDrawnCard;
     private ArrayList<Player> players;
     private Deck gameDeck;
     private Player winner;
     private Player currentTurn;
-    private ArrayList<GameObserver> observers = new ArrayList<>();
     private boolean currentTurnHasPickedUp = false;
 
     /**
@@ -29,7 +28,6 @@ public class Game implements ObservableGame {
      * Get the Player whose turn it is currently.
      * @return The Player in this Game whose turn it is, and needs to put down a card.
      */
-    @Override
     public Player getCurrentTurn() {
         return this.currentTurn;
     }
@@ -54,7 +52,6 @@ public class Game implements ObservableGame {
      * Get the Card that had been played last.
      * @return A Card object which the current Player must place their card on top of.
      */
-    @Override
     public Card getCurrentCard() {
         return this.currentCard;
     }
@@ -63,7 +60,6 @@ public class Game implements ObservableGame {
      * Get the Card that was drawn last.
      * @return A Card object which the current Player has drawn from the deck.
      */
-    @Override
     public Card getDrawnCard() {
         return this.currentDrawnCard;
     }
@@ -91,7 +87,6 @@ public class Game implements ObservableGame {
      * Get all the Players in this Game.
      * @return an ArrayList of Players in this game.
      */
-    @Override
     public ArrayList<Player> getPlayers() {
         return new ArrayList<>(this.players);
     }
@@ -100,7 +95,6 @@ public class Game implements ObservableGame {
      * Determine whether this Game has been won yet.
      * @return True if this Game has been won, false otherwise.
      */
-    @Override
     public boolean hasWinner() {
         return this.winner != null;
     }
@@ -140,48 +134,6 @@ public class Game implements ObservableGame {
     public Card getTopCard() {
         this.currentDrawnCard = this.gameDeck.removeCardFromDeck();
         return this.currentDrawnCard;
-    }
-
-    /**
-     * Notify all GameObservers observing this Game that there has been a change.
-     */
-    @Override
-    public void notifyGameObservers() {
-        for(GameObserver observer : observers) {
-            observer.updateGameObserver(this);
-        }
-    }
-
-    /**
-     * Add a GameObserver to the list of observers.
-     *
-     * @param observer The GameObserver to be added to the list of observers.
-     */
-    @Override
-    public void addObserver(GameObserver observer) {
-        this.observers.add(observer);
-
-    }
-
-    /**
-     * Delete the given observer from the list of observers.
-     *
-     * @param observer The GameObserver to be deleted from the list of observers.
-     */
-    @Override
-    public void deleteObserver(GameObserver observer) {
-        if (this.observers.contains(observer)) {
-            this.observers.remove(observer);
-        }
-
-    }
-
-    /**
-     * Delete clear the list of observers, such that it is now empty.
-     */
-    @Override
-    public void deleteObservers() {
-        this.observers.clear();
     }
 
     /**

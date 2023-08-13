@@ -1,4 +1,4 @@
-package ui.windows.creation;
+package ui.windows.creator;
 
 import controllers.GameBridge;
 import controllers.GameCreationController;
@@ -6,8 +6,11 @@ import controllers.PlayerCreationInformation;
 import controllers.PlayerGameController;
 import enums.WindowName;
 import ui.windows.layout_managers.CardLayoutManager;
+import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
+import ui.components.NavigationButton;
+import ui.components.PriorityActionListener;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -19,34 +22,36 @@ import java.util.ArrayList;
 /**
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.
  */
-public class CreationDisplay extends JPanel implements ActionListener {
+public class CreatorDisplay extends JPanel implements ActionListener {
+    private static final int LOW_PRIO_NAVIGATOR = 0;
+    private static final int HIGH_PRIO_GAME_CREATION = 1;
+
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
     private GameController gameController;
     private CardLayoutManager layoutManager;
     private final GameCreationController controller;
-private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
-private final ArrayList<JTextField> textFieldList = new ArrayList<>();
+    private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
+    private final ArrayList<JTextField> textFieldList = new ArrayList<>();
+
+    private NavigationButton createGameButton;
+    private PriorityActionListener priorityListener;
 
     /**
      * Construct a new CreationDisplay.
      */
-    public CreationDisplay(GameCreationController controller) {
-
+    public CreatorDisplay(GameCreationController controller) {
         this.controller = controller;
+        this.priorityListener = new PriorityActionListener();
+
         initializeGUIComponents();
     }
-    public void setLayoutManager(CardLayoutManager layoutManager) {
-        this.layoutManager = layoutManager;
-    }
-    public GameCreationController getController() {
-        return controller;
+
+    public void setNavigator(PaneDelegator navigator) {
+        priorityListener.addActionListener(navigator, LOW_PRIO_NAVIGATOR);
     }
 
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
     /**
      * Initialize the GUI components for the Game Creation display.
      */
@@ -58,8 +63,9 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
         this.createFieldAndBoxPanels();
 
         // Create the button for submitting player info.
-        JButton createGameButton = new JButton("Play Game!");
-        createGameButton.addActionListener(this);
+        createGameButton = new NavigationButton(WindowName.GAME, "Play Game");
+        priorityListener.addActionListener(this, HIGH_PRIO_GAME_CREATION);
+        createGameButton.addActionListener(priorityListener);
         createGameButton.setPreferredSize(new Dimension(800, 50));
         createGameButton.setFont(new Font("serif", Font.BOLD, 20));
 
@@ -104,25 +110,26 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
         this.giveNameMessage = new JLabel("Type in the names of the players.   ");
         this.giveNameMessage.setFont(new Font("serif", Font.BOLD, 20));
         Dimension dim = new Dimension(420, 50);
+        Font font = new Font("serif", Font.PLAIN, 25);
 
         JTextField p1Name = new JTextField();
-        p1Name.setMaximumSize(dim);
         this.textFieldList.add(p1Name);
         JTextField p2Name = new JTextField();
-        p2Name.setMaximumSize(dim);
         this.textFieldList.add(p2Name);
         JTextField p3Name = new JTextField();
-        p3Name.setMaximumSize(dim);
         this.textFieldList.add(p3Name);
         JTextField p4Name = new JTextField();
-        p4Name.setMaximumSize(dim);
         this.textFieldList.add(p4Name);
         JTextField p5Name = new JTextField();
-        p5Name.setMaximumSize(dim);
         this.textFieldList.add(p5Name);
         JTextField p6Name = new JTextField();
-        p6Name.setMaximumSize(dim);
         this.textFieldList.add(p6Name);
+
+        for(int i = 0; i < this.textFieldList.size(); i++) {
+            JTextField textbox = this.textFieldList.get(i);
+            textbox.setMaximumSize(dim);
+            textbox.setFont(font);
+        }
     }
 
     /**
@@ -166,14 +173,9 @@ private final ArrayList<JTextField> textFieldList = new ArrayList<>();
             }
         }
         boolean gameCreated = controller.createGameResponse(controllerInput);
-        PlayerGameInputBoundary playerGameInteractor = controller.getPlayerGameInteractor();
-        GameBridge bridge = new PlayerGameController(playerGameInteractor);
-        gameController.setBridge(bridge);
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
-            gameController.startGame();
-            layoutManager.setPane(WindowName.GAME);
-
+            
         } else {
             JLabel message = new JLabel("Please enter valid input. That is, at least 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);

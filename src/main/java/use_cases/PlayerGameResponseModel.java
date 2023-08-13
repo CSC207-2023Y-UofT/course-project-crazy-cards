@@ -18,7 +18,6 @@ public class PlayerGameResponseModel {
     private CardResponseModel currentDrawnCard;
     private ArrayList<CardResponseModel> playerCards = new ArrayList<>();
 
-
     /**
      * Create a new PlayerGameResponseModel, using the updated GameState provided.
      * Cards are represented as an array of string by {value, suit}.
@@ -43,7 +42,6 @@ public class PlayerGameResponseModel {
      * @return An array of Strings representing the Card as {value, suit}.
      */
     private CardResponseModel cardToModel(Card card) {
-
         if (card == null) {
             return null;
         }
