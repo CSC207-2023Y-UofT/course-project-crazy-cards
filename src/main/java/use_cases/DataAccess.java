@@ -1,5 +1,6 @@
 package use_cases;
 
+import entities.GameObserver;
 import entities.HumanPlayer;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.io.IOException;
 /**
  * An interface that interacts with the database to load and save players.
  */
-public interface DataAccess {
+public interface DataAccess extends GameObserver {
     /**
      * Loads a HumanPlayer's wins and losses from "src/main/java/use_cases/players.csv" using the given name.
      * @param name The name of the HumanPlayer.
