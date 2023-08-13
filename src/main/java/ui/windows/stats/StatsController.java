@@ -20,10 +20,6 @@ public class StatsController {
         this.database = database;
     }
 
-    public void setDatabase(DataAccess database) {
-        this.database = database;
-    }
-
     /**
      * Sets a display endpoint for the controller.
      * @param display the display to be used

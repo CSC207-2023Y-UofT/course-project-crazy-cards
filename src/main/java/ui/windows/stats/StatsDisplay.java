@@ -30,10 +30,10 @@ public class StatsDisplay extends JPanel {
         initializeGUIComponents();
     }
 
-    public StatsDelegator getDelegator() {
-        return delegator;
-    }
-
+    /**
+     * Sets the action listener for the back button using the provided PaneDelegator.
+     * @param delegator The PaneDelegator (button click) to be set as the action listener.
+     */
     public void setNavigator(PaneDelegator delegator) {
         backButton.addActionListener(delegator);
     }
@@ -71,7 +71,7 @@ public class StatsDisplay extends JPanel {
 
         // Link the search bar to the delegator
         inputNameField.addActionListener(delegator);
-        
+
         // Formatting/spacing TBD
         buttonPanel.add(backButton);
         buttonPanel.add(Box.createHorizontalGlue());

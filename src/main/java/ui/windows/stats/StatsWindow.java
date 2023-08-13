@@ -38,10 +38,13 @@ public class StatsWindow implements Window {
         return renderer;
     }
 
+    /**
+     * Sets the provided PaneDelegator as the navigator for the renderer.
+     * @param navigator The PaneDelegator to be set as the navigator for the renderer.
+     */
     @Override
     public void setNavigator(PaneDelegator navigator) {
         renderer.setNavigator(navigator);
     }
-    
-}
 
+}
