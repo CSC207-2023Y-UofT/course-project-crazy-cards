@@ -33,6 +33,10 @@ public class GameDisplayData {
         return currentPlayer;
     }
 
+    /**
+     * Gets whether the game has a winner.
+     * @return whether the game has a winner.
+     */
     public boolean getHasWinner() {
         return this.hasWinner;
     }
