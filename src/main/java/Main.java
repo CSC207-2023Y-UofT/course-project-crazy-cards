@@ -1,17 +1,25 @@
 import controllers.GameCreationController;
 import controllers.PlayerGameController;
 import database.CSVDatabase;
-import entities.GameManager;
-import entities.IObserverNotifier;
-import entities.ObserverNotifier;
+import entities.*;
+import enums.Rank;
+import enums.Suit;
+import enums.WindowName;
+import ui.components.NavigationButton;
 import ui.factories.*;
-import ui.windows.Window;
 import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.ICardLayoutManager;
 import ui.windows.layout_managers.PaneDelegator;
 import use_cases.*;
-
 import javax.swing.*;
+import ui.windows.Window;
+import ui.windows.creator.CreatorDisplay;
+import use_cases.DataAccess;
+import use_cases.GameCreationInputBoundary;
+import use_cases.GameCreationInteractor;
+import use_cases.GameState;
+import use_cases.PlayerGameInputBoundary;
+import use_cases.PlayerGameInteractor;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,25 +42,28 @@ public class Main {
         PlayerGameController gameController = new PlayerGameController(gameBoundary);
         GameCreationController creationController = new GameCreationController(creationBoundary);
 
-        ICardLayoutManager layoutManager = new CardLayoutManager(frame);
+        ICardLayoutManager layoutManager = new CardLayoutManager(frame, WindowName.MENU);
 
         MenuWindowFactory menuFactory = new MenuWindowFactory();
         RuleWindowFactory ruleFactory = new RuleWindowFactory();
         StatsWindowFactory statsFactory = new StatsWindowFactory(new CSVDatabase());
         GameWindowFactory gameFactory = new GameWindowFactory(gameController);
         CreatorWindowFactory creatorFactory = new CreatorWindowFactory(creationController);
+        HowtoWindowFactory howtoFactory = new HowtoWindowFactory();
 
         Window menuWindow = menuFactory.createWindow();
         Window ruleWindow = ruleFactory.createWindow();
         Window statsWindow = statsFactory.createWindow();
         Window gameWindow = gameFactory.createWindow();
         Window creatorWindow = creatorFactory.createWindow();
+        Window howtoWindow = howtoFactory.createWindow();
 
         layoutManager.addPane(menuWindow);
         layoutManager.addPane(ruleWindow);
         layoutManager.addPane(statsWindow);
         layoutManager.addPane(gameWindow);
         layoutManager.addPane(creatorWindow);
+        layoutManager.addPane(howtoWindow);
 
         PaneDelegator paneDelegator = new PaneDelegator(layoutManager);
         menuWindow.setNavigator(paneDelegator);

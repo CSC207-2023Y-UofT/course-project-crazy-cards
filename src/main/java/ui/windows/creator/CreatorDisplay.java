@@ -1,4 +1,4 @@
-package ui.windows.creation;
+package ui.windows.creator;
 
 import controllers.GameBridge;
 import controllers.GameCreationController;
@@ -9,8 +9,8 @@ import ui.windows.layout_managers.CardLayoutManager;
 import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.game.GameController;
 import use_cases.PlayerGameInputBoundary;
-import enums.WindowName;
 import ui.components.NavigationButton;
+import ui.components.PriorityActionListener;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -22,7 +22,10 @@ import java.util.ArrayList;
 /**
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.
  */
-public class CreationDisplay extends JPanel implements ActionListener {
+public class CreatorDisplay extends JPanel implements ActionListener {
+    private static final int LOW_PRIO_NAVIGATOR = 0;
+    private static final int HIGH_PRIO_GAME_CREATION = 1;
+
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
@@ -33,18 +36,20 @@ public class CreationDisplay extends JPanel implements ActionListener {
     private final ArrayList<JTextField> textFieldList = new ArrayList<>();
 
     private NavigationButton createGameButton;
+    private PriorityActionListener priorityListener;
 
     /**
      * Construct a new CreationDisplay.
      */
-    public CreationDisplay(GameCreationController controller) {
-
+    public CreatorDisplay(GameCreationController controller) {
         this.controller = controller;
+        this.priorityListener = new PriorityActionListener();
+
         initializeGUIComponents();
     }
 
     public void setNavigator(PaneDelegator navigator) {
-        createGameButton.addActionListener(navigator);
+        priorityListener.addActionListener(navigator, LOW_PRIO_NAVIGATOR);
     }
 
     /**
@@ -59,7 +64,8 @@ public class CreationDisplay extends JPanel implements ActionListener {
 
         // Create the button for submitting player info.
         createGameButton = new NavigationButton(WindowName.GAME, "Play Game");
-        createGameButton.addActionListener(this);
+        priorityListener.addActionListener(this, HIGH_PRIO_GAME_CREATION);
+        createGameButton.addActionListener(priorityListener);
         createGameButton.setPreferredSize(new Dimension(800, 50));
         createGameButton.setFont(new Font("serif", Font.BOLD, 20));
 
@@ -104,25 +110,26 @@ public class CreationDisplay extends JPanel implements ActionListener {
         this.giveNameMessage = new JLabel("Type in the names of the players.   ");
         this.giveNameMessage.setFont(new Font("serif", Font.BOLD, 20));
         Dimension dim = new Dimension(420, 50);
+        Font font = new Font("serif", Font.PLAIN, 25);
 
         JTextField p1Name = new JTextField();
-        p1Name.setMaximumSize(dim);
         this.textFieldList.add(p1Name);
         JTextField p2Name = new JTextField();
-        p2Name.setMaximumSize(dim);
         this.textFieldList.add(p2Name);
         JTextField p3Name = new JTextField();
-        p3Name.setMaximumSize(dim);
         this.textFieldList.add(p3Name);
         JTextField p4Name = new JTextField();
-        p4Name.setMaximumSize(dim);
         this.textFieldList.add(p4Name);
         JTextField p5Name = new JTextField();
-        p5Name.setMaximumSize(dim);
         this.textFieldList.add(p5Name);
         JTextField p6Name = new JTextField();
-        p6Name.setMaximumSize(dim);
         this.textFieldList.add(p6Name);
+
+        for(int i = 0; i < this.textFieldList.size(); i++) {
+            JTextField textbox = this.textFieldList.get(i);
+            textbox.setMaximumSize(dim);
+            textbox.setFont(font);
+        }
     }
 
     /**

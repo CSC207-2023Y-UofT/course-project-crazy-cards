@@ -8,6 +8,8 @@ import ui.components.DrawnHand;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Renderer for a game window.
@@ -16,6 +18,7 @@ public class GameDisplay extends JPanel{
     private GamePlayDelegator playDelegator;
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
+    private SwitchUpdater switchUpdater;
     private CardDelegator cardDelegator;
     private DrawnHand currentHand;
     private DrawnCard currentCard;
@@ -24,6 +27,8 @@ public class GameDisplay extends JPanel{
     private JPanel footer;
     private JLabel currentPlayerLabel;
     private JTable scores;
+    public static final String[] COLUMNS = {"Player name", "# of cards"};
+    private String[][] playerInfo;
     private JPanel gameBoard;
     private JPanel hand;
     private JPanel buttons;
@@ -36,12 +41,15 @@ public class GameDisplay extends JPanel{
      * @param gameDelegator the delegator for game actions
      * @param cardDelegator the delegator for card actions
      */
-    public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator) {
+    public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator, SwitchUpdater switchUpdater) {
         this.playDelegator = gameDelegator.getPlayDelegator();
         this.skipDelegator = gameDelegator.getSkipDelegator();
         this.drawDelegator = gameDelegator.getDrawDelegator();
         this.cardDelegator = cardDelegator;
+        this.switchUpdater = switchUpdater;
+
         this.currentCard = new DrawnCard(Suit.HEART, Rank.ACE);
+        this.playerInfo = new String[][]{{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 
         currentHand = new DrawnHand(new ArrayList<>());
         for(int i = 0; i < 8; i++){
@@ -51,12 +59,15 @@ public class GameDisplay extends JPanel{
         initializeGUIComponents();
     }
 
-    public String getCurrentPlayer() {
-        String message = this.currentPlayerLabel.getText();
-        // Remove the substring "'s Turn!" from the player's name.
-        return message.substring(0, message.lastIndexOf("'s Turn!"));
+    public void onSwitch() {
+        switchUpdater.update();
     }
 
+    /**
+     * Updates the view the user(s) see. Includes whose turn it is, the current player's hand, the current card in play
+     * and the rest of the players, excluding the current player, and their respective number of cards remaining.
+     * @param data The GameDisplayData needed to know the current state of the game, in order to update.
+     */
     public void updateView(GameDisplayData data) {
         currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
         currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
@@ -68,13 +79,26 @@ public class GameDisplay extends JPanel{
         currentCard.setSuitLabel(newSuit);
         currentCard.setSuit(newSuit);
         currentCard.setVisible(true);
+        HashMap<String, Integer> map = data.getPlayersAndNumCards();
+        int index = 0;
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String value = String.valueOf(entry.getValue());
+            String[] row = {key, value};
+            playerInfo[index] = row;
+            index++;
+        }
+        scores.repaint();
     }
 
+    /**
+     * Updates the hand to match which user the current turn belongs to.
+     * @param cards The cards belonging to the new current user's hand, as an ArrayList of CardDisplayData.
+     */
     private void updateHand(ArrayList<CardDisplayData> cards) {
         int i = 0;
         for (i = 0; i < cards.size(); i++) {
             CardDisplayData card = cards.get(i);
-
             currentHand.setCard(i, card.getSuit(), card.getRank());
         }
         currentHand.hideCards(i);
@@ -128,7 +152,10 @@ public class GameDisplay extends JPanel{
         scoresConstraints.weightx = 0.33;
         scoresConstraints.weighty = 1;
         JPanel scorePanel = new JPanel();
-        scores = new JTable();  // TODO: handle table data
+        scores = new JTable(playerInfo, COLUMNS);
+        scores.setPreferredSize(new Dimension(200, 180));
+        scores.setRowHeight(30);
+        scores.setFont(new Font("serif", Font.PLAIN, 25));
         scorePanel.add(scores);
 
         top.add(scorePanel, scoresConstraints);
@@ -231,10 +258,4 @@ public class GameDisplay extends JPanel{
     private void initializeFooter() {
         footer = new JPanel();
     }
-
-    public GameController getController() {
-        return this.playDelegator.getController();
-    }
-
 }
-
