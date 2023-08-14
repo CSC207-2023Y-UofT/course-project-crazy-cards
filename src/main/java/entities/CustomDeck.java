@@ -69,6 +69,9 @@ public class CustomDeck implements Deck {
     
     private void generateCards(Suit suit, Rank rank, int count, EffectGenerationParameters effectParams) {
         for (int i = 0; i < count; i++) {
+            if (cards.size() >= capacity) {
+                break;
+            }
             SpecialEffect effect = generateEffect(effectParams);
             cards.add(new Card(suit, rank, effect));
         }
