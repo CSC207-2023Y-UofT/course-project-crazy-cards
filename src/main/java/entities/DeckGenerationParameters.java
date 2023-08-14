@@ -45,11 +45,10 @@ public class DeckGenerationParameters {
         this.weights[SUIT_TO_INDEX.get(suit)][RANK_TO_INDEX.get(rank)] = weight;
     }
 
-    public void setRowWeight(Suit suit, Rank start, double[] weight) {
+    public void setRowWeight(Suit suit, double[] weight) {
         int suitIndex = SUIT_TO_INDEX.get(suit);
-        int startIndex = RANK_TO_INDEX.get(start);
         for (int i = 0; i < weight.length; i++) {
-            this.weights[suitIndex][startIndex + i] = weight[i];
+            this.weights[suitIndex][i] = weight[i];
         }
     }
 
