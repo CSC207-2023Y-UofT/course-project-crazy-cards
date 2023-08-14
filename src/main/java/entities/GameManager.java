@@ -215,6 +215,11 @@ public class GameManager implements CreationAccess,
         }
     }
 
+    /**
+     * Forces a given player to draw cards.
+     * @param numCards the number of cards to draw.
+     * @param player the player drawing the cards.
+     */
     @Override
     public void drawCards(int numCards, Player player) {
         if (isGameReady()) {
