@@ -63,6 +63,10 @@ public class CSVDatabase implements DataAccess {
         return true;
     }
 
+    /**
+     * Update the stats of a particular Player given their stats information.
+     * @param playerInfo The object containing the stats and name of the Player to update.
+     */
     private void updatePlayerStats(PlayerInformation playerInfo) {
         try {
             File toUpdate = new File(file);

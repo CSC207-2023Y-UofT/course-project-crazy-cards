@@ -42,6 +42,11 @@ public class GameCreationController {
         return response.getGameCreated();
     }
 
+    /**
+     * Get whether the inputted info has enough HumanPlayers to be made.
+     * @param info HashMap where keys are player names to be made and values are true iff it is to be a ComputerPlayer.
+     * @return True iff at least 1 HumanPlayer.
+     */
     private boolean validOptions(HashMap<String, Boolean> info) {
         int numHuman = 0;
         for(String name: info.keySet()) {
