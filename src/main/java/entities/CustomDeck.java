@@ -20,7 +20,7 @@ public class CustomDeck implements Deck {
     private ArrayList<Card> cards;
 
     /**
-     * Constructs a CustomDeck with the given capacity.
+     * Constructs a CustomDeck with a given max amount of cards.
      * @param capacity The capacity of the deck.
      */
     public CustomDeck(int capacity) {
