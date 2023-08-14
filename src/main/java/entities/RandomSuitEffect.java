@@ -6,7 +6,7 @@ import enums.Suit;
  * This class represents a special effect that changes the current suit to a random suit.
  */
 public class RandomSuitEffect implements SpecialEffect {
-    private Suit[] suits = {Suit.SPADE, Suit.HEART, Suit.CLUB, Suit.DIAMOND};
+    private static final Suit[] suits = {Suit.SPADE, Suit.HEART, Suit.CLUB, Suit.DIAMOND};
     private boolean alwaysPlayable;
 
     /**
