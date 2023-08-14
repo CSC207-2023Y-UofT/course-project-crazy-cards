@@ -32,7 +32,8 @@ public class StandardDeck implements Deck {
      * @param card The instance of the Card class that is being added to the current deck.
      */
     public void addCardToDeck(Card card) {
-        this.cards.add(card);}
+        this.cards.add(card);
+    }
 
     /**
      * Remove a Card from the top of the Deck, as a Player would when picking up a Card in-game.
@@ -50,20 +51,20 @@ public class StandardDeck implements Deck {
      * @return A Card instance if this Deck is nonempty, otherwise return null.
      */
     public Card removeCardFromDeck () {
-            if (cards.size() >= 1) {
-                Card card = this.cards.get(cards.size() - 1);
-                this.cards.remove(cards.size() - 1);
-                return card;
-            } else {
-                return null;
-            }
+        if (cards.size() >= 1) {
+            Card card = this.cards.get(cards.size() - 1);
+            this.cards.remove(cards.size() - 1);
+            return card;
+        } else {
+            return null;
         }
+    }
 
     /**
      * Get for all the cards in this Deck.
      * @return A new ArrayList of the Cards in this Deck.
      */
     public ArrayList<Card> getCards() {
-            return new ArrayList<>(cards);
-        }
+        return new ArrayList<>(cards);
+    }
 }

@@ -75,6 +75,20 @@ public abstract class Player {
     }
 
     /**
+     * Have this Player pick up a given number of Cards from the deck.
+     * Note this is different from willingly drawing a card, thus setCurrentTurnHasPickedUpTrue() is not called.
+     * @param game The Game instance this Player is playing.
+     * @param num The number of Cards this Player will pick up.
+     */
+    public void drawCards(Game game, int num) {
+        Deck deck = game.getGameDeck();
+        for (int i = 0; i < num; i++) {
+            Card cardToAdd = deck.playerPickUp();
+            this.hand.addCard(cardToAdd);
+        }
+    }
+
+    /**
      * Get the name of this Player.
      * @return A String containing the name of this HumanPlayer.
      */

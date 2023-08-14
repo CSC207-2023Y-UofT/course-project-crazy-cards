@@ -11,13 +11,13 @@ import java.util.List;
 
 public class DrawnHand extends JPanel {
     private JLayeredPane cardPane;
-
     private int visible;
     private List<DrawnCard> drawnCards;
 
     /**
-     * Constructor for DrawnHand that displays a player's hand on the screen.
-     * @param drawnCards The list of DrawnCards within the user's hand about to be displayed.
+     * Constructor that sets the current hand to a given list of DrawnCards before initializing the GUI for display.
+     * Adds a new ComponentListener that will (or won't) perform actions based on a given input it listens for.
+     * @param drawnCards A List of DrawnCards to be set as the current player's hand.
      */
     public DrawnHand(List<DrawnCard> drawnCards) {
         this.drawnCards = drawnCards;
@@ -45,8 +45,8 @@ public class DrawnHand extends JPanel {
     }
 
     /**
-     * Add a mouse listener to each card for gameplay purposes.
-     * @param listener   the mouse listener
+     * Adds a MouseListener to each DrawnCard in the user's hand.
+     * @param listener The mouse listener added to each card.
      */
     @Override
     public void addMouseListener(MouseListener listener) {
@@ -57,10 +57,21 @@ public class DrawnHand extends JPanel {
 
     /**
      * Add a given card to the DrawnHand, in order to be displayed.
-     * @param card
+     * @param card The given card to be added to the user's hand.
      */
     public void addCard(DrawnCard card) {
         drawnCards.add(card);
+    }
+
+    /**
+     * Initializes the GUI components necessary for the DrawnHand to be displayed.
+     */
+    public void addCards(List<DrawnCard> cards) {
+        drawnCards.addAll(cards);
+    }
+
+    public void removeCard(DrawnCard card) {
+        drawnCards.remove(card);
     }
 
     /**

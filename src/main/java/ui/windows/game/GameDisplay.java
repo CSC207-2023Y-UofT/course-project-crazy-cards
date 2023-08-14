@@ -2,8 +2,11 @@ package ui.windows.game;
 
 import enums.Rank;
 import enums.Suit;
+import enums.WindowName;
 import ui.components.DrawnCard;
 import ui.components.DrawnHand;
+import ui.components.NavigationButton;
+import ui.windows.layout_managers.PaneDelegator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +38,8 @@ public class GameDisplay extends JPanel{
     private JButton playButton;
     private JButton drawButton;
     private JButton skipButton;
+    private String currentPlayer;
+    private final NavigationButton goToMenu = new NavigationButton(WindowName.MENU, "Go to Menu");
 
     /**
      * Construct a GameDisplay with the given delegators.
@@ -52,13 +57,16 @@ public class GameDisplay extends JPanel{
         this.playerInfo = new String[][]{{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 
         currentHand = new DrawnHand(new ArrayList<>());
-        for(int i = 0; i < 8; i++){
+        for(int i = 0; i < 10; i++){
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
         currentHand.addMouseListener(cardDelegator);
         initializeGUIComponents();
     }
 
+    /**
+     * Gets the game state after the game is started.
+     */
     public void onSwitch() {
         switchUpdater.update();
     }
@@ -69,8 +77,13 @@ public class GameDisplay extends JPanel{
      * @param data The GameDisplayData needed to know the current state of the game, in order to update.
      */
     public void updateView(GameDisplayData data) {
+        boolean winner = data.getHasWinner();
+        currentPlayer = data.getCurrentPlayer();
         currentPlayerLabel.setText(data.getCurrentPlayer() + "'s Turn!");
         currentPlayerLabel.setFont(new Font("serif", Font.BOLD, 30));
+        if(winner) {
+            winScreen();
+        }
         updateHand(data.getCards());
         Suit newSuit = data.getCurrentCard().getSuit();
         Rank newRank = data.getCurrentCard().getRank();
@@ -89,6 +102,29 @@ public class GameDisplay extends JPanel{
             index++;
         }
         scores.repaint();
+    }
+
+    /*
+     * Draws the winscreen popup.
+     */
+    private void winScreen() {
+        String winner = currentPlayer;
+        goToMenu.setPreferredSize(new Dimension(200, 50));
+        NavigationButton[] buttons = {goToMenu};
+        int num = JOptionPane.showOptionDialog(this, winner + " has won!",
+                "Game is over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, buttons, 0);
+        if(num == JOptionPane.YES_OPTION) {
+            goToMenu.doClick();
+        }
+
+    }
+
+    /*
+     * Adds a PaneDelegator to this instance.
+     */
+    public void setNavigator(PaneDelegator navigator) {
+        this.goToMenu.addActionListener(navigator);
     }
 
     /**

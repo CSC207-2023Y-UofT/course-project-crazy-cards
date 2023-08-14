@@ -11,9 +11,8 @@ import java.util.Collections;
  * to create a Game, and sends a response model to the controller on whether a Game was created or not.
  */
 public class GameCreationInteractor implements GameCreationInputBoundary {
-    static final int NUMBERCARDS = 5;
+    static final int NUMBER_OF_CARDS = 5;
     private final DataAccess dataAccess;
-
     private CreationAccess access;
 
     /**
@@ -25,7 +24,6 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
         this.dataAccess = dataAccess;
         this.access = access;
     }
-
 
     /**
      * Created a response model, and Game if the request is valid.
@@ -78,7 +76,7 @@ public class GameCreationInteractor implements GameCreationInputBoundary {
      */
     private Hand buildHand(Deck deck) {
         Hand hand = new Hand(new ArrayList<>());
-        for(int i = 0; i < NUMBERCARDS; i++) {
+        for(int i = 0; i < NUMBER_OF_CARDS; i++) {
             hand.addCard(deck.removeCardFromDeck());
         }
         return hand;

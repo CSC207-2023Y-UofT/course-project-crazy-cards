@@ -16,14 +16,25 @@ public class HowtoDisplay extends JPanel {
     private JLabel bodyLabel;
     private NavigationButton backButton;
 
+    /**
+     * Constructor that initializes the display aspects of the how to play window.
+     */
     public HowtoDisplay() {
         initializeGUIComponents();
     }
 
+    /**
+     * Add an ActionListener to the back button for the user to navigate between windows.
+     * @param navigator The PaneDelegator that swaps between windows, upon clicking the back button.
+     */
     public void setNavigator(PaneDelegator navigator) {
         backButton.addActionListener(navigator);
     }
 
+    /**
+     * Initialize the GUI components for the how to play window to be displayed. This includes window formatting and the
+     * text for the actual how to play instructions.
+     */
     private void initializeGUIComponents() {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
@@ -35,6 +46,8 @@ public class HowtoDisplay extends JPanel {
                 + "can be played, follow the Play card instructions. Otherwise, you must skip your turn.<br>You can only draw one card per turn.<br><br>"
                 +"Skip turn:<br>This button can only be clicked after you draw a card that cannot be played on top of the one currently in play.<br><br>"
                 +"Help button (TO BE IMPLEMENTED):<br>If you need to see these instructions again, press the \"Help\" button during gameplay.</html>");
+        // TODO: if help button is implemented, remove the (TO BE IMPLEMENTED) in the above line
+        // TODO: also update button stuff for where the player gets redirected to
         bodyLabel.setFont(new Font("serif", Font.BOLD, 20));
         textPanel.add(titleLabel);
         textPanel.add(bodyLabel);

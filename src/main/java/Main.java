@@ -7,13 +7,11 @@ import enums.WindowName;
 import ui.factories.*;
 import ui.windows.layout_managers.*;
 import ui.windows.Window;
-import use_cases.DataAccess;
-import use_cases.GameCreationInputBoundary;
-import use_cases.GameCreationInteractor;
-import use_cases.GameState;
-import use_cases.PlayerGameInputBoundary;
-import use_cases.PlayerGameInteractor;
+import use_cases.*;
 
+/**
+ * Main class to run the game.
+ */
 public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -39,7 +37,7 @@ public class Main {
 
         MenuWindowFactory menuFactory = new MenuWindowFactory();
         RuleWindowFactory ruleFactory = new RuleWindowFactory();
-        StatsWindowFactory statsFactory = new StatsWindowFactory(new CSVDatabase());
+        StatsWindowFactory statsFactory = new StatsWindowFactory(dataAccess);
         GameWindowFactory gameFactory = new GameWindowFactory(gameController);
         CreatorWindowFactory creatorFactory = new CreatorWindowFactory(creationController);
         HowtoWindowFactory howtoFactory = new HowtoWindowFactory();
@@ -62,6 +60,7 @@ public class Main {
         menuWindow.setNavigator(paneDelegator);
         statsWindow.setNavigator(paneDelegator);
         ruleWindow.setNavigator(paneDelegator);
+        gameWindow.setNavigator(paneDelegator);
         creatorWindow.setNavigator(paneDelegator);
         howtoWindow.setNavigator(paneDelegator);
 

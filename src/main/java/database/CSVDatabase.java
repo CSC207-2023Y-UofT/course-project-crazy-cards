@@ -1,12 +1,16 @@
 package database;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
 import entities.GameAccess;
 import entities.HumanPlayer;
 import entities.Player;
 import use_cases.DataAccess;
 import use_cases.PlayerInformation;
-
 import java.io.*;
+import java.util.List;
+
 
 public class CSVDatabase implements DataAccess {
     String file = "src/main/java/database/players.csv";
@@ -45,6 +49,8 @@ public class CSVDatabase implements DataAccess {
 
         PlayerInformation loadedPlayer = loadPlayer(player.getName());
         if (loadedPlayer != null && loadedPlayer.getName().equals(player.getName())) {
+            PlayerInformation newInfo = new PlayerInformation(loadedPlayer.getName(), player.getWins(), player.getLosses());
+            updatePlayerStats(newInfo);
             bw.close();
             return false;
         }
@@ -52,9 +58,35 @@ public class CSVDatabase implements DataAccess {
         String[] data = {player.getName(), wins, losses};
         String line = String.join(",", data);
         bw.write(line);
-        bw.newLine();
+        bw.write("\n");
         bw.close();
         return true;
+    }
+
+    /**
+     * Update the stats of a particular Player given their stats information.
+     * @param playerInfo The object containing the stats and name of the Player to update.
+     */
+    private void updatePlayerStats(PlayerInformation playerInfo) {
+        try {
+            CSVReader reader = new CSVReader(new FileReader(file));
+            List<String[]> allLines = reader.readAll();
+            for(String[] line: allLines) {
+                if(line[0].equals(playerInfo.getName())) {
+                    line[1] = ((Integer) playerInfo.getWins()).toString();
+                    line[2] = ((Integer) playerInfo.getLosses()).toString();
+                }
+            }
+            reader.close();
+            CSVWriter writer = new CSVWriter(new FileWriter(file),
+                    CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
+            writer.writeAll(allLines);
+            writer.flush();
+            writer.close();
+        } catch (IOException | CsvException ignored) {
+        }
+
     }
 
     /**
