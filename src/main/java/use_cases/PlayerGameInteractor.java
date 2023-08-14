@@ -54,6 +54,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 computerPlayerLogic((ComputerPlayer) newCurrPlayer);
                 newCurrPlayer = access.getCurrentTurn();
             }
+            access.notifyGameObservers();
             // Return the current state of the game with a response model.
             return new PlayerGameResponseModel(gameState);
         } 

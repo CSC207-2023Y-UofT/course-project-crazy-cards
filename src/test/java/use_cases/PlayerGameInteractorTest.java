@@ -59,6 +59,7 @@ class PlayerGameInteractorTest {
         players.add(p3);
         manager = new GameManager();
         manager.buildGame(players, deck);
+        firstCard = manager.getCurrentCard();
         // Make the first Card of the game something p1 can play on top of.
         if (!hasAnyValid(p1)) {
             valid = giveValidCard(p1);
@@ -121,7 +122,8 @@ class PlayerGameInteractorTest {
     }
 
     /**
-     * Give the given player an invalid Hand
+     * Give the given player an invalid Hand (cannot play any cards).
+     * @param player The Player to be given an invalid Hand.
      */
     private void giveInvalidHand(Player player) {
         Hand newHand = new Hand(new ArrayList<>());
@@ -144,7 +146,7 @@ class PlayerGameInteractorTest {
         assertEquals(p3.getName(), response.getCurrentPlayerName());
         // Assert that p1 has lost a Card and that Card is in the deck.
         assertEquals(4, p1.getNumCards());
-        assertTrue(deck.getCards().contains(p1sCard));
+        assertTrue(deck.getCards().contains(valid));
         // Assert the Game has no winner yet.
         assertFalse(response.getHasWinner());
     }
@@ -182,7 +184,7 @@ class PlayerGameInteractorTest {
     public void testCreateResponsePlayCardWinner () {
         // Give p1 a new Hand containing just one valid Card
         Hand newHand = new Hand(new ArrayList<>());
-        newHand.addCard(p1sCard);
+        newHand.addCard(valid);
         p1.setHand(newHand);
         // Play the only Card in this Hand.
         PlayerGameResponseModel response = interactor.createResponse(playCardReq);
@@ -196,7 +198,7 @@ class PlayerGameInteractorTest {
         HumanPlayer humanP3 = (HumanPlayer) p3;
         assertEquals(1, humanP3.getLosses());
         assertEquals(0, humanP3.getWins());
-        assertEquals(p1sCard, gameState.getCurrentCard());
+        assertEquals(valid, gameState.getCurrentCard());
     }
 
     /**
@@ -207,10 +209,12 @@ class PlayerGameInteractorTest {
         // Make it so that p1 has to skip (has picked up and no valid cards)
         //.setCurrentTurnHasPickedUpTrue();
         giveInvalidHand(p1);
+        interactor.createResponse(pickUpReq);
+        p1.getHand().removeCard(p1.getCards().get(2));
         // p1 has no valid cards, and cannot pick up, now request to skip
         interactor.createResponse(skipReq);
         // Assert that p1 has had no change in Card number, and that it is now p3s turn
-        assertEquals(2, p1.getNumCards());
+        assertEquals(2, p1.getHand().getCards().size());
         assertEquals(p3, gameState.getCurrentPlayer());
     }
 
