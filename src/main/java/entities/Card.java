@@ -4,9 +4,9 @@ import enums.Rank;
 import enums.Suit;
 
 public class Card {
-    private final Suit suit;
-    private final Rank rank;
-    private String specialEffect = null;
+    private Suit suit;
+    private Rank rank;
+    private SpecialEffect effect;
 
     /**
      * Construct a Card, giving it the provided suit and value. This constructor is used for regular cards.
@@ -16,6 +16,7 @@ public class Card {
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
+        this.effect = null;
     }
 
     /**
@@ -24,10 +25,10 @@ public class Card {
      * @param rank         The value of the card (i.e. 2 through 10, or J, Q, K or A)
      * @param specialEffect The special effect given to the card, if any is provided (e.g. changing the current suit)
      */
-    public Card(Suit suit, Rank rank, String specialEffect) {
+    public Card(Suit suit, Rank rank, SpecialEffect specialEffect) {
         this.suit = suit;
         this.rank = rank;
-        this.specialEffect = specialEffect;
+        this.effect = specialEffect;
     }
 
     /**
@@ -39,6 +40,14 @@ public class Card {
     }
 
     /**
+     * Sets the suit of the card.
+     * @param suit The suit to set the card to.
+     */
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+
+    /**
      * Getter method for the value of the card, since the value is a private attribute.
      * @return The value of the card.
      */
@@ -47,10 +56,18 @@ public class Card {
     }
 
     /**
+     * Sets the rank of the card.
+     * @param rank The rank to set the card to.
+     */
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    /**
      * Getter method for the special effect of the card, since the special effect is a private attribute.
      * @return The special effect of the card.
      */
-    public String getSpecialEffect() {
-        return specialEffect;
+    public SpecialEffect getSpecialEffect() {
+        return this.effect;
     }
 }
