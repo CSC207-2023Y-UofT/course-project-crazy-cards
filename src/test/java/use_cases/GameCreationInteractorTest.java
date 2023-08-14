@@ -1,8 +1,7 @@
 package use_cases;
 
 import database.CSVDatabase;
-import entities.Game;
-import entities.HumanPlayer;
+import entities.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,17 +16,20 @@ import static org.junit.jupiter.api.Assertions.*;
  * action done in it, so testing both would be redundant.
  */
 class GameCreationInteractorTest {
-    GameCreationRequestModel validRequest;
-    GameCreationRequestModel invalidRequest;
-    GameCreationInteractor interactor;
+    private GameCreationRequestModel validRequest;
+    private GameCreationRequestModel invalidRequest;
+    private GameCreationInteractor interactor;
+    private GameAccess access;
+
 
     /**
      * Set up all the objects needed to test GameCreationInteractor.
      */
     @BeforeEach
     public void setUp() {
+        access = new GameManager();
         DataAccess dataAccess = new CSVDatabase();
-        interactor = new GameCreationInteractor();
+        interactor = new GameCreationInteractor(dataAccess, (CreationAccess) access);
         validRequest = new GameCreationRequestModel(new HashMap<>());
         invalidRequest = new GameCreationRequestModel(new HashMap<>());
         validRequest.getPlayersInfo().put("p1", false);
@@ -45,35 +47,37 @@ class GameCreationInteractorTest {
         interactor = null;
         validRequest = null;
         invalidRequest = null;
+        access = null;
     }
 
     /**
      * Test no Game is created when given an invalid input and the response model has the correct response.
+     * That is, methods in access should return null.
      */
     @Test
     public void testCreateGameResponseInvalid() {
         GameCreationResponseModel response = interactor.createGameResponse(invalidRequest);
-        assertNull(interactor.getCreatedGame());
-        assertNull(interactor.getNewGameState());
+        assertNull(access.getCurrentCard());
+        assertNull(access.getPlayers());
         assertFalse(response.getGameCreated());
     }
 
     /**
      * Test a Game and GameState are created and the response model has the correct response when valid request given.
-     * This method also tests getNewGameState() and getCreatedGame().
      */
     @Test
     public void testCreateGameResponseValid() {
         GameCreationResponseModel response = interactor.createGameResponse(validRequest);
         assertTrue(response.getGameCreated());
-        Game game = interactor.getCreatedGame();
-        GameState gameState = interactor.getNewGameState();
-        assertNotNull(game);
-        assertNotNull(gameState);
-        assertTrue(gameState.getCurrentPlayer() instanceof HumanPlayer);
-        assertEquals(5, gameState.getCurrentPlayer().getNumCards());
-        assertNotNull(gameState.getCurrentCard());
+        assertNotNull(access.getCurrentCard());
+        assertTrue(access.getCurrentTurn() instanceof HumanPlayer);
+        assertEquals(5, access.getCurrentTurn().getNumCards());
+        assertNotNull(access.getCurrentCard());
         // Assert the created Game's deck has had Cards dealt from it.
-        assertEquals(36, game.getGameDeck().getCards().size());
+        int sum = 0;
+        for(Player p: access.getPlayers()) {
+            sum += p.getNumCards();
+        }
+        assertEquals(15, sum);
     }
 }

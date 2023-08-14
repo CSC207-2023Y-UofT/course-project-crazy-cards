@@ -4,7 +4,6 @@ import entities.*;
 import enums.Rank;
 import enums.Suit;
 import enums.TurnAction;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class PlayerGameInteractorTest {
 
-    private Game game;
     private Player p1;
     private Player p2;
     private Player p3;
@@ -32,13 +30,16 @@ class PlayerGameInteractorTest {
     private PlayerGameRequestModel pickUpReq;
     private Card p1sCard;
     private Card firstCard;
+    private GameManager manager;
+    private Deck deck;
+    private Card valid;
 
     /**
      * Initialize all objects required to test PlayerGameInteractor.
      */
     @BeforeEach
     public void setUp() {
-        Deck deck = new StandardDeck();
+        deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
         Hand h3 = new Hand(new ArrayList<>());
@@ -56,20 +57,48 @@ class PlayerGameInteractorTest {
         players.add(p1);
         players.add(p2);
         players.add(p3);
-        game = new Game(deck, players);
+        manager = new GameManager();
+        manager.buildGame(players, deck);
         // Make the first Card of the game something p1 can play on top of.
-        firstCard = new Card(h1.getCards().get(0).getSuit(), Rank.KING);
-        game.putCardDown(firstCard);
-        gameState = new GameState(game);
-        game.addObserver(gameState);
-        Rank p1CardVal = h1.getCards().get(0).getRank();
-        Suit p1CardSuit = h1.getCards().get(0).getSuit();
-        p1sCard = h1.getCards().get(0);
-        interactor = new PlayerGameInteractor(game, gameState);
-        playCardReq = new PlayerGameRequestModel("sol", p1CardSuit, p1CardVal, TurnAction.PLAY);
+        if (!hasAnyValid(p1)) {
+            valid = giveValidCard(p1);
+        }
+        gameState = new GameState(manager);
+        manager.addObserver(gameState);
+        valid = findValidCard(p1);
+        IObserverNotifier observerNotifier = new ObserverNotifier(manager);
+        interactor = new PlayerGameInteractor(manager, observerNotifier, gameState);
+        playCardReq = new PlayerGameRequestModel("sol", valid.getSuit(), valid.getRank(), TurnAction.PLAY);
         pickUpReq = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
         skipReq = new PlayerGameRequestModel("sol", null, null, TurnAction.SKIP);
 
+    }
+    private Card findValidCard(Player player) {
+        for(Card card: player.getCards()) {
+            if(manager.isValidCard(card)) {
+                return card;
+            }
+        }
+        return null;
+    }
+    private Card giveValidCard(Player player) {
+        boolean hasValid = false;
+        while(!hasValid) {
+            Card toAdd = deck.removeCardFromDeck();
+            if(manager.isValidCard(toAdd)) {
+                player.getHand().addCard(toAdd);
+                return toAdd;
+            }
+        }
+        return null;
+    }
+    private boolean hasAnyValid(Player player) {
+        for(Card card: player.getCards()) {
+            if (manager.isValidCard(card)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -80,7 +109,7 @@ class PlayerGameInteractorTest {
         gameState = null;
         p1 = null;
         p2 = null;
-        game = null;
+        deck = null;
         players = null;
         interactor = null;
         playCardReq = null;
@@ -88,6 +117,7 @@ class PlayerGameInteractorTest {
         pickUpReq = null;
         p1sCard = null;
         firstCard = null;
+        manager = null;
     }
 
     /**
@@ -96,8 +126,8 @@ class PlayerGameInteractorTest {
     private void giveInvalidHand(Player player) {
         Hand newHand = new Hand(new ArrayList<>());
         while (newHand.getCards().size() < 2) {
-            Card newCard = game.getGameDeck().removeCardFromDeck();
-            if(!(game.isValidCard(newCard))) {
+            Card newCard = deck.removeCardFromDeck();
+            if(!(manager.isValidCard(newCard))) {
                 newHand.addCard(newCard);
             }
         }
@@ -114,7 +144,7 @@ class PlayerGameInteractorTest {
         assertEquals(p3.getName(), response.getCurrentPlayerName());
         // Assert that p1 has lost a Card and that Card is in the deck.
         assertEquals(4, p1.getNumCards());
-        assertTrue(game.getGameDeck().getCards().contains(p1sCard));
+        assertTrue(deck.getCards().contains(p1sCard));
         // Assert the Game has no winner yet.
         assertFalse(response.getHasWinner());
     }
@@ -136,7 +166,7 @@ class PlayerGameInteractorTest {
         assertEquals(p1, gameState.getCurrentPlayer());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             if (p.equals(p1)) {
                 assertEquals(2, p.getNumCards());
             } else {
@@ -146,7 +176,7 @@ class PlayerGameInteractorTest {
     }
 
     /**
-     * Test createResponse when given a Player plays a valid Card and they become the winner.
+     * Test createResponse when given a Player plays a valid Card, and they become the winner.
      */
     @Test
     public void testCreateResponsePlayCardWinner () {
@@ -175,7 +205,7 @@ class PlayerGameInteractorTest {
     @Test
     public void testCreateResponseSkipTurnValid () {
         // Make it so that p1 has to skip (has picked up and no valid cards)
-        game.setCurrentTurnHasPickedUpTrue();
+        //.setCurrentTurnHasPickedUpTrue();
         giveInvalidHand(p1);
         // p1 has no valid cards, and cannot pick up, now request to skip
         interactor.createResponse(skipReq);
@@ -194,7 +224,7 @@ class PlayerGameInteractorTest {
         assertEquals(p1, gameState.getCurrentPlayer());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             assertEquals(5, p.getNumCards());
         }
     }
@@ -211,7 +241,7 @@ class PlayerGameInteractorTest {
         assertEquals(p1, gameState.getCurrentPlayer());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             if(!(p.equals(p1))) {
                 assertEquals(5, p.getNumCards());
             } else {
@@ -230,7 +260,7 @@ class PlayerGameInteractorTest {
         assertEquals(p1.getName(), response.getCurrentPlayerName());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             assertEquals(5, p.getNumCards());
         }
     }
