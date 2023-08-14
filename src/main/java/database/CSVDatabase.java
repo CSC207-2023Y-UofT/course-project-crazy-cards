@@ -8,7 +8,6 @@ import entities.HumanPlayer;
 import entities.Player;
 import use_cases.DataAccess;
 import use_cases.PlayerInformation;
-
 import java.io.*;
 import java.util.List;
 
@@ -50,7 +49,8 @@ public class CSVDatabase implements DataAccess {
 
         PlayerInformation loadedPlayer = loadPlayer(player.getName());
         if (loadedPlayer != null && loadedPlayer.getName().equals(player.getName())) {
-            updatePlayerStats(loadedPlayer);
+            PlayerInformation newInfo = new PlayerInformation(loadedPlayer.getName(), player.getWins(), player.getLosses());
+            updatePlayerStats(newInfo);
             bw.close();
             return false;
         }
@@ -69,8 +69,7 @@ public class CSVDatabase implements DataAccess {
      */
     private void updatePlayerStats(PlayerInformation playerInfo) {
         try {
-            File toUpdate = new File(file);
-            CSVReader reader = new CSVReader(new FileReader(toUpdate));
+            CSVReader reader = new CSVReader(new FileReader(file));
             List<String[]> allLines = reader.readAll();
             for(String[] line: allLines) {
                 if(line[0].equals(playerInfo.getName())) {
@@ -79,9 +78,12 @@ public class CSVDatabase implements DataAccess {
                 }
             }
             reader.close();
-            CSVWriter writer = new CSVWriter(new FileWriter(toUpdate));
+            CSVWriter writer = new CSVWriter(new FileWriter(file),
+                    CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
             writer.writeAll(allLines);
-
+            writer.flush();
+            writer.close();
         } catch (IOException | CsvException ignored) {
         }
 
