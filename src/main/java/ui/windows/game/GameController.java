@@ -57,7 +57,7 @@ public class GameController {
      * Passes request to game logic and sends response to display.
      */
     public void playCard() {
-        PlayerGameResponseModel response = bridge.getResponse(selectedOwner, selectedSuit, selectedRank, TurnAction.PLAY);
+        PlayerGameResponseModel response = bridge.getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.PLAY);
       
         updateCurrentPlayer(response);
         // Assume players can only play at most 1 card per turn.
