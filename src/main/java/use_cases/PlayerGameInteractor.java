@@ -110,11 +110,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         if(valid) {
             // The card is valid, place it down, change turns
             access.playCard(currentPlayer, chosenCard);
+            if (chosenCard.getSpecialEffect() != null) {
+                chosenCard.getSpecialEffect().action(access);
+            }
             if(isWinner(currentPlayer)) {
                 winLogic(currentPlayer);
                 return;
             }
-            access.changeCurrentTurn();
+            access.moveNextTurn();
             access.notifyGameObservers();
         }  // The card is not valid, therefore it should not be played, nothing is to be done.
     }
@@ -139,7 +142,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         assert currentPlayer.equals(access.getCurrentTurn());
         if ((access.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
             // User can skip.
-            access.changeCurrentTurn();
+            access.moveNextTurn();
             notifier.update();
         }
             // User cannot skip their turn.
@@ -216,7 +219,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         }
         // The ComputerPlayer has played a Card (may or may not have picked up) and there was no winner, so change the
         // current turn and update the Game.
-        access.changeCurrentTurn();
+        access.moveNextTurn();
         notifier.update();
     }
 }

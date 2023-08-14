@@ -2,6 +2,9 @@ package entities;
 
 import java.util.ArrayList;
 
+import enums.Rank;
+import enums.Suit;
+
 /**
  * Defines functions to manipulate a Game.
  */
@@ -12,6 +15,12 @@ public interface GameAccess {
      * @return The Player in this Game whose turn it is, and needs to put down a card.
      */
     Player getCurrentTurn();
+
+    /**
+     * Get the player that would be next in the game.
+     * @return The Player in this Game who would be next to play.
+     */
+    Player getNextTurn();
 
     /**
      * Play the given Card for the given Player.
@@ -40,6 +49,19 @@ public interface GameAccess {
     Card getCurrentCard();
 
     /**
+     * Set the current Suit in this Game.
+     * @param suit The Suit to set the current Suit to.
+     */
+    void setCurrentSuit(Suit suit);
+
+
+    /**
+     * Set the current Rank in this Game.
+     * @param rank The Rank to set the current Rank to.
+     */
+    void setCurrentRank(Rank rank);
+
+    /**
      * Get the Card that was drawn from the Deck in this Game.
      * @return The Card that was drawn from the Deck in this Game.
      */
@@ -50,7 +72,25 @@ public interface GameAccess {
      * The Player whose turn it is now should not have picked up.
      * This method assumes that the previous Player is not the winner of the Game, otherwise it would not be called.
      */
-    void changeCurrentTurn();
+    void moveNextTurn();
+
+    /**
+     * Moves the game forward by the given number of turns.
+     * @param turns the number of turns to move; positive for same direction, negative for reverse direction.
+     */
+    void moveTurns(int turns);
+
+    /**
+     * Reverse the direction of turns.
+     */
+    void reverseDirection();
+
+    /**
+     * Forces the given player to draw cards.
+     * @param numCards the number of cards to draw.
+     * @param player the player to draw the cards.
+     */
+    void drawCards(int numCards, Player player);
 
     /**
      * Set the winner of this game to the given Player.

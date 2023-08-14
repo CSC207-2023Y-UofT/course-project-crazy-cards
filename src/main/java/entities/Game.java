@@ -1,6 +1,7 @@
 package entities;
 
 import enums.Rank;
+import enums.Suit;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,8 @@ public class Game {
     private Player winner;
     private Player currentTurn;
     private boolean currentTurnHasPickedUp = false;
+    private int currentPlayerIndex;
+    private boolean reverseDirection;
 
     /**
      * Construct a new Game given a particular deck and set of players.
@@ -21,7 +24,9 @@ public class Game {
     public Game(Deck deck, ArrayList<Player> players) {
         this.gameDeck = deck;
         this.players = new ArrayList<>(players);
+        this.currentPlayerIndex = 0;
         this.currentTurn = this.players.get(0);
+        this.reverseDirection = false;
     }
 
     /**
@@ -33,19 +38,61 @@ public class Game {
     }
 
     /**
+     * Get the player that would be next in the game.
+     * @return The Player in this Game who would be next to play.
+     */
+    public Player getNextTurn() {
+        int shift = reverseDirection ? -1 : 1;
+        int nextPlayer = (currentPlayerIndex + shift) % this.players.size();
+        return this.players.get(nextPlayer);
+    }
+
+    /**
      * Change the turn of the Player from the current Player to the next in the Game.
      * The Player whose turn it is now should not have picked up.
      * This method assumes that the previous Player is not the winner of the Game, otherwise it would not be called.
      */
-    public void changeCurrentTurn() {
-        int currentPlayerIndex = this.players.indexOf(this.currentTurn);
-        if(currentPlayerIndex == (this.players.size() -  1)) {
-            this.currentTurn = this.players.get(0);
-        }
-        else {
-            this.currentTurn = this.players.get(currentPlayerIndex + 1);
-        }
+    public void moveNextTurn() {
+        int shift = reverseDirection ? -1 : 1;
+        int nextPlayer = (currentPlayerIndex + shift) % this.players.size();
+        this.currentPlayerIndex = nextPlayer;
+        this.currentTurn = this.players.get(nextPlayer);
         currentTurnHasPickedUp = false;
+    }
+
+    /**
+     * Moves the game forward by the given number of turns.
+     * @param turns the number of turns to move.
+     */
+    public void moveTurns(int turns) {
+        int shift = reverseDirection ? -turns : turns;
+        int nextPlayer = (currentPlayerIndex + shift) % this.players.size();
+        this.currentPlayerIndex = nextPlayer;
+        this.currentTurn = this.players.get(nextPlayer);
+        currentTurnHasPickedUp = false;
+    }
+
+    /**
+     * Reverse the direction of turns.
+     */
+    public void reverseDirection() {
+        this.reverseDirection = !this.reverseDirection;
+    }
+
+    /**
+     * Sets the rank of the current card.
+     * @param rank The Rank to set the current Rank to.
+     */
+    public void setCurrentRank(Rank rank) {
+        this.currentCard.setRank(rank);
+    }
+
+    /**
+     * Set the suit of the current card.
+     * @param suit The Suit to set the current Suit to.
+     */
+    public void setCurrentSuit(Suit suit) {
+        this.currentCard.setSuit(suit);
     }
 
     /**
@@ -114,9 +161,12 @@ public class Game {
      * @return True if this is a valid Card, false otherwise.
      */
     public boolean isValidCard(Card card) {
-        if (card.getRank().equals(Rank.EIGHT)){
+        if (card.getSpecialEffect().getAlwaysPlayable()) {
             return true;
-        } else {return (card.getRank().equals(currentCard.getRank()) | card.getSuit().equals(currentCard.getSuit()));}
+        } 
+        else {
+            return (card.getRank().equals(currentCard.getRank()) | card.getSuit().equals(currentCard.getSuit()));
+        }
     }
 
     /**
