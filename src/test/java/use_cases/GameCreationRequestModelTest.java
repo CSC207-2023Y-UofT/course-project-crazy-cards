@@ -46,12 +46,13 @@ class GameCreationRequestModelTest {
      * Test to check getPlayersinfo() returns with the names and options requested.
      */
     @Test
-    public void TestgetPlayersInfo() {
+    public void testGetPlayersInfo() {
         HashMap<String, Boolean> map = request.getPlayersInfo();
         assertEquals(2, map.keySet().size());
         assertTrue(map.get("cp1"));
         assertFalse(map.get("Sab"));
     }
+
 }
 
 

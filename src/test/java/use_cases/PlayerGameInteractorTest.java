@@ -38,7 +38,6 @@ class PlayerGameInteractorTest {
     private PlayerGameRequestModel playCardReq;
     private PlayerGameRequestModel skipReq;
     private PlayerGameRequestModel pickUpReq;
-    private Card p1sCard;
     private Card firstCard;
     private GameManager manager;
     private Deck deck;
@@ -73,43 +72,18 @@ class PlayerGameInteractorTest {
         // Make the first Card of the game something p1 can play on top of.
         if (!hasAnyValid(p1)) {
             valid = giveValidCard(p1);
+        } else {
+            valid = findValidCard(p1);
         }
         gameState = new GameState(manager);
         manager.addObserver(gameState);
-        valid = findValidCard(p1);
         IObserverNotifier observerNotifier = new ObserverNotifier(manager);
+        observerNotifier.update();
         interactor = new PlayerGameInteractor(manager, observerNotifier, gameState);
         playCardReq = new PlayerGameRequestModel("sol", valid.getSuit(), valid.getRank(), TurnAction.PLAY);
         pickUpReq = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
         skipReq = new PlayerGameRequestModel("sol", null, null, TurnAction.SKIP);
 
-    }
-    private Card findValidCard(Player player) {
-        for(Card card: player.getCards()) {
-            if(manager.isValidCard(card)) {
-                return card;
-            }
-        }
-        return null;
-    }
-    private Card giveValidCard(Player player) {
-        boolean hasValid = false;
-        while(!hasValid) {
-            Card toAdd = deck.removeCardFromDeck();
-            if(manager.isValidCard(toAdd)) {
-                player.getHand().addCard(toAdd);
-                return toAdd;
-            }
-        }
-        return null;
-    }
-    private boolean hasAnyValid(Player player) {
-        for(Card card: player.getCards()) {
-            if (manager.isValidCard(card)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -120,15 +94,16 @@ class PlayerGameInteractorTest {
         gameState = null;
         p1 = null;
         p2 = null;
+        p3 = null;
         deck = null;
         players = null;
         interactor = null;
         playCardReq = null;
         skipReq = null;
         pickUpReq = null;
-        p1sCard = null;
         firstCard = null;
         manager = null;
+        valid = null;
     }
 
     /**
@@ -151,12 +126,14 @@ class PlayerGameInteractorTest {
      */
     @Test
     public void testCreateResponsePlayValidCard() {
+        assertEquals("PLAY", playCardReq.getAction().toString());
         PlayerGameResponseModel response = interactor.createResponse(playCardReq);
         // Assert turn has been changed to p3 (p2 is Computer, so logic should be done)
         assertEquals(p3.getName(), response.getCurrentPlayerName());
         // Assert that p1 has lost a Card and that Card is in the deck.
         assertEquals(4, p1.getNumCards());
-        assertTrue(deck.getCards().contains(valid));
+        assertFalse(p1.getCards().contains(valid));
+        assertTrue(deck.getCards().contains(valid) | gameState.getCurrentCard().equals(valid));
         // Assert the Game has no winner yet.
         assertFalse(response.getHasWinner());
     }
@@ -278,5 +255,36 @@ class PlayerGameInteractorTest {
             assertEquals(5, p.getNumCards());
         }
     }
+
+    private Card findValidCard(Player player) {
+        for(Card card: player.getCards()) {
+            if(manager.isValidCard(card)) {
+                return card;
+            }
+        }
+        return null;
+    }
+    private Card giveValidCard(Player player) {
+        // Remove a random card from the Hand first, so we guarantee only 5 cards in a Hand.
+        player.getHand().removeCard(player.getCards().get(0));
+        boolean hasValid = false;
+        while(!hasValid) {
+            Card toAdd = deck.removeCardFromDeck();
+            if(manager.isValidCard(toAdd)) {
+                player.getHand().addCard(toAdd);
+                return toAdd;
+            }
+        }
+        return null;
+    }
+    private boolean hasAnyValid(Player player) {
+        for(Card card: player.getCards()) {
+            if (manager.isValidCard(card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
