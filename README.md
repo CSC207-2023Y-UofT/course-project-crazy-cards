@@ -36,9 +36,6 @@ to the user.
 ![](images/design_pattern.png)
 
 ### Observer
-We used an observer design pattern where ```Game``` is an ```ObservableGame```
-and ```GameStat```
-
 Due to the event-driven nature of this program, we decided to use an observer
 design pattern to monitor a ```Game``` instance, whose state changes throughout 
 the program. There is information from a ```Game``` object which we would wanted
@@ -83,7 +80,16 @@ since the process of this is slightly inconvenient, a separate class implementin
 ```DataAccess``` can be used in the case of another database.
 
 We have also introduced extensibility and flexibility in users defining
-their own custom effects.
+their own custom effects. There is a ``SpecialEffect`` interface, in which 
+a ```Card``` has a ```SpecialEffect```, and when that ```Card``` is played, the special
+effect is done. We have already made preset special effects such as reversing the turn,
+swapping a `Hand` with another `Player`, skipping a turn, forcing a `Player` to draw cards, and randomly setting the current suit and rank
+of a `Game` to something else. `SpecialEffect` instances can also be made through
+the `EffectGenerationParameters` class, which introduces randomness in choosing a
+`SpecialEffect` out of a list of them. Of course a user can choose to define their
+own, even crazier, special effects.
+
+
 
 ## Future Updates
 
