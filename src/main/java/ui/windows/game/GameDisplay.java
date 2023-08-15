@@ -59,7 +59,7 @@ public class GameDisplay extends JPanel{
         this.playerInfo = new String[][]{{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""}};
 
         currentHand = new DrawnHand(new ArrayList<>());
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 15; i++){
             currentHand.addCard(new DrawnCard(Suit.HEART, Rank.ACE));
         }
         currentHand.addMouseListener(cardDelegator);
