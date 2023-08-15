@@ -82,10 +82,16 @@ by ```CSVDatabase```, which writes and loads from a CSV file. In the future thou
 since the process of this is slightly inconvenient, a separate class implementing
 ```DataAccess``` can be used in the case of another database.
 
+We have also introduced extensibility and flexibility in users defining
+their own custom effects.
+
 ## Future Updates
 
 ## Known Bugs
-There is one bug which we have identified, but that we ha
+Sometimes when running the program, a card may look out of place or
+glitched out on the screen. We believe this to be a Swing "bug", 
+however it can be fixed in most cases by just resizing the screen
+to something bigger.
 
 
 
