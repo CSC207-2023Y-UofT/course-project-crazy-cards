@@ -3,20 +3,21 @@ package ui.windows.game;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import controllers.interfaces.GameBridge;
 import ui.components.DrawnCard;
 
 /**
  * Delegates user interaction for selecting cards.
  */
 public class CardDelegator implements MouseListener {
-    private GameController controller;
+    private GameBridge bridge;
 
     /**
-     * Construct a CardDelegator with the given controller.
-     * @param controller the controller to be used
+     * Construct a CardDelegator with the given bridge.
+     * @param controller the bridge to be used
      */
-    public CardDelegator(GameController controller) {
-        this.controller = controller;
+    public CardDelegator(GameBridge bridge) {
+        this.bridge = bridge;
     }
 
     /**
@@ -41,7 +42,7 @@ public class CardDelegator implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         DrawnCard card = (DrawnCard)e.getSource();
-        controller.setSelectedCard(card.getSuit(), card.getRank());
+        bridge.setSelectedCard(card.getSuit(), card.getRank());
     }
 
     /**

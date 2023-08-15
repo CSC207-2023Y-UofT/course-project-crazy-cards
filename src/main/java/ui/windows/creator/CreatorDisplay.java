@@ -1,28 +1,36 @@
 package ui.windows.creator;
 
-import controllers.GameCreationController;
-import controllers.PlayerCreationInformation;
-import enums.WindowName;
-import ui.windows.layout_managers.PaneDelegator;
-import ui.components.NavigationButton;
-import ui.components.PriorityActionListener;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import controllers.data_objects.PlayerCreationInformation;
+import controllers.interfaces.CreatorBridge;
+import enums.WindowName;
+import ui.components.NavigationButton;
+import ui.components.PriorityActionListener;
+import ui.windows.layout_managers.PaneDelegator;
 
 /**
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.
  */
 public class CreatorDisplay extends JPanel implements ActionListener {
+    private final CreatorBridge bridge;
     private static final int LOW_PRIO_NAVIGATOR = 0;
-    private static final int HIGH_PRIO_GAME_CREATION = 1;
+    private static final int HIGH_PRIO_GAME_CREATION = 10;
+
     private JLabel giveNameMessage;
     private JLabel makeCPUorNo;
     private JPanel fieldsAndBoxes;
-    private final GameCreationController controller;
     private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
     private final ArrayList<JTextField> textFieldList = new ArrayList<>();
 
@@ -32,13 +40,17 @@ public class CreatorDisplay extends JPanel implements ActionListener {
     /**
      * Construct a new CreationDisplay.
      */
-    public CreatorDisplay(GameCreationController controller) {
-        this.controller = controller;
+    public CreatorDisplay(CreatorBridge bridge) {
+        this.bridge = bridge;
         this.priorityListener = new PriorityActionListener();
 
         initializeGUIComponents();
     }
 
+    /**
+     * Sets a navigator for this window.
+     * @param navigator The navigator to be set.
+     */
     public void setNavigator(PaneDelegator navigator) {
         priorityListener.addActionListener(navigator, LOW_PRIO_NAVIGATOR);
     }
@@ -161,7 +173,7 @@ public class CreatorDisplay extends JPanel implements ActionListener {
                 controllerInput.add(playerInfo);
             }
         }
-        boolean gameCreated = controller.createGameResponse(controllerInput);
+        boolean gameCreated = bridge.requestCreateGame(controllerInput);
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
             return;
@@ -169,6 +181,5 @@ public class CreatorDisplay extends JPanel implements ActionListener {
             JLabel message = new JLabel("Please enter valid input. That is, at least 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);
         }
-
     }
 }

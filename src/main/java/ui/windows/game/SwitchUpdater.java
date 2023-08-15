@@ -1,23 +1,25 @@
 package ui.windows.game;
 
+import controllers.interfaces.GameBridge;
+
 /**
  * Updates the game window when switched to.
  */
 public class SwitchUpdater {
-    private GameController controller;
+    private GameBridge bridge;
 
     /**
-     * Construct a new SwitchUpdater given a GameController.
-     * @param controller The GameController belonging to this SwitchUpdater.
+     * Construct a new SwitchUpdater with the given bridge
+     * @param bridge the bridge to be used
      */
-    public SwitchUpdater(GameController controller) {
-        this.controller = controller;
+    public SwitchUpdater(GameBridge bridge) {
+        this.bridge = bridge;
     }
 
     /**
      * Updates the game window when switched to.
      */
     public void update() {
-        controller.requestStart();
+        bridge.requestStartData();
     }
 }

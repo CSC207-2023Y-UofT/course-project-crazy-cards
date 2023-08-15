@@ -1,8 +1,6 @@
 package ui.factories;
 
-import controllers.GameBridge;
 import ui.windows.game.CardDelegator;
-import ui.windows.game.GameController;
 import ui.windows.game.GameDelegator;
 import ui.windows.game.GameDisplay;
 import ui.windows.game.GameDrawDelegator;
@@ -10,6 +8,7 @@ import ui.windows.game.GamePlayDelegator;
 import ui.windows.game.GameSkipDelegator;
 import ui.windows.game.GameWindow;
 import ui.windows.game.SwitchUpdater;
+import controllers.interfaces.GameBridge;
 import ui.windows.Window;
 
 public class GameWindowFactory implements WindowFactory {
@@ -29,20 +28,18 @@ public class GameWindowFactory implements WindowFactory {
      * @return The new GameWindow that will display the game for the user.
      */
     @Override
-    public Window createWindow() {
-        GameController controller = new GameController(bridge);
-        
-        GamePlayDelegator playDel = new GamePlayDelegator(controller);
-        GameDrawDelegator drawDel = new GameDrawDelegator(controller);
-        GameSkipDelegator skipDel = new GameSkipDelegator(controller);
+    public Window createWindow() {        
+        GamePlayDelegator playDel = new GamePlayDelegator(bridge);
+        GameDrawDelegator drawDel = new GameDrawDelegator(bridge);
+        GameSkipDelegator skipDel = new GameSkipDelegator(bridge);
         GameDelegator delegator = new GameDelegator(playDel, skipDel, drawDel);
 
-        SwitchUpdater switchUp = new SwitchUpdater(controller);
+        SwitchUpdater switchUp = new SwitchUpdater(bridge);
 
-        CardDelegator cardDel = new CardDelegator(controller);
+        CardDelegator cardDel = new CardDelegator(bridge);
 
         GameDisplay display = new GameDisplay(delegator, cardDel, switchUp);
-        controller.setDisplay(display); 
+        bridge.setUI(display); 
 
         return new GameWindow(display);
     }

@@ -1,7 +1,5 @@
 package entities.game_logic;
 
-import entities.game_logic.GameAccess;
-
 public interface GameObserver {
 
     /**

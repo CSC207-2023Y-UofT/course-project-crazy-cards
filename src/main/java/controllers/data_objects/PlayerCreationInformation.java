@@ -1,4 +1,4 @@
-package controllers;
+package controllers.data_objects;
 
 /**
  * A class containing the direct instructions of a User regarding a Player in a Game's creation.

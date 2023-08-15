@@ -1,15 +1,20 @@
-package ui.windows.stats;
-
-import use_cases.DataAccess;
-import use_cases.PlayerInformation;
+package controllers;
 
 import java.io.IOException;
 
+import controllers.data_objects.StatsDisplayData;
+import controllers.interfaces.StatsBridge;
+import controllers.interfaces.StatsUI;
+import use_cases.DataAccess;
+import use_cases.PlayerInformation;
+
 /**
- * Handles in- and outgoing data for a StatsDisplay.
+ * Handles stats requests and responses.
  */
-public class StatsController {
-    private StatsDisplay display;
+public class StatsController implements StatsBridge {
+    private static final StatsDisplayData ERROR = new StatsDisplayData("ERROR", -1, -1);
+
+    private StatsUI display;
     private DataAccess database;
 
     /**
@@ -21,26 +26,31 @@ public class StatsController {
     }
 
     /**
-     * Sets a display endpoint for the controller.
-     * @param display the display to be used
-     */
-    public void setDisplay(StatsDisplay display) {
-        this.display = display;
-    }
-
-    /**
      * Requests statistics for a given user and updates display.
      * @param username the name of the user
      * @return false if no display is supplied, true otherwise
      */
-    public boolean tryRequestUser(String username) throws IOException {
-        if (display == null) {
-            return false;
+    @Override
+    public void tryRequestUser(String username) {
+        PlayerInformation info;
+        try {
+            info = database.loadPlayer(username);
+        } catch (IOException e) {
+            e.printStackTrace();
+            display.updateView(ERROR);
+            return;
         }
-        PlayerInformation player = database.loadPlayer(username);
-        StatsDisplayData data = retrieveData(player, username);
+        StatsDisplayData data = retrieveData(info, username);
         display.updateView(data);
-        return true;
+    }
+
+    /**
+     * Sets a display endpoint for the controller.
+     * @param display the display to be used
+     */
+    @Override
+    public void setUI(StatsUI display) {
+        this.display = display;
     }
 
     /**

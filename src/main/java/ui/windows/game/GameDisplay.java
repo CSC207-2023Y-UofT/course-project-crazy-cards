@@ -1,5 +1,24 @@
 package ui.windows.game;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import controllers.data_objects.CardDisplayData;
+import controllers.data_objects.GameDisplayData;
+import controllers.interfaces.GameUI;
 import enums.Rank;
 import enums.Suit;
 import enums.WindowName;
@@ -8,16 +27,10 @@ import ui.components.DrawnHand;
 import ui.components.NavigationButton;
 import ui.windows.layout_managers.PaneDelegator;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Renderer for a game window.
  */
-public class GameDisplay extends JPanel{
+public class GameDisplay extends JPanel implements GameUI {
     private GamePlayDelegator playDelegator;
     private GameSkipDelegator skipDelegator;
     private GameDrawDelegator drawDelegator;
@@ -45,6 +58,7 @@ public class GameDisplay extends JPanel{
      * Construct a GameDisplay with the given delegators.
      * @param gameDelegator the delegator for game actions
      * @param cardDelegator the delegator for card actions
+     * @param switchUpdater the switch updater
      */
     public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator, SwitchUpdater switchUpdater) {
         this.playDelegator = gameDelegator.getPlayDelegator();
@@ -65,17 +79,11 @@ public class GameDisplay extends JPanel{
     }
 
     /**
-     * Gets the game state after the game is started.
-     */
-    public void onSwitch() {
-        switchUpdater.update();
-    }
-
-    /**
      * Updates the view the user(s) see. Includes whose turn it is, the current player's hand, the current card in play
      * and the rest of the players, excluding the current player, and their respective number of cards remaining.
      * @param data The GameDisplayData needed to know the current state of the game, in order to update.
      */
+    @Override
     public void updateView(GameDisplayData data) {
         boolean winner = data.getHasWinner();
         currentPlayer = data.getCurrentPlayer();
@@ -102,6 +110,13 @@ public class GameDisplay extends JPanel{
             index++;
         }
         scores.repaint();
+    }
+
+    /**
+     * Gets the game state after the game is started.
+     */
+    public void onSwitch() {
+        switchUpdater.update();
     }
 
     /*

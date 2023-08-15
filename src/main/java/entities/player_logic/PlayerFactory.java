@@ -1,8 +1,5 @@
 package entities.player_logic;
 
-import entities.player_logic.Hand;
-import entities.player_logic.Player;
-
 /**
  * The interface used to implement the different types of player factories that will be used
  * to create the players whenever a new game of Crazy Cards is started.

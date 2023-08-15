@@ -3,18 +3,20 @@ package ui.windows.game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controllers.interfaces.GameBridge;
+
 /**
  * Delegates user interaction for skipping turns.
  */
 public class GameSkipDelegator implements ActionListener {
-    private GameController controller;
+    private GameBridge bridge;
 
     /**
-     * Construct a GameSkipDelegator with the given controller.
-     * @param controller the controller to be used
+     * Construct a GameSkipDelegator with the given bridge.
+     * @param bridge the bridge to be used
      */
-    public GameSkipDelegator(GameController controller) {
-        this.controller = controller;
+    public GameSkipDelegator(GameBridge bridge) {
+        this.bridge = bridge;
     }
 
     /**
@@ -22,6 +24,6 @@ public class GameSkipDelegator implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        controller.skip();
+        bridge.requestSkip();
     }
 }

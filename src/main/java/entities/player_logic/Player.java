@@ -1,11 +1,10 @@
 package entities.player_logic;
 
+import java.util.ArrayList;
+
 import entities.card_logic.Card;
 import entities.deck_logic.Deck;
 import entities.game_logic.Game;
-import entities.player_logic.Hand;
-
-import java.util.ArrayList;
 
 public abstract class Player {
     private Hand hand;

@@ -1,31 +1,24 @@
 package ui.windows.stats;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.io.IOException;
+import javax.swing.JTextField;
+
+import controllers.interfaces.StatsBridge;
 
 /**
  * Delegates incoming user input from a StatsDisplay.
  */
 public class StatsDelegator implements ActionListener {
-    private StatsController controller;
+    private StatsBridge bridge;
 
     /**
      * Constructs a StatsDelegator with a given controller.
-     *  @param controller the controller to be used.
+     *  @param bridge the controller to be used.
      */
-    public StatsDelegator(StatsController controller) {
-        this.controller = controller;
-    }
-
-    /**
-     * Gets the StatsController object.
-     * @return the StatsController object.
-     */
-    public StatsController getController() {
-        return controller;
+    public StatsDelegator(StatsBridge bridge) {
+        this.bridge = bridge;
     }
 
     /**
@@ -36,10 +29,6 @@ public class StatsDelegator implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JTextField inputNameField = (JTextField)e.getSource();
         String username = inputNameField.getText();
-        try {
-            controller.tryRequestUser(username);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        bridge.tryRequestUser(username);
     }
 }

@@ -121,11 +121,6 @@ public interface GameAccess {
     boolean isValidCard(Card card);
 
     /**
-     * Notify all GameObservers observing this Game that there has been a change.
-     */
-    void notifyGameObservers();
-
-    /**
      * Return if the current Player has picked up a card.
      * @return True iff the current Player has picked up a Card from this Game's Deck.
      */
