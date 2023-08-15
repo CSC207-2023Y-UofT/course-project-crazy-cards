@@ -3,18 +3,20 @@ package ui.windows.game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controllers.interfaces.GameBridge;
+
 /**
  * Delegates user interaction for drawing cards.
  */
 public class GameDrawDelegator implements ActionListener {
-    private GameController controller;
+    private GameBridge bridge;
 
     /**
-     * Construct a GameDrawDelegator with the given controller.
-     * @param controller the controller to be used
+     * Construct a GameDrawDelegator with the given bridge.
+     * @param bridge the bridge to be used
      */
-    public GameDrawDelegator(GameController controller) {
-        this.controller = controller;
+    public GameDrawDelegator(GameBridge bridge) {
+        this.bridge = bridge;
     }
 
     /**
@@ -22,6 +24,6 @@ public class GameDrawDelegator implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        controller.drawCard();
+        bridge.requestDraw();
     }
 }
