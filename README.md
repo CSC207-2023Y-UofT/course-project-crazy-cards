@@ -92,6 +92,12 @@ own, even crazier, special effects.
 
 
 ## Future Updates
+Besides bug fixes and making the code cleaner, we believe there is still much to do in the 
+project. We could work on special effects that are not random, i.e. they require
+user input, such as the cards from UNO and the 8 from the game Crazy8s. This would
+may require a new type of special effect class, and most definitely requires special
+pop up screens to be made. It would also require small tweaks to our current logic,
+or another implementation of the `PlayerGameInputBoundary` interface.
 
 ## Known Bugs
 Sometimes when running the program, a card may look out of place or
