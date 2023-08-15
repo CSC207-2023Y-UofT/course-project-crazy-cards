@@ -1,18 +1,24 @@
 package ui.windows.creator;
 
-import controllers.CreatorController;
-import controllers.data_objects.PlayerCreationInformation;
-import controllers.interfaces.CreatorBridge;
-import enums.WindowName;
-import ui.windows.layout_managers.PaneDelegator;
-import ui.components.NavigationButton;
-import ui.components.PriorityActionListener;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import controllers.data_objects.PlayerCreationInformation;
+import controllers.interfaces.CreatorBridge;
+import enums.WindowName;
+import ui.components.NavigationButton;
+import ui.components.PriorityActionListener;
+import ui.windows.layout_managers.PaneDelegator;
 
 /**
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.

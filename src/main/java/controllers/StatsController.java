@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import controllers.data_objects.StatsDisplayData;
 import controllers.interfaces.StatsBridge;
-import ui.interfaces.StatsUI;
+import controllers.interfaces.StatsUI;
 import use_cases.DataAccess;
 import use_cases.PlayerInformation;
 

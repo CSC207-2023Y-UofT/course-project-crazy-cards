@@ -1,11 +1,11 @@
 package ui.components;
 
+import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.JButton;
 
 import enums.WindowName;
-import javafx.stage.Window;
-
-import java.awt.*;
 
 public class NavigationButton extends JButton {
     private WindowName identifier;

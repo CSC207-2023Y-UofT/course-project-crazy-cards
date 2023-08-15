@@ -18,13 +18,13 @@ import javax.swing.JTable;
 
 import controllers.data_objects.CardDisplayData;
 import controllers.data_objects.GameDisplayData;
+import controllers.interfaces.GameUI;
 import enums.Rank;
 import enums.Suit;
 import enums.WindowName;
 import ui.components.DrawnCard;
 import ui.components.DrawnHand;
 import ui.components.NavigationButton;
-import ui.interfaces.GameUI;
 import ui.windows.layout_managers.PaneDelegator;
 
 /**

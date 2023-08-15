@@ -1,12 +1,18 @@
 package ui.components;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.HashMap;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import enums.Rank;
 import enums.Suit;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.util.HashMap;
 
 public class DrawnCard extends JPanel {
     private static final int HIGHLIGHT_OFFSET = 15;

@@ -1,7 +1,5 @@
 package controllers.interfaces;
 
-import ui.interfaces.StatsUI;
-
 /**
  * Defines a controller that handles stats requests and responses.
  */
