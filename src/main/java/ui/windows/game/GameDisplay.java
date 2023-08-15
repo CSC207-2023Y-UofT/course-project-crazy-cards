@@ -9,6 +9,8 @@ import ui.components.NavigationButton;
 import ui.windows.layout_managers.PaneDelegator;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,19 +107,20 @@ public class GameDisplay extends JPanel{
     }
 
     /*
-     * Draws the winscreen popup.
+     * Draws the win screen popup.
      */
     private void winScreen() {
         String winner = currentPlayer;
         goToMenu.setPreferredSize(new Dimension(200, 50));
         NavigationButton[] buttons = {goToMenu};
-        int num = JOptionPane.showOptionDialog(this, winner + " has won!",
+        JLabel message = new JLabel(winner + " has won!");
+        message.setFont(new Font("serif", Font.BOLD, 20));
+        int num = JOptionPane.showOptionDialog(this, message,
                 "Game is over", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE,
                 null, buttons, 0);
         if(num == JOptionPane.YES_OPTION) {
             goToMenu.doClick();
         }
-
     }
 
     /*
@@ -188,12 +191,18 @@ public class GameDisplay extends JPanel{
         scoresConstraints.weightx = 0.33;
         scoresConstraints.weighty = 1;
         JPanel scorePanel = new JPanel();
+        scorePanel.setLayout(new BorderLayout());
+        EmptyBorder emptyBorder = new EmptyBorder(new Insets(10, 20, 0, 0));
+        scorePanel.setBorder(emptyBorder);
         scores = new JTable(playerInfo, COLUMNS);
         scores.setPreferredSize(new Dimension(200, 180));
         scores.setRowHeight(30);
         scores.setFont(new Font("serif", Font.PLAIN, 25));
-        scorePanel.add(scores);
-
+        JTableHeader header = scores.getTableHeader();
+        header.setFont(new Font("serif", Font.PLAIN, 25));
+        scorePanel.add(header, BorderLayout.NORTH);
+        scorePanel.add(scores, BorderLayout.CENTER);
+        top.add(scorePanel, scoresConstraints);
         top.add(scorePanel, scoresConstraints);
 
         // The game board
