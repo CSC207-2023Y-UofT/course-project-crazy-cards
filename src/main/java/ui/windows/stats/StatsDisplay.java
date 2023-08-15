@@ -12,10 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controllers.data_objects.StatsDisplayData;
+import controllers.interfaces.StatsUI;
 import enums.WindowName;
 import ui.components.NavigationButton;
 import ui.components.WrappingLabel;
-import ui.interfaces.StatsUI;
 import ui.windows.layout_managers.PaneDelegator;
 
 /**
@@ -27,7 +27,7 @@ public class StatsDisplay extends JPanel implements StatsUI {
     private JLabel nameLabel;
     private JLabel gamesWonLabel;
     private JLabel gamesLostLabel;
-    private JLabel nextPlayer;
+    private WrappingLabel nextPlayer;
     private NavigationButton backButton;
 
     /**
@@ -56,7 +56,7 @@ public class StatsDisplay extends JPanel implements StatsUI {
             nameLabel.setText("User: " + data.getName());
             gamesWonLabel.setText("Games Won: " + data.getGamesWon());
             gamesLostLabel.setText("Games Lost: " + data.getGamesLost());
-            nextPlayer.setText("<html><br>Enter a new username to see statistics.</html>");
+            nextPlayer.setText("<br>Enter a new username to see statistics.");
         }
     }
 
@@ -112,6 +112,11 @@ public class StatsDisplay extends JPanel implements StatsUI {
         add(buttonPanel, BorderLayout.PAGE_END);
     }
 
+    /**
+     * Check if the data provided is an error data: negative wins and losses and name "ERROR".
+     * @param data the data to check
+     * @return whether the data is an error data
+     */
     private boolean isErrorData(StatsDisplayData data) {
         return data.getGamesWon() == -1 && data.getGamesLost() == -1 && data.getName().equals("ERROR");
     }
