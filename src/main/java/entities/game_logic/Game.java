@@ -164,7 +164,8 @@ public class Game {
      * @return True if this is a valid Card, false otherwise.
      */
     public boolean isValidCard(Card card) {
-        if (card.getSpecialEffect().getAlwaysPlayable()) {
+        SpecialEffect specialEffect = card.getSpecialEffect();
+        if (specialEffect != null && specialEffect.getAlwaysPlayable()) {
             return true;
         } 
         else {
