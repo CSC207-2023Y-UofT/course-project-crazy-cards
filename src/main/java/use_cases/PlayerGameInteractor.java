@@ -54,15 +54,11 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 computerPlayerLogic((ComputerPlayer) newCurrPlayer);
                 newCurrPlayer = access.getCurrentTurn();
             }
-            notifier.update();
-            // Return the current state of the game with a response model.
-            return new PlayerGameResponseModel(gameState);
         } 
-        else {
-            // Called on request of starting game data, i.e. TurnAction.START
-            notifier.update();
-            return new PlayerGameResponseModel(gameState);
-        }
+
+        notifier.update();
+        // Return the current state of the game with a response model.
+        return new PlayerGameResponseModel(gameState);
     }
 
     /**
@@ -142,7 +138,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         if ((access.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
             // User can skip.
             access.moveNextTurn();
-            notifier.update();
         }
             // User cannot skip their turn.
     }
@@ -175,7 +170,6 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 ((HumanPlayer) p).incrementLosses();
             }
         }
-        notifier.update();
     }
 
     /**
@@ -219,6 +213,5 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
         // The ComputerPlayer has played a Card (may or may not have picked up) and there was no winner, so change the
         // current turn and update the Game.
         access.moveNextTurn();
-        notifier.update();
     }
 }
