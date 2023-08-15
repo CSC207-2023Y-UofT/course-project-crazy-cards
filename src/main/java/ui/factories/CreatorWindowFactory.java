@@ -3,16 +3,16 @@ package ui.factories;
 import ui.windows.Window;
 import ui.windows.creator.CreatorDisplay;
 import ui.windows.creator.CreatorWindow;
-import controllers.GameCreationController;
+import controllers.CreatorController;
 
 public class CreatorWindowFactory implements WindowFactory {
-    private GameCreationController controller;
+    private CreatorController controller;
 
     /**
      * Constructor for the factory that sets the factory's controller.
      * @param controller The GameCreationController to be used in creating the window.
      */
-    public CreatorWindowFactory(GameCreationController controller) {
+    public CreatorWindowFactory(CreatorController controller) {
         this.controller = controller;
     }
 

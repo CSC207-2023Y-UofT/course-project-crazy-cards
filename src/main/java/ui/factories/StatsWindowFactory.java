@@ -1,9 +1,10 @@
 package ui.factories;
 
-import ui.windows.stats.StatsController;
 import ui.windows.stats.StatsDelegator;
 import ui.windows.stats.StatsDisplay;
 import ui.windows.stats.StatsWindow;
+import controllers.StatsController;
+import controllers.interfaces.StatsBridge;
 import ui.windows.Window;
 import use_cases.DataAccess;
 
@@ -25,10 +26,10 @@ public class StatsWindowFactory implements WindowFactory {
      */
     @Override
     public Window createWindow() {
-        StatsController controller = new StatsController(dataAccess);
-        StatsDelegator delegator = new StatsDelegator(controller);
+        StatsBridge bridge = new StatsController(dataAccess);
+        StatsDelegator delegator = new StatsDelegator(bridge);
         StatsDisplay display = new StatsDisplay(delegator);
-        controller.setDisplay(display);
+        bridge.setUI(display);
 
         return new StatsWindow(display);
     }
