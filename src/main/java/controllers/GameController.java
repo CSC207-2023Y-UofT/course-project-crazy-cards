@@ -35,6 +35,9 @@ public class GameController implements GameBridge {
         this.inputBoundary = inputBoundary;
     }
 
+    /**
+     * Requests the state of the initial game.
+     */
     @Override
     public void requestStartData() {
         PlayerGameResponseModel response = getResponse(null, null, null, TurnAction.START);
@@ -43,6 +46,9 @@ public class GameController implements GameBridge {
         UI.updateView(data);
     }
 
+    /**
+     * Requests to play the selected card.
+     */
     @Override
     public void requestPlay() {
         PlayerGameResponseModel response = getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.PLAY);
@@ -51,6 +57,9 @@ public class GameController implements GameBridge {
         UI.updateView(data);
     }
 
+    /**
+     * Requests to draw a card.
+     */
     @Override
     public void requestDraw() {
         PlayerGameResponseModel response = getResponse(currentPlayer, null, null, TurnAction.DRAW);
@@ -59,6 +68,9 @@ public class GameController implements GameBridge {
         UI.updateView(data);
     }
 
+    /**
+     * Requests to skip a turn.
+     */
     @Override
     public void requestSkip() {
         PlayerGameResponseModel response = getResponse(currentPlayer, null, null, TurnAction.SKIP);
@@ -67,12 +79,21 @@ public class GameController implements GameBridge {
         UI.updateView(data);
     }
 
+    /**
+     * Sets the selected card.
+     * @param suit the suit of the card
+     * @param rank the rank of the card
+     */
     @Override
     public void setSelectedCard(Suit suit, Rank rank) {
         selectedSuit = suit;
         selectedRank = rank;
     }
 
+    /**
+     * Sets the UI.
+     * @param UI the UI to be set
+     */
     @Override
     public void setUI(GameUI UI) {
         this.UI = UI;

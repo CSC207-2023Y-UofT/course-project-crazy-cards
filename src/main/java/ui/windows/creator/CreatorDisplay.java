@@ -41,6 +41,10 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         initializeGUIComponents();
     }
 
+    /**
+     * Sets a navigator for this window.
+     * @param navigator The navigator to be set.
+     */
     public void setNavigator(PaneDelegator navigator) {
         priorityListener.addActionListener(navigator, LOW_PRIO_NAVIGATOR);
     }

@@ -9,7 +9,7 @@ import use_cases.DataAccess;
 import use_cases.PlayerInformation;
 
 /**
- * Handles in- and outgoing data for a StatsDisplay.
+ * Handles stats requests and responses.
  */
 public class StatsController implements StatsBridge {
     private static final StatsDisplayData ERROR = new StatsDisplayData("ERROR", -1, -1);

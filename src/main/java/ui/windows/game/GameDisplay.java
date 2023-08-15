@@ -58,6 +58,7 @@ public class GameDisplay extends JPanel implements GameUI {
      * Construct a GameDisplay with the given delegators.
      * @param gameDelegator the delegator for game actions
      * @param cardDelegator the delegator for card actions
+     * @param switchUpdater the switch updater
      */
     public GameDisplay(GameDelegator gameDelegator, CardDelegator cardDelegator, SwitchUpdater switchUpdater) {
         this.playDelegator = gameDelegator.getPlayDelegator();
