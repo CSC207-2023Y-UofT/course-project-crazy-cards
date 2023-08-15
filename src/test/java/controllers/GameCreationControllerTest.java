@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import controllers.data_objects.PlayerCreationInformation;
 import use_cases.DataAccess;
 import use_cases.GameCreationInputBoundary;
 import use_cases.GameCreationInteractor;
@@ -20,7 +22,7 @@ class GameCreationControllerTest {
 
     private ArrayList<PlayerCreationInformation> validInfo = new ArrayList<>();
     private ArrayList<PlayerCreationInformation> invalidInfo = new ArrayList<>();
-    private GameCreationController controller;
+    private CreatorController controller;
 
     /**
      * Set up objects needed to test GameCreationController
@@ -40,7 +42,7 @@ class GameCreationControllerTest {
         DataAccess dataAccess = new CSVDatabase();
         CreationAccess creationAccess = new GameManager();
         GameCreationInputBoundary inputBoundary = new GameCreationInteractor(dataAccess, creationAccess);
-        controller = new GameCreationController(inputBoundary);
+        controller = new CreatorController(inputBoundary);
     }
 
     /**
@@ -58,7 +60,7 @@ class GameCreationControllerTest {
      */
     @Test
     public void testCreateGameInvalid() {
-        Assertions.assertFalse(controller.createGameResponse(invalidInfo));
+        Assertions.assertFalse(controller.requestCreateGame(invalidInfo));
     }
 
     /**
@@ -66,6 +68,6 @@ class GameCreationControllerTest {
      */
     @Test
     public void testCreateGameValid() {
-        Assertions.assertTrue(controller.createGameResponse((validInfo)));
+        Assertions.assertTrue(controller.requestCreateGame((validInfo)));
     }
 }
