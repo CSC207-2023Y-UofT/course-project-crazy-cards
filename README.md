@@ -1,7 +1,15 @@
 # Crazy Cards
 
-Crazy cards is a single/multiplayer card game (crazy 8s) that can be played between users and/or computers. Throughout
-the code and documentation, we use player and user interchangeably.
+Crazy cards is a single/multiplayer card game adapted from Crazy 8s. Compete against your friends or against our CPU
+bots to see who can get rid of their cards the fastest. You can view our rules page and how to play page on more details
+on the way our card game is played. Or, you can check your gameplay statistics, and see how many wins or losses you've 
+accumulated.
+
+Comments:<br>
+Throughout the code and documentation, we use player and user interchangeably. Once you've entered the gameplay itself, 
+feel free to maximize the program window. In the event that the cards you draw are extremely unlucky, this prevents the
+cards from becoming hidden behind the action buttons beside your hand. Other screens/windows will be compatible with the
+original screen size when the program is run.
 
 ## How To Run The Game
 
