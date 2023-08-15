@@ -1,17 +1,27 @@
 package ui.windows.stats;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Insets;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import controllers.data_objects.StatsDisplayData;
 import enums.WindowName;
 import ui.components.NavigationButton;
+import ui.components.WrappingLabel;
+import ui.interfaces.StatsUI;
 import ui.windows.layout_managers.PaneDelegator;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
 /**
  * A JPanel subclass representing the game's statistics window.
  */
-public class StatsDisplay extends JPanel {
+public class StatsDisplay extends JPanel implements StatsUI {
     private static final String EMPTY_LABEL = "";
     private StatsDelegator delegator;
     private JLabel nameLabel;
@@ -28,6 +38,26 @@ public class StatsDisplay extends JPanel {
         this.delegator = delegator;
 
         initializeGUIComponents();
+    }
+
+    /**
+     * Update this instance's labels to reflect updated values in data.
+     * @param data the data to update the labels with
+     */
+    @Override
+    public void updateView(StatsDisplayData data) {
+        if (isErrorData(data)) {
+            nameLabel.setText("Error encountered. Check console for more information.");
+            gamesWonLabel.setText(EMPTY_LABEL);
+            gamesLostLabel.setText(EMPTY_LABEL);
+            nextPlayer.setText(EMPTY_LABEL);
+        } 
+        else {
+            nameLabel.setText("User: " + data.getName());
+            gamesWonLabel.setText("Games Won: " + data.getGamesWon());
+            gamesLostLabel.setText("Games Lost: " + data.getGamesLost());
+            nextPlayer.setText("<html><br>Enter a new username to see statistics.</html>");
+        }
     }
 
     /**
@@ -55,7 +85,7 @@ public class StatsDisplay extends JPanel {
         gamesWonLabel.setFont(font);
         gamesLostLabel = new JLabel(EMPTY_LABEL);
         gamesLostLabel.setFont(font);
-        nextPlayer = new JLabel(EMPTY_LABEL);
+        nextPlayer = new WrappingLabel(EMPTY_LABEL);
         nextPlayer.setFont(font);
 
         dataPanel.add(nameLabel);
@@ -82,13 +112,7 @@ public class StatsDisplay extends JPanel {
         add(buttonPanel, BorderLayout.PAGE_END);
     }
 
-    /**
-     * Update this instance's labels to reflect updated values in data.
-     */
-    public void updateView(StatsDisplayData data) {
-        nameLabel.setText("User: " + data.getName());
-        gamesWonLabel.setText("Games Won: " + data.getGamesWon());
-        gamesLostLabel.setText("Games Lost: " + data.getGamesLost());
-        nextPlayer.setText("<html><br>Enter a new username to see statistics.</html>");
+    private boolean isErrorData(StatsDisplayData data) {
+        return data.getGamesWon() == -1 && data.getGamesLost() == -1 && data.getName().equals("ERROR");
     }
 }
