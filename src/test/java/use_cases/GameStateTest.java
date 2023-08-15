@@ -1,6 +1,13 @@
 package use_cases;
 
-import entities.*;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.Game;
+import entities.game_logic.GameManager;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import enums.Rank;
 import enums.Suit;
 import org.junit.jupiter.api.AfterEach;
@@ -69,7 +76,7 @@ class GameStateTest {
         // It is p1's turn, once the turn has been changed it will be p2's turn
         // the turn change and card placement will be separate, p1 should still have
         // the same amount of Cards
-        access.changeCurrentTurn();
+        access.moveNextTurn();
         Card toPutDown = new Card(Suit.SPADE, Rank.QUEEN);
         access.playCard(p1, toPutDown);
         // update GameState

@@ -1,5 +1,8 @@
 package entities;
 
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
 import enums.Rank;
 import enums.Suit;
 import org.junit.jupiter.api.BeforeEach;

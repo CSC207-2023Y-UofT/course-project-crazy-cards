@@ -1,4 +1,4 @@
-package entities;
+package entities.card_logic;
 
 import java.util.ArrayList;
 import java.util.List;

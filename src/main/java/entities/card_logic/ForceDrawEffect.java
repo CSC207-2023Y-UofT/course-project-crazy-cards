@@ -1,4 +1,7 @@
-package entities;
+package entities.card_logic;
+
+import entities.game_logic.GameAccess;
+import entities.player_logic.Player;
 
 /**
  * This class represents a special effect that forces the next player to draw a certain amount of cards.

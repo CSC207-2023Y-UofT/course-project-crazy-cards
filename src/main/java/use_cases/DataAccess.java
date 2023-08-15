@@ -1,7 +1,7 @@
 package use_cases;
 
-import entities.GameObserver;
-import entities.HumanPlayer;
+import entities.game_logic.GameObserver;
+import entities.player_logic.HumanPlayer;
 
 import java.io.IOException;
 

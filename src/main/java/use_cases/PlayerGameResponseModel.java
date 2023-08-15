@@ -1,7 +1,7 @@
 package use_cases;
 
-import entities.Card;
-import entities.Player;
+import entities.card_logic.Card;
+import entities.player_logic.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

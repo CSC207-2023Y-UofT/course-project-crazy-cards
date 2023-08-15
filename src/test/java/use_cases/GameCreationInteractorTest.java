@@ -1,7 +1,11 @@
 package use_cases;
 
 import database.CSVDatabase;
-import entities.*;
+import entities.game_logic.CreationAccess;
+import entities.game_logic.GameAccess;
+import entities.game_logic.GameManager;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

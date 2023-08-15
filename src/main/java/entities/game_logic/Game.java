@@ -1,5 +1,8 @@
-package entities;
+package entities.game_logic;
 
+import entities.player_logic.Player;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
 import enums.Rank;
 import enums.Suit;
 

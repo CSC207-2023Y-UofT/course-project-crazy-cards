@@ -1,4 +1,4 @@
-package entities;
+package entities.deck_logic;
 
 import java.util.HashMap;
 

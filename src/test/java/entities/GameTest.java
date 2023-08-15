@@ -1,5 +1,12 @@
 package entities;
 
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.Game;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -163,7 +170,7 @@ class GameTest {
      */
     @Test
     public void testChangeCurrentTurn() {
-        game.changeCurrentTurn();
+        game.moveNextTurn();
         assertEquals(p2, game.getCurrentTurn());
         assertFalse(game.getCurrentTurnHasPickedUp());
     }

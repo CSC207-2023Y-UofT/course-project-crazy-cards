@@ -1,6 +1,16 @@
 package use_cases;
 
-import entities.*;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.Game;
+import entities.game_logic.GameManager;
+import entities.game_logic.IObserverNotifier;
+import entities.game_logic.ObserverNotifier;
+import entities.player_logic.ComputerPlayer;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import enums.Rank;
 import enums.Suit;
 import enums.TurnAction;
