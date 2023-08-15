@@ -52,8 +52,7 @@ class PlayerGameInteractorTest {
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
         Hand h3 = new Hand(new ArrayList<>());
-        Hand h4 = new Hand(new ArrayList<>());
-        Hand[] hands = {h1, h2, h3, h4};
+        Hand[] hands = {h1, h2, h3};
         for (Hand h: hands) {
             for(int i = 0; i < 5 ; i++) {
                 h.addCard(deck.removeCardFromDeck());
@@ -104,21 +103,6 @@ class PlayerGameInteractorTest {
         firstCard = null;
         manager = null;
         valid = null;
-    }
-
-    /**
-     * Give the given player an invalid Hand (cannot play any cards).
-     * @param player The Player to be given an invalid Hand.
-     */
-    private void giveInvalidHand(Player player) {
-        Hand newHand = new Hand(new ArrayList<>());
-        while (newHand.getCards().size() < 2) {
-            Card newCard = deck.removeCardFromDeck();
-            if(!(manager.isValidCard(newCard))) {
-                newHand.addCard(newCard);
-            }
-        }
-        player.setHand(newHand);
     }
 
     /**
@@ -256,6 +240,12 @@ class PlayerGameInteractorTest {
         }
     }
 
+    /**
+     * Find a valid Card in a Player's Hand.
+     * This method assumes the Player has a valid Card (considering the current Card of the game).
+     * @param player The Player's whose Hand will be searched.
+     * @return A the valid Card in this Player's Hand/
+     */
     private Card findValidCard(Player player) {
         for(Card card: player.getCards()) {
             if(manager.isValidCard(card)) {
@@ -264,11 +254,21 @@ class PlayerGameInteractorTest {
         }
         return null;
     }
+
+    /**
+     * Give a Player a playable Card.
+     * This method assumes the Player has no valid Cards.
+     * @param player The Player to be given a Card.
+     * @return The valid Card given.
+     */
     private Card giveValidCard(Player player) {
         // Remove a random card from the Hand first, so we guarantee only 5 cards in a Hand.
         player.getHand().removeCard(player.getCards().get(0));
         boolean hasValid = false;
         while(!hasValid) {
+            if(deck.getCards().size() == 0) {
+                return null;
+            }
             Card toAdd = deck.removeCardFromDeck();
             if(manager.isValidCard(toAdd)) {
                 player.getHand().addCard(toAdd);
@@ -277,6 +277,12 @@ class PlayerGameInteractorTest {
         }
         return null;
     }
+
+    /**
+     * Check if the Player has any valid Cards.
+     * @param player The Player to check
+     * @return true iff has a valid card.
+     */
     private boolean hasAnyValid(Player player) {
         for(Card card: player.getCards()) {
             if (manager.isValidCard(card)) {
@@ -284,6 +290,21 @@ class PlayerGameInteractorTest {
             }
         }
         return false;
+    }
+
+    /**
+     * Give the given player an invalid Hand (cannot play any cards).
+     * @param player The Player to be given an invalid Hand.
+     */
+    private void giveInvalidHand(Player player) {
+        Hand newHand = new Hand(new ArrayList<>());
+        while (newHand.getCards().size() < 2) {
+            Card newCard = deck.removeCardFromDeck();
+            if(!(manager.isValidCard(newCard))) {
+                newHand.addCard(newCard);
+            }
+        }
+        player.setHand(newHand);
     }
 
 }
