@@ -1,6 +1,16 @@
 package use_cases;
 
-import entities.*;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.Game;
+import entities.game_logic.GameManager;
+import entities.game_logic.IObserverNotifier;
+import entities.game_logic.ObserverNotifier;
+import entities.player_logic.ComputerPlayer;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import enums.Rank;
 import enums.Suit;
 import enums.TurnAction;
@@ -21,6 +31,7 @@ class PlayerGameResponseModelTest {
     private Game game;
     private Player p1;
     private PlayerGameResponseModel response;
+    private GameManager manager;
 
     @BeforeEach
     public void setUp() {
@@ -46,9 +57,12 @@ class PlayerGameResponseModelTest {
         // Make the first Card of the game something p1 can play on top of.
         Card firstCard = new Card(h1.getCards().get(0).getSuit(), Rank.KING);
         game.putCardDown(firstCard);
-        GameState gameState = new GameState(game);
-        game.addObserver(gameState);
-        PlayerGameInteractor interactor = new PlayerGameInteractor(game, gameState);
+        manager = new GameManager();
+        manager.buildGame(players, deck);
+        GameState gameState = new GameState(manager);
+        manager.addObserver(gameState);
+        IObserverNotifier notifier = new ObserverNotifier(manager);
+        PlayerGameInteractor interactor = new PlayerGameInteractor(manager, notifier, gameState);
         PlayerGameRequestModel request = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
         response = interactor.createResponse(request);
     }

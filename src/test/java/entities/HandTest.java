@@ -1,5 +1,11 @@
 package entities;
 
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.player_logic.Hand;
+import enums.Rank;
+import enums.Suit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +31,7 @@ class HandTest {
             cards.add(deck.removeCardFromDeck());
         }
         h1 = new Hand(cards);
-        toAdd = new Card("Tests", "17");
+        toAdd = new Card(Suit.SPADE, Rank.QUEEN);
     }
 
     /**
@@ -60,7 +66,6 @@ class HandTest {
      */
     @Test
     public void testRemoveCard() {
-        Card toAdd = new Card("Tests", "17");
         h1.addCard(toAdd);
         h1.removeCard(toAdd);
         assertFalse(h1.getCards().contains(toAdd));

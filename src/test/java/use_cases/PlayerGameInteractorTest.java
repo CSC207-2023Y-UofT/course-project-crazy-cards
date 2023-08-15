@@ -1,10 +1,18 @@
 package use_cases;
 
-import entities.*;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.GameManager;
+import entities.game_logic.IObserverNotifier;
+import entities.game_logic.ObserverNotifier;
+import entities.player_logic.ComputerPlayer;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import enums.Rank;
 import enums.Suit;
 import enums.TurnAction;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class PlayerGameInteractorTest {
 
-    private Game game;
     private Player p1;
     private Player p2;
     private Player p3;
@@ -32,13 +39,16 @@ class PlayerGameInteractorTest {
     private PlayerGameRequestModel pickUpReq;
     private Card p1sCard;
     private Card firstCard;
+    private GameManager manager;
+    private Deck deck;
+    private Card valid;
 
     /**
      * Initialize all objects required to test PlayerGameInteractor.
      */
     @BeforeEach
     public void setUp() {
-        Deck deck = new StandardDeck();
+        deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
         Hand h3 = new Hand(new ArrayList<>());
@@ -56,20 +66,49 @@ class PlayerGameInteractorTest {
         players.add(p1);
         players.add(p2);
         players.add(p3);
-        game = new Game(deck, players);
+        manager = new GameManager();
+        manager.buildGame(players, deck);
+        firstCard = manager.getCurrentCard();
         // Make the first Card of the game something p1 can play on top of.
-        firstCard = new Card(h1.getCards().get(0).getSuit(), Rank.KING);
-        game.putCardDown(firstCard);
-        gameState = new GameState(game);
-        game.addObserver(gameState);
-        Rank p1CardVal = h1.getCards().get(0).getRank();
-        Suit p1CardSuit = h1.getCards().get(0).getSuit();
-        p1sCard = h1.getCards().get(0);
-        interactor = new PlayerGameInteractor(game, gameState);
-        playCardReq = new PlayerGameRequestModel("sol", p1CardSuit, p1CardVal, TurnAction.PLAY);
+        if (!hasAnyValid(p1)) {
+            valid = giveValidCard(p1);
+        }
+        gameState = new GameState(manager);
+        manager.addObserver(gameState);
+        valid = findValidCard(p1);
+        IObserverNotifier observerNotifier = new ObserverNotifier(manager);
+        interactor = new PlayerGameInteractor(manager, observerNotifier, gameState);
+        playCardReq = new PlayerGameRequestModel("sol", valid.getSuit(), valid.getRank(), TurnAction.PLAY);
         pickUpReq = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
         skipReq = new PlayerGameRequestModel("sol", null, null, TurnAction.SKIP);
 
+    }
+    private Card findValidCard(Player player) {
+        for(Card card: player.getCards()) {
+            if(manager.isValidCard(card)) {
+                return card;
+            }
+        }
+        return null;
+    }
+    private Card giveValidCard(Player player) {
+        boolean hasValid = false;
+        while(!hasValid) {
+            Card toAdd = deck.removeCardFromDeck();
+            if(manager.isValidCard(toAdd)) {
+                player.getHand().addCard(toAdd);
+                return toAdd;
+            }
+        }
+        return null;
+    }
+    private boolean hasAnyValid(Player player) {
+        for(Card card: player.getCards()) {
+            if (manager.isValidCard(card)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -80,7 +119,7 @@ class PlayerGameInteractorTest {
         gameState = null;
         p1 = null;
         p2 = null;
-        game = null;
+        deck = null;
         players = null;
         interactor = null;
         playCardReq = null;
@@ -88,6 +127,22 @@ class PlayerGameInteractorTest {
         pickUpReq = null;
         p1sCard = null;
         firstCard = null;
+        manager = null;
+    }
+
+    /**
+     * Give the given player an invalid Hand (cannot play any cards).
+     * @param player The Player to be given an invalid Hand.
+     */
+    private void giveInvalidHand(Player player) {
+        Hand newHand = new Hand(new ArrayList<>());
+        while (newHand.getCards().size() < 2) {
+            Card newCard = deck.removeCardFromDeck();
+            if(!(manager.isValidCard(newCard))) {
+                newHand.addCard(newCard);
+            }
+        }
+        player.setHand(newHand);
     }
 
     /**
@@ -100,7 +155,7 @@ class PlayerGameInteractorTest {
         assertEquals(p3.getName(), response.getCurrentPlayerName());
         // Assert that p1 has lost a Card and that Card is in the deck.
         assertEquals(4, p1.getNumCards());
-        assertTrue(game.getGameDeck().getCards().contains(p1sCard));
+        assertTrue(deck.getCards().contains(valid));
         // Assert the Game has no winner yet.
         assertFalse(response.getHasWinner());
     }
@@ -108,26 +163,21 @@ class PlayerGameInteractorTest {
     /**
      * Test createResponse() when given the input to play a Card and the Card is invalid.
      */
-    /*
     @Test
     public void testCreateResponsePlayInvalidCard() {
         // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
-        Hand newHand = new Hand(new ArrayList<>());
-        Card bogus1 = new Card("Test", "17");
-        Card bogus2 = new Card("Test", "18");
-        newHand.addCard(bogus1);
-        newHand.addCard(bogus2);
-        p1.setHand(newHand);
-        Suit chosenSuit = bogus1.getSuit();
-        Rank chosenValue = bogus1.getRank();
-        // Have p1 try to play bogus1.
-        PlayerGameRequestModel pgrm = new PlayerGameRequestModel("sol", chosenSuit, chosenValue, TurnAction.PLAY);
+        giveInvalidHand(p1);
+        Card bogus = p1.getCards().get(0);
+        Suit bogusSuit = bogus.getSuit();
+        Rank bogusRank = bogus.getRank();
+        // Have p1 try to play bogus card.
+        PlayerGameRequestModel pgrm = new PlayerGameRequestModel("sol", bogusSuit, bogusRank, TurnAction.PLAY);
         interactor.createResponse(pgrm);
         // Assert the turn has not changed, no winner, current Card is the same, none of the player's cards have changed.
         assertEquals(p1, gameState.getCurrentPlayer());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             if (p.equals(p1)) {
                 assertEquals(2, p.getNumCards());
             } else {
@@ -136,16 +186,14 @@ class PlayerGameInteractorTest {
         }
     }
 
-     */
-
     /**
-     * Test createResponse when given a Player plays a valid Card and they become the winner.
+     * Test createResponse when given a Player plays a valid Card, and they become the winner.
      */
     @Test
     public void testCreateResponsePlayCardWinner () {
         // Give p1 a new Hand containing just one valid Card
         Hand newHand = new Hand(new ArrayList<>());
-        newHand.addCard(p1sCard);
+        newHand.addCard(valid);
         p1.setHand(newHand);
         // Play the only Card in this Hand.
         PlayerGameResponseModel response = interactor.createResponse(playCardReq);
@@ -159,31 +207,25 @@ class PlayerGameInteractorTest {
         HumanPlayer humanP3 = (HumanPlayer) p3;
         assertEquals(1, humanP3.getLosses());
         assertEquals(0, humanP3.getWins());
-        assertEquals(p1sCard, gameState.getCurrentCard());
+        assertEquals(valid, gameState.getCurrentCard());
     }
 
     /**
      * Test createResponse when a User/Player requests to skip a turn which they can.
      */
-    /*
     @Test
     public void testCreateResponseSkipTurnValid () {
         // Make it so that p1 has to skip (has picked up and no valid cards)
-        game.setCurrentTurnHasPickedUpTrue();
-        Hand newHand = new Hand(new ArrayList<>());
-        Card bogus1 = new Card("Test", "17");
-        Card bogus2 = new Card("Test", "18");
-        newHand.addCard(bogus1);
-        newHand.addCard(bogus2);
-        p1.setHand(newHand);
+        //.setCurrentTurnHasPickedUpTrue();
+        giveInvalidHand(p1);
+        interactor.createResponse(pickUpReq);
+        p1.getHand().removeCard(p1.getCards().get(2));
         // p1 has no valid cards, and cannot pick up, now request to skip
         interactor.createResponse(skipReq);
         // Assert that p1 has had no change in Card number, and that it is now p3s turn
-        assertEquals(2, p1.getNumCards());
+        assertEquals(2, p1.getHand().getCards().size());
         assertEquals(p3, gameState.getCurrentPlayer());
-        }
-
-     */
+    }
 
     /**
      * Test createResponse when a User requests to skip a turn, but they cannot.
@@ -195,7 +237,7 @@ class PlayerGameInteractorTest {
         assertEquals(p1, gameState.getCurrentPlayer());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             assertEquals(5, p.getNumCards());
         }
     }
@@ -203,23 +245,16 @@ class PlayerGameInteractorTest {
     /**
      * Test createResponse when a User requests to pick up a Card and they can do so.
      */
-
-    /*
     @Test
     public void testCreateResponsePickUpCardValid () {
         // Give a new bogus Hand to p1 so to validate p1 has no valid Cards.
-        Hand newHand = new Hand(new ArrayList<>());
-        Card bogus1 = new Card("Test", "17");
-        Card bogus2 = new Card("Test", "18");
-        newHand.addCard(bogus1);
-        newHand.addCard(bogus2);
-        p1.setHand(newHand);
+        giveInvalidHand(p1);
         // Have p1 pick up a Card. Only thing that should've changed is p1's number of Cards.
         interactor.createResponse(pickUpReq);
         assertEquals(p1, gameState.getCurrentPlayer());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             if(!(p.equals(p1))) {
                 assertEquals(5, p.getNumCards());
             } else {
@@ -227,8 +262,6 @@ class PlayerGameInteractorTest {
             }
         }
     }
-
-     */
 
     /**
      * Test createResponse when a User requests to pick up a Card, but they cannot.
@@ -240,7 +273,7 @@ class PlayerGameInteractorTest {
         assertEquals(p1.getName(), response.getCurrentPlayerName());
         assertFalse(gameState.getHasWinner());
         assertEquals(firstCard, gameState.getCurrentCard());
-        for (Player p : game.getPlayers()) {
+        for (Player p : manager.getPlayers()) {
             assertEquals(5, p.getNumCards());
         }
     }

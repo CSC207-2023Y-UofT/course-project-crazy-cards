@@ -1,5 +1,12 @@
 package entities;
 
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.GameManager;
+import entities.player_logic.ComputerPlayer;
+import entities.player_logic.Hand;
+import entities.player_logic.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,14 +21,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComputerPlayerTest {
 
     private ComputerPlayer cp1;
-    private Game game;
+    private GameManager manager;
+    private Deck deck;
 
     /**
      * Construct a ComputerPlayer with a valid Hand of Cards.
      */
     @BeforeEach
     public void setUp() {
-        Deck deck = new StandardDeck();
+        deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
         Hand h2 = new Hand(new ArrayList<>());
         Hand[] hands = {h1, h2};
@@ -33,9 +41,10 @@ class ComputerPlayerTest {
         cp1 = new ComputerPlayer("CPU1", h1);
         ArrayList<Player> players = new ArrayList<>();
         players.add(cp1);
-        game = new Game(deck, players);
+        manager = new GameManager();
+        manager.buildGame(players, deck);
         Card firstCard = new Card(Suit.SPADE, Rank.SEVEN);
-        game.putCardDown(firstCard);
+        manager.playCard(cp1, firstCard);
     }
 
     /**
@@ -47,6 +56,21 @@ class ComputerPlayerTest {
     }
 
 
+
+    /**
+     * Give the given player an invalid Hand
+     */
+    private void giveInvalidHand(Player player) {
+        Hand newHand = new Hand(new ArrayList<>());
+        while (newHand.getCards().size() < 2) {
+            Card newCard = deck.removeCardFromDeck();
+            if(!(manager.isValidCard(newCard))) {
+                newHand.addCard(newCard);
+            }
+        }
+        player.setHand(newHand);
+    }
+
     /**
      * Test selectRandomCard() in ComputerPlayer selects a valid Card given a Game instance or than a NoValidCardException
      * is thrown if it does not.
@@ -55,8 +79,8 @@ class ComputerPlayerTest {
     public void testSelectCardValidCard() {
         Card toAddToCp1 = new Card(Suit.SPADE, Rank.NINE);
         cp1.getHand().addCard(toAddToCp1);
-        Card selected = cp1.selectRandomValidCard(game);
-        boolean validity = game.isValidCard(selected);
+        Card selected = manager.selectRandomValidCard(cp1);
+        boolean validity = manager.isValidCard(selected);
         assertTrue(validity);
 
     }
@@ -66,12 +90,8 @@ class ComputerPlayerTest {
      */
     @Test()
     public void testSelectCardInvalid() {
-        Card bogus = new Card("Test", "18");
-        ArrayList<Card> newHandList = new ArrayList<>();
-        newHandList.add(bogus);
-        Hand hand = new Hand(newHandList);
-        cp1.setHand(hand);
-        Card selected = cp1.selectRandomValidCard(game);
+        giveInvalidHand(cp1);
+        Card selected = manager.selectRandomValidCard(cp1);
         assertNull(selected);
     }
 }

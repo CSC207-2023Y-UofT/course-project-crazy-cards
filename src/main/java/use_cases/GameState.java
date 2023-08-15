@@ -1,7 +1,9 @@
 package use_cases;
 
-import entities.GameObserver;
-import entities.*;
+import entities.game_logic.GameObserver;
+import entities.card_logic.Card;
+import entities.game_logic.GameAccess;
+import entities.player_logic.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

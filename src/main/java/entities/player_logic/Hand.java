@@ -1,4 +1,6 @@
-package entities;
+package entities.player_logic;
+
+import entities.card_logic.Card;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package entities;
+package entities.player_logic;
 
 /**
  * The class used to create HumanPlayers whenever a new game of Crazy Cards is started.

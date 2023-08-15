@@ -1,4 +1,7 @@
-package entities;
+package entities.game_logic;
+
+import entities.game_logic.IObserverNotifier;
+import entities.game_logic.ObservableGame;
 
 /**
  * Delegate for observer notification.

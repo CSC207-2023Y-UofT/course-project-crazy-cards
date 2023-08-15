@@ -1,4 +1,4 @@
-package entities;
+package entities.card_logic;
 
 import enums.Rank;
 import enums.Suit;
