@@ -1,4 +1,4 @@
-package ui.windows.game;
+package controllers.data_objects;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package ui.windows.stats;
+package controllers.data_objects;
 
 /**
  * Stores data to be displayed by a StatsDisplay.
