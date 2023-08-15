@@ -1,3 +1,4 @@
+
 package entities;
 
 import entities.card_logic.Card;
@@ -80,3 +81,4 @@ class HandTest {
         assertEquals(cards, h1.getCards());
     }
 }
+

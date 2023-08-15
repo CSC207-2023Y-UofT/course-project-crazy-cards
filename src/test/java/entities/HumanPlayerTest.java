@@ -1,3 +1,5 @@
+
+
 package entities;
 
 import entities.deck_logic.Deck;
@@ -24,9 +26,9 @@ class HumanPlayerTest {
     public void setUp() {
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
-       for(int i = 0; i < 4 ; i++) {
-           h1.addCard(deck.removeCardFromDeck());
-            }
+        for(int i = 0; i < 4 ; i++) {
+            h1.addCard(deck.removeCardFromDeck());
+        }
         p1 = new HumanPlayer("sol", h1, 0 , 0);
     }
 

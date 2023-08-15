@@ -6,6 +6,7 @@ import entities.card_logic.Card;
 import entities.card_logic.SpecialEffect;
 import entities.deck_logic.Deck;
 import entities.player_logic.Player;
+import entities.card_logic.SpecialEffect;
 import enums.Rank;
 import enums.Suit;
 
