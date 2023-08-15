@@ -1,6 +1,15 @@
 package use_cases;
 
-import entities.*;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.Game;
+import entities.game_logic.GameManager;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
+import enums.Rank;
+import enums.Suit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +17,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test class for GameState.
@@ -20,6 +30,7 @@ class GameStateTest {
     private Player p2;
     private ArrayList<Player> players;
     private GameState gameState;
+    private GameManager access;
 
     /**
      * Initialize all objects needed to test GameState.
@@ -40,8 +51,9 @@ class GameStateTest {
         players = new ArrayList<>();
         players.add(p1);
         players.add(p2);
-        game = new Game(deck, players);
-        gameState = new GameState(game);
+        access = new GameManager();
+        access.buildGame(players, deck);
+        gameState = new GameState(access);
     }
 
     /**
@@ -65,11 +77,11 @@ class GameStateTest {
         // It is p1's turn, once the turn has been changed it will be p2's turn
         // the turn change and card placement will be separate, p1 should still have
         // the same amount of Cards
-        game.changeCurrentTurn();
-        Card toPutDown = new Card("Test", "17");
-        game.putCardDown(toPutDown);
+        access.moveNextTurn();
+        Card toPutDown = new Card(Suit.SPADE, Rank.QUEEN);
+        access.playCard(p1, toPutDown);
         // update GameState
-        gameState.updateGameObserver(game);
+        gameState.updateGameObserver(access);
         // Assert it is p2's turn
         assertEquals(p2, gameState.getCurrentPlayer());
         // Assert the current Card is toPutDown.

@@ -1,9 +1,15 @@
+
 package entities;
 
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import enums.Rank;
+import enums.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StandardDeckTest {
 
@@ -13,7 +19,7 @@ class StandardDeckTest {
     @BeforeEach
     public void setUp() {
         deck = new StandardDeck();
-        toAdd = new Card("Tests", "17");
+        toAdd = new Card(Suit.SPADE, Rank.QUEEN);
     }
 
     /**

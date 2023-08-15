@@ -1,4 +1,7 @@
-package entities;
+package entities.player_logic;
+
+import entities.game_logic.Game;
+import entities.card_logic.Card;
 
 import java.util.*;
 

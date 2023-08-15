@@ -1,5 +1,11 @@
+
+
 package entities;
 
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.player_logic.Hand;
+import entities.player_logic.HumanPlayer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +26,9 @@ class HumanPlayerTest {
     public void setUp() {
         Deck deck = new StandardDeck();
         Hand h1 = new Hand(new ArrayList<>());
-       for(int i = 0; i < 4 ; i++) {
-           h1.addCard(deck.removeCardFromDeck());
-            }
+        for(int i = 0; i < 4 ; i++) {
+            h1.addCard(deck.removeCardFromDeck());
+        }
         p1 = new HumanPlayer("sol", h1, 0 , 0);
     }
 

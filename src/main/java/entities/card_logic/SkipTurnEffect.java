@@ -1,4 +1,6 @@
-package entities;
+package entities.card_logic;
+
+import entities.game_logic.GameAccess;
 
 /**
  * This class represents a special effect that skips the next player's turn.

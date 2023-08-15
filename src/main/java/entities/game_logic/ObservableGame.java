@@ -1,6 +1,6 @@
-package entities;
+package entities.game_logic;
 
-import java.util.ArrayList;
+import entities.game_logic.GameObserver;
 
 public interface ObservableGame {
 

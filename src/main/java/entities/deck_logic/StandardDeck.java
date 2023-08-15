@@ -1,5 +1,7 @@
-package entities;
+package entities.deck_logic;
 
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
 import enums.Rank;
 import enums.Suit;
 

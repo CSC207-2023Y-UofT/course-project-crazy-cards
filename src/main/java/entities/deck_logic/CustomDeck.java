@@ -1,9 +1,12 @@
-package entities;
+package entities.deck_logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import entities.card_logic.EffectGenerationParameters;
+import entities.card_logic.SpecialEffect;
+import entities.card_logic.Card;
 import enums.Rank;
 import enums.Suit;
 

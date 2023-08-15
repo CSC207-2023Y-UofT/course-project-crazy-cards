@@ -1,7 +1,11 @@
-package entities;
+package entities.game_logic;
 
 import java.util.ArrayList;
 
+import entities.player_logic.Player;
+import entities.card_logic.Card;
+import entities.deck_logic.Deck;
+import entities.player_logic.ComputerPlayer;
 import enums.Rank;
 import enums.Suit;
 
@@ -11,8 +15,8 @@ import enums.Suit;
  * Allows interactors to reference a shared game without one being made.
  */
 public class GameManager implements CreationAccess,
-                                    GameAccess,
-                                    ObservableGame {
+        GameAccess,
+        ObservableGame {
     private Game game;
     private ArrayList<GameObserver> observers;
 

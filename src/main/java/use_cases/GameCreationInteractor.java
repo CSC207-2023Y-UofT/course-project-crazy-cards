@@ -1,6 +1,9 @@
 package use_cases;
 
-import entities.*;
+import entities.deck_logic.Deck;
+import entities.deck_logic.StandardDeck;
+import entities.game_logic.CreationAccess;
+import entities.player_logic.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
