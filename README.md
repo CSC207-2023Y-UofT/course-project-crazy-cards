@@ -18,12 +18,35 @@ This is done by reading and writing to a csv file.
 
 
 
-## Code Organization
-The code is organized by packages adhering to clean architecture. Packages include entities, use_cases, controllers, database, and UI (LIST OTHERS HERE).
+## Code Organization and Style
+The code is organized by packages adhering to clean architecture. Packages include entities, use_cases, controllers, database, and UI (LIST OTHERS HERE). 
 
-## Testing
+## Testing and Coverage
 Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive tests for the various functionalities of the game. Javadocs are included to further explain each test.
 
-## Design Patterns
+#### What we haven't tested:
+
+
+## Clean Architecture and Design Decisions/Patterns
+
+### Clean Architecture
+
+### Design Patterns
+
+#### Observer
+
+#### Factories
+
+### Design Decisions
+
+use of manager, access..... making a Game accessible only via interfaces
+
+## Extensibility
+
+## Future Updates
+
+## Known Bugs
+
+
 
 
