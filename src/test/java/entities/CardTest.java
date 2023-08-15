@@ -5,6 +5,7 @@ import entities.card_logic.RandomSuitEffect;
 import entities.card_logic.SpecialEffect;
 import enums.Rank;
 import enums.Suit;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

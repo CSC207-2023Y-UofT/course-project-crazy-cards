@@ -78,11 +78,39 @@ class PlayerGameInteractorTest {
         manager.addObserver(gameState);
         IObserverNotifier observerNotifier = new ObserverNotifier(manager);
         observerNotifier.update();
+
         interactor = new PlayerGameInteractor(manager, observerNotifier, gameState);
         playCardReq = new PlayerGameRequestModel("sol", valid.getSuit(), valid.getRank(), TurnAction.PLAY);
         pickUpReq = new PlayerGameRequestModel("sol", null, null, TurnAction.DRAW);
         skipReq = new PlayerGameRequestModel("sol", null, null, TurnAction.SKIP);
 
+    }
+    private Card findValidCard(Player player) {
+        for(Card card: player.getCards()) {
+            if(manager.isValidCard(card)) {
+                return card;
+            }
+        }
+        return null;
+    }
+    private Card giveValidCard(Player player) {
+        boolean hasValid = false;
+        while(!hasValid) {
+            Card toAdd = deck.removeCardFromDeck();
+            if(manager.isValidCard(toAdd)) {
+                player.getHand().addCard(toAdd);
+                return toAdd;
+            }
+        }
+        return null;
+    }
+    private boolean hasAnyValid(Player player) {
+        for(Card card: player.getCards()) {
+            if (manager.isValidCard(card)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -308,4 +336,3 @@ class PlayerGameInteractorTest {
     }
 
 }
-

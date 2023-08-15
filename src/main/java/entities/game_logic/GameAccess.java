@@ -2,9 +2,9 @@ package entities.game_logic;
 
 import java.util.ArrayList;
 
+import entities.player_logic.ComputerPlayer;
 import entities.player_logic.Player;
 import entities.card_logic.Card;
-import entities.player_logic.ComputerPlayer;
 import enums.Rank;
 import enums.Suit;
 

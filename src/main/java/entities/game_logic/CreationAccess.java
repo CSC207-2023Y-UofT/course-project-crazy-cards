@@ -1,7 +1,7 @@
 package entities.game_logic;
 
-import entities.deck_logic.Deck;
 import entities.player_logic.Player;
+import entities.deck_logic.Deck;
 
 import java.util.ArrayList;
 

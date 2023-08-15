@@ -1,14 +1,14 @@
 package entities.deck_logic;
 
+import entities.card_logic.Card;
+import entities.card_logic.EffectGenerationParameters;
+import entities.card_logic.SpecialEffect;
+import enums.Rank;
+import enums.Suit;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import entities.card_logic.EffectGenerationParameters;
-import entities.card_logic.SpecialEffect;
-import entities.card_logic.Card;
-import enums.Rank;
-import enums.Suit;
 
 /**
  * Represents a customizable, ordered deck of cards.
