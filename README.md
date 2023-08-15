@@ -35,8 +35,32 @@ to the user.
 ![](images/design_pattern.png)
 
 ### Observer
+We used an observer design pattern where ```Game``` is an ```ObservableGame```
+and ```GameStat```
+
+Due to the event-driven nature of this program, we decided to use an observer
+design pattern to monitor a ```Game``` instance, whose state changes throughout 
+the program. There is information from a ```Game``` object which we would wanted
+to display to the user, such as information on whose turn it is, their cards, 
+the number of cards of other ```Player```s, and the last played ```Card```
+in the ```Game```. Naturally this led to a ```GameState``` class which observes 
+the ```Game``` and is updated with this information whenever there is a change. Later
+on we decided to have a manager class for a game, and so the role of the 
+```ObservableGame``` is given to ```GameManager```. Instead of a
+```GameManager``` directly notifying observers, there is a ```ObserverNotifier```
+class whose sole responsibility is to update observers. Later when attempting
+to find a way update player's wins and losses to the database, we had the
+idea of making the ```DataAccess``` interface extend ```GameObserver```, and
+so everytime there is an update to a ```Game```, the ```DataAccess``` objects 
+are updated. We use this as a way to write statistics to the database after
+a ```Game``` has been won.
 
 ### Factories
+We used simple factories on two occasions, we had factories for creating windows and
+factories for players. Our ``Player`` factories helped to encapsulate the logic for creating
+a ```Player```, such as loading the statistics for a ```HumanPlayer```. Our ```Window```
+factories helped to encapsulate the creation logic required to create displays and delegators
+used for the ```Window``` classes.
 
 ## Design Decisions
 
