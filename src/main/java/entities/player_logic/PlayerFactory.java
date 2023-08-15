@@ -1,4 +1,4 @@
-package entities;
+package entities.player_logic;
 
 /**
  * The interface used to implement the different types of player factories that will be used

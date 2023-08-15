@@ -1,6 +1,11 @@
 package use_cases;
 
-import entities.*;
+import entities.card_logic.Card;
+import entities.game_logic.GameAccess;
+import entities.game_logic.IObserverNotifier;
+import entities.player_logic.ComputerPlayer;
+import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import enums.Rank;
 import enums.Suit;
 

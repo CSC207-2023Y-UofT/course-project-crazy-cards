@@ -1,4 +1,4 @@
-package entities;
+package entities.game_logic;
 
 /**
  * Delegate for observer notification.

@@ -1,9 +1,13 @@
-package entities;
-
-import enums.Rank;
-import enums.Suit;
+package entities.game_logic;
 
 import java.util.ArrayList;
+
+import entities.card_logic.Card;
+import entities.card_logic.SpecialEffect;
+import entities.deck_logic.Deck;
+import entities.player_logic.Player;
+import enums.Rank;
+import enums.Suit;
 
 public class Game {
     private Card currentCard;
@@ -161,7 +165,8 @@ public class Game {
      * @return True if this is a valid Card, false otherwise.
      */
     public boolean isValidCard(Card card) {
-        if (card.getSpecialEffect().getAlwaysPlayable()) {
+        SpecialEffect specialEffect = card.getSpecialEffect();
+        if (specialEffect != null && specialEffect.getAlwaysPlayable()) {
             return true;
         } 
         else {

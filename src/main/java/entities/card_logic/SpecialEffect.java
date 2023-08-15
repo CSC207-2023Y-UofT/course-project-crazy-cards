@@ -1,4 +1,6 @@
-package entities;
+package entities.card_logic;
+
+import entities.game_logic.GameAccess;
 
 /**
  * This interface represents a special effect that can be applied to a game.

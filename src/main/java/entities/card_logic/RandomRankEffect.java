@@ -1,5 +1,6 @@
-package entities;
+package entities.card_logic;
 
+import entities.game_logic.GameAccess;
 import enums.Rank;
 
 /**

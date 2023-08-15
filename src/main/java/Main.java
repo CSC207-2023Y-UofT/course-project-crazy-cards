@@ -1,8 +1,11 @@
 import javax.swing.JFrame;
-import controllers.GameCreationController;
-import controllers.PlayerGameController;
+
+import controllers.CreatorController;
+import controllers.GameController;
 import database.CSVDatabase;
-import entities.*;
+import entities.game_logic.GameManager;
+import entities.game_logic.IObserverNotifier;
+import entities.game_logic.ObserverNotifier;
 import enums.WindowName;
 import ui.factories.*;
 import ui.windows.layout_managers.*;
@@ -30,8 +33,8 @@ public class Main {
         PlayerGameInputBoundary gameBoundary = new PlayerGameInteractor(manager, notifier, state);
         GameCreationInputBoundary creationBoundary = new GameCreationInteractor(dataAccess, manager);
 
-        PlayerGameController gameController = new PlayerGameController(gameBoundary);
-        GameCreationController creationController = new GameCreationController(creationBoundary);
+        GameController gameController = new GameController(gameBoundary);
+        CreatorController creationController = new CreatorController(creationBoundary);
 
         ICardLayoutManager layoutManager = new CardLayoutManager(frame, WindowName.MENU);
 

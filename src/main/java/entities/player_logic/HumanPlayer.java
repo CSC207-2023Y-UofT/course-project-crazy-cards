@@ -1,4 +1,4 @@
-package entities;
+package entities.player_logic;
 
 public class HumanPlayer extends Player {
     private int losses;

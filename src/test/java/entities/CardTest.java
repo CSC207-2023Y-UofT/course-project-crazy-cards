@@ -1,5 +1,8 @@
 package entities;
 
+import entities.card_logic.Card;
+import entities.card_logic.RandomSuitEffect;
+import entities.card_logic.SpecialEffect;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,14 +16,16 @@ class CardTest {
 
     private Card regCard;
     private Card specCard;
+    private SpecialEffect crazy8;
 
     /**
      * Set up Card objects for testing.
      */
     @BeforeEach
     public void setUp() {
+        crazy8 = new RandomSuitEffect(true);
         regCard = new Card(Suit.SPADE, Rank.TEN);
-        specCard = new Card(Suit.CLUB, Rank.EIGHT, "Crazy8");
+        specCard = new Card(Suit.CLUB, Rank.EIGHT, crazy8);
     }
 
     /**
@@ -57,8 +62,7 @@ class CardTest {
      */
     @Test
     public void testGetSpecialEffect() {
-        String expected = "Crazy8";
-        String actual = specCard.getSpecialEffect();
-        assertEquals(expected, actual);
+        SpecialEffect actual = specCard.getSpecialEffect();
+        assertEquals(crazy8, actual);
     }
 }

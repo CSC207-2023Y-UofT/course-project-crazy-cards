@@ -1,10 +1,11 @@
-package entities;
-
-import enums.Rank;
-import enums.Suit;
+package entities.deck_logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import entities.card_logic.Card;
+import enums.Rank;
+import enums.Suit;
 
 // A StandardDeck containing 52 Cards, no Jokers
 public class StandardDeck implements Deck {

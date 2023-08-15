@@ -1,4 +1,4 @@
-package entities;
+package entities.game_logic;
 
 public interface ObservableGame {
 

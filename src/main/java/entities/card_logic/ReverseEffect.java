@@ -1,4 +1,6 @@
-package entities;
+package entities.card_logic;
+
+import entities.game_logic.GameAccess;
 
 /**
  * This class represents a special effect that reverses the direction of the game.
