@@ -3,6 +3,8 @@
 package entities;
 
 import entities.card_logic.Card;
+import entities.card_logic.RandomSuitEffect;
+import entities.card_logic.SpecialEffect;
 import entities.deck_logic.Deck;
 import entities.deck_logic.StandardDeck;
 import entities.game_logic.Game;
@@ -151,8 +153,9 @@ class GameTest {
      */
     @Test
     public void testIsValidCardCrazy8() {
+        SpecialEffect crazy8 = new RandomSuitEffect(true);
         game.putCardDown(new Card(Suit.HEART, Rank.NINE));
-        Card toTest = new Card(Suit.SPADE, Rank.EIGHT);
+        Card toTest = new Card(Suit.SPADE, Rank.EIGHT, crazy8);
         boolean validity = game.isValidCard(toTest);
         assertTrue(validity);
     }
