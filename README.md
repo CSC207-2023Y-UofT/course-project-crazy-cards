@@ -24,6 +24,7 @@ Players are able to save their progress and resume it. By entering their usernam
 If the player is found, the program restores their number of wins and losses; if not, it creates a new player with no wins and losses.
 This was done by utilizing [opencsv](https://opencsv.sourceforge.net/), a CSV parser library for Java.
 
+
 ## Clean Architecture, Code Organization, and Style
 The code is organized by packages adhering to clean architecture. Packages include entities, use_cases, controllers, database, and UI.
 
@@ -66,6 +67,7 @@ used for the ```Window``` classes.
 
 use of manager, access..... making a Game accessible only via interfaces
 
+
 ## Testing and Coverage
 Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive
 tests for the various functionalities of the game. Javadocs are included to further explain each test.
@@ -73,10 +75,17 @@ tests for the various functionalities of the game. Javadocs are included to furt
 ### What we haven't tested
 
 ## Extensibility
+Firstly, we have made the type of database used to be easily extended. We 
+defined a ```DataAccess``` interface in the use case layer, which is what the rest
+of the program uses in loading data from the database. This interface is implemented
+by ```CSVDatabase```, which writes and loads from a CSV file. In the future though,
+since the process of this is slightly inconvenient, a separate class implementing
+```DataAccess``` can be used in the case of another database.
 
 ## Future Updates
 
 ## Known Bugs
+There is one bug which we have identified, but that we ha
 
 
 
