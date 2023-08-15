@@ -2,15 +2,20 @@ package database;
 
 import entities.deck_logic.Deck;
 import entities.deck_logic.StandardDeck;
+import entities.game_logic.GameManager;
+import entities.game_logic.IObserverNotifier;
+import entities.game_logic.ObserverNotifier;
 import entities.player_logic.Hand;
 import entities.player_logic.HumanPlayer;
+import entities.player_logic.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.PlayerInformation;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,24 +24,43 @@ public class SaveLoadPlayerTest {
     private HumanPlayer p1;
     private HumanPlayer p2;
     private HumanPlayer p3;
+    private HumanPlayer p4;
+    private GameManager manager;
+    private Deck deck;
     
     private CSVDatabase database;
+    private IObserverNotifier observerNotifier;
 
     /**
      * Construct 3 HumanPlayer objects to be used in the following tests.
      */
     @BeforeEach
     public void setUp() {
-        Deck deck = new StandardDeck();
-        Hand hand = new Hand(new ArrayList<>());
-        for(int i = 0; i < 4 ; i++) {
-            hand.addCard(deck.removeCardFromDeck());
+        deck = new StandardDeck();
+        Hand h1 = new Hand(new ArrayList<>());
+        Hand h2 = new Hand(new ArrayList<>());
+        Hand h3 = new Hand(new ArrayList<>());
+        Hand[] hands = {h1, h2, h3};
+        for (Hand h: hands) {
+            for(int i = 0; i < 5 ; i++) {
+                h.addCard(deck.removeCardFromDeck());
+            }
         }
-        p1 = new HumanPlayer("Lily1", hand, 0 , 0);
-        p2 = new HumanPlayer("Lily2", hand, 1, 2);
-        p3 = new HumanPlayer("Lily1", hand, 3, 0);
-
+        p1 = new HumanPlayer("Lily1", h1, 0 , 0);
+        p2 = new HumanPlayer("Lily2", h2, 1, 2);
+        p3 = new HumanPlayer("Lily1", h3, 3, 0);
+        p4 = new HumanPlayer("Lily4", h3, 3, 0);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(p1);
+        players.add(p2);
+        players.add(p4);
+        manager = new GameManager();
+        manager.buildGame(players, deck);
         database = new CSVDatabase();
+        manager.addObserver(database);
+        observerNotifier = new ObserverNotifier(manager);
+
+
     }
 
     /**
@@ -48,6 +72,37 @@ public class SaveLoadPlayerTest {
         FileWriter file = new FileWriter("src/main/java/database/players.csv");
         file.write("");
         file.close();
+        p1 = null;
+        p2 = null;
+        p3 = null;
+        p4 = null;
+        manager = null;
+        deck = null;
+        database = null;
+        observerNotifier = null;
+    }
+
+    @Test
+    public void testUpdateGameObserver() {
+        manager.setWinner(p1);
+        p1.incrementWins();
+        p2.incrementLosses();
+        p4.incrementLosses();
+        observerNotifier.update();
+        try {
+            PlayerInformation loadedP1 = database.loadPlayer("Lily1");
+            assertEquals(1, loadedP1.getWins());
+            assertEquals(0, loadedP1.getLosses());
+            PlayerInformation loadedP2 = database.loadPlayer("Lily2");
+            assertEquals(1, loadedP2.getWins());
+            assertEquals(3, loadedP2.getLosses());
+            PlayerInformation loadedP3 = database.loadPlayer("Lily4");
+            assertEquals(3, loadedP3.getWins());
+            assertEquals(1, loadedP3.getLosses());
+        } catch(IOException e) {
+            fail();
+        }
+
     }
 
     /**

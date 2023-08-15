@@ -3,14 +3,14 @@ package entities;
 import entities.card_logic.Card;
 import entities.card_logic.RandomSuitEffect;
 import entities.card_logic.SpecialEffect;
+import enums.Rank;
+import enums.Suit;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import enums.Rank;
-import enums.Suit;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardTest {
 
