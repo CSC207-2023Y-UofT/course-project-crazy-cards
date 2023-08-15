@@ -54,8 +54,8 @@ public class MenuDisplay extends JPanel {
         c2.setForeground(Color.BLACK);
         c2.setBounds(280, 30, 300, 300);
 
-        logo.add(c1, new Integer(1));
-        logo.add(c2, new Integer(2));
+        logo.add(c1, Integer.valueOf(1));
+        logo.add(c2, Integer.valueOf(2));
 
         playButton = new NavigationButton(WindowName.CREATOR, "Play");
         statsButton = new NavigationButton(WindowName.STATS, "Stats");
