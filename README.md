@@ -144,6 +144,12 @@ use cases to manipulate the game. A response is then packaged and sent back to t
 Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive
 tests for the various functionalities of the game. Javadocs are included to further explain each test.
 
+Below are the images showing test coverage.
+![](images/coverage1.png)
+![](images/coverage2.png)
+![](images/coverage3.png)
+![](images/coverage4.png)
+
 ### What we didn't test
 We did not unit test the windows or their factories as they mostly contained Swing logic, i.e.
 we just tested them by having them run and giving different inputs and outputs. We did however test
