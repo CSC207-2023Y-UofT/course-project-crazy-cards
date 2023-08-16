@@ -52,7 +52,7 @@ the controllers and the UI/windows. This would also be good adherence to DIP.
 
 Additionally, we made sure to follow ISP and SRP, as can be seen with `GameManager`, which
 implements `GameAccess`, `CreationAccess`, and `ObservableGame`. These interfaces
-are all segregated and kept up small. Additionally we have an interface and class solely for updating
+are all segregated and kept up small. Additionally, we have an interface and class solely for updating
 `GameObserver` classes, this responsibility is kept away from `GameManager`, adhering to SRP. While it seems that
 GameManager violates SRP due to the implementation of 3 different interfaces, at any one time,
 it is only one of these, it serves to encapsulate `Game`, and is acted upon only one actor
@@ -97,7 +97,7 @@ used for the ```Window``` classes.
 Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive
 tests for the various functionalities of the game. Javadocs are included to further explain each test.
 
-### What we didn't tested
+### What we didn't test
 We did not unit test the windows or their factories as they mostly contained Swing logic, i.e.
 we just tested them by having them run and giving different inputs and outputs. We did however test
 `PriorityActionListener` as we needed to be sure the logic that allows different listeners to be 
