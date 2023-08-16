@@ -25,7 +25,7 @@ Run the file [src/main/Main.java](https://github.com/CSC207-2023Y-UofT/course-pr
 We coded the GUI by hand, that includes the placement of all the GUI elements, and even
 the cards themselves, we hope you like it.
 
-include screenshots of the game and put them in images folder 
+include screenshots of the game and put them in images folder, update when newest PR is merged.
 
 ## Data Persistence
 Players are able to save their progress and resume it. By entering their username, our program locates the player in our database.
