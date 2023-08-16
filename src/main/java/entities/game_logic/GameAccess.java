@@ -7,6 +7,7 @@ import entities.player_logic.Player;
 import entities.card_logic.Card;
 import enums.Rank;
 import enums.Suit;
+import enums.TurnAction;
 
 /**
  * Defines functions to manipulate a Game.
@@ -125,4 +126,28 @@ public interface GameAccess {
      * @return True iff the current Player has picked up a Card from this Game's Deck.
      */
     boolean getCurrentTurnHasPickedUp();
+
+    /**
+     * Sets the last attempt made.
+     * @param request the last attempt made.
+     */
+    void setLastRequest(TurnAction request);
+
+    /**
+     * Gets the last attempt made.
+     * @return the last attempt made.
+     */
+    TurnAction getLastRequest();
+
+    /**
+     * Sets the success of the last attempt made.
+     * @param success the success of the last attempt made.
+     */
+    void setSuccess(boolean success);
+
+    /**
+     * Gets the success of the last attempt made.
+     * @return the success of the last attempt made.
+     */
+    boolean getSuccess();
 }

@@ -4,6 +4,7 @@ import entities.game_logic.GameObserver;
 import entities.card_logic.Card;
 import entities.game_logic.GameAccess;
 import entities.player_logic.Player;
+import enums.TurnAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,8 @@ public class GameState implements GameObserver {
     private ArrayList<Card> currentPlayerCards;
     private HashMap<Player, Integer> playersAndCards = new HashMap<>();
     private boolean hasWinner;
+    private TurnAction lastRequest;
+    private boolean lastRequestSuccess;
 
     /**
      * Given a Game, construct a GameState object which keeps track of the Game's current Player,
@@ -28,10 +31,7 @@ public class GameState implements GameObserver {
      * @param game The Game containing the information to update this GameState.
      */
     public GameState(GameAccess game) {
-        this.currentPlayer = game.getCurrentTurn();
-        this.currentCard = game.getCurrentCard();
-        this.currentDrawnCard = game.getDrawnCard();
-        this.hasWinner = game.hasWinner();
+
     }
 
     /**
@@ -48,6 +48,8 @@ public class GameState implements GameObserver {
         this.currentDrawnCard = game.getDrawnCard();
         this.hasWinner = game.hasWinner();
         this.currentPlayerCards = this.currentPlayer.getCards();
+        this.lastRequest = game.getLastRequest();
+        this.lastRequestSuccess = game.getSuccess();
     }
 
     /**
@@ -96,6 +98,22 @@ public class GameState implements GameObserver {
      */
     public HashMap<Player, Integer> getPlayersAndCards() {
         return playersAndCards;
+    }
+
+    /**
+     * Get the last request made by the current Player.
+     * @return A TurnAction representing the last request made by the current Player.
+     */
+    public TurnAction getLastRequest() {
+        return this.lastRequest;
+    }
+
+    /**
+     * Get whether the last request made by the current Player was successful.
+     * @return True iff the last request made by the current Player was successful.
+     */
+    public boolean getLastRequestSuccess() {
+        return this.lastRequestSuccess;
     }
 
     /**

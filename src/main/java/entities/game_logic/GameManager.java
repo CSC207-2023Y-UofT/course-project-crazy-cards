@@ -8,6 +8,7 @@ import entities.card_logic.Card;
 import entities.deck_logic.Deck;
 import enums.Rank;
 import enums.Suit;
+import enums.TurnAction;
 
 /**
  * Proxy class for Game.
@@ -288,6 +289,57 @@ public class GameManager implements CreationAccess,
             game.reverseDirection();
         }
     }
+
+    /**
+     * Gets the last attempted move made in this game.
+     * @return the last request
+     */
+    @Override
+    public TurnAction getLastRequest() {
+        if (isGameReady()) {
+            return game.getLastRequest();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Sets the last attempted move made in this game.
+     * @param lastRequest the last request
+     */
+    @Override
+    public void setLastRequest(TurnAction lastRequest) {
+        if (isGameReady()) {
+            game.setLastRequest(lastRequest);
+        }
+    }
+
+    /**
+     * Gets whether the last attempted move made in this game was successful.
+     * @return whether the last request was successful
+     */
+    @Override
+    public boolean getSuccess() {
+        if (isGameReady()) {
+            return game.getLastRequestSuccess();
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Sets whether the last attempted move made in this game was successful.
+     * @param success whether the last request was successful
+     */
+    @Override
+    public void setSuccess(boolean success) {
+        if (isGameReady()) {
+            game.setLastRequestSuccess(success);
+        }
+    }
+
 
     /**
      * Sets this game's attributes.

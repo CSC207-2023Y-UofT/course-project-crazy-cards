@@ -9,6 +9,7 @@ import entities.player_logic.Player;
 import entities.card_logic.SpecialEffect;
 import enums.Rank;
 import enums.Suit;
+import enums.TurnAction;
 
 public class Game {
     private Card currentCard;
@@ -20,6 +21,8 @@ public class Game {
     private boolean currentTurnHasPickedUp = false;
     private int currentPlayerIndex;
     private boolean reverseDirection;
+    private TurnAction lastRequest;
+    private boolean lastRequestSuccess;
 
     /**
      * Construct a new Game given a particular deck and set of players.
@@ -206,4 +209,35 @@ public class Game {
         currentTurnHasPickedUp = true;
     }
 
+    /**
+     * Gets the last attempted move made.
+     * @return The last attempted move made.
+     */
+    public TurnAction getLastRequest() {
+        return lastRequest;
+    }
+
+    /**
+     * Sets the last attempted move made.
+     * @param lastRequest The last attempted move made.
+     */
+    public void setLastRequest(TurnAction lastRequest) {
+        this.lastRequest = lastRequest;
+    }
+
+    /**
+     * Gets whether the last attempted move was successful.
+     * @return Whether the last attempted move was successful.
+     */
+    public boolean getLastRequestSuccess() {
+        return lastRequestSuccess;
+    }
+
+    /**
+     * Sets whether the last attempted move was successful.
+     * @param lastRequestSuccess Whether the last attempted move was successful.
+     */
+    public void setLastRequestSuccess(boolean lastRequestSuccess) {
+        this.lastRequestSuccess = lastRequestSuccess;
+    }
 }
