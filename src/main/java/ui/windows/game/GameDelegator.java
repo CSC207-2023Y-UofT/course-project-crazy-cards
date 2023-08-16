@@ -4,9 +4,9 @@ package ui.windows.game;
  * Wrapper class for user interaction delegators in a game.
  */
 public class GameDelegator {
-    private GamePlayDelegator playDelegator;
-    private GameSkipDelegator skipDelegator;
-    private GameDrawDelegator drawDelegator;
+    private final GamePlayDelegator playDelegator;
+    private final GameSkipDelegator skipDelegator;
+    private final GameDrawDelegator drawDelegator;
 
     /**
      * Construct a GameDelegator with the given delegators.

@@ -13,8 +13,7 @@ public class MenuWindowFactory implements WindowFactory {
     @Override
     public Window createWindow() {
         MenuDisplay display = new MenuDisplay();
-        MenuWindow window = new MenuWindow(display);
 
-        return window;
+        return new MenuWindow(display);
     }
 }

@@ -1,15 +1,15 @@
 package ui.windows.game;
 
+import controllers.interfaces.GameBridge;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import controllers.interfaces.GameBridge;
 
 /**
  * Delegates user interaction for drawing cards.
  */
 public class GameDrawDelegator implements ActionListener {
-    private GameBridge bridge;
+    private final GameBridge bridge;
 
     /**
      * Construct a GameDrawDelegator with the given bridge.

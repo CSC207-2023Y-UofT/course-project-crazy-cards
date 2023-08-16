@@ -15,9 +15,9 @@ import enums.Suit;
  * This class also implements the logic for the ComputerPlayer.
  */
 public class PlayerGameInteractor implements PlayerGameInputBoundary {
-    private GameAccess access;
-    private IObserverNotifier notifier;
-    private GameState gameState;
+    private final GameAccess access;
+    private final IObserverNotifier notifier;
+    private final GameState gameState;
 
     /**
      * Construct a PlayerGameInteractor with the given GameAccess, ObserverNotifier and GameState.

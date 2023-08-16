@@ -14,8 +14,7 @@ public class HowtoWindowFactory implements WindowFactory {
     @Override
     public Window createWindow() {
         HowtoDisplay display = new HowtoDisplay();
-        HowtoWindow window = new HowtoWindow(display);
 
-        return window;
+        return new HowtoWindow(display);
     }
 }

@@ -4,8 +4,8 @@ package controllers.data_objects;
  * A class containing the direct instructions of a User regarding a Player in a Game's creation.
  */
 public class PlayerCreationInformation {
-    private String playerName;
-    private boolean isComputerPlayer;
+    private final String playerName;
+    private final boolean isComputerPlayer;
 
     /**
      * Construct a PlayerCreationInformation containing information provided by the User.

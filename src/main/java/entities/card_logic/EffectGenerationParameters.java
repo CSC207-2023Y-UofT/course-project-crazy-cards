@@ -7,9 +7,9 @@ import java.util.List;
  * Describes parameters for adding special effects to cards.
  */
 public class EffectGenerationParameters {
-    private List<WeightedEffect> effectsByWeight;
+    private final List<WeightedEffect> effectsByWeight;
 
-    private double chance;
+    private final double chance;
     private double totalWeight;
     private boolean recalculateTotalWeight;
 
@@ -82,8 +82,8 @@ public class EffectGenerationParameters {
  * Private wrapper class for a weighted effect.
  */
 class WeightedEffect {
-    private SpecialEffect effect;
-    private double weight;
+    private final SpecialEffect effect;
+    private final double weight;
 
     /**
      * Creates a weighted effect.

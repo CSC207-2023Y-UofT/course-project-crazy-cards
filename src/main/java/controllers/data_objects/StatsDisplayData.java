@@ -5,8 +5,8 @@ package controllers.data_objects;
  */
 public class StatsDisplayData {
     private String name;
-    private int gamesWon;
-    private int gamesLost;
+    private final int gamesWon;
+    private final int gamesLost;
 
     /**
      * Create a StatsDisplayData with default values.

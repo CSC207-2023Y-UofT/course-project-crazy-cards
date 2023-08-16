@@ -6,7 +6,7 @@ import entities.game_logic.GameAccess;
  * This class represents a special effect that skips the next player's turn.
  */
 public class SkipTurnEffect implements SpecialEffect {
-    private boolean alwaysPlayable;
+    private final boolean alwaysPlayable;
 
     /**
      * Constructs a SkipTurnEffect.

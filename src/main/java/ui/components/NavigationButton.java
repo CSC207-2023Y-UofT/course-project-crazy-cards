@@ -1,14 +1,12 @@
 package ui.components;
 
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.JButton;
-
 import enums.WindowName;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class NavigationButton extends JButton {
-    private WindowName identifier;
+    private final WindowName identifier;
 
     /**
      * Constructor for the navigation button that brings the user through menus in the program.

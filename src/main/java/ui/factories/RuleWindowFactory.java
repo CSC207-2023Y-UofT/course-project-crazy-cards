@@ -14,8 +14,7 @@ public class RuleWindowFactory implements WindowFactory {
     @Override
     public Window createWindow() {
         RulesDisplay display = new RulesDisplay();
-        RulesWindow window = new RulesWindow(display);
 
-        return window;
+        return new RulesWindow(display);
     }
 }

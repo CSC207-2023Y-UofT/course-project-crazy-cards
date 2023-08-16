@@ -7,8 +7,8 @@ import enums.Suit;
  * A class representing a playing card with a specific suit and rank.
  */
 public class CardResponseModel {
-    private Suit suit;
-    private Rank rank;
+    private final Suit suit;
+    private final Rank rank;
 
     /**
      * Constructs a new card with the specified suit and rank.

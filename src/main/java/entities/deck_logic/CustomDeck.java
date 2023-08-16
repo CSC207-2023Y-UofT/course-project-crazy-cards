@@ -17,10 +17,10 @@ public class CustomDeck implements Deck {
     private static final Suit[] SUITS = {Suit.SPADE, Suit.HEART, Suit.CLUB, Suit.DIAMOND};
     private static final Rank[] RANKS = {Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX, Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN, Rank.JACK, Rank.QUEEN, Rank.KING};
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    private int capacity;
-    private ArrayList<Card> cards;
+    private final int capacity;
+    private final ArrayList<Card> cards;
 
     /**
      * Constructs a CustomDeck with a given max amount of cards.
@@ -28,7 +28,7 @@ public class CustomDeck implements Deck {
      */
     public CustomDeck(int capacity) {
         this.capacity = capacity;
-        this.cards = new ArrayList<Card>(capacity);
+        this.cards = new ArrayList<>(capacity);
     }
 
     /**
@@ -38,11 +38,11 @@ public class CustomDeck implements Deck {
      */
     public void generate(DeckGenerationParameters deckParams, EffectGenerationParameters effectParams) {
         double totalWeight = deckParams.getTotalWeight();
-        for (int i = 0; i < SUITS.length; i++) {
-            for (int j = 0; j < RANKS.length; j++) {
-                double weight = deckParams.getWeight(SUITS[i], RANKS[j]);
+        for (Suit suit : SUITS) {
+            for (Rank rank : RANKS) {
+                double weight = deckParams.getWeight(suit, rank);
                 int count = (int) Math.round(weight / totalWeight * capacity);
-                generateCards(SUITS[i], RANKS[j], count, effectParams);
+                generateCards(suit, rank, count, effectParams);
             }
         }
         if (deckParams.getShuffle()) {
@@ -117,7 +117,7 @@ public class CustomDeck implements Deck {
 
     /**
      * Generates a special effect with the given parameters, respecting chance and weight.
-     * See {@link #EffectGenerationParameters} for more information.
+     * See  for more information.
      * @param effectParams parameters for generating special effects.
      */
     private SpecialEffect generateEffect(EffectGenerationParameters effectParams) {

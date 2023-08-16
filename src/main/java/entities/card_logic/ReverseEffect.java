@@ -6,7 +6,7 @@ import entities.game_logic.GameAccess;
  * This class represents a special effect that reverses the direction of the game.
  */
 public class ReverseEffect implements SpecialEffect {
-    private boolean alwaysPlayable;
+    private final boolean alwaysPlayable;
 
     /**
      * Constructs a ReverseEffect.

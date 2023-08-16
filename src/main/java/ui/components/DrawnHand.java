@@ -12,7 +12,7 @@ import java.util.List;
 public class DrawnHand extends JPanel {
     private JLayeredPane cardPane;
     private int visible;
-    private List<DrawnCard> drawnCards;
+    private final List<DrawnCard> drawnCards;
 
     /**
      * Constructor that sets the current hand to a given list of DrawnCards before initializing the GUI for display.

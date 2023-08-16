@@ -1,13 +1,13 @@
 package ui.windows.rules;
 
-import javax.swing.JPanel;
-
 import enums.WindowName;
-import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.Window;
+import ui.windows.layout_managers.PaneDelegator;
+
+import javax.swing.*;
 
 public class RulesWindow implements Window {
-    private RulesDisplay display;
+    private final RulesDisplay display;
 
     /**
      * Constructor for the Window, by setting a RulesDisplay to it.

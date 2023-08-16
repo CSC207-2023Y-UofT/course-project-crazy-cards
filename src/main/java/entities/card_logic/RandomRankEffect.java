@@ -8,7 +8,7 @@ import enums.Rank;
  */
 public class RandomRankEffect implements SpecialEffect {
     private static final Rank[] ranks = {Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX, Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN, Rank.JACK, Rank.QUEEN, Rank.KING};
-    private boolean alwaysPlayable;
+    private final boolean alwaysPlayable;
 
     /**
      * Constructs a RandomRankEffect.

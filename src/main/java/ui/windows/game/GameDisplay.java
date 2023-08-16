@@ -1,28 +1,5 @@
 package ui.windows.game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.table.JTableHeader;
-
 import controllers.data_objects.CardDisplayData;
 import controllers.data_objects.GameDisplayData;
 import controllers.interfaces.GameUI;
@@ -32,8 +9,17 @@ import enums.WindowName;
 import ui.components.DrawnCard;
 import ui.components.DrawnHand;
 import ui.components.NavigationButton;
-import ui.components.WrappingLabel;
 import ui.windows.layout_managers.PaneDelegator;
+
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Renderer for a game window.
@@ -42,11 +28,11 @@ public class GameDisplay extends JPanel implements GameUI {
     private static final String[] COLUMNS = {"Player name", "# of cards"};
     private static final String EMPTY_LABEL = "";
 
-    private GamePlayDelegator playDelegator;
-    private GameSkipDelegator skipDelegator;
-    private GameDrawDelegator drawDelegator;
-    private CardDelegator cardDelegator;
-    private SwitchUpdater switchUpdater;
+    private final GamePlayDelegator playDelegator;
+    private final GameSkipDelegator skipDelegator;
+    private final GameDrawDelegator drawDelegator;
+    private final CardDelegator cardDelegator;
+    private final SwitchUpdater switchUpdater;
     private DrawnHand currentHand;
     private DrawnCard currentCard;
 
@@ -56,11 +42,7 @@ public class GameDisplay extends JPanel implements GameUI {
     private JPanel center;
     private JTable scores;
     private String[][] playerInfo;
-    private JPanel gameBoard;
     private JLabel feedback;
-    private JButton playButton;
-    private JButton drawButton;
-    private JButton skipButton;
     private JPanel buttons;
 
     private JPanel footer;
@@ -278,7 +260,7 @@ public class GameDisplay extends JPanel implements GameUI {
         gameBoardConstraints.fill = GridBagConstraints.BOTH;
         gameBoardConstraints.weightx = 0.67;
         gameBoardConstraints.weighty = 1;
-        gameBoard = new JPanel();
+        JPanel gameBoard = new JPanel();
 
         JLabel currCardLabel = new JLabel("Current card:");
         currCardLabel.setFont(new Font("serif", Font.PLAIN, 20));
@@ -339,9 +321,9 @@ public class GameDisplay extends JPanel implements GameUI {
     private void initializeButtons() {
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
 
-        playButton = new JButton("Play");
-        drawButton = new JButton("Draw");
-        skipButton = new JButton("Skip");
+        JButton playButton = new JButton("Play");
+        JButton drawButton = new JButton("Draw");
+        JButton skipButton = new JButton("Skip");
 
         Dimension dim = new Dimension(80, 40);
         Font font = new Font("serif", Font.BOLD, 20);

@@ -8,7 +8,7 @@ import ui.windows.layout_managers.PaneDelegator;
 import javax.swing.*;
 
 public class GameWindow implements Window, SwapListener {
-    private GameDisplay display;
+    private final GameDisplay display;
 
     /**
      * Constructor for the window that displays the actual game.

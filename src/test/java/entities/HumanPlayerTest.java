@@ -7,12 +7,12 @@ import entities.deck_logic.StandardDeck;
 import entities.player_logic.Hand;
 import entities.player_logic.HumanPlayer;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class HumanPlayerTest {
@@ -47,7 +47,7 @@ class HumanPlayerTest {
     public void testGetWinsNoWins() {
         int actual = p1.getWins();
         int expected = 0;
-        assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     /**
@@ -57,7 +57,7 @@ class HumanPlayerTest {
     public void testGetLossesNoLosses() {
         int actual = p1.getLosses();
         int expected = 0;
-        assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     /**

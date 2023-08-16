@@ -1,13 +1,13 @@
 package ui.windows.howto;
 
-import javax.swing.JPanel;
-
 import enums.WindowName;
-import ui.windows.layout_managers.PaneDelegator;
 import ui.windows.Window;
+import ui.windows.layout_managers.PaneDelegator;
+
+import javax.swing.*;
 
 public class HowtoWindow implements Window {
-    private HowtoDisplay display;
+    private final HowtoDisplay display;
 
     /**
      * Constructor for the Window, by setting a HowtoDisplay to it.

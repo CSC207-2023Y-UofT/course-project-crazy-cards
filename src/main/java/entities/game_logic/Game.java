@@ -1,7 +1,5 @@
 package entities.game_logic;
 
-import java.util.ArrayList;
-
 import entities.card_logic.Card;
 import entities.card_logic.SpecialEffect;
 import entities.deck_logic.Deck;
@@ -10,11 +8,13 @@ import enums.Rank;
 import enums.Suit;
 import enums.TurnAction;
 
+import java.util.ArrayList;
+
 public class Game {
     private Card currentCard;
     private Card currentDrawnCard;
-    private ArrayList<Player> players;
-    private Deck gameDeck;
+    private final ArrayList<Player> players;
+    private final Deck gameDeck;
     private Player winner;
     private Player currentTurn;
     private boolean currentTurnHasPickedUp = false;

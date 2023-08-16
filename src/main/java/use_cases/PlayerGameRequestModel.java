@@ -8,10 +8,10 @@ import enums.TurnAction;
  * An object containing the details of a User's request with a particular Game.
  */
 public class PlayerGameRequestModel {
-    private String playerName;
-    private TurnAction action;
-    private Suit suit;
-    private Rank rank;
+    private final String playerName;
+    private final TurnAction action;
+    private final Suit suit;
+    private final Rank rank;
 
     /**
      * Construct a PlayerGameRequestModel object with the following information.

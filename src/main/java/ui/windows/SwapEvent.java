@@ -6,8 +6,8 @@ import enums.WindowName;
  * An event that stores swapping information.
  */
 public class SwapEvent {
-    private WindowName previous;
-    private WindowName next;
+    private final WindowName previous;
+    private final WindowName next;
 
     /**
      * Construct a new SwapEvent given the previous and next window names.

@@ -1,21 +1,16 @@
 package ui.windows.rules;
 
-import java.awt.*;
-
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import enums.WindowName;
 import ui.components.NavigationButton;
 import ui.components.WrappingLabel;
 import ui.windows.layout_managers.PaneDelegator;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+
 public class RulesDisplay extends JPanel {
     private NavigationButton backButton;
-    private JLabel titleLabel;
-    private JLabel bodyLabel;
 
     /**
      * Constructor that initializes the display aspects of the rules window.
@@ -40,10 +35,10 @@ public class RulesDisplay extends JPanel {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
 
-        titleLabel = new JLabel("Rules for Crazy Cards!");
+        JLabel titleLabel = new JLabel("Rules for Crazy Cards!");
         titleLabel.setFont(new Font("Calibri", Font.BOLD, 36));
         // Wrapping JLabel text with html tags allows for wrapping and resizing with window
-        bodyLabel = new WrappingLabel("<br>Objective: Players try to be the first to get rid of all of their cards in their hand.<br><br>" +
+        JLabel bodyLabel = new WrappingLabel("<br>Objective: Players try to be the first to get rid of all of their cards in their hand.<br><br>" +
                 "Players can play a given card onto the pile if the card has the same value OR suit as the one on the table.<br><br>" +
                 "Crazy cards can be used to change up various aspects of the game. Their functions are listed below (TO BE IMPLEMENTED):<br>" +
                 "1. Any '8' card can be used to change the suit of the game, which the next player must play.<br>" +
