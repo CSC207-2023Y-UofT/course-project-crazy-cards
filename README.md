@@ -7,6 +7,14 @@ accumulated. The rules of the game are simple, simply play a card that is simila
 to the card that was played last, but beware, some cards may have some 
 unintended side effects!
 
+While the current implementation of the game does not contain any "crazy" cards, we have left materials in this code base 
+for users to make them themselves.
+
+Comments:<br>
+Throughout the code and documentation, we use player and user interchangeably. Once you've entered the gameplay itself, 
+feel free to maximize the program window. In the event that the cards you draw are extremely unlucky, this prevents the
+cards from becoming hidden behind the action buttons beside your hand. Other screens/windows will be compatible with the
+original screen size when the program is run.
 Note: Throughout the code and documentation, we use player and user interchangeably.
 
 ## How To Run The Game
@@ -84,16 +92,25 @@ a ```Player```, such as loading the statistics for a ```HumanPlayer```. Our ```W
 factories helped to encapsulate the creation logic required to create displays and delegators
 used for the ```Window``` classes.
 
-## Design Decisions
-
-use of manager, access..... making a Game accessible only via interfaces
-
 
 ## Testing and Coverage
 Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive
 tests for the various functionalities of the game. Javadocs are included to further explain each test.
 
-### What we haven't tested
+### What we didn't tested
+We did not unit test the windows or their factories as they mostly contained Swing logic, i.e.
+we just tested them by having them run and giving different inputs and outputs. We did however test
+`PriorityActionListener` as we needed to be sure the logic that allows different listeners to be 
+executed was stable. We did not unit test the controllers, as most of them simply call an input boundary
+with a given response model, this logic was instead tested in the interactor tests. We only 
+unit tested `CreationController` because it contained some logic of accepting and rejecting some
+`PlayerCreationInformation` input. We were unable to unit test the card effect classes and custom deck generation classes
+as they were a fairly new addition to the code base, and we ran out of time. However,
+we do hope future users can try their hand at creating different customs effects and decks, 
+testing the functionality of these newer classes. The special effect classes required some new methods in the 
+`Game` and `GameManager` classes, which we were unable to test due to time, hence why the coverage for that isn't as high
+as we'd like, even though the key functionalities and logic of our current implementation of the game have been 
+rigorously tested.
 
 ## Extensibility
 Firstly, we have made the type of database used to be easily extended. We 
@@ -113,6 +130,13 @@ the `EffectGenerationParameters` class, which introduces randomness in choosing 
 `SpecialEffect` out of a list of them. Of course a user can choose to define their
 own, even crazier, special effects.
 
+Practically speaking, how would a user extend our program (i.e. define their
+own custom deck and effects)? First they'd define a new class implementing `GameCreationInputBoundary` 
+in where when they build the game, they'd define their own `EffectGenerationParameter` classes for the types of cards they want,
+their own `DeckGenerationParameters` for the type of `Deck` they want, and finally use them to generate their own
+`CustomDeck` containing they cards the want in their custom game. Then they'd simply replace the constructor in
+`Main` to match that of their custom input boundary. This is all done without modifying the main body of the
+program, just extending it, which follows OCP.
 
 
 ## Future Updates
