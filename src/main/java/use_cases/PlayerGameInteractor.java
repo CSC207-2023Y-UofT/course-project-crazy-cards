@@ -39,18 +39,19 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     @Override
     public PlayerGameResponseModel createResponse(PlayerGameRequestModel pgrm) {
         Player currPlayer = findPlayerFromString(pgrm.getPlayerName());
+        boolean success = false;
         if (currPlayer != null) {
             Card chosenCard = findCard(pgrm.getCardValue(), pgrm.getCardSuit(), currPlayer);
 
             if (chosenCard != null && pgrm.getPlayCardRequest()) {
-                playCardRequestLogic(chosenCard, currPlayer);
+                success = playCardRequestLogic(chosenCard, currPlayer);
             } 
             else if (pgrm.getPickUpCardRequest()) {
-                pickUpCardRequestLogic(currPlayer);
+                success = pickUpCardRequestLogic(currPlayer);
             } 
             else {
                 // Requested to skip turn, check if the Player can play a Card first
-                skipTurnLogic(currPlayer);
+                success = skipTurnLogic(currPlayer);
             }
             // Now we assume that the Game has been successfully updated, but first check that the Player whose
             // turn it IS NOT a ComputerPlayer, as a User should not play as a ComputerPlayer
@@ -60,6 +61,8 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
                 newCurrPlayer = access.getCurrentTurn();
             }
         } 
+        access.setLastRequest(pgrm.getAction());
+        access.setSuccess(success);
 
         notifier.update();
         // Return the current state of the game with a response model.
@@ -107,7 +110,7 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
     /**
      * Implement the logic required when a Player tries to place the chosenCard down.
      */
-    private void playCardRequestLogic(Card chosenCard, Player currentPlayer) {
+    private boolean playCardRequestLogic(Card chosenCard, Player currentPlayer) {
         boolean valid = access.isValidCard(chosenCard);
         if(valid) {
             // The card is valid, place it down, change turns
@@ -117,20 +120,24 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
             }
             if(isWinner(currentPlayer)) {
                 winLogic(currentPlayer);
-                return;
+                return true;
             }
             access.moveNextTurn();
+            return true;
         }  // The card is not valid, therefore it should not be played, nothing is to be done.
+        return false;
     }
 
     /**
      * Implement the logic required when a User requests to pick up a Card. It will check if the user
      * can pick up a Card, and if they can, then pick one up. Otherwise, the function won't do anything.
      */
-    private void pickUpCardRequestLogic(Player currentPlayer) {
+    private boolean pickUpCardRequestLogic(Player currentPlayer) {
         if(!(access.getCurrentTurnHasPickedUp()) && !(anyValidCards(currentPlayer))) {
             access.pickUpCard(currentPlayer);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -138,13 +145,14 @@ public class PlayerGameInteractor implements PlayerGameInputBoundary {
      * has any valid cards or if the user has picked up. If the user has picked up OR has no valid cards,
      * the user CAN skip their turn. Otherwise, the user CANNOT skip their turn.
      */
-    private void skipTurnLogic(Player currentPlayer) {
-        assert currentPlayer.equals(access.getCurrentTurn());
+    private boolean skipTurnLogic(Player currentPlayer) {
         if ((access.getCurrentTurnHasPickedUp()) & !(anyValidCards(currentPlayer))) {
             // User can skip.
             access.moveNextTurn();
+            return true;
         }
-            // User cannot skip their turn.
+        // User cannot skip their turn.
+        return false;
     }
 
     /**
