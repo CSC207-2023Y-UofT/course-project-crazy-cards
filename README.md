@@ -219,3 +219,6 @@ the game are not affected by this card display "bug".
 
 Another bug in the program is when invalid player creation information input is given (no HumanPlayers or Players of the same name),
 is instead of having no response, a NullPointerException is thrown. Although this does not affect game play
+
+
+
