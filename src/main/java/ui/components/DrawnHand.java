@@ -66,24 +66,12 @@ public class DrawnHand extends JPanel {
     /**
      * Initializes the GUI components necessary for the DrawnHand to be displayed.
      */
-    public void addCards(List<DrawnCard> cards) {
-        drawnCards.addAll(cards);
-    }
-
-    public void removeCard(DrawnCard card) {
-        drawnCards.remove(card);
-    }
-
-    /**
-     * Initializes the GUI components necessary for the DrawnHand to be displayed.
-     */
     private void initializeGUIComponents() {
         setLayout(new BorderLayout());
 
         cardPane = new JLayeredPane();
         cardPane.setPreferredSize(new Dimension(300, 100));
 
-        cardPane.setBorder(BorderFactory.createLineBorder(Color.RED, 8));
         add(cardPane);
     }
 
@@ -97,11 +85,7 @@ public class DrawnHand extends JPanel {
         DrawnCard card = drawnCards.get(index);
         card.setSuit(suit);
         card.setRank(rank);
-        card.setSuitLabel(suit);
-        card.setRankLabel(rank);
         card.setVisible(true);
-        // TODO: justDrawn implementation
-        updateCards();
     }
 
     /**
@@ -122,15 +106,22 @@ public class DrawnHand extends JPanel {
     public void updateCards() {
         int width = cardPane.getWidth();
         int height = cardPane.getHeight();
-        double offset = (double) width / visible;
+
+        double cardOffset = (double) (width - 70) / (this.visible - 1);
 
         cardPane.removeAll();
 
-        for (int i = 0; i < visible; i++) {
+        for (int i = 0; i < this.visible; i++) {
             DrawnCard card = drawnCards.get(i);
             cardPane.add(card, i);
 
-            card.setBounds((int)(i * offset + 10), (height / 2) - 30, 70, 95);
+            boolean wasHovered = card.isHovered();
+
+            card.unhover();
+            card.setBounds((int)(i * cardOffset), (height / 2) - 30, 70, 95);
+            if (wasHovered) {
+                card.hover();
+            }
         }
     }
 }

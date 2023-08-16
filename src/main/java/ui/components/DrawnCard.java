@@ -15,12 +15,29 @@ import enums.Rank;
 import enums.Suit;
 
 public class DrawnCard extends JPanel {
-    private static final int HIGHLIGHT_OFFSET = 15;
+    private static final int HOVER_OFFSET = 30;
+    private static final Color GOLD_SELECTED = new Color(255, 215, 0);
+    private static final Color BLACK_UNSELECTED = new Color(0, 0, 0);
+    private static HashMap<Rank, String> rankToString = new HashMap<>() {{
+        put(Rank.ACE, "A");
+        put(Rank.TWO, "2");
+        put(Rank.THREE, "3");
+        put(Rank.FOUR, "4");
+        put(Rank.FIVE, "5");
+        put(Rank.SIX, "6");
+        put(Rank.SEVEN, "7");
+        put(Rank.EIGHT, "8");
+        put(Rank.NINE, "9");
+        put(Rank.TEN, "10");
+        put(Rank.JACK, "J");
+        put(Rank.QUEEN, "Q");
+        put(Rank.KING, "K");
+    }};
+
     private Suit suit;
     private Rank rank;
-    private int index;
-    private boolean highlighted;
-    private static HashMap<Rank, String> rankToString;
+    private boolean hovered;
+    private boolean selected;
     private JLabel suitLabel;
     private JLabel rankLabel;
 
@@ -32,9 +49,9 @@ public class DrawnCard extends JPanel {
     public DrawnCard(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
-        highlighted = false;
-        rankToString = new HashMap<>();
-        generateRankToString();
+        hovered = false;
+        selected = false;
+
         initializeGUIComponents();
     }
 
@@ -52,6 +69,8 @@ public class DrawnCard extends JPanel {
      */
     public void setSuit(Suit suit) {
         this.suit = suit;
+        setSuitLabel(suit);
+        unhighlight();
     }
 
     /**
@@ -68,25 +87,8 @@ public class DrawnCard extends JPanel {
      */
     public void setRank(Rank rank) {
         this.rank = rank;
-    }
-
-    /**
-     * Generates the hashmap used to display the string representation of a Rank enum, for any given card.
-     */
-    public void generateRankToString() {
-        rankToString.put(Rank.ACE, "A");
-        rankToString.put(Rank.TWO, "2");
-        rankToString.put(Rank.THREE, "3");
-        rankToString.put(Rank.FOUR, "4");
-        rankToString.put(Rank.FIVE, "5");
-        rankToString.put(Rank.SIX, "6");
-        rankToString.put(Rank.SEVEN, "7");
-        rankToString.put(Rank.EIGHT, "8");
-        rankToString.put(Rank.NINE, "9");
-        rankToString.put(Rank.TEN, "10");
-        rankToString.put(Rank.JACK, "J");
-        rankToString.put(Rank.QUEEN, "Q");
-        rankToString.put(Rank.KING, "K");
+        setRankLabel(rank);
+        unhighlight();
     }
 
     /**
@@ -95,7 +97,7 @@ public class DrawnCard extends JPanel {
     private void initializeGUIComponents() {
         Dimension dimension = new Dimension(70, 95);
         setPreferredSize(dimension);
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 2, true));
+        setBorder(BorderFactory.createLineBorder(BLACK_UNSELECTED, 2, true));
         // Define colours
         Color red = new Color(180, 20, 20);
         Color black = Color.BLACK;
@@ -113,7 +115,7 @@ public class DrawnCard extends JPanel {
         rankLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         suitLabel = new JLabel();
         suitLabel.setFont(font);
-        suitLabel.setBounds(5, -30, 70, 95);
+        suitLabel.setBounds(5, -30, 50, 95);
         suitLabel.setHorizontalAlignment(SwingConstants.LEFT);
         switch (this.suit) {
             case CLUB: suitLabel.setText("<html>&#9827;</html>");
@@ -138,7 +140,18 @@ public class DrawnCard extends JPanel {
         add(pane);
     }
 
-    public void setSuitLabel(Suit suit) {
+    /**
+     * Helper method to update this card's rank.
+     */
+    private void setRankLabel(Rank rank) {
+        String rankString = rankToString.get(rank);
+        rankLabel.setText(rankString);
+    }
+
+    /**
+     * Helper method to update this card's suit.
+     */
+    private void setSuitLabel(Suit suit) {
         Color red = new Color(180, 20, 20);
         Color black = Color.BLACK;
         switch (suit) {
@@ -161,27 +174,51 @@ public class DrawnCard extends JPanel {
         }
     }
 
-    public void setRankLabel(Rank rank) {
-        this.rankLabel.setText(rankToString.get(rank));
+    /**
+     * Moves the card up 15 pixels to signify hovering the mouse over it.
+     */
+    public void hover() {
+        if (!hovered) {
+            hovered = true;
+            setLocation(getX(), getY() - HOVER_OFFSET);
+        }
     }
 
     /**
-     * Highlights the card by moving the card up 15 pixels.
+     * Moves the card back down to signify moving the mouse off it.
+     */
+    public void unhover() {
+        if (hovered) {
+            hovered = false;
+            setLocation(getX(), getY() + HOVER_OFFSET);
+        }
+    }
+
+    /**
+     * Highlights the card by changing the border to gold.
      */
     public void highlight() {
-        if (!highlighted) {
-            highlighted = true;
-            setLocation(getX(), getY() - HIGHLIGHT_OFFSET);
+        if (!selected) {
+            selected = true;
+            setBorder(BorderFactory.createLineBorder(GOLD_SELECTED, 2, true));
         }
     }
 
     /**
-     * Unhighlights the card by setting it back to the initial position.
+     * Unhighlights the card by changing the border to black.
      */
     public void unhighlight() {
-        if (highlighted) {
-            highlighted = false;
-            setLocation(getX(), getY() + HIGHLIGHT_OFFSET);
+        if (selected) {
+            selected = false;
+            setBorder(BorderFactory.createLineBorder(BLACK_UNSELECTED, 2, true));
         }
+    }
+
+    /**
+     * Returns whether the card is being hovered over or not.
+     * @return whether the card is being hovered over.
+     */
+    public boolean isHovered() {
+        return hovered;
     }
 }
