@@ -67,6 +67,7 @@ public class Main {
         creatorWindow.setNavigator(paneDelegator);
         howtoWindow.setNavigator(paneDelegator);
 
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 }
