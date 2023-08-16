@@ -43,7 +43,7 @@ public class HowtoDisplay extends JPanel {
         titleLabel.setFont(new Font("Calibri", Font.BOLD, 36));
         bodyLabel = new JLabel("<html><br>Play card:<br>In order to play a card, first click on the card itself. Then, you're able to click the \"Play\" button to play the card.<br><br>"
                 +"Draw card:<br>If you don't have any cards in your hand that can be played onto the current card, click the \"Draw\" button to get a new card. If the card you just picked up"
-                + "can be played, follow the Play card instructions. Otherwise, you must skip your turn.<br>You can only draw one card per turn.<br><br>"
+                + " can be played, follow the Play card instructions. Otherwise, you must skip your turn.<br>You can only draw one card per turn.<br><br>"
                 +"Skip turn:<br>This button can only be clicked after you draw a card that cannot be played on top of the one currently in play.<br><br>"
                 +"Help button (TO BE IMPLEMENTED):<br>If you need to see these instructions again, press the \"Help\" button during gameplay.</html>");
         // TODO: if help button is implemented, remove the (TO BE IMPLEMENTED) in the above line
