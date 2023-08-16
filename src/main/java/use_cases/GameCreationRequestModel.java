@@ -6,7 +6,7 @@ import java.util.HashMap;
  * A request model containing User provided information on the Players to be made in a Game.
  */
 public class GameCreationRequestModel {
-    private HashMap<String, Boolean> playersInfo;
+    private final HashMap<String, Boolean> playersInfo;
 
     /**
      * Construct a GameCreationRequestModel

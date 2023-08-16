@@ -6,7 +6,7 @@ import ui.windows.creator.CreatorWindow;
 import controllers.CreatorController;
 
 public class CreatorWindowFactory implements WindowFactory {
-    private CreatorController controller;
+    private final CreatorController controller;
 
     /**
      * Constructor for the factory that sets the factory's controller.

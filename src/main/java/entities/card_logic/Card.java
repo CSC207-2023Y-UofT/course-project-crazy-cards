@@ -6,7 +6,7 @@ import enums.Suit;
 public class Card {
     private Suit suit;
     private Rank rank;
-    private SpecialEffect effect;
+    private final SpecialEffect effect;
 
     /**
      * Construct a Card, giving it the provided suit and value. This constructor is used for regular cards.

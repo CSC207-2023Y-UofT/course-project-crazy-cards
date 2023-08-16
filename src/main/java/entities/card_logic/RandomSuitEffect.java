@@ -8,7 +8,7 @@ import enums.Suit;
  */
 public class RandomSuitEffect implements SpecialEffect {
     private static final Suit[] suits = {Suit.SPADE, Suit.HEART, Suit.CLUB, Suit.DIAMOND};
-    private boolean alwaysPlayable;
+    private final boolean alwaysPlayable;
 
     /**
      * Constructs a RandomSuitEffect.

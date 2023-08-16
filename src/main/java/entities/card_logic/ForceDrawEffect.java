@@ -7,8 +7,8 @@ import entities.player_logic.Player;
  * This class represents a special effect that forces the next player to draw a certain amount of cards.
  */
 public class ForceDrawEffect implements SpecialEffect {
-    private int drawAmount;
-    private boolean alwaysPlayable;
+    private final int drawAmount;
+    private final boolean alwaysPlayable;
 
     /**
      * Constructs a ForceDrawEffect.

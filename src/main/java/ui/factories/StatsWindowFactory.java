@@ -9,7 +9,7 @@ import ui.windows.Window;
 import use_cases.DataAccess;
 
 public class StatsWindowFactory implements WindowFactory {
-    private DataAccess dataAccess;
+    private final DataAccess dataAccess;
 
     /**
      * Constructs a new StatsWindowFactory given a DataAccess.

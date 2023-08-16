@@ -1,24 +1,17 @@
 package ui.windows.creator;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import controllers.data_objects.PlayerCreationInformation;
 import controllers.interfaces.CreatorBridge;
 import enums.WindowName;
 import ui.components.NavigationButton;
 import ui.components.PriorityActionListener;
 import ui.windows.layout_managers.PaneDelegator;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * This class contains all the GUI/front-end logic for the game creation window/screen the User will see.
@@ -34,8 +27,7 @@ public class CreatorDisplay extends JPanel implements ActionListener {
     private final ArrayList<JCheckBox> checkBoxList = new ArrayList<>();
     private final ArrayList<JTextField> textFieldList = new ArrayList<>();
 
-    private NavigationButton createGameButton;
-    private PriorityActionListener priorityListener;
+    private final PriorityActionListener priorityListener;
 
     /**
      * Construct a new CreationDisplay.
@@ -66,7 +58,7 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         this.createFieldAndBoxPanels();
 
         // Create the button for submitting player info.
-        createGameButton = new NavigationButton(WindowName.GAME, "Play Game");
+        NavigationButton createGameButton = new NavigationButton(WindowName.GAME, "Play Game");
         priorityListener.addActionListener(this, HIGH_PRIO_GAME_CREATION);
         createGameButton.addActionListener(priorityListener);
         createGameButton.setPreferredSize(new Dimension(800, 50));
@@ -127,8 +119,7 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         JTextField p6Name = new JTextField();
         this.textFieldList.add(p6Name);
 
-        for(int i = 0; i < this.textFieldList.size(); i++) {
-            JTextField textbox = this.textFieldList.get(i);
+        for (JTextField textbox : this.textFieldList) {
             textbox.setMaximumSize(dim);
             textbox.setFont(font);
         }
@@ -176,7 +167,6 @@ public class CreatorDisplay extends JPanel implements ActionListener {
         boolean gameCreated = bridge.requestCreateGame(controllerInput);
         // If a Game was created (valid input for game players), then set the window to the Game.
         if(gameCreated) {
-            return;
         } else {
             JLabel message = new JLabel("Please enter valid input. That is, at least 2 players, 1 non-computer player, and no repeated names");
             this.add(message, BorderLayout.LINE_END);

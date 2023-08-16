@@ -5,7 +5,7 @@ package entities.game_logic;
  * Hides observable objects' implementation from notifiers.
  */
 public class ObserverNotifier implements IObserverNotifier {
-    private ObservableGame game;
+    private final ObservableGame game;
 
     /**
      * Constructor for the ObserverNotifier class, which notifies any game observers to update the game.

@@ -12,7 +12,7 @@ import controllers.interfaces.GameBridge;
 import ui.windows.Window;
 
 public class GameWindowFactory implements WindowFactory {
-    private GameBridge bridge;
+    private final GameBridge bridge;
 
     /**
      * Constructor that sets the factory's GameBridge.

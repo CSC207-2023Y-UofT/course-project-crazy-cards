@@ -5,7 +5,7 @@ import entities.card_logic.Card;
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards;
 
     /**
      * Construct a Hand instance given a list of Cards.

@@ -12,14 +12,14 @@ import java.util.HashMap;
  * to show to the view without using any of the entity data (prevent crossover of entity code in controller layer).
  */
 public class PlayerGameResponseModel {
-    private String currentPlayerName;
-    private boolean hasWinner;
-    private HashMap<String, Integer> playersAndNumCards = new HashMap<>();
-    private CardResponseModel currentCard;
-    private CardResponseModel currentDrawnCard;
-    private ArrayList<CardResponseModel> playerCards = new ArrayList<>();
-    private TurnAction lastMove;
-    private boolean success;
+    private final String currentPlayerName;
+    private final boolean hasWinner;
+    private final HashMap<String, Integer> playersAndNumCards = new HashMap<>();
+    private final CardResponseModel currentCard;
+    private final CardResponseModel currentDrawnCard;
+    private final ArrayList<CardResponseModel> playerCards = new ArrayList<>();
+    private final TurnAction lastMove;
+    private final boolean success;
 
     /**
      * Create a new PlayerGameResponseModel, using the updated GameState provided.

@@ -5,7 +5,7 @@ package use_cases;
  * User attempts to create a Game.
  */
 public class GameCreationResponseModel {
-    private boolean gameCreated;
+    private final boolean gameCreated;
 
     /**
      * Create a GameCreationResponseModel with the given parameter.

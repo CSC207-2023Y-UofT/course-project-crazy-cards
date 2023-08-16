@@ -32,7 +32,6 @@ class PlayerGameResponseModelTest {
     private Game game;
     private Player p1;
     private PlayerGameResponseModel response;
-    private GameManager manager;
 
     @BeforeEach
     public void setUp() {
@@ -58,7 +57,7 @@ class PlayerGameResponseModelTest {
         // Make the first Card of the game something p1 can play on top of.
         Card firstCard = new Card(h1.getCards().get(0).getSuit(), Rank.KING);
         game.putCardDown(firstCard);
-        manager = new GameManager();
+        GameManager manager = new GameManager();
         manager.buildGame(players, deck);
         GameState gameState = new GameState(manager);
         manager.addObserver(gameState);

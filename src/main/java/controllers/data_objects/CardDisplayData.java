@@ -4,9 +4,8 @@ import enums.Rank;
 import enums.Suit;
 
 public class CardDisplayData {
-    private Suit suit;
-    private Rank rank;
-    private boolean justDrawn;
+    private final Suit suit;
+    private final Rank rank;
 
     /**
      * Constructor for the CardDisplayData that will be used to generate GUI components to display.
@@ -16,7 +15,6 @@ public class CardDisplayData {
     public CardDisplayData(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
-        justDrawn = false;
     }
 
     /**
@@ -35,11 +33,4 @@ public class CardDisplayData {
         return rank;
     }
 
-    /**
-     * Returns whether the card to be displayed was just drawn or not.
-     * @return If the card is just drawn, return true, otherwise return false.
-     */
-    public boolean isJustDrawn() {
-        return justDrawn;
-    }
 }

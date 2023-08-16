@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class CardLayoutManager implements ICardLayoutManager {
-    private JPanel panel;
+    private final JPanel panel;
     private HashMap<WindowName, Window> windows;
     private WindowName current;
 

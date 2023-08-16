@@ -6,7 +6,7 @@ import controllers.interfaces.GameBridge;
  * Updates the game window when switched to.
  */
 public class SwitchUpdater {
-    private GameBridge bridge;
+    private final GameBridge bridge;
 
     /**
      * Construct a new SwitchUpdater with the given bridge

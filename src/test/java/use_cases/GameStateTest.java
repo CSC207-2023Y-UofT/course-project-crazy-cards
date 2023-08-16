@@ -3,7 +3,6 @@ package use_cases;
 import entities.card_logic.Card;
 import entities.deck_logic.Deck;
 import entities.deck_logic.StandardDeck;
-import entities.game_logic.Game;
 import entities.game_logic.GameManager;
 import entities.player_logic.Hand;
 import entities.player_logic.HumanPlayer;
@@ -25,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 class GameStateTest {
 
-    private Game game;
     private Player p1;
     private Player p2;
     private ArrayList<Player> players;
@@ -64,7 +62,6 @@ class GameStateTest {
         gameState = null;
         p1 = null;
         p2 = null;
-        game = null;
         players = null;
     }
 

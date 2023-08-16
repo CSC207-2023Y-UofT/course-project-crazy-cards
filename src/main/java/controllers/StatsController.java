@@ -1,12 +1,12 @@
 package controllers;
 
-import java.io.IOException;
-
 import controllers.data_objects.StatsDisplayData;
 import controllers.interfaces.StatsBridge;
 import controllers.interfaces.StatsUI;
 import use_cases.DataAccess;
 import use_cases.PlayerInformation;
+
+import java.io.IOException;
 
 /**
  * Handles stats requests and responses.
@@ -15,7 +15,7 @@ public class StatsController implements StatsBridge {
     private static final StatsDisplayData ERROR = new StatsDisplayData("ERROR", -1, -1);
 
     private StatsUI display;
-    private DataAccess database;
+    private final DataAccess database;
 
     /**
      * Construct a StatsController with no endpoint. 
@@ -28,7 +28,6 @@ public class StatsController implements StatsBridge {
     /**
      * Requests statistics for a given user and updates display.
      * @param username the name of the user
-     * @return false if no display is supplied, true otherwise
      */
     @Override
     public void tryRequestUser(String username) {

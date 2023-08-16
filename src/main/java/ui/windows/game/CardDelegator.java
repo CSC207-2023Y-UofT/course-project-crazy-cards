@@ -1,10 +1,10 @@
 package ui.windows.game;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import controllers.interfaces.GameBridge;
 import ui.components.DrawnCard;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Delegates user interaction for selecting cards.
@@ -15,7 +15,6 @@ public class CardDelegator implements MouseListener {
 
     /**
      * Construct a CardDelegator with the given bridge.
-     * @param controller the bridge to be used
      */
     public CardDelegator(GameBridge bridge) {
         this.bridge = bridge;

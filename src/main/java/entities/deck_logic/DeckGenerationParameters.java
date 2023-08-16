@@ -1,9 +1,9 @@
 package entities.deck_logic;
 
-import java.util.HashMap;
-
 import enums.Rank;
 import enums.Suit;
+
+import java.util.HashMap;
 
 /**
  * Parameters for generating a deck. Represents a 2D matrix of weights for each combination of suit and rank.
@@ -36,7 +36,7 @@ public class DeckGenerationParameters {
         }
     };
 
-    private double[][] weights;
+    private final double[][] weights;
     private boolean shuffle;
 
     /**
@@ -69,9 +69,7 @@ public class DeckGenerationParameters {
      */
     public void setRowWeight(Suit suit, double[] weight) {
         int suitIndex = SUIT_TO_INDEX.get(suit);
-        for (int i = 0; i < weight.length; i++) {
-            this.weights[suitIndex][i] = weight[i];
-        }
+        System.arraycopy(weight, 0, this.weights[suitIndex], 0, weight.length);
     }
 
     /**
@@ -104,9 +102,9 @@ public class DeckGenerationParameters {
      */
     public double getTotalWeight() {
         double total = 0;
-        for (int i = 0; i < this.weights.length; i++) {
-            for (int j = 0; j < this.weights[i].length; j++) {
-                total += this.weights[i][j];
+        for (double[] weight : this.weights) {
+            for (int j = 0; j < weight.length; j++) {
+                total += weight[j];
             }
         }
         return total;

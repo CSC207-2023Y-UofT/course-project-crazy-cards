@@ -16,7 +16,7 @@ import java.util.Collections;
 public class GameCreationInteractor implements GameCreationInputBoundary {
     static final int NUMBER_OF_CARDS = 5;
     private final DataAccess dataAccess;
-    private CreationAccess access;
+    private final CreationAccess access;
 
     /**
      * Initialize a GameCreationInteractor given a particular data access object.

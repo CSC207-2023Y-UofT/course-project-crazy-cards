@@ -1,9 +1,9 @@
 package use_cases;
 
 public class PlayerInformation {
-    private String name;
-    private int wins;
-    private int losses;
+    private final String name;
+    private final int wins;
+    private final int losses;
 
     /**
      * Construct an instance of PlayerInformation.

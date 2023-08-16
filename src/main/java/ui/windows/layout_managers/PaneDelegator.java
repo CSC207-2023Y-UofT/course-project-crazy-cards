@@ -1,12 +1,12 @@
 package ui.windows.layout_managers;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import ui.components.NavigationButton;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class PaneDelegator implements ActionListener {
-    private ICardLayoutManager manager;
+    private final ICardLayoutManager manager;
 
     /**
      * Constructor for the PaneDelegator, which listens for an ActionEvent related to NavigationButtons
