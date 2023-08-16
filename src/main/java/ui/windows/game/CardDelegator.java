@@ -11,6 +11,7 @@ import ui.components.DrawnCard;
  */
 public class CardDelegator implements MouseListener {
     private GameBridge bridge;
+    private DrawnCard lastSelected;
 
     /**
      * Construct a CardDelegator with the given bridge.
@@ -43,6 +44,12 @@ public class CardDelegator implements MouseListener {
     public void mousePressed(MouseEvent e) {
         DrawnCard card = (DrawnCard)e.getSource();
         bridge.setSelectedCard(card.getSuit(), card.getRank());
+
+        if (lastSelected != null) {
+            lastSelected.unhighlight();
+        }
+        card.highlight();
+        lastSelected = card;
     }
 
     /**
@@ -51,7 +58,7 @@ public class CardDelegator implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         DrawnCard card = (DrawnCard)e.getSource();
-        card.highlight();
+        card.hover();
     }
 
     /**
@@ -60,6 +67,6 @@ public class CardDelegator implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         DrawnCard card = (DrawnCard)e.getSource();
-        card.unhighlight();
+        card.unhover();
     }
 }
