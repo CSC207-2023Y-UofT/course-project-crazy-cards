@@ -3,7 +3,9 @@
 Crazy cards is a single/multiplayer card game adapted from Crazy 8s. Compete against your friends or against our CPU
 bots to see who can get rid of their cards the fastest. You can view our rules page and how to play page on more details
 on the way our card game is played. Or, you can check your gameplay statistics, and see how many wins or losses you've 
-accumulated.
+accumulated. The rules of the game are simple, simply play a card that is similar in suit or rank
+to the card that was played last, but beware, some cards may have some 
+unintended side effects!
 
 Comments:<br>
 Throughout the code and documentation, we use player and user interchangeably. Once you've entered the gameplay itself, 
@@ -29,7 +31,8 @@ This was done by utilizing [opencsv](https://opencsv.sourceforge.net/), a CSV pa
 
 ## Code Organization, and Style
 The code is organized by packages adhering to clean architecture. Packages include entities, use_cases, controllers, database, and UI.
-Entities and UI have been divided further 
+Entities and UI classes have been divided further into subpackages based on the part of business logic
+they belong to.
 
 We used `lowerCamelCase` for variable and method names, `CamelCase` for class names,
 `CONSTANT_CASE` for constants, and `pothole_case` for package names.
