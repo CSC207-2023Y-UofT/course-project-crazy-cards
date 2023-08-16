@@ -32,12 +32,12 @@ games before, the wins and losses are both 0. As seen in the data persistence de
 
 ![](images/howto_page.png)
 <br>The "how to play" page explaining to users the mechanics of the program, such as how exactly to play a given card, when they can draw a card,
-and when they're allowed to skip their turn.
+and when they're allowed to skip their turn.<br><br>
 
 ![](images/game_create.png)
 <br>Once you click the "Play" button, you are brought into the game creation page, where you can type in the usernames of
 all the players, and select if they are computer controlled or not. Whenever you're ready to play, you can press the "Play Game"
-button to begin!
+button to begin!<br><br>
 
 ![](images/play_game.png)
 <br>Once you enter the game, the current player is displayed at the top of the screen. That user can then choose between playing a card,
