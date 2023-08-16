@@ -7,11 +7,7 @@ accumulated. The rules of the game are simple, simply play a card that is simila
 to the card that was played last, but beware, some cards may have some 
 unintended side effects!
 
-Comments:<br>
-Throughout the code and documentation, we use player and user interchangeably. Once you've entered the gameplay itself, 
-feel free to maximize the program window. In the event that the cards you draw are extremely unlucky, this prevents the
-cards from becoming hidden behind the action buttons beside your hand. Other screens/windows will be compatible with the
-original screen size when the program is run.
+Note: Throughout the code and documentation, we use player and user interchangeably.
 
 ## How To Run The Game
 
@@ -53,22 +49,22 @@ are all segregated and kept up small. Additionally we have an interface and clas
 GameManager violates SRP due to the implementation of 3 different interfaces, at any one time,
 it is only one of these, it serves to encapsulate `Game`, and is acted upon only one actor
 at a particular time during execution. The program also follows OCP, which the Extensibility section
-goes into further detail about. We also don't see any LSP violations, subclasses serve to extend functionality,
-instead of override it.
+goes into further detail about. We also don't see any LSP violations, subclasses serve to extend functionality of their parent classes,
+instead of overriding the parent class behaviours.
 
 ## Design Patterns
 Our overall program functionality primarily follows the MVC design pattern. Through user input received by the window and display, 
 information is sent to a delegator, which is then sent to a controller, which interacts with use cases and manipulates the entities. 
 A response is then received by the controller and the packaged response is processed by visual components to display the new information 
-to the user.
+to the user.<br>
 ![](images/design_pattern.png)
 
 ### Observer
 Due to the event-driven nature of this program, we decided to use an observer
 design pattern to monitor a ```Game``` instance, whose state changes throughout 
-the program. There is information from a ```Game``` object which we would wanted
-to display to the user, such as information on whose turn it is, their cards, 
-the number of cards of other ```Player```s, and the last played ```Card```
+the program. There is information from a ```Game``` object which we wanted
+to display to the user, such as information on whose turn it is, a given user's cards, how many cards
+the other ```Player```s have, and the most recently played ```Card```
 in the ```Game```. Naturally this led to a ```GameState``` class which observes 
 the ```Game``` and is updated with this information whenever there is a change. Later
 on we decided to have a manager class for a game, and so the role of the 
@@ -125,13 +121,24 @@ project. We could work on special effects that are not random, i.e. they require
 user input, such as the cards from UNO and the 8 from the game Crazy8s. This would
 may require a new type of special effect class, and most definitely requires special
 pop up screens to be made. It would also require small tweaks to our current logic,
-or another implementation of the `PlayerGameInputBoundary` interface.
+or another implementation of the `PlayerGameInputBoundary` interface. We also plan on working on giving users more choice
+in the game modes and rules they want to play with. They can customize the game much more to their liking, and make them
+as "crazy" as they want to. <br>
+Outside of the gameplay itself, we want to update our persistence mechanism as well. Because of issues we were running
+into during development, we chose to save to a .csv file for the sake of demonstrating the persistence mechanism as required
+by the project. However, we want to upgrade this to our initial idea of serialization. We would probably store more data
+about the user as well, such as longest win streak, total games played, and etc. <br>
+And lastly, as more general improvements, we want to address any of the remaining open issues on our GitHub page, and
+improve the GUI in general. These are just some of the things we've though up of, but we do plan on continuing work on this
+project in the future.
 
 ## Known Bugs
 Sometimes when running the program, a card may look out of place or
 glitched out on the screen. We believe this to be a Swing "bug", 
 however it can be fixed in most cases by just resizing the screen
-to something bigger.
+to something bigger. Alternatively, closing out of the GUI and restarting it should work too. Although these may have an
+effect on the visuals of the game, there should not be any differences in how the game actually plays. All functions of
+the game are not affected by this card display "bug".
 
 
 
