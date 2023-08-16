@@ -40,7 +40,7 @@ public class RulesDisplay extends JPanel {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
 
-        titleLabel = new WrappingLabel("Rules for Crazy Cards!");
+        titleLabel = new JLabel("Rules for Crazy Cards!");
         titleLabel.setFont(new Font("Calibri", Font.BOLD, 36));
         // Wrapping JLabel text with html tags allows for wrapping and resizing with window
         bodyLabel = new WrappingLabel("<br>Objective: Players try to be the first to get rid of all of their cards in their hand.<br><br>" +
