@@ -10,11 +10,6 @@ unintended side effects!
 While the current implementation of the game does not contain any "crazy" cards, we have left materials in this code base 
 for users to make them themselves.
 
-Comments:<br>
-Throughout the code and documentation, we use player and user interchangeably. Once you've entered the gameplay itself, 
-feel free to maximize the program window. In the event that the cards you draw are extremely unlucky, this prevents the
-cards from becoming hidden behind the action buttons beside your hand. Other screens/windows will be compatible with the
-original screen size when the program is run.
 Note: Throughout the code and documentation, we use player and user interchangeably.
 
 ## How To Run The Game
@@ -22,10 +17,42 @@ Note: Throughout the code and documentation, we use player and user interchangea
 Run the file [src/main/Main.java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/blob/main/src/main/java/Main.java).
 
 ## GUI & Gameplay
-We coded the GUI by hand, that includes the placement of all the GUI elements, and even
+We coded the GUI by hand, which includes the placement of all the GUI elements, and even
 the cards themselves, we hope you like it.
 
-include screenshots of the game and put them in images folder, update when newest PR is merged.
+![](images/main_menu.png)
+<br>The main menu of the game once you run the program. Features the project title, logo, and navigation buttons.<br><br>
+
+![](images/stats_page.png)
+<br>The page used to load user data using their username, from our .csv file. Since the user "nancy" has not played any
+games before, the wins and losses are both 0. As seen in the data persistence demo video, this updates once a user has played games.<br><br>
+
+![](images/rules_page.png)
+<br>The rules page describing the overall objective and basic rules of the game. Any "crazy" card functions will be added accordingly.<br><br>
+
+![](images/howto_page.png)
+<br>The "how to play" page explaining to users the mechanics of the program, such as how exactly to play a given card, when they can draw a card,
+and when they're allowed to skip their turn.
+
+![](images/game_create.png)
+<br>Once you click the "Play" button, you are brought into the game creation page, where you can type in the usernames of
+all the players, and select if they are computer controlled or not. Whenever you're ready to play, you can press the "Play Game"
+button to begin!
+
+![](images/play_game.png)
+<br>Once you enter the game, the current player is displayed at the top of the screen. That user can then choose between playing a card,
+drawing a card, or skipping their turn. However, the program automatically checks for playable cards, so some options may be limited (see image below).
+When a user selects a card to play, the border of the card turns gold, to let them know which card they've chosen.<br><br>
+
+![](images/update_msg.png)
+<br>As seen here (circled in red), the user had chosen an invalid card, since the suit and value both don't match the ones on the
+current card. As a result, the user is notified that they cannot play their selected card. In this case, since the user has no valid cards,
+they would need to draw a card afterwards.<br><br>
+
+![](images/game_won.png)
+<br>After playing through the entire game, the winner was `Player3`! A pop-up notifies the user who the winner is, before
+providing them a button to go back to the main menu. If the user were to search up `Player3` in the statistics page now, it would
+display one win and zero losses for this lucky player.
 
 ## Data Persistence
 Players are able to save their progress and resume it. By entering their username, our program locates the player in our database.
