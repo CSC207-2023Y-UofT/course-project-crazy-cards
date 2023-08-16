@@ -119,6 +119,26 @@ a ```Player```, such as loading the statistics for a ```HumanPlayer```. Our ```W
 factories helped to encapsulate the creation logic required to create displays and delegators
 used for the ```Window``` classes.
 
+### Proxy
+The ```GameManager``` class serves as a proxy for its internal ```Game``` object. This class 
+was created to solve the problem of interactors needing a reference to a ```Game``` object.
+We had issues with this approach, as creator interactors would construct an instance, while
+game interactors would need said instance. However, there was no easy nor clean way to transfer
+this instance between interactors, as well as the concern of implementing more interactors
+that required a ```Game```. The ```GameManager``` solves this by providing a placeholder
+for interactors to use, while only delegating calls to its ```Game``` object once it is created.
+
+### Strategy
+The ```SpecialEffect``` interface and its implementations follow the 'Strategy' design pattern.
+```SpecialEffect``` implementations are interchangeable, and do something unique to the game they are in.
+This also allows for user-defined effects to be easily created.
+
+### Bridge
+The separation between the user interfaces and game logic is linked with a bridge object. In our
+program, these take the form of controllers, i.e. ```GameController```, ```CreatorController```, 
+and ```StatsController```. These handle incoming input data from a delegator, and call the appropriate
+use cases to manipulate the game. A response is then packaged and sent back to the respective view.
+
 
 ## Testing and Coverage
 Under [src/test/java](https://github.com/CSC207-2023Y-UofT/course-project-crazy-cards/tree/main/src/test/java) include comprehensive
