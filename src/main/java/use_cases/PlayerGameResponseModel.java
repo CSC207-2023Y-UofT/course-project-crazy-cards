@@ -2,6 +2,7 @@ package use_cases;
 
 import entities.card_logic.Card;
 import entities.player_logic.Player;
+import enums.TurnAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ public class PlayerGameResponseModel {
     private CardResponseModel currentCard;
     private CardResponseModel currentDrawnCard;
     private ArrayList<CardResponseModel> playerCards = new ArrayList<>();
+    private TurnAction lastMove;
+    private boolean success;
 
     /**
      * Create a new PlayerGameResponseModel, using the updated GameState provided.
@@ -34,6 +37,8 @@ public class PlayerGameResponseModel {
         for(Player player: gameState.getPlayersAndCards().keySet()) {
             this.playersAndNumCards.put(player.getName(), player.getNumCards());
         }
+        this.lastMove = gameState.getLastRequest();
+        this.success = gameState.getLastRequestSuccess();
     }
 
     /**
@@ -94,5 +99,21 @@ public class PlayerGameResponseModel {
      */
     public CardResponseModel getCurrentDrawnCard() {
         return this.currentDrawnCard;
+    }
+
+    /**
+     * Get the last move made by the current Player.
+     * @return The last move made by the current Player.
+     */
+    public TurnAction getLastMove() {
+        return lastMove;
+    }
+
+    /**
+     * Get if the last move made by the current Player was successful.
+     * @return True iff the last move made by the current Player was successful.
+     */
+    public boolean getSuccess() {
+        return success;
     }
 }

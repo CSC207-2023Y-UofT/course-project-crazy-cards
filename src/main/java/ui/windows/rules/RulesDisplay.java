@@ -40,12 +40,12 @@ public class RulesDisplay extends JPanel {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
 
-        titleLabel = new WrappingLabel("Rules for Crazy Cards!");
+        titleLabel = new JLabel("Rules for Crazy Cards!");
         titleLabel.setFont(new Font("Calibri", Font.BOLD, 36));
         // Wrapping JLabel text with html tags allows for wrapping and resizing with window
         bodyLabel = new WrappingLabel("<br>Objective: Players try to be the first to get rid of all of their cards in their hand.<br><br>" +
                 "Players can play a given card onto the pile if the card has the same value OR suit as the one on the table.<br><br>" +
-                "Crazy cards can be used to change up various aspects of the game. Their functions are listed below:<br>" +
+                "Crazy cards can be used to change up various aspects of the game. Their functions are listed below (TO BE IMPLEMENTED):<br>" +
                 "1. Any '8' card can be used to change the suit of the game, which the next player must play.<br>" +
                 "2. Any 'Ace' card can be used to swap hands with the player with the smallest number of cards in their hand.");
         bodyLabel.setFont(new Font("serif", Font.BOLD, 20));

@@ -25,6 +25,7 @@ public class GameController implements GameBridge {
     private Suit selectedSuit;
     private Rank selectedRank;
     private String currentPlayer;
+    private GameDisplayData data;
 
     /**
      * Construct a Controller for the interaction between a User/Player and a Game.
@@ -41,7 +42,7 @@ public class GameController implements GameBridge {
     @Override
     public void requestStartData() {
         PlayerGameResponseModel response = getResponse(null, null, null, TurnAction.START);
-        GameDisplayData data = getGameDisplayData(response);
+        data = getGameDisplayData(response);
         updateCurrentPlayer(response);
         UI.updateView(data);
     }
@@ -52,7 +53,7 @@ public class GameController implements GameBridge {
     @Override
     public void requestPlay() {
         PlayerGameResponseModel response = getResponse(currentPlayer, selectedSuit, selectedRank, TurnAction.PLAY);
-        GameDisplayData data = getGameDisplayData(response);
+        data = getGameDisplayData(response);
         updateCurrentPlayer(response);
         UI.updateView(data);
     }
@@ -63,7 +64,7 @@ public class GameController implements GameBridge {
     @Override
     public void requestDraw() {
         PlayerGameResponseModel response = getResponse(currentPlayer, null, null, TurnAction.DRAW);
-        GameDisplayData data = getGameDisplayData(response);
+        data = getGameDisplayData(response);
         updateCurrentPlayer(response);
         UI.updateView(data);
     }
@@ -74,7 +75,7 @@ public class GameController implements GameBridge {
     @Override
     public void requestSkip() {
         PlayerGameResponseModel response = getResponse(currentPlayer, null, null, TurnAction.SKIP);
-        GameDisplayData data = getGameDisplayData(response);
+        data = getGameDisplayData(response);
         updateCurrentPlayer(response);
         UI.updateView(data);
     }
@@ -88,6 +89,8 @@ public class GameController implements GameBridge {
     public void setSelectedCard(Suit suit, Rank rank) {
         selectedSuit = suit;
         selectedRank = rank;
+        data.resetFeedback();
+        UI.updateView(data);
     }
 
     /**
@@ -124,8 +127,18 @@ public class GameController implements GameBridge {
         for (CardResponseModel cardResponse : cardResponses) {
             cards.add(new CardDisplayData(cardResponse.getSuit(), cardResponse.getRank()));
         }
+        CardResponseModel responseCard = response.getCurrentCard();
+        CardDisplayData topCard = new CardDisplayData(responseCard.getSuit(), responseCard.getRank());
+
         HashMap<String, Integer> playersAndNumCards = response.getPlayersAndNumCards();
-        return new GameDisplayData(currentPlayer, cards, new CardDisplayData(response.getCurrentCard().getSuit(), response.getCurrentCard().getRank()), playersAndNumCards, hasWinner);
+        GameDisplayData data = new GameDisplayData();
+        data.setCurrentPlayer(currentPlayer);
+        data.setCurrentCard(topCard);
+        data.setCards(cards);
+        data.setHasWinner(hasWinner);
+        data.setPlayersAndNumCards(playersAndNumCards);
+        data.setLastAction(response.getLastMove(), response.getSuccess());
+        return data;
     }
 
     /**
